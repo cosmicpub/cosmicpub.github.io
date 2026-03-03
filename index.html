@@ -1,78 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Decide For Me</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            background:#f4f6fb;
-            margin:0;
-            text-align:center;
-        }
-        header{
-            background:#4f46e5;
-            color:white;
-            padding:30px 20px;
-        }
-        h1{
-            margin:0;
-            font-size:40px;
-        }
-        .container{
-            padding:40px 20px;
-        }
-        .card{
-            background:white;
-            max-width:600px;
-            margin:20px auto;
-            padding:25px;
-            border-radius:12px;
-            box-shadow:0 8px 20px rgba(0,0,0,.08);
-        }
-        button{
-            padding:15px 25px;
-            font-size:18px;
-            border:none;
-            border-radius:8px;
-            background:#4f46e5;
-            color:white;
-            cursor:pointer;
-        }
-        button:hover{
-            background:#4338ca;
-        }
-        #result{
-            font-size:28px;
-            margin-top:20px;
-            font-weight:bold;
-            color:#222;
-        }
-    </style>
+
+<title>Decide For Me | Random Decision Tools</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6fb;
+text-align:center;
+margin:0;
+}
+
+header{
+background:#4f46e5;
+color:white;
+padding:40px;
+}
+
+.tools{
+max-width:600px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.tool{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.tool a{
+text-decoration:none;
+font-size:20px;
+color:#333;
+}
+
+.tool a:hover{
+color:#4f46e5;
+}
+
+</style>
+
 </head>
+
 <body>
 
 <header>
-    <h1>Decide For Me</h1>
-    <p>Press the button. Stop overthinking.</p>
+
+<h1>Decide For Me</h1>
+
+<p>Stop overthinking. Let the internet decide.</p>
+
 </header>
-<p><a href="/">← Back to all tools</a></p>
-<div class="container">
-    <div class="card">
-        <h2>Yes or No Decision Maker</h2>
-        <button onclick="decide()">Decide</button>
-        <div id="result"></div>
-    </div>
+
+<div class="tools">
+
+<div class="tool">
+<a href="/pages/yes-or-no.html">Yes or No Decision Maker</a>
 </div>
 
-<script>
-function decide(){
-    const answers = ["YES", "NO"];
-    const pick = answers[Math.floor(Math.random()*answers.length)];
-    document.getElementById("result").textContent = pick;
-}
-</script>
+<div class="tool">
+<a href="/pages/coin-flip.html">Coin Flip</a>
+</div>
+
+<div class="tool">
+<a href="/pages/random-number.html">Random Number Generator</a>
+</div>
+
+<div class="tool">
+<a href="/pages/eat-tonight.html">What Should I Eat Tonight</a>
+</div>
+
+<div class="tool">
+<a href="/pages/username-generator.html">Username Generator</a>
+</div>
+
+</div>
 
 </body>
 </html>
