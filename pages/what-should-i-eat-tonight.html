@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>What Should I Eat Tonight? | Dinner Picker</title>
-<meta name="description" content="Tap to get a random dinner idea for tonight.">
+<meta name="description" content="Tap to get a random dinner idea with tags like 15 min, budget, healthy, comfort, and high-protein.">
 
 <link rel="stylesheet" href="/assets/style.css">
 </head>
@@ -13,50 +13,167 @@
 <body>
 
 <header>
-<h1>Decide For Me</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Decide For Me</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
 <div class="container">
-<div class="card">
+  <div class="card">
 
-<h2 id="toolH2"></h2>
-<p id="toolDesc"></p>
+    <h2>What Should I Eat Tonight?</h2>
+    <p>Tap for a dinner idea. No repeats (recent picks are skipped).</p>
 
-<button onclick="ToolEngine.run()"><span id="btnText"></span></button>
+    <button onclick="pickDinner()">Pick dinner</button>
 
-<div id="result" class="result"></div>
-<div id="hint"></div>
+    <div id="result" class="result" style="font-size:26px; line-height:1.25;"></div>
+    <div id="tags" class="small" style="margin-top:10px;"></div>
+    <div id="hint" class="small" style="margin-top:12px;">
+      Tip: Hit it again if you want something totally different.
+    </div>
 
+  </div>
 </div>
-</div>
 
-<script type="application/json" id="tool-config">
-{
-"type":"picker",
-"title":"What Should I Eat Tonight?",
-"description":"Tap for a random dinner idea.",
-"buttonText":"Pick dinner",
-"options":[
-"Tacos",
-"Pizza",
-"Burgers",
-"Pasta",
-"Chicken & rice",
-"Stir-fry",
-"Soup & sandwich",
-"Sushi",
-"BBQ",
-"Quesadillas",
-"Salad + grilled chicken",
-"Breakfast for dinner"
-]
+<script>
+/* -------------------------
+   Big variety via combinations
+   ------------------------- */
+
+const PROTEINS = [
+  { t:"Chicken", tags:["High-Protein"] },
+  { t:"Ground beef", tags:["Comfort"] },
+  { t:"Steak", tags:["High-Protein"] },
+  { t:"Pork chops", tags:["Comfort"] },
+  { t:"Bacon", tags:["Comfort"] },
+  { t:"Turkey", tags:["High-Protein"] },
+  { t:"Sausage", tags:["Comfort"] },
+  { t:"Shrimp", tags:["15 min","High-Protein"] },
+  { t:"Salmon", tags:["Healthy","High-Protein"] },
+  { t:"Tuna", tags:["Budget","High-Protein"] },
+  { t:"Eggs", tags:["15 min","Budget","High-Protein"] },
+  { t:"Tofu", tags:["Healthy"] },
+  { t:"Chickpeas", tags:["Budget","Healthy"] },
+  { t:"Black beans", tags:["Budget","Healthy"] },
+  { t:"Lentils", tags:["Budget","Healthy"] },
+  { t:"Veggie mix", tags:["Healthy"] }
+];
+
+const STYLES = [
+  { t:"tacos", tags:["Comfort"] },
+  { t:"bowl (rice + toppings)", tags:["Healthy"] },
+  { t:"stir-fry", tags:["15 min","Healthy"] },
+  { t:"pasta", tags:["Comfort"] },
+  { t:"salad", tags:["Healthy"] },
+  { t:"sandwich / wrap", tags:["15 min"] },
+  { t:"sheet-pan bake", tags:["Healthy"] },
+  { t:"soup", tags:["Comfort"] },
+  { t:"chili", tags:["Comfort"] },
+  { t:"fried rice", tags:["15 min","Comfort"] },
+  { t:"quesadillas", tags:["Comfort"] },
+  { t:"burger style", tags:["Comfort"] },
+  { t:"curry", tags:["Healthy"] },
+  { t:"breakfast-for-dinner", tags:["15 min","Budget","Comfort"] },
+  { t:"air-fryer meal", tags:["15 min"] },
+  { t:"grill meal", tags:[] }
+];
+
+const SIDES = [
+  { t:"with roasted veggies", tags:["Healthy"] },
+  { t:"with rice", tags:["Budget"] },
+  { t:"with potatoes", tags:["Comfort"] },
+  { t:"with tortilla chips + salsa", tags:["Comfort"] },
+  { t:"with steamed broccoli", tags:["Healthy"] },
+  { t:"with a side salad", tags:["Healthy"] },
+  { t:"with corn + beans", tags:["Budget"] },
+  { t:"with garlic bread", tags:["Comfort"] },
+  { t:"with fruit", tags:["Healthy"] },
+  { t:"with mac & cheese", tags:["Comfort"] },
+  { t:"with quinoa", tags:["Healthy"] },
+  { t:"with tortillas", tags:["Budget"] }
+];
+
+const EXTRAS = [
+  { t:"(spicy)", tags:[] },
+  { t:"(extra cheesy)", tags:["Comfort"] },
+  { t:"(low-carb style)", tags:["Healthy"] },
+  { t:"(one-pan)", tags:["15 min"] },
+  { t:"(budget-friendly)", tags:["Budget"] },
+  { t:"(high-protein)", tags:["High-Protein"] },
+  { t:"", tags:[] },
+  { t:"", tags:[] },
+  { t:"", tags:[] }
+];
+
+const TAG_ORDER = ["15 min","Budget","Healthy","Comfort","High-Protein"];
+const RECENT_KEY = "dfm_dinner_recent";
+const RECENT_KEEP = 8;
+
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function mergeTags(...tagLists){
+  const s = new Set();
+  tagLists.flat().forEach(t => s.add(t));
+  return TAG_ORDER.filter(t => s.has(t));
+}
+
+function getRecent(){
+  try{
+    const raw = localStorage.getItem(RECENT_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function setRecent(arr){
+  try{
+    localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0, RECENT_KEEP)));
+  }catch(e){}
+}
+
+function buildPick(){
+  const p = rand(PROTEINS);
+  const s = rand(STYLES);
+  const side = rand(SIDES);
+  const x = rand(EXTRAS);
+
+  // Text
+  // Example: "Chicken stir-fry with rice (one-pan)"
+  const text = `${p.t} ${s.t} ${side.t} ${x.t}`.replace(/\s+/g," ").trim();
+
+  // Tags
+  const tags = mergeTags(p.tags, s.tags, side.tags, x.tags);
+  return { text, tags };
+}
+
+function pickDinner(){
+  const recent = getRecent();
+  let pick = null;
+
+  // Try up to 25 times to avoid repeats
+  for(let i=0;i<25;i++){
+    const candidate = buildPick();
+    if(!recent.includes(candidate.text)){
+      pick = candidate;
+      break;
+    }
+  }
+
+  // Fallback (rare)
+  if(!pick) pick = buildPick();
+
+  // Update UI
+  document.getElementById("result").textContent = pick.text;
+  document.getElementById("tags").textContent =
+    pick.tags.length ? `Tags: ${pick.tags.join(" • ")}` : "";
+
+  // Save recent
+  const updated = [pick.text, ...recent.filter(x => x !== pick.text)];
+  setRecent(updated);
 }
 </script>
-
-<script src="/assets/tool-engine.js"></script>
-<script>ToolEngine.init();</script>
 
 </body>
 </html>
