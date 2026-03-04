@@ -5,39 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>What Should I Do Today?</title>
-<meta name="description" content="Get a random activity idea when you're bored.">
+<meta name="description" content="Get a random activity idea when you're bored. Avoid repeats and discover something new to do today.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
+<style>
+  .sub{
+    margin-top:8px;
+    color:#6b7280;
+    font-size:14px;
+  }
+  .row{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .ghost{
+    background: transparent;
+    border: 2px solid rgba(79,70,229,.25);
+    color:#111827;
+  }
+  .tiny{
+    margin-top:12px;
+    font-size:13px;
+    color:#6b7280;
+  }
+</style>
 
 </head>
 
 <body>
 
 <header>
-<h1>Decide For Me</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Decide For Me</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
 <div class="container">
+  <div class="card">
 
-<div class="card">
+    <h2>What Should I Do Today?</h2>
+    <p class="sub">Tap for a random idea. Recent picks are skipped so it stays fresh.</p>
 
-<h2>What Should I Do Today?</h2>
-<p>Get a random idea when you're bored.</p>
+    <div class="row">
+      <button id="goBtn" onclick="pickIdea()">Give me an idea</button>
+      <button class="ghost" onclick="resetHistory()">Reset history</button>
+    </div>
 
-<button onclick="pick()">Give me an idea</button>
+    <div id="result" class="result" style="margin-top:18px;"></div>
+    <div id="meta" class="tiny"></div>
 
-<div id="result" class="result"></div>
-
-</div>
-
+  </div>
 </div>
 
 <script>
+/* -----------------------------
+   No-repeat logic (static)
+   ----------------------------- */
+const RECENT_KEY = "dfm_today_recent";
+const RECENT_KEEP = 8;
 
+/* Expanded idea pool (100+)
+   You can add more any time. */
 const ideas = [
-
 "Go for a 30 minute walk",
 "Clean your room",
 "Try a new recipe",
@@ -157,16 +190,67 @@ const ideas = [
 "Try a quick creativity exercise",
 "Write down an idea you've had",
 "Start planning your next adventure"
-
 ];
 
-function pick(){
-
-const result = ideas[Math.floor(Math.random()*ideas.length)];
-document.getElementById("result").textContent = result;
-
+function randIndex(max){
+  return Math.floor(Math.random() * max);
 }
 
+function getRecent(){
+  try{
+    const raw = localStorage.getItem(RECENT_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function setRecent(arr){
+  try{
+    localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0, RECENT_KEEP)));
+  }catch(e){}
+}
+
+function pickIdea(){
+  const recent = getRecent();
+  let pick = null;
+
+  // Try up to 30 times to avoid recent repeats
+  for(let i=0;i<30;i++){
+    const candidate = ideas[randIndex(ideas.length)];
+    if(!recent.includes(candidate)){
+      pick = candidate;
+      break;
+    }
+  }
+
+  // Fallback (rare)
+  if(!pick) pick = ideas[randIndex(ideas.length)];
+
+  // Update UI
+  document.getElementById("result").textContent = pick;
+
+  // Save recent
+  const updated = [pick, ...recent.filter(x => x !== pick)];
+  setRecent(updated);
+
+  // Meta
+  document.getElementById("meta").textContent =
+    `Idea pool: ${ideas.length} • Skipping last ${RECENT_KEEP} picks`;
+  
+  // Change button label after first run (nice UX)
+  const btn = document.getElementById("goBtn");
+  if(btn) btn.textContent = "Another idea";
+}
+
+function resetHistory(){
+  try{ localStorage.removeItem(RECENT_KEY); }catch(e){}
+  document.getElementById("result").textContent = "";
+  document.getElementById("meta").textContent = "History cleared.";
+  const btn = document.getElementById("goBtn");
+  if(btn) btn.textContent = "Give me an idea";
+}
 </script>
 
 </body>
