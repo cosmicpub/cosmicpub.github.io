@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Would You Rather</title>
+
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Would You Rather</h2>
+<p>Pick one.</p>
+
+<button onclick="generate()">New Question</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const questions = [
+
+"Live in the mountains OR live at the beach",
+
+"Always be 10 minutes late OR always be 20 minutes early",
+
+"Never use social media again OR never watch TV again",
+
+"Travel the world OR have your dream home",
+
+"Be able to fly OR be invisible",
+
+"Eat pizza forever OR tacos forever",
+
+"Have unlimited money OR unlimited time",
+
+"Live without music OR live without movies",
+
+"Only text OR only call",
+
+"Always summer OR always winter",
+
+"Never sleep OR never eat",
+
+"Be famous OR be extremely wealthy",
+
+"Give up coffee OR give up dessert",
+
+"Live in space OR live underwater",
+
+"Always whisper OR always shout"
+
+];
+
+function generate(){
+
+const q = questions[Math.floor(Math.random()*questions.length)];
+
+document.getElementById("result").textContent = q;
+
+}
+
+</script>
+
+</body>
+</html>
