@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>What Should I Eat Tonight?</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>What Should I Eat Tonight? | Dinner Picker</title>
+<meta name="description" content="Tap to get a random dinner idea for tonight.">
+
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 
@@ -12,46 +15,48 @@
 <header>
 <h1>Decide For Me</h1>
 <p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+<p><a href="/">← Back to all tools</a></p>
 </header>
 
 <div class="container">
 <div class="card">
 
-<h2>What Should I Eat Tonight?</h2>
-<p>Let the internet choose dinner.</p>
+<h2 id="toolH2"></h2>
+<p id="toolDesc"></p>
 
-<button onclick="runTool()">Pick Dinner</button>
+<button onclick="ToolEngine.run()"><span id="btnText"></span></button>
 
 <div id="result" class="result"></div>
+<div id="hint"></div>
 
 </div>
 </div>
 
-<script>
-
-const OPTIONS = [
-"Pizza",
+<script type="application/json" id="tool-config">
+{
+"type":"picker",
+"title":"What Should I Eat Tonight?",
+"description":"Tap for a random dinner idea.",
+"buttonText":"Pick dinner",
+"options":[
 "Tacos",
+"Pizza",
 "Burgers",
 "Pasta",
-"Chicken and rice",
-"Stir fry",
+"Chicken & rice",
+"Stir-fry",
+"Soup & sandwich",
+"Sushi",
 "BBQ",
-"Sandwich and fries",
-"Breakfast for dinner",
-"Sushi"
+"Quesadillas",
+"Salad + grilled chicken",
+"Breakfast for dinner"
 ]
-
-function runTool(){
-
-const pick = OPTIONS[Math.floor(Math.random()*OPTIONS.length)]
-
-document.getElementById("result").textContent = pick
-
 }
-
 </script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
 
 </body>
 </html>
