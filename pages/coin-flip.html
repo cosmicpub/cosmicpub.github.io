@@ -5,141 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Coin Flip | Heads or Tails</title>
-<meta name="description" content="Flip a coin online with a fun animation. Get heads or tails instantly.">
+<meta name="description" content="Flip a coin online and watch it spin before landing on heads or tails.">
 
 <link rel="stylesheet" href="/assets/style.css">
 
 <style>
-  /* Small page-specific add-ons (keeps your site consistent) */
-  .coin-wrap{
-    display:flex;
-    justify-content:center;
-    margin:18px 0 6px;
-  }
-  .coin{
-    width:120px;
-    height:120px;
-    border-radius:999px;
-    border:6px solid rgba(0,0,0,.12);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
-    font-size:22px;
-    letter-spacing:.5px;
-    background: #fff;
-    box-shadow:0 12px 28px rgba(0,0,0,.10);
-    user-select:none;
-    transform: rotateY(0deg);
-  }
-  .coin.flipping{
-    animation: flipY .9s linear infinite;
-  }
-  @keyframes flipY{
-    0%   { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-  }
-  .sub{
-    margin-top:10px;
-    color:#6b7280;
-    font-size:14px;
-  }
-  .row{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:14px;
-  }
-  .ghost{
-    background: transparent;
-    border: 2px solid rgba(79,70,229,.25);
-    color:#111827;
-  }
+
+.coin{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  margin:20px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  font-weight:bold;
+  color:white;
+
+  background:linear-gradient(145deg,#ffd700,#d4af37);
+  box-shadow:
+    inset 0 0 8px rgba(0,0,0,.3),
+    0 10px 25px rgba(0,0,0,.25);
+
+  transition:transform 1s;
+}
+
+.coin.flip{
+  animation:flip 1s ease-in-out;
+}
+
+@keyframes flip{
+  0% {transform:rotateY(0deg)}
+  100% {transform:rotateY(1080deg)}
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-  <h1>Decide For Me</h1>
-  <p>Stop overthinking. Let the internet decide.</p>
-  <div class="nav"><a href="/">← Back to all tools</a></div>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
 <div class="container">
-  <div class="card">
 
-    <h2>Coin Flip</h2>
-    <p>Press flip for a realistic feeling coin toss.</p>
+<div class="card">
 
-    <div class="coin-wrap">
-      <div id="coin" class="coin">COIN</div>
-    </div>
+<h2>Coin Flip</h2>
+<p>Flip a coin and get HEADS or TAILS instantly.</p>
 
-    <div id="status" class="sub"></div>
+<div id="coin" class="coin">?</div>
 
-    <div class="row">
-      <button id="flipBtn" onclick="flipCoin()">Flip</button>
-      <button class="ghost" onclick="resetCoin()">Reset</button>
-    </div>
+<button onclick="flipCoin()">Flip</button>
 
-    <div id="result" class="result" style="margin-top:16px;"></div>
+<div id="result" class="result"></div>
 
-  </div>
+</div>
+
 </div>
 
 <script>
-let flipping = false;
-
-function randPick(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
-}
-
-function setText(id, text){
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
 
 function flipCoin(){
-  if (flipping) return;
-  flipping = true;
 
   const coin = document.getElementById("coin");
-  const btn = document.getElementById("flipBtn");
+  const result = document.getElementById("result");
 
-  // UI start
-  btn.disabled = true;
-  coin.classList.add("flipping");
-  setText("result", "");
-  setText("status", "Flipping…");
+  coin.classList.remove("flip");
+  void coin.offsetWidth;
+  coin.classList.add("flip");
 
-  // Optional: add a little "flutter" time variation
-  const flipTime = 900 + Math.floor(Math.random()*600); // 0.9s - 1.5s
+  result.textContent="Flipping...";
 
-  setTimeout(() => {
-    const outcome = randPick(["HEADS","TAILS"]);
+  setTimeout(()=>{
 
-    // UI end
-    coin.classList.remove("flipping");
+    const outcome = Math.random() < 0.5 ? "HEADS" : "TAILS";
+
     coin.textContent = outcome === "HEADS" ? "H" : "T";
-    setText("result", outcome);
-    setText("status", "Done.");
+    result.textContent = outcome;
 
-    btn.disabled = false;
-    flipping = false;
-  }, flipTime);
+  },900);
+
 }
 
-function resetCoin(){
-  const coin = document.getElementById("coin");
-  coin.classList.remove("flipping");
-  coin.textContent = "COIN";
-  setText("result", "");
-  setText("status", "");
-  flipping = false;
-  document.getElementById("flipBtn").disabled = false;
-}
 </script>
 
 </body>
