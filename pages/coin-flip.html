@@ -5,41 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Coin Flip | Heads or Tails</title>
-<meta name="description" content="Flip a coin online and watch it spin before landing on heads or tails.">
+<meta name="description" content="Flip a coin online with a realistic 3D animation. Land on heads or tails.">
 
 <link rel="stylesheet" href="/assets/style.css">
 
 <style>
+/* Page-only enhancements (keeps your global style.css intact) */
 
-.coin{
-  width:120px;
-  height:120px;
+.coin-stage{
+  display:flex;
+  justify-content:center;
+  margin:18px 0 6px;
+  perspective: 900px;
+}
+
+.coin-3d{
+  width:130px;
+  height:130px;
+  position:relative;
+  transform-style:preserve-3d;
+}
+
+.coin-face{
+  position:absolute;
+  inset:0;
   border-radius:50%;
-  margin:20px auto;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
-  font-weight:bold;
-  color:white;
+  font-weight:900;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  user-select:none;
 
-  background:linear-gradient(145deg,#ffd700,#d4af37);
+  /* “coin” look */
+  background: radial-gradient(circle at 30% 25%, #fff2a8 0%, #ffd24d 35%, #d4a017 72%, #b37b00 100%);
   box-shadow:
-    inset 0 0 8px rgba(0,0,0,.3),
-    0 10px 25px rgba(0,0,0,.25);
-
-  transition:transform 1s;
+    inset 0 0 0 6px rgba(0,0,0,.10),
+    inset 0 0 0 12px rgba(255,255,255,.18),
+    inset 0 -12px 18px rgba(0,0,0,.18),
+    0 18px 35px rgba(0,0,0,.18);
 }
 
-.coin.flip{
-  animation:flip 1s ease-in-out;
+.coin-face::after{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:50%;
+  border:2px dashed rgba(255,255,255,.35);
+  opacity:.75;
 }
 
-@keyframes flip{
-  0% {transform:rotateY(0deg)}
-  100% {transform:rotateY(1080deg)}
+.coin-face .big{
+  position:relative;
+  z-index:2;
+  font-size:26px;
+  color:#2a1a00;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
 }
 
+.coin-face .small{
+  position:absolute;
+  bottom:18px;
+  font-size:12px;
+  color: rgba(42,26,0,.75);
+  letter-spacing:1px;
+}
+
+.face-heads{
+  transform: translateZ(10px);
+}
+
+.face-tails{
+  transform: rotateY(180deg) translateZ(10px);
+}
+
+.coin-edge{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  transform: translateZ(0px);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.18) 0px,
+      rgba(0,0,0,.18) 2px,
+      rgba(255,255,255,.20) 2px,
+      rgba(255,255,255,.20) 4px
+    );
+  filter: blur(.2px);
+  opacity:.35;
+}
+
+/* Flip animation */
+@keyframes spin {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(1080deg) rotateY(720deg); }
+}
+
+.coin-3d.flipping{
+  animation: spin 1.15s cubic-bezier(.12,.6,.22,1) both;
+}
+
+/* Result + status */
+.status{
+  margin-top:10px;
+  color:#6b7280;
+  font-size:14px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+button[disabled]{
+  opacity:.7;
+  cursor:not-allowed;
+}
+.ghost{
+  background: transparent;
+  border: 2px solid rgba(79,70,229,.25);
+  color:#111827;
+}
 </style>
 
 </head>
@@ -47,52 +138,106 @@
 <body>
 
 <header>
-<h1>Decide For Me</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Decide For Me</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
 <div class="container">
+  <div class="card">
 
-<div class="card">
+    <h2>Coin Flip</h2>
+    <p>Press flip to toss the coin with a realistic animation.</p>
 
-<h2>Coin Flip</h2>
-<p>Flip a coin and get HEADS or TAILS instantly.</p>
+    <div class="coin-stage">
+      <div id="coin3d" class="coin-3d" aria-label="coin">
+        <div class="coin-edge"></div>
 
-<div id="coin" class="coin">?</div>
+        <div class="coin-face face-heads">
+          <div class="big">HEADS</div>
+          <div class="small">H</div>
+        </div>
 
-<button onclick="flipCoin()">Flip</button>
+        <div class="coin-face face-tails">
+          <div class="big">TAILS</div>
+          <div class="small">T</div>
+        </div>
+      </div>
+    </div>
 
-<div id="result" class="result"></div>
+    <div id="status" class="status"></div>
 
-</div>
+    <div class="row">
+      <button id="flipBtn" onclick="flipCoin()">Flip</button>
+      <button class="ghost" onclick="resetCoin()">Reset</button>
+    </div>
 
+    <div id="result" class="result" style="margin-top:16px;"></div>
+
+  </div>
 </div>
 
 <script>
+let busy = false;
 
-function flipCoin(){
-
-  const coin = document.getElementById("coin");
-  const result = document.getElementById("result");
-
-  coin.classList.remove("flip");
-  void coin.offsetWidth;
-  coin.classList.add("flip");
-
-  result.textContent="Flipping...";
-
-  setTimeout(()=>{
-
-    const outcome = Math.random() < 0.5 ? "HEADS" : "TAILS";
-
-    coin.textContent = outcome === "HEADS" ? "H" : "T";
-    result.textContent = outcome;
-
-  },900);
-
+function setText(id, text){
+  const el = document.getElementById(id);
+  if(el) el.textContent = text;
 }
 
+function flipCoin(){
+  if(busy) return;
+  busy = true;
+
+  const coin = document.getElementById("coin3d");
+  const btn = document.getElementById("flipBtn");
+
+  btn.disabled = true;
+  setText("result", "");
+  setText("status", "Flipping…");
+
+  // Remove any prior transform so a new animation always runs
+  coin.classList.remove("flipping");
+  // Force reflow
+  void coin.offsetWidth;
+  coin.classList.add("flipping");
+
+  // Pick outcome
+  const outcome = Math.random() < 0.5 ? "HEADS" : "TAILS";
+
+  // Let animation play, then “land” on the outcome by setting final rotation
+  const ms = 1150;
+
+  setTimeout(() => {
+    coin.classList.remove("flipping");
+
+    // Land on heads (0deg) or tails (180deg)
+    // Add some extra spins so it feels natural
+    const base = outcome === "HEADS" ? 0 : 180;
+    const extraSpins = 720; // 2 full turns
+    coin.style.transform = `rotateY(${base + extraSpins}deg)`;
+
+    setText("result", outcome);
+    setText("status", "Done.");
+
+    btn.disabled = false;
+    busy = false;
+  }, ms);
+}
+
+function resetCoin(){
+  const coin = document.getElementById("coin3d");
+  const btn = document.getElementById("flipBtn");
+
+  coin.classList.remove("flipping");
+  coin.style.transform = "rotateY(0deg)";
+
+  setText("result", "");
+  setText("status", "");
+
+  btn.disabled = false;
+  busy = false;
+}
 </script>
 
 </body>
