@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Number Generator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+<div class="card">
+
+<h2>Random Number Generator</h2>
+<p>Pick a number between 1 and 100.</p>
+
+<button onclick="runTool()">Generate</button>
+
+<div id="result" class="result"></div>
+
+</div>
+</div>
+
+<script>
+
+function runTool(){
+
+const number = Math.floor(Math.random()*100)+1
+
+document.getElementById("result").textContent = number
+
+}
+
+</script>
+
+</body>
+</html>
