@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>What Should I Do Today?</title>
+<meta name="description" content="Get a random activity idea when you're bored.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>What Should I Do Today?</h2>
+<p>Get a random idea when you're bored.</p>
+
+<button onclick="pick()">Give me an idea</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const ideas = [
+
+"Go for a 30 minute walk",
+"Clean your room",
+"Try a new recipe",
+"Watch a documentary",
+"Call a friend",
+"Start a new book",
+"Go explore a new coffee shop",
+"Take photos around your town",
+"Do a quick workout",
+"Organize your workspace",
+"Listen to a podcast",
+"Write down your goals",
+"Try a new hobby",
+"Learn a random fact",
+"Plan your next trip"
+
+];
+
+function pick(){
+
+const result = ideas[Math.floor(Math.random()*ideas.length)];
+document.getElementById("result").textContent = result;
+
+}
+
+</script>
+
+</body>
+</html>
