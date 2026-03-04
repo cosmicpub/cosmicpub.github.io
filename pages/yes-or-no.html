@@ -1,71 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Yes or No Decision Maker</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-font-family:Arial;
-text-align:center;
-background:#f4f6fb;
-margin:0;
-}
+<title>Yes or No Decision Maker</title>
+<meta name="description" content="Yes or No decision maker. Get an instant answer.">
 
-header{
-background:#4f46e5;
-color:white;
-padding:25px;
-}
+<link rel="stylesheet" href="/assets/style.css">
 
-.container{
-padding:40px;
-}
-
-button{
-padding:15px 25px;
-font-size:18px;
-border:none;
-border-radius:8px;
-background:#4f46e5;
-color:white;
-cursor:pointer;
-}
-
-#result{
-font-size:32px;
-margin-top:20px;
-font-weight:bold;
-}
-</style>
 </head>
 
 <body>
 
 <header>
-<h1>Yes or No Decision Maker</h1>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<p><a href="/">← Back to all tools</a></p>
 </header>
 
 <div class="container">
 
-<p>Can't decide? Press the button.</p>
+<div class="card">
 
-<button onclick="decide()">Decide</button>
+<h2 id="toolH2"></h2>
+<p id="toolDesc"></p>
 
-<div id="result"></div>
+<button onclick="ToolEngine.run()">
+<span id="btnText"></span>
+</button>
+
+<div id="result" class="result"></div>
+<div id="hint"></div>
 
 </div>
 
-<script>
+</div>
 
-function decide(){
-const answers = ["YES","NO"];
-const pick = answers[Math.floor(Math.random()*answers.length)];
-document.getElementById("result").textContent = pick;
+<script type="application/json" id="tool-config">
+{
+"type":"picker",
+"title":"Yes or No Decision Maker",
+"description":"Press the button for a quick answer.",
+"buttonText":"Decide",
+"options":["YES","NO"]
 }
-
 </script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
 
 </body>
 </html>
