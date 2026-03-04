@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Coin Flip</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Coin Flip | Heads or Tails</title>
+<meta name="description" content="Flip a coin online. Get heads or tails instantly.">
+
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 
@@ -12,35 +15,34 @@
 <header>
 <h1>Decide For Me</h1>
 <p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+<p><a href="/">← Back to all tools</a></p>
 </header>
 
 <div class="container">
 <div class="card">
 
-<h2>Coin Flip</h2>
-<p>Flip a coin instantly.</p>
+<h2 id="toolH2"></h2>
+<p id="toolDesc"></p>
 
-<button onclick="runTool()">Flip</button>
+<button onclick="ToolEngine.run()"><span id="btnText"></span></button>
 
 <div id="result" class="result"></div>
+<div id="hint"></div>
 
 </div>
 </div>
 
-<script>
-
-const OPTIONS = ["HEADS","TAILS"]
-
-function runTool(){
-
-const pick = OPTIONS[Math.floor(Math.random()*OPTIONS.length)]
-
-document.getElementById("result").textContent = pick
-
+<script type="application/json" id="tool-config">
+{
+"type":"coin",
+"title":"Coin Flip",
+"description":"Flip a coin and get HEADS or TAILS instantly.",
+"buttonText":"Flip"
 }
-
 </script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
 
 </body>
 </html>
