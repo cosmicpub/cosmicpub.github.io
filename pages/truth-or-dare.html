@@ -213,9 +213,33 @@ const dares = [
 "Make a fake award and present it to yourself."
 ];
 
+let truthHistory = [];
+let dareHistory = [];
+
+function getRandom(arr, history){
+
+let available = arr.filter(item => !history.includes(item));
+
+if(available.length === 0){
+history.length = 0;
+available = arr;
+}
+
+const pick = available[Math.floor(Math.random()*available.length)];
+
+history.push(pick);
+
+if(history.length > 10){
+history.shift();
+}
+
+return pick;
+
+}
+
 function truth(){
 
-const t = truths[Math.floor(Math.random()*truths.length)];
+const t = getRandom(truths, truthHistory);
 
 document.getElementById("result").textContent = t;
 
@@ -223,7 +247,7 @@ document.getElementById("result").textContent = t;
 
 function dare(){
 
-const d = dares[Math.floor(Math.random()*dares.length)];
+const d = getRandom(dares, dareHistory);
 
 document.getElementById("result").textContent = d;
 
