@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Excuse Generator</title>
+<meta name="description" content="Generate funny excuses instantly.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Excuse Generator</h2>
+<p>Need an excuse? We've got you covered.</p>
+
+<button onclick="generate()">Generate excuse</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const subjects=[
+"My dog",
+"My internet",
+"My neighbor",
+"My alarm clock",
+"My car",
+"My laptop",
+"My phone"
+];
+
+const actions=[
+"stopped working",
+"caught fire",
+"froze completely",
+"exploded",
+"started making weird noises",
+"locked me out",
+"refused to cooperate"
+];
+
+const endings=[
+"right before I left.",
+"so I couldn't make it.",
+"and I had to fix it.",
+"and it took hours.",
+"and it ruined my plans."
+];
+
+function r(arr){return arr[Math.floor(Math.random()*arr.length)]}
+
+function generate(){
+
+let excuse = r(subjects)+" "+r(actions)+" "+r(endings);
+
+document.getElementById("result").textContent=excuse;
+
+}
+
+</script>
+
+</body>
+</html>
