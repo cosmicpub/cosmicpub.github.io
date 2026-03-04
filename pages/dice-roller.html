@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dice Roller</title>
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<style>
+
+.dice{
+font-size:80px;
+margin:20px 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Dice Roller</h2>
+
+<button onclick="roll()">Roll Dice</button>
+
+<div class="dice" id="dice">🎲</div>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const diceIcons = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+
+function roll(){
+
+const num = Math.floor(Math.random()*6);
+
+document.getElementById("dice").textContent = diceIcons[num];
+
+document.getElementById("result").textContent = "You rolled " + (num+1);
+
+}
+
+</script>
+
+</body>
+</html>
