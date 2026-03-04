@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random Number Generator</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Number Generator</title>
+<meta name="description" content="Generate a random number between 1 and 100 instantly.">
+
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 
@@ -12,33 +15,37 @@
 <header>
 <h1>Decide For Me</h1>
 <p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+<p><a href="/">← Back to all tools</a></p>
 </header>
 
 <div class="container">
 <div class="card">
 
-<h2>Random Number Generator</h2>
-<p>Pick a number between 1 and 100.</p>
+<h2 id="toolH2"></h2>
+<p id="toolDesc"></p>
 
-<button onclick="runTool()">Generate</button>
+<button onclick="ToolEngine.run()"><span id="btnText"></span></button>
 
 <div id="result" class="result"></div>
+<div id="hint"></div>
 
 </div>
 </div>
 
-<script>
-
-function runTool(){
-
-const number = Math.floor(Math.random()*100)+1
-
-document.getElementById("result").textContent = number
-
+<script type="application/json" id="tool-config">
+{
+"type":"number",
+"title":"Random Number Generator",
+"description":"Generate a random number between 1 and 100.",
+"buttonText":"Generate",
+"min":1,
+"max":100,
+"hint":"Tip: You can use the URL like ?min=10&max=50"
 }
-
 </script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
 
 </body>
 </html>
