@@ -157,9 +157,24 @@ const ideas = [
 "Do a “try a new playlist genre” date (jazz, lo-fi, etc.)"
 ];
 
+let history = [];
+
 function generate(){
 
-const idea = ideas[Math.floor(Math.random()*ideas.length)];
+let available = ideas.filter(item => !history.includes(item));
+
+if(available.length === 0){
+history = [];
+available = ideas;
+}
+
+const idea = available[Math.floor(Math.random()*available.length)];
+
+history.push(idea);
+
+if(history.length > 10){
+history.shift();
+}
 
 document.getElementById("result").textContent = idea;
 
