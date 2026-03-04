@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Date Night Idea Generator</title>
+
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Date Night Idea</h2>
+
+<button onclick="generate()">Pick an Idea</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const ideas = [
+
+"Cook dinner together",
+
+"Go for a sunset walk",
+
+"Try a new restaurant",
+
+"Watch a movie at home",
+
+"Play board games",
+
+"Have a picnic",
+
+"Visit a coffee shop",
+
+"Go bowling",
+
+"Take a scenic drive",
+
+"Try a new dessert place",
+
+"Go to a museum",
+
+"Do a puzzle together",
+
+"Watch the stars",
+
+"Go dancing",
+
+"Try a new recipe together"
+
+];
+
+function generate(){
+
+const idea = ideas[Math.floor(Math.random()*ideas.length)];
+
+document.getElementById("result").textContent = idea;
+
+}
+
+</script>
+
+</body>
+</html>
