@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <!-- These will be overridden by the config -->
+  <title>Decide For Me</title>
+  <meta name="description" content="Free decision tools to help you choose fast.">
+
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+
+<body>
+
+<header>
+  <h1>Decide For Me</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2 id="toolH2">Tool Title</h2>
+    <p id="toolDesc">Tool description</p>
+
+    <button onclick="ToolEngine.run()"><span id="btnText">Decide</span></button>
+
+    <div id="result" class="result"></div>
+    <div id="hint" class="small"></div>
+  </div>
+</div>
+
+<!-- TOOL CONFIG GOES HERE -->
+<script type="application/json" id="tool-config">
+{
+  "type": "picker",
+  "title": "Example Tool",
+  "description": "This is an example tool.",
+  "buttonText": "Decide",
+  "seoTitle": "Example Tool | Decide For Me",
+  "options": ["Option A", "Option B", "Option C"]
+}
+</script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>
+  ToolEngine.init();
+</script>
+
+</body>
+</html>
