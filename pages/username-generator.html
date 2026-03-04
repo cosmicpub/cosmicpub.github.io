@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Username Generator</title>
+<meta name="description" content="Generate unique username ideas instantly. Perfect for social media, gaming, and online accounts.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<style>
+
+.name-list{
+margin-top:20px;
+display:grid;
+gap:10px;
+}
+
+.name{
+background:white;
+padding:12px;
+border-radius:8px;
+font-weight:600;
+box-shadow:0 5px 10px rgba(0,0,0,.08);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Decide For Me</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Username Generator</h2>
+<p>Generate cool username ideas instantly.</p>
+
+<button onclick="generate()">Generate</button>
+
+<div id="names" class="name-list"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const adjectives = [
+"Shadow","Epic","Crazy","Swift","Dark","Electric","Silent","Frozen","Cosmic","Turbo",
+"Golden","Rapid","Savage","Mystic","Neon","Alpha","Ultra","Phantom","Wild","Atomic"
+];
+
+const nouns = [
+"Falcon","Wolf","Tiger","Ninja","Wizard","Knight","Hunter","Dragon","Vortex","Storm",
+"Ghost","Blaze","Rider","Pirate","Sniper","Samurai","Glitch","Titan","Phantom","Rocket"
+];
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function generate(){
+
+const list = document.getElementById("names");
+list.innerHTML="";
+
+for(let i=0;i<8;i++){
+
+let name = random(adjectives) + random(nouns) + Math.floor(Math.random()*99);
+
+const div = document.createElement("div");
+div.className="name";
+div.textContent=name;
+
+list.appendChild(div);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
