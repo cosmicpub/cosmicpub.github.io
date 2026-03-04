@@ -8,93 +8,67 @@
   <meta name="description" content="Free random decision tools: yes or no, coin flip, random number generator, dinner picker, username generator and more. Stop overthinking and decide fast.">
 
   <style>
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      background:#f4f6fb;
-      margin:0;
-      text-align:center;
-      color:#111827;
-    }
+    /* --- Tool Grid Upgrade --- */
+.tools{
+  background:white;
+  border-radius:14px;
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+  padding:18px;
+}
 
-    header{
-      background:#4f46e5;
-      color:white;
-      padding:38px 18px;
-    }
+.section-title{
+  font-size:18px;
+  font-weight:800;
+  margin:0 0 14px;
+  color:#111827;
+}
 
-    h1{
-      margin:0;
-      font-size:44px;
-      letter-spacing:.3px;
-    }
+.tool-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
 
-    header p{
-      margin:10px 0 0;
-      font-size:16px;
-      opacity:.95;
-    }
+@media (max-width: 700px){
+  .tool-grid{ grid-template-columns: 1fr; }
+}
 
-    .container{
-      max-width:900px;
-      margin:28px auto;
-      padding:0 16px 60px;
-    }
+.tool-card{
+  display:block;
+  text-decoration:none;
+  background:#f8fafc;
+  border:1px solid #eef2ff;
+  border-radius:14px;
+  padding:16px;
+  transition: transform .08s ease, box-shadow .08s ease, border-color .08s ease;
+  color:#111827;
+}
 
-    .tools{
-      background:white;
-      border-radius:14px;
-      box-shadow:0 12px 28px rgba(0,0,0,.10);
-      padding:18px;
-      text-align:left;
-    }
+.tool-card:hover{
+  transform: translateY(-1px);
+  border-color: rgba(79,70,229,.35);
+  box-shadow:0 10px 18px rgba(0,0,0,.10);
+}
 
-    .section-title{
-      text-align:left;
-      font-size:18px;
-      font-weight:700;
-      margin:0 0 10px;
-      padding:0 6px;
-      color:#111827;
-    }
+.tool-title{
+  font-size:18px;
+  font-weight:800;
+  margin:0 0 6px;
+}
 
-    .tool{
-      padding:14px 10px;
-      border-bottom:1px solid #eef2ff;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
+.tool-desc{
+  font-size:14px;
+  color:#6b7280;
+  margin:0;
+  line-height:1.35;
+}
 
-    .tool:last-child{
-      border-bottom:none;
-    }
-
-    .tool a{
-      text-decoration:none;
-      font-size:18px;
-      color:#111827;
-      font-weight:600;
-    }
-
-    .tool a:hover{
-      color:#4f46e5;
-    }
-
-    .tool span{
-      font-size:13px;
-      color:#6b7280;
-      white-space:nowrap;
-    }
-
-    .note{
-      margin-top:14px;
-      color:#6b7280;
-      font-size:13px;
-      line-height:1.4;
-      text-align:left;
-      padding:0 6px;
-    }
+.note{
+  margin-top:14px;
+  color:#6b7280;
+  font-size:13px;
+  line-height:1.4;
+}
   </style>
 </head>
 
@@ -110,43 +84,47 @@
   <div class="tools">
     <div class="section-title">Decision Tools</div>
 
-    <div class="tool">
-      <a href="/pages/yes-or-no.html">Yes or No Decision Maker</a>
-      <span>Quick answer</span>
-    </div>
+    <div class="tool-grid">
 
-    <div class="tool">
-      <a href="/pages/coin-flip.html">Coin Flip</a>
-      <span>3D flip</span>
-    </div>
+      <a class="tool-card" href="/pages/yes-or-no.html">
+        <div class="tool-title">Yes or No</div>
+        <p class="tool-desc">Get a quick answer when you’re stuck.</p>
+      </a>
 
-    <div class="tool">
-      <a href="/pages/random-number.html">Random Number Generator</a>
-      <span>Pick a number</span>
-    </div>
+      <a class="tool-card" href="/pages/coin-flip.html">
+        <div class="tool-title">Coin Flip</div>
+        <p class="tool-desc">Flip a 3D coin and land on heads or tails.</p>
+      </a>
 
-    <div class="tool">
-      <a href="/pages/what-should-i-eat-tonight.html">What Should I Eat Tonight?</a>
-      <span>No repeats</span>
-    </div>
+      <a class="tool-card" href="/pages/random-number.html">
+        <div class="tool-title">Random Number</div>
+        <p class="tool-desc">Generate a random number instantly.</p>
+      </a>
 
-    <div class="tool">
-      <a href="/pages/what-should-i-do-today.html">What Should I Do Today?</a>
-      <span>No repeats</span>
-    </div>
+      <a class="tool-card" href="/pages/what-should-i-eat-tonight.html">
+        <div class="tool-title">What Should I Eat Tonight?</div>
+        <p class="tool-desc">Dinner ideas that stay fresh.</p>
+      </a>
 
-    <div class="tool">
-      <a href="/pages/username-generator.html">Username Generator</a>
-      <span>8 ideas</span>
-    </div>
+      <a class="tool-card" href="/pages/what-should-i-do-today.html">
+        <div class="tool-title">What Should I Do Today?</div>
+        <p class="tool-desc">Get an idea when you’re bored.</p>
+      </a>
 
-    <div class="tool">
-      <a href="/pages/excuse-generator.html">Excuse Generator</a>
-      <span>Instant excuse</span>
+      <a class="tool-card" href="/pages/username-generator.html">
+        <div class="tool-title">Username Generator</div>
+        <p class="tool-desc">Generate username ideas in one tap.</p>
+      </a>
+
+      <a class="tool-card" href="/pages/excuse-generator.html">
+        <div class="tool-title">Excuse Generator</div>
+        <p class="tool-desc">Generate a quick excuse instantly.</p>
+      </a>
+
     </div>
 
     <div class="note">
-      More tools coming soon. Bookmark this page and come back when you need a fast decision.
+      More tools coming soon — bookmark this page for whenever you need a quick decision.
     </div>
   </div>
 
