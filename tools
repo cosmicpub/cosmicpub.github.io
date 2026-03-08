@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Tools | ToolSquares</title>
+  <meta
+    name="description"
+    content="Browse all free online tools available on ToolSquares, including decision tools, random generators, and quick utility tools."
+  />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+
+  <main class="page-shell">
+    <section class="page-card">
+      <h1>All Tools</h1>
+
+      <p>
+        Browse the growing collection of free online tools available on ToolSquares.
+        These tools are designed to help you make quick decisions, generate random results,
+        and solve small everyday problems fast.
+      </p>
+
+      <h2>Decision Tools</h2>
+      <ul>
+        <li><a href="/pages/yes-or-no.html">Yes or No</a></li>
+        <li><a href="/pages/coin-flip.html">Coin Flip</a></li>
+        <li><a href="/pages/random-number.html">Random Number Generator</a></li>
+      </ul>
+
+      <h2>Games and Group Tools</h2>
+      <ul>
+        <li><a href="/pages/would-you-rather.html">Would You Rather</a></li>
+        <li><a href="/pages/truth-or-dare.html">Truth or Dare</a></li>
+        <li><a href="/pages/never-have-i-ever.html">Never Have I Ever</a></li>
+      </ul>
+
+      <h2>Creative and Random Generators</h2>
+      <ul>
+        <li><a href="/pages/random-excuse.html">Random Excuse Generator</a></li>
+        <li><a href="/pages/date-night-generator.html">Date Night Generator</a></li>
+        <li><a href="/pages/random-topic.html">Random Topic Generator</a></li>
+      </ul>
+
+      <h2>More Tools Coming Soon</h2>
+      <p>
+        ToolSquares is expanding over time. More free generators, pickers, and quick-use
+        online tools will be added as the site grows.
+      </p>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/js/include-footer.js"></script>
+</body>
+</html>
