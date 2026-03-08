@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<title>Random Movie | ToolSquares</title>
+<meta name="description" content="Pick a random movie instantly when you can't decide what to watch.">
+
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<header>
+<h1>Random Movie</h1>
+<p>Let the internet decide what you watch tonight.</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<button onclick="pickMovie()">Pick a Movie</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+<script>
+
+const movies=[
+"Inception",
+"Jurassic Park",
+"The Dark Knight",
+"Interstellar",
+"The Matrix",
+"Avatar",
+"Gladiator",
+"Titanic",
+"Spider-Man",
+"The Lord of the Rings"
+];
+
+function pickMovie(){
+const movie=movies[Math.floor(Math.random()*movies.length)];
+document.getElementById("result").textContent=movie;
+}
+
+</script>
+
+</body>
+</html>
