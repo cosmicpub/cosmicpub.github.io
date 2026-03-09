@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<title>Outfit Picker | ToolSquares</title>
+<meta name="description" content="Let the internet decide what you should wear today.">
+
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<header>
+<h1>Outfit Picker</h1>
+<p>Can't decide what to wear? Let the internet choose.</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<button onclick="pickOutfit()">Pick My Outfit</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+<script>
+
+const outfits=[
+"Jeans and a T-shirt",
+"Hoodie and joggers",
+"Shorts and sneakers",
+"Casual button-down and jeans",
+"All black outfit",
+"Sweater and chinos",
+"Athleisure outfit",
+"Denim jacket and tee"
+];
+
+function pickOutfit(){
+const outfit=outfits[Math.floor(Math.random()*outfits.length)];
+document.getElementById("result").textContent=outfit;
+}
+
+</script>
+
+</body>
+</html>
