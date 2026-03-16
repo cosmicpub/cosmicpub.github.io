@@ -1,1 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Team Generator | Decide For Me</title>
+  <meta name="description" content="Split people into random teams instantly. Paste names, choose the number of teams, and generate balanced groups.">
+
+  <link rel="stylesheet" href="/assets/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+       crossorigin="anonymous"></script>
+
+  <style>
+    .tool-wrap{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .intro{
+      text-align:center;
+      margin-bottom:20px;
+      color:#6b7280;
+      font-size:16px;
+    }
+
+    .input-grid{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:16px;
+      margin-top:20px;
+      align-items:start;
+    }
+
+    @media (max-width: 760px){
+      .input-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-card{
+      background:#f8fafc;
+      border-radius:16px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+
+    .field-label{
+      display:block;
+      font-size:16px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:#111827;
+    }
+
+    textarea,
+    input[type="number"]{
+      width:100%;
+      box-sizing:border-box;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      padding:14px;
+      font-size:16px;
+      font-family:inherit;
+      background:white;
+      color:#111827;
+    }
+
+    textarea{
+      min-height:220px;
+      resize:vertical;
+      line-height:1.45;
+    }
+
+    .helper{
+      margin-top:8px;
+      color:#6b7280;
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:22px;
+    }
+
+    .ghost-btn{
+      background:white;
+      color:#111827;
+      border:2px solid #d1d5db;
+    }
+
+    .result-section{
+      margin-top:28px;
+    }
+
+    .teams-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+
+    @media (max-width: 760px){
+      .teams-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .team-card{
+      background:#f8fafc;
+      border-radius:16px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+
+    .team-title{
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:12px;
+      color:#111827;
+    }
+
+    .team-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:10px;
+    }
+
+    .team-list li{
+      background:white;
+      border-radius:10px;
+      padding:10px 12px;
+      box-shadow:0 4px 10px rgba(0,0,0,.05);
+      font-size:16px;
+      font-weight:600;
+      color:#111827;
+    }
+
+    .status-box{
+      margin-top:18px;
+      padding:16px;
+      border-radius:14px;
+      background:#f8fafc;
+      color:#374151;
+      font-size:15px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.06);
+    }
+
+    .empty-state{
+      margin-top:18px;
+      padding:20px;
+      border-radius:14px;
+      background:#f8fafc;
+      color:#6b7280;
+      text-align:center;
+      font-size:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.06);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Team Generator</h1>
+  <p>Split names into random teams in seconds.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+  <div class="card tool-wrap">
+
+    <h2>Team Generator</h2>
+    <p class="intro">Paste one name per line, choose how many teams you want, and generate balanced groups.</p>
+
+    <div class="input-grid">
+
+      <div class="field-card">
+        <label for="namesInput" class="field-label">Names</label>
+        <textarea id="namesInput" placeholder="Enter one name per line&#10;&#10;Ava&#10;Noah&#10;Mia&#10;Liam&#10;Sophia"></textarea>
+        <div class="helper">Tip: One name per line works best.</div>
+      </div>
+
+      <div class="field-card">
+        <label for="teamCount" class="field-label">Number of teams</label>
+        <input id="teamCount" type="number" min="2" max="20" value="2">
+        <div class="helper">Choose between 2 and 20 teams.</div>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button type="button" onclick="generateTeams()">Generate Teams</button>
+      <button type="button" class="ghost-btn" onclick="reshuffleTeams()">Reshuffle</button>
+      <button type="button" class="ghost-btn" onclick="clearAllFields()">Clear</button>
+    </div>
+
+    <div class="result-section">
+      <div id="statusBox" class="status-box">Your teams will appear below.</div>
+      <div id="teamsOutput"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let lastNames = [];
+  let lastTeamCount = 0;
+
+  function parseNames() {
+    const raw = document.getElementById("namesInput").value || "";
+    const names = raw
+      .split("\n")
+      .map(name => name.trim())
+      .filter(Boolean);
+
+    // remove exact duplicates while preserving order
+    return [...new Set(names)];
+  }
+
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function buildTeams(names, teamCount) {
+    const shuffled = shuffle(names);
+    const teams = Array.from({ length: teamCount }, () => []);
+
+    shuffled.forEach((name, index) => {
+      teams[index % teamCount].push(name);
+    });
+
+    return teams;
+  }
+
+  function renderTeams(teams) {
+    const output = document.getElementById("teamsOutput");
+
+    if (!teams.length) {
+      output.innerHTML = '<div class="empty-state">No teams to show yet.</div>';
+      return;
+    }
+
+    let html = '<div class="teams-grid">';
+    teams.forEach((team, i) => {
+      html += `
+        <div class="team-card">
+          <div class="team-title">Team ${i + 1}</div>
+          <ul class="team-list">
+            ${team.map(member => `<li>${escapeHtml(member)}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+    });
+    html += '</div>';
+
+    output.innerHTML = html;
+  }
+
+  function escapeHtml(text) {
+    return text
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function generateTeams() {
+    const names = parseNames();
+    const teamCountInput = document.getElementById("teamCount");
+    const teamCount = Math.max(2, Math.min(20, Number(teamCountInput.value) || 2));
+    teamCountInput.value = teamCount;
+
+    const statusBox = document.getElementById("statusBox");
+
+    if (names.length < 2) {
+      statusBox.textContent = "Please enter at least 2 names.";
+      document.getElementById("teamsOutput").innerHTML = "";
+      return;
+    }
+
+    if (teamCount > names.length) {
+      statusBox.textContent = "The number of teams cannot be greater than the number of names.";
+      document.getElementById("teamsOutput").innerHTML = "";
+      return;
+    }
+
+    const teams = buildTeams(names, teamCount);
+    renderTeams(teams);
+
+    lastNames = [...names];
+    lastTeamCount = teamCount;
+
+    statusBox.textContent = `${names.length} names split into ${teamCount} team${teamCount === 1 ? "" : "s"}.`;
+  }
+
+  function reshuffleTeams() {
+    const statusBox = document.getElementById("statusBox");
+
+    if (!lastNames.length || !lastTeamCount) {
+      statusBox.textContent = "Generate teams first, then you can reshuffle them.";
+      return;
+    }
+
+    const teams = buildTeams(lastNames, lastTeamCount);
+    renderTeams(teams);
+    statusBox.textContent = `Teams reshuffled for ${lastNames.length} names.`;
+  }
+
+  function clearAllFields() {
+    document.getElementById("namesInput").value = "";
+    document.getElementById("teamCount").value = 2;
+    document.getElementById("teamsOutput").innerHTML = "";
+    document.getElementById("statusBox").textContent = "Your teams will appear below.";
+    lastNames = [];
+    lastTeamCount = 0;
+  }
+</script>
+
+</body>
+</html>
