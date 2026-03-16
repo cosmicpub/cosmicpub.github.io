@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Outfit Picker | ToolSquares</title>
 <meta name="description" content="Let the internet decide what you should wear today.">
@@ -8,7 +10,6 @@
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -20,121 +21,144 @@
 </header>
 
 <div class="container">
+  <div class="card">
 
-<div class="card">
+    <h2>Outfit Picker</h2>
+    <p>Tap the button for a random outfit idea.</p>
 
-<button onclick="pickOutfit()">Pick My Outfit</button>
+    <button onclick="pickOutfit()">Pick My Outfit</button>
 
-<div class="result" id="result"></div>
+    <div class="result" id="result"></div>
 
-</div>
-
+  </div>
 </div>
 
 <div id="site-footer"></div>
 <script src="/js/include-footer.js"></script>
 
 <script>
+const outfits = [
 
-const movies=[
+"Jeans + t-shirt + sneakers",
+"Joggers + hoodie + sneakers",
+"Shorts + graphic tee + sneakers",
+"Black jeans + plain tee + jacket",
+"Cargo pants + hoodie + cap",
+"Sweatpants + sweatshirt + slides",
+"Khaki shorts + polo + sneakers",
+"Dark jeans + flannel + boots",
+"Track pants + athletic shirt + trainers",
+"White tee + denim jacket + black jeans",
 
-"The Shawshank Redemption",
-"The Godfather",
-"The Dark Knight",
-"Pulp Fiction",
-"Forrest Gump",
-"Fight Club",
-"Inception",
-"The Matrix",
-"Interstellar",
-"The Lord of the Rings: The Fellowship of the Ring",
-"The Lord of the Rings: The Two Towers",
-"The Lord of the Rings: The Return of the King",
+"Leggings + oversized sweatshirt + sneakers",
+"Jeans + blouse + flats",
+"Maxi dress + sandals",
+"Shorts + tank top + sneakers",
+"Joggers + cropped hoodie + sneakers",
+"Black leggings + denim jacket + white sneakers",
+"Skirt + tucked tee + sandals",
+"Wide-leg pants + fitted top + flats",
+"Sundress + cardigan + sandals",
+"Jeans + sweater + ankle boots",
 
-"Jurassic Park",
-"Titanic",
-"Avatar",
-"Gladiator",
-"Braveheart",
-"Saving Private Ryan",
-"Top Gun",
-"Top Gun: Maverick",
+"Business casual: slacks + button-up",
+"Business casual: blouse + slacks",
+"Office look: pencil skirt + blouse",
+"Office look: chinos + polo",
+"Smart casual: dark jeans + blazer",
+"Smart casual: midi dress + flats",
+"Meeting ready: dress shirt + khakis",
+"Meeting ready: blouse + trousers",
+"Polished casual: sweater + dark jeans",
+"Polished casual: cardigan + blouse + jeans",
 
-"Spider-Man",
-"Spider-Man: No Way Home",
-"Iron Man",
-"Avengers: Endgame",
-"Avengers: Infinity War",
-"Black Panther",
-"Guardians of the Galaxy",
-"Doctor Strange",
+"Workout clothes: athletic tee + shorts",
+"Workout clothes: tank + leggings",
+"Workout clothes: hoodie + joggers",
+"Gym look: moisture-wicking tee + shorts",
+"Gym look: sports top + leggings",
+"Walk outfit: comfy tee + joggers",
+"Run outfit: light top + shorts",
+"Activewear: zip-up + leggings",
+"Stretch day: oversized tee + leggings",
+"Casual sporty: sweatshirt + bike shorts",
 
-"Star Wars: A New Hope",
-"Star Wars: The Empire Strikes Back",
-"Star Wars: Return of the Jedi",
-"Rogue One",
-"The Force Awakens",
+"Cold weather: sweater + jeans + boots",
+"Cold weather: hoodie + coat + jeans",
+"Cold weather: thermal shirt + joggers",
+"Layered look: long sleeve + flannel + jeans",
+"Winter casual: knit sweater + leggings + boots",
+"Winter comfy: oversized hoodie + sweatpants",
+"Bundle up: coat + scarf + jeans",
+"Chilly day: cardigan + tee + dark jeans",
+"Rainy day: hoodie + joggers + waterproof shoes",
+"Cold date look: sweater dress + boots",
 
-"The Lion King",
-"Toy Story",
-"Toy Story 3",
-"Finding Nemo",
-"Frozen",
-"Shrek",
+"Hot weather: tank top + shorts + sandals",
+"Hot weather: lightweight tee + shorts",
+"Hot weather: sundress + sandals",
+"Hot weather: linen shirt + shorts",
+"Hot weather: sleeveless top + skirt",
+"Beachy casual: tank + denim shorts",
+"Summer casual: tee + athletic shorts",
+"Summer comfy: flowy top + shorts",
+"Warm day: polo + chino shorts",
+"Warm day: breezy dress + flats",
 
-"Harry Potter and the Sorcerer's Stone",
-"Harry Potter and the Prisoner of Azkaban",
-"Harry Potter and the Deathly Hallows",
+"Stay-home comfy: pajama set",
+"Stay-home comfy: oversized tee + shorts",
+"Stay-home comfy: hoodie + lounge pants",
+"Stay-home comfy: sweatshirt + leggings",
+"Stay-home comfy: soft tee + joggers",
+"Lazy day: sweats + slippers",
+"Lazy day: oversized hoodie + bike shorts",
+"At-home casual: tee + lounge shorts",
+"Comfy fit: crewneck + sweatpants",
+"Netflix outfit: blanket hoodie + leggings",
 
-"The Hunger Games",
-"The Maze Runner",
-"Divergent",
+"Date night: dark jeans + fitted top + boots",
+"Date night: dress + heels",
+"Date night: black jeans + button-up",
+"Date night: skirt + blouse + boots",
+"Date night: nice top + trousers",
+"Date night: collared shirt + dark pants",
+"Date night: midi dress + jacket",
+"Date night: blazer + tee + jeans",
+"Dinner look: sweater + skirt + ankle boots",
+"Dinner look: polo + chinos + loafers",
 
-"The Social Network",
-"The Wolf of Wall Street",
-"Catch Me If You Can",
-"The Great Gatsby",
-
-"The Notebook",
-"La La Land",
-"Crazy Rich Asians",
-"Pride & Prejudice",
-
-"The Hangover",
-"Superbad",
-"Step Brothers",
-"Anchorman",
-"Mean Girls",
-
-"A Quiet Place",
-"Get Out",
-"The Conjuring",
-"It",
-"Hereditary",
-
-"Mad Max: Fury Road",
-"John Wick",
-"Mission: Impossible – Fallout",
-"Casino Royale",
-"Skyfall",
-
-"The Revenant",
-"Whiplash",
-"Parasite",
-"Everything Everywhere All at Once",
-
-"The Breakfast Club",
-"Back to the Future",
-"Ghostbusters",
-"Indiana Jones and the Raiders of the Lost Ark"
+"Errands outfit: leggings + tee + sneakers",
+"Errands outfit: joggers + hoodie + sneakers",
+"Errands outfit: tee + shorts + slides",
+"Errands outfit: jeans + sweatshirt + sneakers",
+"Quick trip: tank + joggers",
+"Quick trip: oversized tee + biker shorts",
+"Grocery run: hoodie + leggings",
+"Grocery run: tee + athletic shorts",
+"Coffee run: jeans + cardigan + sneakers",
+"Coffee run: sweatshirt + shorts + slides"
 
 ];
 
-function pickOutfit(){
-const outfit=outfits[Math.floor(Math.random()*outfits.length)];
-document.getElementById("result").textContent=outfit;
-}
+let history = [];
 
+function pickOutfit(){
+  let available = outfits.filter(item => !history.includes(item));
+
+  if(available.length === 0){
+    history = [];
+    available = outfits;
+  }
+
+  const outfit = available[Math.floor(Math.random() * available.length)];
+
+  history.push(outfit);
+  if(history.length > 10){
+    history.shift();
+  }
+
+  document.getElementById("result").textContent = outfit;
+}
 </script>
 
 </body>
