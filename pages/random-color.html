@@ -1,1 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Random Color Picker | Decide For Me</title>
+  <meta name="description" content="Generate a random color instantly. Get a color name, hex code, and fresh picks without recent repeats.">
+
+  <link rel="stylesheet" href="/assets/style.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+       crossorigin="anonymous"></script>
+
+  <style>
+    .tool-wrap{
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .intro{
+      text-align:center;
+      margin-bottom:20px;
+      color:#6b7280;
+      font-size:16px;
+    }
+
+    .color-display{
+      width:100%;
+      min-height:280px;
+      border-radius:20px;
+      box-shadow:0 18px 40px rgba(0,0,0,.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:30px;
+      transition: background .25s ease, color .25s ease;
+      margin-top:20px;
+    }
+
+    .color-inner{
+      background:rgba(255,255,255,.18);
+      backdrop-filter: blur(8px);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:18px;
+      padding:24px 28px;
+      min-width:280px;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    .color-name{
+      font-size:38px;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:10px;
+    }
+
+    .color-hex{
+      font-size:26px;
+      font-weight:800;
+      letter-spacing:.8px;
+      margin-bottom:8px;
+    }
+
+    .color-rgb{
+      font-size:16px;
+      opacity:.9;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    .ghost-btn{
+      background:white;
+      color:#111827;
+      border:2px solid #d1d5db;
+    }
+
+    .tiny-note{
+      text-align:center;
+      margin-top:14px;
+      color:#6b7280;
+      font-size:14px;
+    }
+
+    .copied{
+      text-align:center;
+      margin-top:12px;
+      font-size:14px;
+      font-weight:700;
+      color:#4f46e5;
+      min-height:20px;
+    }
+
+    .palette-bar{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:10px;
+    }
+
+    @media (max-width: 700px){
+      .palette-bar{
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .color-name{
+        font-size:30px;
+      }
+      .color-hex{
+        font-size:22px;
+      }
+    }
+
+    .swatch{
+      height:72px;
+      border-radius:14px;
+      box-shadow:0 8px 18px rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.06);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Random Color Picker</h1>
+  <p>Discover a fresh color in one click.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<div class="container">
+  <div class="card tool-wrap">
+
+    <h2>Random Color Picker</h2>
+    <p class="intro">Get a random color name, hex code, and a matching mini palette.</p>
+
+    <div id="colorDisplay" class="color-display">
+      <div class="color-inner">
+        <div id="colorName" class="color-name">Tap below</div>
+        <div id="colorHex" class="color-hex">to pick a color</div>
+        <div id="colorRgb" class="color-rgb"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" onclick="pickColor()">Pick a Color</button>
+      <button type="button" class="ghost-btn" onclick="copyHex()">Copy Hex</button>
+      <button type="button" class="ghost-btn" onclick="copyName()">Copy Name</button>
+    </div>
+
+    <div id="copiedMsg" class="copied"></div>
+
+    <div id="paletteBar" class="palette-bar"></div>
+
+    <div class="tiny-note">Recent colors are skipped so each pick feels fresh.</div>
+
+  </div>
+</div>
+
+<script>
+  const RECENT_LIMIT = 20;
+  let history = [];
+  let currentColor = null;
+
+  const colors = [
+    { name: "Crimson Red", hex: "#DC143C" },
+    { name: "Scarlet", hex: "#FF2400" },
+    { name: "Cherry Red", hex: "#D2042D" },
+    { name: "Ruby", hex: "#E0115F" },
+    { name: "Rose Red", hex: "#C21E56" },
+    { name: "Burgundy", hex: "#800020" },
+    { name: "Coral", hex: "#FF7F50" },
+    { name: "Salmon", hex: "#FA8072" },
+    { name: "Peach", hex: "#FFCBA4" },
+    { name: "Apricot", hex: "#FBCEB1" },
+
+    { name: "Tangerine", hex: "#F28500" },
+    { name: "Pumpkin", hex: "#FF7518" },
+    { name: "Orange Peel", hex: "#FF9F00" },
+    { name: "Amber", hex: "#FFBF00" },
+    { name: "Goldenrod", hex: "#DAA520" },
+    { name: "Mustard", hex: "#E1AD01" },
+    { name: "Sunflower", hex: "#FFC512" },
+    { name: "Lemon Yellow", hex: "#FFF44F" },
+    { name: "Canary Yellow", hex: "#FFEF00" },
+    { name: "Daffodil", hex: "#FFFF31" },
+
+    { name: "Lime", hex: "#BFFF00" },
+    { name: "Chartreuse", hex: "#7FFF00" },
+    { name: "Apple Green", hex: "#8DB600" },
+    { name: "Olive", hex: "#708238" },
+    { name: "Forest Green", hex: "#228B22" },
+    { name: "Emerald", hex: "#50C878" },
+    { name: "Mint", hex: "#98FF98" },
+    { name: "Jade", hex: "#00A86B" },
+    { name: "Seafoam", hex: "#93E9BE" },
+    { name: "Sage", hex: "#9CAF88" },
+
+    { name: "Teal", hex: "#008080" },
+    { name: "Turquoise", hex: "#40E0D0" },
+    { name: "Aqua", hex: "#00FFFF" },
+    { name: "Cyan", hex: "#00BCD4" },
+    { name: "Robin Egg Blue", hex: "#00CCCC" },
+    { name: "Sky Blue", hex: "#87CEEB" },
+    { name: "Baby Blue", hex: "#89CFF0" },
+    { name: "Powder Blue", hex: "#B0E0E6" },
+    { name: "Cerulean", hex: "#2A52BE" },
+    { name: "Steel Blue", hex: "#4682B4" },
+
+    { name: "Royal Blue", hex: "#4169E1" },
+    { name: "Cobalt Blue", hex: "#0047AB" },
+    { name: "Navy", hex: "#000080" },
+    { name: "Midnight Blue", hex: "#191970" },
+    { name: "Periwinkle", hex: "#CCCCFF" },
+    { name: "Lavender Blue", hex: "#CCCCFF" },
+    { name: "Indigo", hex: "#4B0082" },
+    { name: "Violet", hex: "#7F00FF" },
+    { name: "Amethyst", hex: "#9966CC" },
+    { name: "Purple", hex: "#800080" },
+
+    { name: "Plum", hex: "#8E4585" },
+    { name: "Orchid", hex: "#DA70D6" },
+    { name: "Lilac", hex: "#C8A2C8" },
+    { name: "Mauve", hex: "#E0B0FF" },
+    { name: "Magenta", hex: "#FF00FF" },
+    { name: "Hot Pink", hex: "#FF69B4" },
+    { name: "Bubblegum Pink", hex: "#FF77FF" },
+    { name: "Blush", hex: "#DE5D83" },
+    { name: "Rose Pink", hex: "#FF66CC" },
+    { name: "Dusty Rose", hex: "#C08081" },
+
+    { name: "Ivory", hex: "#FFFFF0" },
+    { name: "Cream", hex: "#FFFDD0" },
+    { name: "Beige", hex: "#F5F5DC" },
+    { name: "Sand", hex: "#C2B280" },
+    { name: "Tan", hex: "#D2B48C" },
+    { name: "Caramel", hex: "#AF6F09" },
+    { name: "Mocha", hex: "#967969" },
+    { name: "Chocolate", hex: "#7B3F00" },
+    { name: "Chestnut", hex: "#954535" },
+    { name: "Mahogany", hex: "#C04000" },
+
+    { name: "Slate Gray", hex: "#708090" },
+    { name: "Cool Gray", hex: "#8C92AC" },
+    { name: "Silver", hex: "#C0C0C0" },
+    { name: "Charcoal", hex: "#36454F" },
+    { name: "Jet Black", hex: "#343434" },
+    { name: "Snow White", hex: "#FFFAFA" },
+
+    { name: "Copper", hex: "#B87333" },
+    { name: "Bronze", hex: "#CD7F32" },
+    { name: "Gold", hex: "#FFD700" },
+    { name: "Rose Gold", hex: "#B76E79" },
+
+    { name: "Ocean Blue", hex: "#4F42B5" },
+    { name: "Lagoon", hex: "#4CB7A5" },
+    { name: "Denim", hex: "#1560BD" },
+    { name: "Ice Blue", hex: "#99FFFF" },
+    { name: "Mint Cream", hex: "#F5FFFA" },
+    { name: "Pear", hex: "#D1E231" },
+    { name: "Pistachio", hex: "#93C572" },
+    { name: "Moss", hex: "#8A9A5B" },
+    { name: "Wine", hex: "#722F37" },
+    { name: "Raspberry", hex: "#E30B5D" },
+
+    { name: "Watermelon", hex: "#FC6C85" },
+    { name: "Cotton Candy", hex: "#FFBCD9" },
+    { name: "Fuchsia", hex: "#FF00FF" },
+    { name: "Neon Green", hex: "#39FF14" },
+    { name: "Neon Blue", hex: "#4D4DFF" },
+    { name: "Neon Orange", hex: "#FF5F1F" },
+    { name: "Neon Pink", hex: "#FF10F0" },
+    { name: "Electric Purple", hex: "#BF00FF" },
+    { name: "Electric Blue", hex: "#7DF9FF" },
+    { name: "Electric Lime", hex: "#CCFF00" },
+
+    { name: "Terracotta", hex: "#E2725B" },
+    { name: "Clay", hex: "#B66A50" },
+    { name: "Dusty Blue", hex: "#6E7F80" },
+    { name: "Storm Blue", hex: "#507B9C" },
+    { name: "Fern", hex: "#4F7942" },
+    { name: "Pine", hex: "#01796F" },
+    { name: "Honey", hex: "#FFC30B" },
+    { name: "Marigold", hex: "#EAA221" },
+    { name: "Buttercream", hex: "#FFF1B5" },
+    { name: "Cloud Gray", hex: "#D9D9D9" }
+  ];
+
+  function hexToRgb(hex) {
+    const clean = hex.replace("#", "");
+    const bigint = parseInt(clean, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return { r, g, b };
+  }
+
+  function getContrastColor(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+    return luminance > 160 ? "#111827" : "#ffffff";
+  }
+
+  function adjustColor(hex, amount) {
+    let usePound = false;
+    let color = hex;
+
+    if (color[0] === "#") {
+      color = color.slice(1);
+      usePound = true;
+    }
+
+    let num = parseInt(color, 16);
+
+    let r = (num >> 16) + amount;
+    let b = ((num >> 8) & 0x00FF) + amount;
+    let g = (num & 0x0000FF) + amount;
+
+    r = Math.max(Math.min(255, r), 0);
+    b = Math.max(Math.min(255, b), 0);
+    g = Math.max(Math.min(255, g), 0);
+
+    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16).padStart(6, "0");
+  }
+
+  function buildPalette(hex) {
+    return [
+      adjustColor(hex, 50),
+      adjustColor(hex, 25),
+      hex,
+      adjustColor(hex, -25),
+      adjustColor(hex, -50)
+    ];
+  }
+
+  function pickColor() {
+    let available = colors.filter(color => !history.includes(color.hex));
+
+    if (available.length === 0) {
+      history = [];
+      available = colors;
+    }
+
+    const chosen = available[Math.floor(Math.random() * available.length)];
+    currentColor = chosen;
+
+    history.push(chosen.hex);
+    if (history.length > RECENT_LIMIT) {
+      history.shift();
+    }
+
+    const display = document.getElementById("colorDisplay");
+    const nameEl = document.getElementById("colorName");
+    const hexEl = document.getElementById("colorHex");
+    const rgbEl = document.getElementById("colorRgb");
+    const copiedMsg = document.getElementById("copiedMsg");
+
+    const textColor = getContrastColor(chosen.hex);
+    const rgb = hexToRgb(chosen.hex);
+
+    display.style.background = chosen.hex;
+    display.style.color = textColor;
+
+    nameEl.textContent = chosen.name;
+    hexEl.textContent = chosen.hex.toUpperCase();
+    rgbEl.textContent = `RGB(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+    copiedMsg.textContent = "";
+
+    renderPalette(chosen.hex);
+  }
+
+  function renderPalette(hex) {
+    const palette = buildPalette(hex);
+    const bar = document.getElementById("paletteBar");
+
+    bar.innerHTML = palette.map(color => `
+      <div class="swatch" style="background:${color};" title="${color.toUpperCase()}"></div>
+    `).join("");
+  }
+
+  async function copyHex() {
+    if (!currentColor) return;
+    await navigator.clipboard.writeText(currentColor.hex.toUpperCase());
+    document.getElementById("copiedMsg").textContent = "Hex code copied.";
+  }
+
+  async function copyName() {
+    if (!currentColor) return;
+    await navigator.clipboard.writeText(currentColor.name);
+    document.getElementById("copiedMsg").textContent = "Color name copied.";
+  }
+</script>
+
+</body>
+</html>
