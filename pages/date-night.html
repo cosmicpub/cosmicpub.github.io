@@ -1,188 +1,420 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Date Night Idea Generator</title>
+<title>Date Night Idea Generator | Tool Squares</title>
+<meta name="description" content="Get a free random date night idea instantly. Find cute, fun, cozy, budget-friendly, and at-home date ideas for couples in one click.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolsquares.com/pages/date-night.html">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.date-meta{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 18px;
+}
+
+.date-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(79,70,229,.08);
+  color:#4338ca;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+.date-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.ghost{
+  background:transparent;
+  border:2px solid rgba(79,70,229,.20);
+  color:#111827;
+}
+
+.ghost:hover{
+  background:rgba(79,70,229,.04);
+  filter:none;
+}
+
+.result-box{
+  min-height:110px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.result-empty{
+  color:#6b7280;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.5;
+}
+
+.history-wrap{
+  margin-top:18px;
+  text-align:left;
+}
+
+.history-title{
+  margin:0 0 10px;
+  font-size:14px;
+  font-weight:800;
+  color:#374151;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.history-list{
+  margin:0;
+  padding-left:18px;
+  color:#4b5563;
+  line-height:1.7;
+}
+
+.history-list li + li{
+  margin-top:4px;
+}
+</style>
 
 </head>
 
 <body>
 
 <header>
-<h1>Tool Squares</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Tool Squares</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Couples tool</div>
+      <h1>Date Night Idea Generator</h1>
+      <p class="tool-lead">
+        Need a fun date idea without spending forever trying to agree on something? This free date night idea generator gives you a random suggestion instantly, whether you want something cozy at home, low-cost, playful, or a little more adventurous.
+      </p>
 
-<h2>Date Night Idea</h2>
+      <div class="tool-actions">
+        <div class="date-meta">
+          <span class="date-pill">At-home ideas</span>
+          <span class="date-pill">Budget-friendly</span>
+          <span class="date-pill">Cute and fun</span>
+        </div>
 
-<button onclick="generate()">Pick an Idea</button>
+        <h2>Pick a date idea</h2>
+        <p>Click once to get a random idea. The generator avoids recent repeats to keep things fresh.</p>
 
-<div class="result" id="result"></div>
+        <div class="date-actions">
+          <button onclick="generate()">Pick an Idea</button>
+          <button class="ghost" onclick="copyIdea()">Copy Idea</button>
+        </div>
 
-</div>
+        <div class="result-box">
+          <div class="result result-empty" id="result">Your next date idea will show up here.</div>
+        </div>
 
-</div>
+        <div class="small" id="status">No recent repeats. Easy to use on mobile or desktop.</div>
+
+        <div class="history-wrap" id="historyWrap" style="display:none;">
+          <div class="history-title">Recent ideas</div>
+          <ol class="history-list" id="historyList"></ol>
+        </div>
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this date night generator works</h2>
+        <p>
+          This tool randomly selects from a large list of date night ideas for couples. It also keeps track of recent results so you are less likely to see the same idea again right away. That makes it useful when you want quick inspiration but still want some variety.
+        </p>
+        <p>
+          The list includes simple date night ideas, cozy home dates, food-based dates, creative activities, and casual outings. You can keep clicking until something feels right for your mood, budget, and schedule.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>What kinds of date ideas are included?</h2>
+        <ul>
+          <li>At-home date night ideas</li>
+          <li>Cheap and budget-friendly date ideas</li>
+          <li>Food and dessert dates</li>
+          <li>Outdoor and casual outing ideas</li>
+          <li>Creative and conversation-based date ideas</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Why couples use random date idea tools</h2>
+        <p>
+          Sometimes the hardest part of date night is not the date itself. It is deciding what to do. A random date night generator helps remove that back-and-forth and gives you something to react to quickly. Even if the first result is not perfect, it usually gets the conversation moving faster.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+
+          <div class="faq-item">
+            <h3>Is this date night idea generator free?</h3>
+            <p>Yes. You can use it as often as you want for free.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Does it only show expensive date ideas?</h3>
+            <p>No. Many of the ideas are simple, low-cost, or can be done at home.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Will it repeat the same idea over and over?</h3>
+            <p>Not usually. The tool avoids recently used ideas to keep the results feeling fresh.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Can I use this on my phone?</h3>
+            <p>Yes. The generator is built to work well on mobile, tablet, and desktop.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tools">
+          <a class="related-link" href="/pages/what-should-i-eat-tonight.html">
+            <strong>What Should I Eat Tonight?</strong>
+            <span>Get a quick food idea when you cannot decide.</span>
+          </a>
+
+          <a class="related-link" href="/pages/random-movie.html">
+            <strong>Random Movie</strong>
+            <span>Pair your date night with a movie pick.</span>
+          </a>
+
+          <a class="related-link" href="/pages/would-you-rather.html">
+            <strong>Would You Rather</strong>
+            <span>Use fun questions to keep the conversation going.</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
 
 <script>
-
 const ideas = [
-"Cook a new recipe together and rate it like a cooking show",
-"Do a ‘fancy dinner’ at home with candles and a playlist",
-"Try a new dessert place and split two desserts",
-"Go for a sunset drive with a snack stop",
-"Have a picnic (even indoors on the floor)",
-"Do a movie night with a theme (90s, rom-com, thriller, etc.)",
-"Play board games and make a silly trophy for the winner",
-"Do a puzzle together with music playing",
-"Go bowling",
-"Go mini-golf",
-"Go to a local coffee shop and people-watch",
-"Visit a bookstore and pick a book for each other",
-"Go on a walk and take turns choosing the next turn",
-"Do a “$10 date” — each person plans a part on a budget",
-"Go to a museum or art gallery",
-"Try a new restaurant you’ve never been to",
-"Do a food truck night",
-"Try a new smoothie/juice place",
-"Have a breakfast-for-dinner date",
-"Make homemade pizza and do weird toppings",
-"Have a taco night with a toppings bar",
-"Do a karaoke night at home (YouTube karaoke)",
-"Go to a live music spot (even small/local)",
-"Go to a sports game or local event",
-"Go to a comedy night (or watch a stand-up special)",
-"Do a ‘two truths and a lie’ date",
-"Do a ‘questions’ date: take turns asking fun questions",
-"Make mocktails and rate them",
-"Make a charcuterie board and pretend you’re food critics",
-"Do a “random recipe” challenge: pick ingredients and make something",
-"Do a ‘no phones’ date for one hour",
-"Go thrifting and pick outfits for each other (just for fun)",
-"Go to Target/Walmart and do a silly scavenger hunt",
-"Go to a park and feed ducks (if allowed) or just chill",
-"Go stargazing with a blanket",
-"Do a campfire night (or backyard fire pit) with s’mores",
-"Take a scenic drive and stop at a random place",
-"Go for a night walk with hot drinks",
-"Do a ‘dessert crawl’ (two places, one night)",
-"Do an ice cream date and try flavors you’ve never had",
-"Do a “DIY spa night” (face masks, foot soak, etc.)",
-"Do a ‘paint night’ at home (cheap canvases + paint)",
-"Try a ‘draw each other’ challenge",
-"Make a playlist for each other and share why you picked songs",
-"Do a photo walk and take goofy couple pics",
-"Do a ‘memory lane’ date: look at old photos and tell stories",
-"Write down 10 dream trips and rank them together",
-"Plan a future trip together (even if it’s pretend)",
-"Try a new hobby together (origami, baking, chess, etc.)",
-"Learn a simple dance together (YouTube tutorial)",
-"Do a “cook-off” — both make the same thing and compare",
-"Go to a farmers market",
-"Go window shopping and make wish lists",
-"Go to a local festival or community event",
-"Take a day trip to a nearby town",
-"Go to a scenic lookout and bring snacks",
-"Do a “restaurant roulette” — pick between 3 spots by coin flip",
-"Do a “taste test” night (chips, sodas, candy) and rate them",
-"Do a “make your own sundae” night",
-"Do a “home restaurant” night: write a menu and serve each other",
-"Have a candlelit breakfast date",
-"Have a themed night: Italian, Mexican, Asian, etc.",
-"Do a ‘compliment battle’ — take turns complimenting until someone laughs",
-"Do a ‘story time’ date: each person tells a funny childhood story",
-"Do a ‘bucket list’ date: write and swap 10 bucket list ideas",
-"Do a “game night” with classic card games",
-"Do a “truth or dare (soft version)” date",
-"Go to a botanical garden",
-"Go to an aquarium or zoo (if available)",
-"Go to the movies",
-"Do a drive-in movie (if available)",
-"Go roller skating (or just watch people do it)",
-"Go to an arcade",
-"Do a ‘new appetizer’ date: order only appetizers",
-"Do a “soup & sandwich” comfort date",
-"Do a “breakfast tacos + coffee” date",
-"Do a “late-night snack run” date",
-"Do a “sunrise” date if you’re brave",
-"Do a “bookstore + coffee” date",
-"Do a “park + playlist” date",
-"Do a “couch fort” date with snacks",
-"Do a “card writing” date: write a sweet note to each other",
-"Do a “gratitude” date: share 3 things you appreciate about life",
-"Do a “dream house” date: look at houses online for fun",
-"Do a “design a room” date: pick a room and plan it",
-"Do a “learn something” date: watch a short doc then discuss",
-"Do a “mystery meal” date: one person plans and the other shows up",
-"Go to a local bakery and pick something new",
-"Try a new pizza place and rate it",
-"Try a new taco place and rate it",
-"Do a “street food” style night at home",
-"Do a “board game café” date (if you have one)",
-"Do a “walk + ice cream” date",
-"Do a “coffee + dessert at home” date",
-"Do a “cook together, eat outside” date",
-"Do a “make a vision board” date",
-"Do a “watch a nostalgic movie from childhood” date",
-"Do a “create a couple playlist” date",
-"Do a “random YouTube recipe” date and attempt it",
-"Do a “food delivery + fancy plating” date",
-"Do a “two-hour tidy + reward” date: clean together then treat yourselves",
-"Do a “new board game” date (learn a new one)",
-"Do a “choose a new hobby” date (pick one to try this week)",
-"Do a “walk in a new neighborhood” date",
-"Do a “coffee tasting” date (2–3 different coffees)",
-"Do a “hot chocolate + movie” date",
-"Do a “late-night drive + music” date",
-"Do a “no talking for 5 minutes” silly challenge, then laugh",
-"Do a “random question jar” date (write questions on paper and pull them)",
-"Do a “cookbook browsing” date and pick next week’s meal",
-"Do a “DIY dessert” date (cookies, brownies, mug cake)",
-"Do a “fast food taste test” date (pick 2 places and compare)",
-"Do a “mini photo shoot” date at home (phones only)",
-"Do a “build something” date (LEGO, simple DIY, etc.)",
-"Do a “go to a park and bring a card game” date",
-"Do a “dessert at a diner” date",
-"Do a “lunch date at a place you’ve never tried” date",
-"Do a “make waffles/pancakes together” date",
-"Do a “try a new playlist genre” date (jazz, lo-fi, etc.)"
+  "Cook a new recipe together and rate it like a cooking show",
+  "Do a ‘fancy dinner’ at home with candles and a playlist",
+  "Try a new dessert place and split two desserts",
+  "Go for a sunset drive with a snack stop",
+  "Have a picnic (even indoors on the floor)",
+  "Do a movie night with a theme (90s, rom-com, thriller, etc.)",
+  "Play board games and make a silly trophy for the winner",
+  "Do a puzzle together with music playing",
+  "Go bowling",
+  "Go mini-golf",
+  "Go to a local coffee shop and people-watch",
+  "Visit a bookstore and pick a book for each other",
+  "Go on a walk and take turns choosing the next turn",
+  "Do a “$10 date” — each person plans a part on a budget",
+  "Go to a museum or art gallery",
+  "Try a new restaurant you’ve never been to",
+  "Do a food truck night",
+  "Try a new smoothie/juice place",
+  "Have a breakfast-for-dinner date",
+  "Make homemade pizza and do weird toppings",
+  "Have a taco night with a toppings bar",
+  "Do a karaoke night at home (YouTube karaoke)",
+  "Go to a live music spot (even small/local)",
+  "Go to a sports game or local event",
+  "Go to a comedy night (or watch a stand-up special)",
+  "Do a ‘two truths and a lie’ date",
+  "Do a ‘questions’ date: take turns asking fun questions",
+  "Make mocktails and rate them",
+  "Make a charcuterie board and pretend you’re food critics",
+  "Do a “random recipe” challenge: pick ingredients and make something",
+  "Do a ‘no phones’ date for one hour",
+  "Go thrifting and pick outfits for each other (just for fun)",
+  "Go to Target/Walmart and do a silly scavenger hunt",
+  "Go to a park and feed ducks (if allowed) or just chill",
+  "Go stargazing with a blanket",
+  "Do a campfire night (or backyard fire pit) with s’mores",
+  "Take a scenic drive and stop at a random place",
+  "Go for a night walk with hot drinks",
+  "Do a ‘dessert crawl’ (two places, one night)",
+  "Do an ice cream date and try flavors you’ve never had",
+  "Do a “DIY spa night” (face masks, foot soak, etc.)",
+  "Do a ‘paint night’ at home (cheap canvases + paint)",
+  "Try a ‘draw each other’ challenge",
+  "Make a playlist for each other and share why you picked songs",
+  "Do a photo walk and take goofy couple pics",
+  "Do a ‘memory lane’ date: look at old photos and tell stories",
+  "Write down 10 dream trips and rank them together",
+  "Plan a future trip together (even if it’s pretend)",
+  "Try a new hobby together (origami, baking, chess, etc.)",
+  "Learn a simple dance together (YouTube tutorial)",
+  "Do a “cook-off” — both make the same thing and compare",
+  "Go to a farmers market",
+  "Go window shopping and make wish lists",
+  "Go to a local festival or community event",
+  "Take a day trip to a nearby town",
+  "Go to a scenic lookout and bring snacks",
+  "Do a “restaurant roulette” — pick between 3 spots by coin flip",
+  "Do a “taste test” night (chips, sodas, candy) and rate them",
+  "Do a “make your own sundae” night",
+  "Do a “home restaurant” night: write a menu and serve each other",
+  "Have a candlelit breakfast date",
+  "Have a themed night: Italian, Mexican, Asian, etc.",
+  "Do a ‘compliment battle’ — take turns complimenting until someone laughs",
+  "Do a ‘story time’ date: each person tells a funny childhood story",
+  "Do a ‘bucket list’ date: write and swap 10 bucket list ideas",
+  "Do a “game night” with classic card games",
+  "Do a “truth or dare (soft version)” date",
+  "Go to a botanical garden",
+  "Go to an aquarium or zoo (if available)",
+  "Go to the movies",
+  "Do a drive-in movie (if available)",
+  "Go roller skating (or just watch people do it)",
+  "Go to an arcade",
+  "Do a ‘new appetizer’ date: order only appetizers",
+  "Do a “soup & sandwich” comfort date",
+  "Do a “breakfast tacos + coffee” date",
+  "Do a “late-night snack run” date",
+  "Do a “sunrise” date if you’re brave",
+  "Do a “bookstore + coffee” date",
+  "Do a “park + playlist” date",
+  "Do a “couch fort” date with snacks",
+  "Do a “card writing” date: write a sweet note to each other",
+  "Do a “gratitude” date: share 3 things you appreciate about life",
+  "Do a “dream house” date: look at houses online for fun",
+  "Do a “design a room” date: pick a room and plan it",
+  "Do a “learn something” date: watch a short doc then discuss",
+  "Do a “mystery meal” date: one person plans and the other shows up",
+  "Go to a local bakery and pick something new",
+  "Try a new pizza place and rate it",
+  "Try a new taco place and rate it",
+  "Do a “street food” style night at home",
+  "Do a “board game café” date (if you have one)",
+  "Do a “walk + ice cream” date",
+  "Do a “coffee + dessert at home” date",
+  "Do a “cook together, eat outside” date",
+  "Do a “make a vision board” date",
+  "Do a “watch a nostalgic movie from childhood” date",
+  "Do a “create a couple playlist” date",
+  "Do a “random YouTube recipe” date and attempt it",
+  "Do a “food delivery + fancy plating” date",
+  "Do a “two-hour tidy + reward” date: clean together then treat yourselves",
+  "Do a “new board game” date (learn a new one)",
+  "Do a “choose a new hobby” date (pick one to try this week)",
+  "Do a “walk in a new neighborhood” date",
+  "Do a “coffee tasting” date (2–3 different coffees)",
+  "Do a “hot chocolate + movie” date",
+  "Do a “late-night drive + music” date",
+  "Do a “no talking for 5 minutes” silly challenge, then laugh",
+  "Do a “random question jar” date (write questions on paper and pull them)",
+  "Do a “cookbook browsing” date and pick next week’s meal",
+  "Do a “DIY dessert” date (cookies, brownies, mug cake)",
+  "Do a “fast food taste test” date (pick 2 places and compare)",
+  "Do a “mini photo shoot” date at home (phones only)",
+  "Do a “build something” date (LEGO, simple DIY, etc.)",
+  "Do a “go to a park and bring a card game” date",
+  "Do a “dessert at a diner” date",
+  "Do a “lunch date at a place you’ve never tried” date",
+  "Do a “make waffles/pancakes together” date",
+  "Do a “try a new playlist genre” date (jazz, lo-fi, etc.)"
 ];
 
 let history = [];
 
+function updateHistory(){
+  const wrap = document.getElementById("historyWrap");
+  const list = document.getElementById("historyList");
+
+  if(!history.length){
+    wrap.style.display = "none";
+    list.innerHTML = "";
+    return;
+  }
+
+  wrap.style.display = "block";
+  list.innerHTML = "";
+
+  history.slice().reverse().forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
+
 function generate(){
+  let available = ideas.filter(item => !history.includes(item));
 
-let available = ideas.filter(item => !history.includes(item));
+  if(available.length === 0){
+    history = [];
+    available = ideas;
+  }
 
-if(available.length === 0){
-history = [];
-available = ideas;
+  const idea = available[Math.floor(Math.random() * available.length)];
+
+  history.push(idea);
+
+  if(history.length > 5){
+    history.shift();
+  }
+
+  const result = document.getElementById("result");
+  const status = document.getElementById("status");
+
+  result.textContent = idea;
+  result.classList.remove("result-empty");
+  status.textContent = "Fresh pick generated. Recent ideas are kept out of rotation for a while.";
+
+  updateHistory();
 }
 
-const idea = available[Math.floor(Math.random()*available.length)];
+async function copyIdea(){
+  const text = document.getElementById("result").textContent.trim();
+  const status = document.getElementById("status");
 
-history.push(idea);
+  if(!text || text === "Your next date idea will show up here."){
+    status.textContent = "Generate a date idea first, then copy it.";
+    return;
+  }
 
-if(history.length > 10){
-history.shift();
+  try{
+    await navigator.clipboard.writeText(text);
+    status.textContent = "Date idea copied to your clipboard.";
+  }catch(e){
+    status.textContent = "Could not copy automatically, but you can still copy it manually.";
+  }
 }
-
-document.getElementById("result").textContent = idea;
-
-}
-
 </script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
