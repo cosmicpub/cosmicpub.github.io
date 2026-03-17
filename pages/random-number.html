@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Random Number Generator</title>
-<meta name="description" content="Generate a random number between 1 and 100 instantly.">
+<title>Random Number Generator | Tool Squares</title>
+<meta name="description" content="Generate a random number between 1 and 100 instantly. Free and easy random number generator for decisions, games, and more.">
+<meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.number-inputs{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:12px 0;
+  flex-wrap:wrap;
+}
+
+.number-inputs input{
+  width:100px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  text-align:center;
+  font-size:16px;
+}
+</style>
+
 </head>
 
 <body>
@@ -20,20 +43,65 @@
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
-<div class="card">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<h2 id="toolH2"></h2>
-<p id="toolDesc"></p>
+    <section class="tool-main">
+      <div class="tool-kicker">Random tool</div>
+      <h1 id="toolH2"></h1>
+      <p class="tool-lead" id="toolDesc"></p>
 
-<button onclick="ToolEngine.run()"><span id="btnText"></span></button>
+      <div class="tool-actions">
 
-<div id="result" class="result"></div>
-<div id="hint"></div>
+        <h2>Generate a number</h2>
+        <p>Click the button to generate a random number within the selected range.</p>
 
-</div>
-</div>
+        <div class="number-inputs">
+          <input type="number" id="minInput" placeholder="Min" value="1">
+          <input type="number" id="maxInput" placeholder="Max" value="100">
+        </div>
 
+        <button onclick="runNumber()">Generate</button>
+
+        <div class="result-box">
+          <div id="result" class="result"></div>
+        </div>
+
+        <div id="hint" class="small"></div>
+
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this random number generator works</h2>
+        <p>
+          This tool generates a random number between your selected minimum and maximum values. Each number in the range has an equal chance of being selected.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Common uses</h2>
+        <ul>
+          <li>Picking winners or random selections</li>
+          <li>Games and classroom activities</li>
+          <li>Decision making</li>
+          <li>Testing and simulations</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- Tool Config (kept for consistency if reused elsewhere) -->
 <script type="application/json" id="tool-config">
 {
 "type":"number",
@@ -46,7 +114,31 @@
 </script>
 
 <script src="/assets/tool-engine.js"></script>
-<script>ToolEngine.init();</script>
+
+<script>
+function runNumber(){
+  const min = parseInt(document.getElementById("minInput").value) || 1;
+  const max = parseInt(document.getElementById("maxInput").value) || 100;
+
+  if(min > max){
+    document.getElementById("result").textContent = "Invalid range";
+    return;
+  }
+
+  const num = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  document.getElementById("result").textContent = num;
+  document.getElementById("hint").textContent = `Between ${min} and ${max}`;
+}
+</script>
+
+<!-- Dynamic Tools -->
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<!-- Footer -->
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
