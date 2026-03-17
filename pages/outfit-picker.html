@@ -1,188 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Outfit Picker | Tool Squares</title>
-  <meta name="description" content="Let the internet decide what you should wear today.">
+<title>Outfit Picker | Tool Squares</title>
+<meta name="description" content="Let the internet decide what you should wear today. Get random outfit ideas instantly.">
 
-  <link rel="stylesheet" href="/assets/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
-       crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
 
-  <style>
-    .result-box{
-      margin-top:24px;
-      padding:22px;
-      border-radius:16px;
-      background:#f8fafc;
-      box-shadow:0 10px 24px rgba(0,0,0,.08);
-      font-size:28px;
-      font-weight:800;
-      line-height:1.35;
-      min-height:84px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+     crossorigin="anonymous"></script>
 
-    .subtext{
-      margin-top:10px;
-      color:#6b7280;
-      font-size:15px;
-      text-align:center;
-    }
-  </style>
+<style>
+.result-box{
+  margin-top:20px;
+  padding:24px;
+  border-radius:18px;
+  background:#f8fafc;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  font-size:26px;
+  font-weight:800;
+  line-height:1.4;
+  min-height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.subtext{
+  margin-top:10px;
+  color:#6b7280;
+  font-size:14px;
+  text-align:center;
+}
+
+.tool-actions{
+  text-align:center;
+}
+
+.tool-actions button{
+  margin-top:10px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Tool Squares</h1>
-  <p>Can’t decide what to wear? Let the internet choose.</p>
-  <div class="nav"><a href="/">← Back to all tools</a></div>
+<h1>Tool Squares</h1>
+<p>Can’t decide what to wear? Let the internet choose.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
-  <div class="card">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-    <h2>Outfit Picker</h2>
-    <p>Tap the button for a random outfit idea.</p>
+    <section class="tool-main">
+      <div class="tool-kicker">Lifestyle tool</div>
+      <h1>Outfit Picker</h1>
+      <p class="tool-lead">
+        Get a random outfit idea instantly. Perfect for when you don’t know what to wear.
+      </p>
 
-    <button id="pickBtn" type="button">Pick My Outfit</button>
+      <div class="tool-actions">
+        <h2>Pick your outfit</h2>
+        <p>Tap the button and let the internet decide your look.</p>
 
-    <div id="result" class="result-box">Tap the button to get an outfit idea.</div>
-    <div class="subtext">Fresh picks, with recent results skipped.</div>
+        <button id="pickBtn" type="button">Pick My Outfit</button>
+
+        <div id="result" class="result-box">
+          Tap the button to get an outfit idea.
+        </div>
+
+        <div class="subtext">
+          Fresh picks — recent results are avoided.
+        </div>
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this works</h2>
+        <p>
+          This tool randomly selects outfit ideas from a large list while avoiding recently shown results. It keeps suggestions fresh and varied every time you click.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use this</h2>
+        <ul>
+          <li>When you’re stuck deciding what to wear</li>
+          <li>When you want to try something new</li>
+          <li>For quick outfit inspiration</li>
+          <li>To simplify your daily routine</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
 
   </div>
-</div>
+</main>
 
 <script>
-  const outfits = [
-    "Jeans + t-shirt + sneakers",
-    "Joggers + hoodie + sneakers",
-    "Shorts + graphic tee + sneakers",
-    "Black jeans + plain tee + jacket",
-    "Cargo pants + hoodie + cap",
-    "Sweatpants + sweatshirt + slides",
-    "Khaki shorts + polo + sneakers",
-    "Dark jeans + flannel + boots",
-    "Track pants + athletic shirt + trainers",
-    "White tee + denim jacket + black jeans",
+const outfits = [
+"Jeans + t-shirt + sneakers",
+"Joggers + hoodie + sneakers",
+"Shorts + graphic tee + sneakers",
+"Black jeans + plain tee + jacket",
+"Cargo pants + hoodie + cap",
+"Sweatpants + sweatshirt + slides",
+"Khaki shorts + polo + sneakers",
+"Dark jeans + flannel + boots",
+"Track pants + athletic shirt + trainers",
+"White tee + denim jacket + black jeans",
 
-    "Leggings + oversized sweatshirt + sneakers",
-    "Jeans + blouse + flats",
-    "Maxi dress + sandals",
-    "Shorts + tank top + sneakers",
-    "Joggers + cropped hoodie + sneakers",
-    "Black leggings + denim jacket + white sneakers",
-    "Skirt + tucked tee + sandals",
-    "Wide-leg pants + fitted top + flats",
-    "Sundress + cardigan + sandals",
-    "Jeans + sweater + ankle boots",
+"Leggings + oversized sweatshirt + sneakers",
+"Jeans + blouse + flats",
+"Maxi dress + sandals",
+"Shorts + tank top + sneakers",
+"Joggers + cropped hoodie + sneakers",
+"Black leggings + denim jacket + white sneakers",
+"Skirt + tucked tee + sandals",
+"Wide-leg pants + fitted top + flats",
+"Sundress + cardigan + sandals",
+"Jeans + sweater + ankle boots",
 
-    "Business casual: slacks + button-up",
-    "Business casual: blouse + slacks",
-    "Office look: pencil skirt + blouse",
-    "Office look: chinos + polo",
-    "Smart casual: dark jeans + blazer",
-    "Smart casual: midi dress + flats",
-    "Meeting ready: dress shirt + khakis",
-    "Meeting ready: blouse + trousers",
-    "Polished casual: sweater + dark jeans",
-    "Polished casual: cardigan + blouse + jeans",
+"Business casual: slacks + button-up",
+"Business casual: blouse + slacks",
+"Office look: pencil skirt + blouse",
+"Office look: chinos + polo",
+"Smart casual: dark jeans + blazer",
+"Smart casual: midi dress + flats",
+"Meeting ready: dress shirt + khakis",
+"Meeting ready: blouse + trousers",
+"Polished casual: sweater + dark jeans",
+"Polished casual: cardigan + blouse + jeans",
 
-    "Workout clothes: athletic tee + shorts",
-    "Workout clothes: tank + leggings",
-    "Workout clothes: hoodie + joggers",
-    "Gym look: moisture-wicking tee + shorts",
-    "Gym look: sports top + leggings",
-    "Walk outfit: comfy tee + joggers",
-    "Run outfit: light top + shorts",
-    "Activewear: zip-up + leggings",
-    "Stretch day: oversized tee + leggings",
-    "Casual sporty: sweatshirt + bike shorts",
+"Workout clothes: athletic tee + shorts",
+"Workout clothes: tank + leggings",
+"Workout clothes: hoodie + joggers",
+"Gym look: moisture-wicking tee + shorts",
+"Gym look: sports top + leggings",
+"Walk outfit: comfy tee + joggers",
+"Run outfit: light top + shorts",
+"Activewear: zip-up + leggings",
+"Stretch day: oversized tee + leggings",
+"Casual sporty: sweatshirt + bike shorts",
 
-    "Cold weather: sweater + jeans + boots",
-    "Cold weather: hoodie + coat + jeans",
-    "Cold weather: thermal shirt + joggers",
-    "Layered look: long sleeve + flannel + jeans",
-    "Winter casual: knit sweater + leggings + boots",
-    "Winter comfy: oversized hoodie + sweatpants",
-    "Bundle up: coat + scarf + jeans",
-    "Chilly day: cardigan + tee + dark jeans",
-    "Rainy day: hoodie + joggers + waterproof shoes",
-    "Cold date look: sweater dress + boots",
+"Cold weather: sweater + jeans + boots",
+"Cold weather: hoodie + coat + jeans",
+"Cold weather: thermal shirt + joggers",
+"Layered look: long sleeve + flannel + jeans",
+"Winter casual: knit sweater + leggings + boots",
+"Winter comfy: oversized hoodie + sweatpants",
+"Bundle up: coat + scarf + jeans",
+"Chilly day: cardigan + tee + dark jeans",
+"Rainy day: hoodie + joggers + waterproof shoes",
+"Cold date look: sweater dress + boots",
 
-    "Hot weather: tank top + shorts + sandals",
-    "Hot weather: lightweight tee + shorts",
-    "Hot weather: sundress + sandals",
-    "Hot weather: linen shirt + shorts",
-    "Hot weather: sleeveless top + skirt",
-    "Beachy casual: tank + denim shorts",
-    "Summer casual: tee + athletic shorts",
-    "Summer comfy: flowy top + shorts",
-    "Warm day: polo + chino shorts",
-    "Warm day: breezy dress + flats",
+"Hot weather: tank top + shorts + sandals",
+"Hot weather: lightweight tee + shorts",
+"Hot weather: sundress + sandals",
+"Hot weather: linen shirt + shorts",
+"Hot weather: sleeveless top + skirt",
+"Beachy casual: tank + denim shorts",
+"Summer casual: tee + athletic shorts",
+"Summer comfy: flowy top + shorts",
+"Warm day: polo + chino shorts",
+"Warm day: breezy dress + flats",
 
-    "Stay-home comfy: pajama set",
-    "Stay-home comfy: oversized tee + shorts",
-    "Stay-home comfy: hoodie + lounge pants",
-    "Stay-home comfy: sweatshirt + leggings",
-    "Stay-home comfy: soft tee + joggers",
-    "Lazy day: sweats + slippers",
-    "Lazy day: oversized hoodie + bike shorts",
-    "At-home casual: tee + lounge shorts",
-    "Comfy fit: crewneck + sweatpants",
-    "Netflix outfit: blanket hoodie + leggings",
+"Stay-home comfy: pajama set",
+"Stay-home comfy: oversized tee + shorts",
+"Stay-home comfy: hoodie + lounge pants",
+"Stay-home comfy: sweatshirt + leggings",
+"Stay-home comfy: soft tee + joggers",
+"Lazy day: sweats + slippers",
+"Lazy day: oversized hoodie + bike shorts",
+"At-home casual: tee + lounge shorts",
+"Comfy fit: crewneck + sweatpants",
+"Netflix outfit: blanket hoodie + leggings",
 
-    "Date night: dark jeans + fitted top + boots",
-    "Date night: dress + heels",
-    "Date night: black jeans + button-up",
-    "Date night: skirt + blouse + boots",
-    "Date night: nice top + trousers",
-    "Date night: collared shirt + dark pants",
-    "Date night: midi dress + jacket",
-    "Date night: blazer + tee + jeans",
-    "Dinner look: sweater + skirt + ankle boots",
-    "Dinner look: polo + chinos + loafers",
+"Date night: dark jeans + fitted top + boots",
+"Date night: dress + heels",
+"Date night: black jeans + button-up",
+"Date night: skirt + blouse + boots",
+"Date night: nice top + trousers",
+"Date night: collared shirt + dark pants",
+"Date night: midi dress + jacket",
+"Date night: blazer + tee + jeans",
+"Dinner look: sweater + skirt + ankle boots",
+"Dinner look: polo + chinos + loafers",
 
-    "Errands outfit: leggings + tee + sneakers",
-    "Errands outfit: joggers + hoodie + sneakers",
-    "Errands outfit: tee + shorts + slides",
-    "Errands outfit: jeans + sweatshirt + sneakers",
-    "Quick trip: tank + joggers",
-    "Quick trip: oversized tee + biker shorts",
-    "Grocery run: hoodie + leggings",
-    "Grocery run: tee + athletic shorts",
-    "Coffee run: jeans + cardigan + sneakers",
-    "Coffee run: sweatshirt + shorts + slides"
-  ];
+"Errands outfit: leggings + tee + sneakers",
+"Errands outfit: joggers + hoodie + sneakers",
+"Errands outfit: tee + shorts + slides",
+"Errands outfit: jeans + sweatshirt + sneakers",
+"Quick trip: tank + joggers",
+"Quick trip: oversized tee + biker shorts",
+"Grocery run: hoodie + leggings",
+"Grocery run: tee + athletic shorts",
+"Coffee run: jeans + cardigan + sneakers",
+"Coffee run: sweatshirt + shorts + slides"
+];
 
-  let history = [];
+let history = [];
 
-  function pickOutfit() {
-    let available = outfits.filter(item => !history.includes(item));
+function pickOutfit(){
+  let available = outfits.filter(item => !history.includes(item));
 
-    if (available.length === 0) {
-      history = [];
-      available = outfits;
-    }
-
-    const outfit = available[Math.floor(Math.random() * available.length)];
-
-    history.push(outfit);
-    if (history.length > 10) {
-      history.shift();
-    }
-
-    document.getElementById("result").textContent = outfit;
+  if(available.length === 0){
+    history = [];
+    available = outfits;
   }
 
-  document.getElementById("pickBtn").addEventListener("click", pickOutfit);
+  const outfit = available[Math.floor(Math.random() * available.length)];
+
+  history.push(outfit);
+  if(history.length > 10){
+    history.shift();
+  }
+
+  document.getElementById("result").textContent = outfit;
+}
+
+document.getElementById("pickBtn").addEventListener("click", pickOutfit);
 </script>
+
+<!-- Dynamic related tools -->
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<!-- Footer -->
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
