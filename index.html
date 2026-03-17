@@ -1,252 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Tool Squares | Random Decision Tools</title>
+  <title>Tool Squares | Free Random Decision Tools</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Free random decision tools: yes or no, coin flip, random number generator, dinner picker, username generator and more. Stop overthinking and decide fast.">
+  <meta name="description" content="Free random decision tools including yes or no, coin flip, random number generator, dinner picker, username generator, team generator, and more. Make fast choices without overthinking.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="canonical" href="https://toolsquares.com/">
+
+  <meta property="og:title" content="Tool Squares | Free Random Decision Tools">
+  <meta property="og:description" content="Simple online tools to help you make quick decisions, generate ideas, and have fun.">
+  <meta property="og:type" content="website">
+
   <link rel="stylesheet" href="/assets/style.css">
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
-  <style>
-    /* --- Tool Grid Upgrade --- */
-/* ===== Colorful Square Cards ===== */
-/* ===== GLOBAL ===== */
-
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background:#f3f4f6;
-  color:#111827;
-}
-
-/* ===== HEADER / HERO ===== */
-
-header{
-  background: linear-gradient(135deg,#5b5bd6,#6a4be8);
-  padding:70px 20px;
-  text-align:center;
-  color:white;
-}
-
-header h1{
-  font-size:52px;
-  margin:0 0 12px;
-  font-weight:900;
-  letter-spacing:.5px;
-}
-
-header p{
-  font-size:22px;
-  margin:0;
-  opacity:.95;
-}
-
-/* ===== PAGE LAYOUT ===== */
-
-.container{
-  max-width:1000px;
-  margin:40px auto;
-  padding:0 20px 80px;
-}
-
-/* ===== SECTION TITLE ===== */
-
-.section-title{
-  text-align:center;
-  font-size:24px;
-  font-weight:900;
-  margin-bottom:22px;
-}
-
-/* ===== TOOL GRID ===== */
-
-.tool-grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:18px;
-}
-
-@media (max-width:900px){
-  .tool-grid{
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width:600px){
-  .tool-grid{
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ===== TOOL CARDS ===== */
-
-.tool-card{
-  display:block;
-  text-decoration:none;
-  border-radius:14px;
-  padding:28px;
-  min-height:170px;
-  color:#111827;
-  box-shadow:0 18px 40px rgba(0,0,0,.12);
-  transition: transform .12s ease, box-shadow .12s ease;
-  position:relative;
-}
-
-.tool-card:hover{
-  transform: translateY(-4px);
-  box-shadow:0 24px 55px rgba(0,0,0,.18);
-}
-
-/* ===== CARD TEXT ===== */
-
-.tool-title{
-  font-size:26px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.tool-desc{
-  font-size:17px;
-  line-height:1.45;
-  opacity:.95;
-}
-
-/* ===== ICON ===== */
-
-.icon{
-  position:absolute;
-  top:18px;
-  right:18px;
-  font-size:38px;
-}
-
-/* ===== BADGE ===== */
-
-.badge{
-  position:absolute;
-  bottom:18px;
-  left:18px;
-  font-size:14px;
-  font-weight:800;
-  padding:7px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.85);
-}
-
-/* ===== CARD COLORS ===== */
-
-.c-purple{
-  background:linear-gradient(135deg,#c4b5fd,#7c3aed);
-}
-
-.c-amber{
-  background:linear-gradient(135deg,#fde68a,#f59e0b);
-}
-
-.c-slate{
-  background:linear-gradient(135deg,#e2e8f0,#94a3b8);
-}
-
-.c-teal{
-  background:linear-gradient(135deg,#99f6e4,#14b8a6);
-}
-
-.c-green{
-  background:linear-gradient(135deg,#86efac,#22c55e);
-}
-
-.c-blue{
-  background:linear-gradient(135deg,#93c5fd,#3b82f6);
-}
-
-.c-pink{
-  background:linear-gradient(135deg,#fbcfe8,#ec4899);
-}
-
-/* ===== FOOTNOTE ===== */
-
-.note{
-  text-align:center;
-  margin-top:18px;
-  color:#6b7280;
-  font-size:14px;
-}
-
-    /* ===== HOVER GLOW + ANIMATION UPGRADE ===== */
-
-/* Soft shimmer overlay */
-.tool-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:14px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.45), rgba(255,255,255,0) 55%),
-              linear-gradient(120deg, rgba(255,255,255,.14), rgba(255,255,255,0) 55%);
-  opacity:.55;
-  pointer-events:none;
-  transition: opacity .18s ease;
-}
-
-/* Glow ring */
-.tool-card::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:16px;
-  background: var(--glow, rgba(99,102,241,.35));
-  filter: blur(14px);
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .18s ease;
-  z-index:-1;
-}
-
-.tool-card:hover::before{
-  opacity:.75;
-}
-
-.tool-card:hover::after{
-  opacity:1;
-}
-
-/* Icon float */
-.icon{
-  transition: transform .14s ease, filter .14s ease;
-}
-
-.tool-card:hover .icon{
-  transform: translateY(-3px) scale(1.03);
-  filter: drop-shadow(0 10px 14px rgba(0,0,0,.18));
-}
-
-/* Slight tilt feel (subtle) */
-.tool-card{
-  transform: translateY(0);
-  will-change: transform;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .tool-card,
-  .tool-card::before,
-  .tool-card::after,
-  .icon{
-    transition:none !important;
-    animation:none !important;
-  }
-}
-
-/* Per-card glow colors */
-.c-purple{ --glow: rgba(124,58,237,.45); }
-.c-amber { --glow: rgba(245,158,11,.45); }
-.c-slate { --glow: rgba(148,163,184,.45); }
-.c-teal  { --glow: rgba(20,184,166,.45); }
-.c-green { --glow: rgba(34,197,94,.45); }
-.c-blue  { --glow: rgba(59,130,246,.45); }
-.c-pink  { --glow: rgba(236,72,153,.45); }
-  </style>
 </head>
 
 <body>
@@ -255,23 +26,26 @@ header p{
   <h1>Tool Squares</h1>
   <p>Stop overthinking. Let the internet decide.</p>
 </header>
+
 <section class="home-intro">
   <div class="home-intro-card">
     <div class="home-intro-eyebrow">Quick tools</div>
     <h2>Simple tools for fast decisions.</h2>
     <p>
-      <span class="home-intro-strong">Tool Squares</span> is a collection of simple tools designed to help you make quick decisions without overthinking.
-      Whether you're choosing what to eat, picking a random number, flipping a coin, or splitting teams, these tools give you instant answers.
+      <span class="home-intro-strong">Tool Squares</span> is a collection of free online tools designed to help you make quick decisions without overthinking.
+      Whether you are choosing what to eat, flipping a coin, generating a random number, or splitting groups into teams, these tools are built to be fast, simple, and easy to use.
     </p>
     <p>
-      Built for everyday choices, fun moments, and those times when you just want a quick answer, every tool is designed to feel fast, simple, and easy to use.
+      Every page is designed for quick results, clean usability, and everyday usefulness. No signups, no complicated setup, and no clutter.
+      Just open a tool, click once, and get an answer.
     </p>
   </div>
 </section>
+
 <div class="container">
 
-  <div class="tools">
-    <div class="section-title">Decision Tools</div>
+  <section class="tools">
+    <h2 class="section-title">Decision Tools</h2>
 
     <div class="tool-grid">
 
@@ -285,7 +59,7 @@ header p{
       <a class="tool-card c-amber" href="/pages/coin-flip.html">
         <div class="icon">🪙</div>
         <div class="tool-title">Coin Flip</div>
-        <p class="tool-desc">A realistic 3D flip (heads or tails).</p>
+        <p class="tool-desc">A fast heads or tails result.</p>
         <div class="badge">Fun</div>
       </a>
 
@@ -299,14 +73,14 @@ header p{
       <a class="tool-card c-teal" href="/pages/what-should-i-eat-tonight.html">
         <div class="icon">🍽️</div>
         <div class="tool-title">Eat Tonight</div>
-        <p class="tool-desc">Fresh dinner ideas that don’t repeat.</p>
-        <div class="badge">No repeats</div>
+        <p class="tool-desc">Get a dinner idea when you can’t decide.</p>
+        <div class="badge">Dinner</div>
       </a>
 
       <a class="tool-card c-green" href="/pages/what-should-i-do-today.html">
         <div class="icon">📌</div>
         <div class="tool-title">Do Today</div>
-        <p class="tool-desc">Get an idea when you’re bored.</p>
+        <p class="tool-desc">Get an activity idea when you’re bored.</p>
         <div class="badge">Ideas</div>
       </a>
 
@@ -320,7 +94,7 @@ header p{
       <a class="tool-card c-pink" href="/pages/excuse-generator.html">
         <div class="icon">😅</div>
         <div class="tool-title">Excuse</div>
-        <p class="tool-desc">A quick excuse (fun + harmless).</p>
+        <p class="tool-desc">Generate a quick, harmless excuse for fun.</p>
         <div class="badge">Funny</div>
       </a>
 
@@ -334,7 +108,7 @@ header p{
       <a class="tool-card c-green" href="/pages/would-you-rather.html">
         <div class="icon">🤔</div>
         <div class="tool-title">Would You Rather</div>
-        <p class="tool-desc">Get a random dilemma to decide between.</p>
+        <p class="tool-desc">Get a random dilemma to choose between.</p>
         <div class="badge">Fun</div>
       </a>
 
@@ -362,7 +136,7 @@ header p{
       <a class="tool-card c-amber" href="/pages/dice-roller.html">
         <div class="icon">🎲</div>
         <div class="tool-title">Dice Roller</div>
-        <p class="tool-desc">Roll a digital dice instantly.</p>
+        <p class="tool-desc">Roll a digital die instantly.</p>
         <div class="badge">Game</div>
       </a>
 
@@ -376,21 +150,50 @@ header p{
       <a class="tool-card c-purple" href="/pages/random-color.html">
         <div class="icon">🎨</div>
         <div class="tool-title">Random Color</div>
-        <p class="tool-desc">Generate a random color palette.</p>
+        <p class="tool-desc">Generate a random color idea fast.</p>
         <div class="badge">Design</div>
       </a>
 
-      
     </div>
 
     <div class="note">
-      More tools coming soon — bookmark this page for quick decisions anytime.
+      More tools are coming soon. Bookmark this page for fast answers, quick ideas, and everyday decision help.
     </div>
+  </section>
 
-  </div>
+  <section class="section">
+    <div class="page-card">
+      <h2>Why use Tool Squares?</h2>
+      <p>
+        Tool Squares is made for people who want quick answers without friction. Instead of downloading an app, creating an account,
+        or sorting through cluttered pages, you can use a simple tool in seconds.
+      </p>
+      <p>
+        These tools are useful for everyday decisions, classroom activities, game nights, group choices, usernames, dinner ideas,
+        random generators, and other moments when you want a fast result. The goal is simple: useful tools, clean pages, and an easy experience.
+      </p>
+
+      <h2>Popular ways people use these tools</h2>
+      <ul>
+        <li>Flip a coin when two choices feel equally good</li>
+        <li>Generate random numbers for games, raffles, and quick picks</li>
+        <li>Choose dinner ideas when nobody can decide what to eat</li>
+        <li>Create usernames, teams, and fun prompts in seconds</li>
+        <li>Use simple random tools for parties, classrooms, and friend groups</li>
+      </ul>
+
+      <h2>Free online tools that stay simple</h2>
+      <p>
+        Every Tool Squares page is built to be direct, lightweight, and easy to understand. That means clean layouts, useful text,
+        and no misleading content. Each tool is designed to do one job well and help visitors get what they came for quickly.
+      </p>
+    </div>
+  </section>
 
 </div>
+
 <div id="site-footer"></div>
 <script src="/js/include-footer.js"></script>
+
 </body>
 </html>
