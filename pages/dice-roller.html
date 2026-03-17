@@ -1,22 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dice Roller</title>
+<title>Dice Roller | Tool Squares</title>
+<meta name="description" content="Roll a virtual dice instantly. Free online dice roller for games, decisions, and random number picks.">
+<meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
-<style>
 
-.dice{
-font-size:80px;
-margin:20px 0;
+<style>
+.dice-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:20px 0;
 }
 
+.dice{
+  font-size:90px;
+  transition:transform .25s ease;
+}
+
+.dice.roll{
+  animation: diceRoll .5s ease;
+}
+
+@keyframes diceRoll{
+  0%{ transform:rotate(0deg) scale(1); }
+  30%{ transform:rotate(120deg) scale(1.2); }
+  60%{ transform:rotate(240deg) scale(1.2); }
+  100%{ transform:rotate(360deg) scale(1); }
+}
+
+.dice-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.ghost{
+  background:transparent;
+  border:2px solid rgba(79,70,229,.20);
+  color:#111827;
+}
+
+.ghost:hover{
+  background:rgba(79,70,229,.05);
+  filter:none;
+}
 </style>
 
 </head>
@@ -29,37 +68,97 @@ margin:20px 0;
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Random tool</div>
+      <h1>Dice Roller</h1>
+      <p class="tool-lead">
+        Roll a virtual dice instantly for games, decisions, or random number picks.
+      </p>
 
-<h2>Dice Roller</h2>
+      <div class="tool-actions">
+        <h2>Roll the dice</h2>
+        <p>Click the button to generate a random number from 1 to 6.</p>
 
-<button onclick="roll()">Roll Dice</button>
+        <div class="dice-wrap">
+          <div class="dice" id="dice">🎲</div>
+        </div>
 
-<div class="dice" id="dice">🎲</div>
+        <div class="dice-actions">
+          <button onclick="roll()">Roll Dice</button>
+          <button class="ghost" onclick="resetDice()">Reset</button>
+        </div>
 
-<div class="result" id="result"></div>
+        <div class="result-box">
+          <div class="result" id="result"></div>
+        </div>
 
-</div>
+        <div class="small">Perfect for games, classrooms, or quick decisions.</div>
+      </div>
+    </section>
 
-</div>
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this dice roller works</h2>
+        <p>
+          This tool simulates a standard six-sided die. Each roll is completely random with equal probability.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use this tool</h2>
+        <ul>
+          <li>Board games and tabletop games</li>
+          <li>Classroom activities</li>
+          <li>Random decision making</li>
+          <li>When you don’t have a physical die</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+  </div>
+</main>
 
 <script>
-
 const diceIcons = ["⚀","⚁","⚂","⚃","⚄","⚅"];
 
 function roll(){
+  const dice = document.getElementById("dice");
+  const result = document.getElementById("result");
 
-const num = Math.floor(Math.random()*6);
+  const num = Math.floor(Math.random()*6);
 
-document.getElementById("dice").textContent = diceIcons[num];
+  dice.classList.remove("roll");
+  void dice.offsetWidth;
+  dice.classList.add("roll");
 
-document.getElementById("result").textContent = "You rolled " + (num+1);
-
+  setTimeout(()=>{
+    dice.textContent = diceIcons[num];
+    result.textContent = "You rolled " + (num + 1);
+  }, 200);
 }
 
+function resetDice(){
+  document.getElementById("dice").textContent = "🎲";
+  document.getElementById("result").textContent = "";
+}
 </script>
+
+<!-- 🔥 Dynamic Tools System -->
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<!-- Footer -->
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
