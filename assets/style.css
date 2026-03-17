@@ -826,3 +826,105 @@ button:active{
     animation:none !important;
   }
 }
+/* =========================
+   TOOL PAGE VISUAL UPGRADE
+========================= */
+
+/* Main tool card gradient border */
+.tool-main{
+  position:relative;
+  overflow:hidden;
+}
+
+.tool-main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding:1px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events:none;
+}
+
+/* Action box subtle highlight */
+.tool-actions{
+  position:relative;
+}
+
+.tool-actions::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:linear-gradient(120deg, rgba(99,102,241,.08), rgba(236,72,153,.08));
+  pointer-events:none;
+}
+
+/* Result glow */
+.result-box{
+  position:relative;
+}
+
+.result-box::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#6366f1,#ec4899);
+  filter:blur(14px);
+  opacity:.12;
+  z-index:-1;
+}
+
+/* Info cards colored side border */
+.info-card{
+  position:relative;
+}
+
+.info-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  border-radius:20px 0 0 20px;
+  background:linear-gradient(180deg,#6366f1,#ec4899);
+}
+
+/* FAQ items subtle hover */
+.faq-item{
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+
+.faq-item:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+}
+
+/* Related tools cards pop */
+.related-link{
+  position:relative;
+  overflow:hidden;
+}
+
+.related-link::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#6366f1,#22c55e,#ec4899);
+  filter:blur(10px);
+  opacity:0;
+  transition:opacity .15s ease;
+  z-index:-1;
+}
+
+.related-link:hover::after{
+  opacity:.2;
+}
