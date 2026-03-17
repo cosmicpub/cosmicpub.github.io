@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Coin Flip | Heads or Tails</title>
-<meta name="description" content="Flip a coin online with a realistic 3D animation. Land on heads or tails.">
+<title>Coin Flip | Heads or Tails | Tool Squares</title>
+<meta name="description" content="Flip a coin online with a realistic animation. Get heads or tails instantly with this free coin flip tool.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolsquares.com/pages/coin-flip.html">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
 
 <style>
-/* Page-only enhancements (keeps your global style.css intact) */
-
 .coin-stage{
   display:flex;
   justify-content:center;
@@ -40,7 +41,6 @@
   text-transform:uppercase;
   user-select:none;
 
-  /* “coin” look */
   background: radial-gradient(circle at 30% 25%, #fff2a8 0%, #ffd24d 35%, #d4a017 72%, #b37b00 100%);
   box-shadow:
     inset 0 0 0 6px rgba(0,0,0,.10),
@@ -63,15 +63,12 @@
   z-index:2;
   font-size:26px;
   color:#2a1a00;
-  text-shadow: 0 1px 0 rgba(255,255,255,.4);
 }
 
 .coin-face .small{
   position:absolute;
   bottom:18px;
   font-size:12px;
-  color: rgba(42,26,0,.75);
-  letter-spacing:1px;
 }
 
 .face-heads{
@@ -95,11 +92,9 @@
       rgba(255,255,255,.20) 2px,
       rgba(255,255,255,.20) 4px
     );
-  filter: blur(.2px);
   opacity:.35;
 }
 
-/* Flip animation */
 @keyframes spin {
   0%   { transform: rotateX(0deg) rotateY(0deg); }
   100% { transform: rotateX(1080deg) rotateY(720deg); }
@@ -109,7 +104,6 @@
   animation: spin 1.15s cubic-bezier(.12,.6,.22,1) both;
 }
 
-/* Result + status */
 .status{
   margin-top:10px;
   color:#6b7280;
@@ -128,6 +122,7 @@ button[disabled]{
   opacity:.7;
   cursor:not-allowed;
 }
+
 .ghost{
   background: transparent;
   border: 2px solid rgba(79,70,229,.25);
@@ -145,39 +140,109 @@ button[disabled]{
   <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
-  <div class="card">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-    <h2>Coin Flip</h2>
-    <p>Press flip to toss the coin with a realistic animation.</p>
+    <section class="tool-main">
+      <div class="tool-kicker">Random tool</div>
+      <h1>Coin Flip</h1>
+      <p class="tool-lead">
+        Flip a virtual coin instantly. This free online coin flip tool gives you a quick heads or tails result with a smooth animation.
+      </p>
 
-    <div class="coin-stage">
-      <div id="coin3d" class="coin-3d" aria-label="coin">
-        <div class="coin-edge"></div>
+      <div class="tool-actions">
+        <h2>Flip the coin</h2>
+        <p>Tap the button to spin the coin and get your result.</p>
 
-        <div class="coin-face face-heads">
-          <div class="big">HEADS</div>
-          <div class="small">H</div>
+        <div class="coin-stage">
+          <div id="coin3d" class="coin-3d">
+            <div class="coin-edge"></div>
+
+            <div class="coin-face face-heads">
+              <div class="big">HEADS</div>
+              <div class="small">H</div>
+            </div>
+
+            <div class="coin-face face-tails">
+              <div class="big">TAILS</div>
+              <div class="small">T</div>
+            </div>
+          </div>
         </div>
 
-        <div class="coin-face face-tails">
-          <div class="big">TAILS</div>
-          <div class="small">T</div>
+        <div id="status" class="status"></div>
+
+        <div class="row">
+          <button id="flipBtn" onclick="flipCoin()">Flip</button>
+          <button class="ghost" onclick="resetCoin()">Reset</button>
+        </div>
+
+        <div class="result-box">
+          <div id="result" class="result"></div>
         </div>
       </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How the coin flip works</h2>
+        <p>
+          This tool randomly selects between heads and tails using a simple probability function.
+          Each flip has a 50/50 chance, just like a real coin.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use a coin flip</h2>
+        <ul>
+          <li>Making quick decisions between two options</li>
+          <li>Settling friendly debates</li>
+          <li>Choosing randomly for games or activities</li>
+          <li>Breaking ties fairly</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+
+          <div class="faq-item">
+            <h3>Is the coin flip truly random?</h3>
+            <p>Yes. Each result is randomly generated with equal probability.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Can I use this on mobile?</h3>
+            <p>Yes. The coin flip works smoothly on phones, tablets, and desktops.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tools">
+          <a class="related-link" href="/pages/yes-or-no.html">
+            <strong>Yes or No</strong>
+            <span>Get a fast decision instantly.</span>
+          </a>
+
+          <a class="related-link" href="/pages/random-number.html">
+            <strong>Random Number</strong>
+            <span>Generate numbers instantly.</span>
+          </a>
+
+          <a class="related-link" href="/pages/excuse-generator.html">
+            <strong>Excuse Generator</strong>
+            <span>Create funny excuses quickly.</span>
+          </a>
+        </div>
+      </section>
+
     </div>
-
-    <div id="status" class="status"></div>
-
-    <div class="row">
-      <button id="flipBtn" onclick="flipCoin()">Flip</button>
-      <button class="ghost" onclick="resetCoin()">Reset</button>
-    </div>
-
-    <div id="result" class="result" style="margin-top:16px;"></div>
-
   </div>
-</div>
+</main>
 
 <script>
 let busy = false;
@@ -198,25 +263,17 @@ function flipCoin(){
   setText("result", "");
   setText("status", "Flipping…");
 
-  // Remove any prior transform so a new animation always runs
   coin.classList.remove("flipping");
-  // Force reflow
   void coin.offsetWidth;
   coin.classList.add("flipping");
 
-  // Pick outcome
   const outcome = Math.random() < 0.5 ? "HEADS" : "TAILS";
-
-  // Let animation play, then “land” on the outcome by setting final rotation
-  const ms = 1150;
 
   setTimeout(() => {
     coin.classList.remove("flipping");
 
-    // Land on heads (0deg) or tails (180deg)
-    // Add some extra spins so it feels natural
     const base = outcome === "HEADS" ? 0 : 180;
-    const extraSpins = 720; // 2 full turns
+    const extraSpins = 720;
     coin.style.transform = `rotateY(${base + extraSpins}deg)`;
 
     setText("result", outcome);
@@ -224,7 +281,7 @@ function flipCoin(){
 
     btn.disabled = false;
     busy = false;
-  }, ms);
+  }, 1150);
 }
 
 function resetCoin(){
@@ -241,6 +298,9 @@ function resetCoin(){
   busy = false;
 }
 </script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
