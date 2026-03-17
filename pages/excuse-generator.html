@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Excuse Generator</title>
-<meta name="description" content="Generate funny excuses instantly.">
+<title>Excuse Generator | Tool Squares</title>
+<meta name="description" content="Use this free excuse generator to create random funny excuses instantly. Fast, lighthearted, and easy to use for harmless fun.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4f46e5">
+<link rel="canonical" href="https://toolsquares.com/pages/excuse-generator.html">
+
+<meta property="og:title" content="Excuse Generator | Tool Squares">
+<meta property="og:description" content="Generate random funny excuses instantly with this free online excuse generator.">
+<meta property="og:type" content="website">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
@@ -16,189 +23,278 @@
 <body>
 
 <header>
-<h1>Tool Squares</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Tool Squares</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Funny tool</div>
+      <h1>Excuse Generator</h1>
+      <p class="tool-lead">
+        Need a quick random excuse for a joke, a laugh, or a harmless made-up scenario?
+        This free excuse generator creates funny excuses instantly with one click.
+      </p>
 
-<h2>Excuse Generator</h2>
-<p>Need an excuse? We've got you covered.</p>
+      <div class="tool-actions">
+        <h2>Generate a random excuse</h2>
+        <p>Tap the button and get a new funny excuse right away.</p>
 
-<button onclick="generate()">Generate excuse</button>
+        <button onclick="generate()">Generate excuse</button>
 
-<div id="result" class="result"></div>
+        <div class="result-box">
+          <div id="result" class="result" aria-live="polite"></div>
+        </div>
 
-</div>
+        <div class="small">
+          This tool is for lighthearted entertainment and creative fun.
+        </div>
+      </div>
+    </section>
 
-</div>
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this excuse generator works</h2>
+        <p>
+          The tool combines a random subject, a random problem, and a random ending to create a quick excuse.
+          Each click gives you a fresh result, so it is easy to keep generating new options until you find one that makes you laugh.
+        </p>
+        <p>
+          It is designed to be simple, fast, and easy to use on desktop or mobile.
+          There are no forms, no accounts, and nothing extra to set up.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Ways people use this tool</h2>
+        <ul>
+          <li>For harmless jokes with friends</li>
+          <li>For party games and icebreakers</li>
+          <li>For creative writing prompts</li>
+          <li>For funny social captions or messages</li>
+          <li>For random inspiration when making comedy content</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>About the excuses</h2>
+        <p>
+          The excuses generated here are intentionally light, silly, and unrealistic.
+          They are meant for entertainment, not for serious situations.
+          If you want a new result, just click again and the generator will build another one instantly.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+
+          <div class="faq-item">
+            <h3>Is this excuse generator free?</h3>
+            <p>Yes. You can use it as many times as you want for free.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Does it generate a different excuse every time?</h3>
+            <p>Yes. The tool randomly combines different parts to create a new excuse on each click.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Can I use this on mobile?</h3>
+            <p>Yes. The page is built to work on phones, tablets, and desktop screens.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Is this tool meant for serious use?</h3>
+            <p>No. It is meant for fun, humor, and harmless entertainment.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tools">
+          <a class="related-link" href="/pages/yes-or-no.html">
+            <strong>Yes or No</strong>
+            <span>Get a fast answer when you feel stuck.</span>
+          </a>
+
+          <a class="related-link" href="/pages/coin-flip.html">
+            <strong>Coin Flip</strong>
+            <span>Heads or tails in one quick tap.</span>
+          </a>
+
+          <a class="related-link" href="/pages/would-you-rather.html">
+            <strong>Would You Rather</strong>
+            <span>Pick between two random options for fun.</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
 
 <script>
-
 const subjects = [
-
-"My dog",
-"My cat",
-"My neighbor",
-"My alarm clock",
-"My car",
-"My laptop",
-"My phone",
-"My WiFi",
-"My internet provider",
-"My door lock",
-"My coffee maker",
-"My printer",
-"My power",
-"My smoke alarm",
-"My GPS",
-"My dishwasher",
-"My washing machine",
-"My calendar",
-"My bike",
-"My garage door",
-"My headphones",
-"My smartwatch",
-"My toaster",
-"My vacuum",
-"My router",
-"My smart speaker",
-"My delivery driver",
-"My rideshare driver",
-"My roommate",
-"My kid",
-"My babysitter",
-"My boss",
-"My coworker",
-"My landlord",
-"My HOA",
-"My dentist",
-"My doctor",
-"My plumber",
-"My mechanic",
-"My electrician",
-"My bank",
-"My credit card",
-"My email",
-"My group chat",
-"My calendar reminder",
-"My grocery order",
-"My food delivery",
-"My flight",
-"My train",
-"My bus",
-"My parking app",
-"My work app",
-"My password manager"
-
+  "My dog",
+  "My cat",
+  "My neighbor",
+  "My alarm clock",
+  "My car",
+  "My laptop",
+  "My phone",
+  "My WiFi",
+  "My internet provider",
+  "My door lock",
+  "My coffee maker",
+  "My printer",
+  "My power",
+  "My smoke alarm",
+  "My GPS",
+  "My dishwasher",
+  "My washing machine",
+  "My calendar",
+  "My bike",
+  "My garage door",
+  "My headphones",
+  "My smartwatch",
+  "My toaster",
+  "My vacuum",
+  "My router",
+  "My smart speaker",
+  "My delivery driver",
+  "My rideshare driver",
+  "My roommate",
+  "My kid",
+  "My babysitter",
+  "My boss",
+  "My coworker",
+  "My landlord",
+  "My HOA",
+  "My dentist",
+  "My doctor",
+  "My plumber",
+  "My mechanic",
+  "My electrician",
+  "My bank",
+  "My credit card",
+  "My email",
+  "My group chat",
+  "My calendar reminder",
+  "My grocery order",
+  "My food delivery",
+  "My flight",
+  "My train",
+  "My bus",
+  "My parking app",
+  "My work app",
+  "My password manager"
 ];
 
 const actions = [
-
-"stopped working",
-"froze completely",
-"exploded",
-"started making weird noises",
-"locked me out",
-"refused to cooperate",
-"crashed repeatedly",
-"updated at the worst possible time",
-"needed an emergency restart",
-"lost all my settings",
-"wouldn't connect",
-"wouldn't start",
-"wouldn't stop beeping",
-"needed a reset",
-"needed troubleshooting",
-"needed a software update",
-"needed a hard reboot",
-"got stuck",
-"malfunctioned",
-"glitched out",
-"short circuited",
-"overheated",
-"needed immediate attention",
-"decided to stop responding",
-"started acting possessed",
-"needed emergency maintenance",
-"broke unexpectedly",
-"wouldn't unlock",
-"wouldn't charge",
-"lost signal",
-"lost power",
-"locked me out of everything",
-"triggered an alert",
-"set off an alarm",
-"required support",
-"needed repairs",
-"needed a technician",
-"needed to be replaced",
-"forced me to troubleshoot",
-"wouldn't sync",
-"wouldn't update",
-"wouldn't load",
-"wouldn't cooperate",
-"went completely offline",
-"wouldn't respond",
-"started flashing warnings"
-
+  "stopped working",
+  "froze completely",
+  "exploded",
+  "started making weird noises",
+  "locked me out",
+  "refused to cooperate",
+  "crashed repeatedly",
+  "updated at the worst possible time",
+  "needed an emergency restart",
+  "lost all my settings",
+  "wouldn't connect",
+  "wouldn't start",
+  "wouldn't stop beeping",
+  "needed a reset",
+  "needed troubleshooting",
+  "needed a software update",
+  "needed a hard reboot",
+  "got stuck",
+  "malfunctioned",
+  "glitched out",
+  "short circuited",
+  "overheated",
+  "needed immediate attention",
+  "decided to stop responding",
+  "started acting possessed",
+  "needed emergency maintenance",
+  "broke unexpectedly",
+  "wouldn't unlock",
+  "wouldn't charge",
+  "lost signal",
+  "lost power",
+  "locked me out of everything",
+  "triggered an alert",
+  "set off an alarm",
+  "required support",
+  "needed repairs",
+  "needed a technician",
+  "needed to be replaced",
+  "forced me to troubleshoot",
+  "wouldn't sync",
+  "wouldn't update",
+  "wouldn't load",
+  "wouldn't cooperate",
+  "went completely offline",
+  "wouldn't respond",
+  "started flashing warnings"
 ];
 
 const endings = [
-
-"right before I left.",
-"so I couldn't make it.",
-"and I had to fix it.",
-"and it took hours.",
-"and it ruined my plans.",
-"and I couldn't get it working again.",
-"and everything got delayed.",
-"so I had to deal with it immediately.",
-"and it completely derailed my morning.",
-"so I had to troubleshoot it.",
-"and I lost a lot of time.",
-"so I had to call support.",
-"and I had to restart everything.",
-"and I had to wait for it to reset.",
-"and nothing was responding.",
-"and it slowed everything down.",
-"and I had to figure it out.",
-"so I had to handle it first.",
-"and I couldn't leave until it was fixed.",
-"and it took way longer than expected.",
-"so I had to sort it out.",
-"and it caused a whole mess.",
-"and it forced me to stop everything.",
-"so I had to deal with it.",
-"and it delayed everything today.",
-"so I had to stay and handle it.",
-"and it turned into a whole situation.",
-"and it took forever to resolve.",
-"and I had to work around it.",
-"so I had to spend time fixing it.",
-"and it spiraled into a bigger problem.",
-"and I had to sort out the issue.",
-"and it messed up my schedule.",
-"so I couldn't leave when I planned.",
-"and it needed attention immediately.",
-"so I had to troubleshoot it for a while.",
-"and it turned into a bigger issue.",
-"and it forced me to stop what I was doing."
+  "right before I left.",
+  "so I couldn't make it.",
+  "and I had to fix it.",
+  "and it took hours.",
+  "and it ruined my plans.",
+  "and I couldn't get it working again.",
+  "and everything got delayed.",
+  "so I had to deal with it immediately.",
+  "and it completely derailed my morning.",
+  "so I had to troubleshoot it.",
+  "and I lost a lot of time.",
+  "so I had to call support.",
+  "and I had to restart everything.",
+  "and I had to wait for it to reset.",
+  "and nothing was responding.",
+  "and it slowed everything down.",
+  "and I had to figure it out.",
+  "so I had to handle it first.",
+  "and I couldn't leave until it was fixed.",
+  "and it took way longer than expected.",
+  "so I had to sort it out.",
+  "and it caused a whole mess.",
+  "and it forced me to stop everything.",
+  "so I had to deal with it.",
+  "and it delayed everything today.",
+  "so I had to stay and handle it.",
+  "and it turned into a whole situation.",
+  "and it took forever to resolve.",
+  "and I had to work around it.",
+  "so I had to spend time fixing it.",
+  "and it spiraled into a bigger problem.",
+  "and I had to sort out the issue.",
+  "and it messed up my schedule.",
+  "so I couldn't leave when I planned.",
+  "and it needed attention immediately.",
+  "so I had to troubleshoot it for a while.",
+  "and it turned into a bigger issue.",
+  "and it forced me to stop what I was doing."
 ];
 
-function r(arr){return arr[Math.floor(Math.random()*arr.length)]}
-
-function generate(){
-
-let excuse = r(subjects)+" "+r(actions)+" "+r(endings);
-
-document.getElementById("result").textContent=excuse;
-
+function r(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function generate(){
+  const excuse = r(subjects) + " " + r(actions) + " " + r(endings);
+  document.getElementById("result").textContent = excuse;
+}
 </script>
 
 </body>
