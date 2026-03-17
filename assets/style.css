@@ -1,10 +1,17 @@
 :root{
   --brand:#4f46e5;
+  --brand-dark:#4338ca;
   --bg:#f4f6fb;
   --card:#ffffff;
   --text:#111827;
   --muted:#6b7280;
+  --muted-2:#374151;
   --border:#e5e7eb;
+  --shadow:0 12px 28px rgba(0,0,0,.10);
+  --shadow-lg:0 18px 45px rgba(0,0,0,.10);
+  --radius:14px;
+  --radius-lg:22px;
+  --max:1120px;
 }
 
 *{
@@ -22,12 +29,21 @@ body{
   color:var(--text);
 }
 
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  color:inherit;
+}
+
 /* =========================
    HEADER
 ========================= */
 
 header{
-  background: linear-gradient(135deg,#5b5bd6,#6a4be8);
+  background:linear-gradient(135deg,#5b5bd6,#6a4be8);
   color:#fff;
   padding:70px 20px;
   text-align:center;
@@ -72,12 +88,17 @@ header p{
   padding:0 20px 80px;
 }
 
+.section{
+  margin-top:26px;
+}
+
 .card{
   background:var(--card);
   border-radius:14px;
-  box-shadow:0 12px 28px rgba(0,0,0,.10);
+  box-shadow:var(--shadow);
   padding:26px;
   text-align:center;
+  border:1px solid rgba(17,24,39,.04);
 }
 
 .card h2{
@@ -88,6 +109,7 @@ header p{
 .card p{
   margin:0 0 18px;
   color:var(--muted);
+  line-height:1.65;
 }
 
 button{
@@ -97,24 +119,35 @@ button{
   border-radius:10px;
   padding:14px 22px;
   font-size:18px;
+  font-weight:700;
   cursor:pointer;
+  transition:transform .12s ease, filter .12s ease, background .12s ease;
 }
 
 button:hover{
-  filter:brightness(.95);
+  filter:brightness(.96);
+  transform:translateY(-1px);
+}
+
+button:active{
+  transform:translateY(0);
 }
 
 .result{
   margin-top:18px;
   font-size:34px;
   font-weight:800;
-  letter-spacing:.5px;
+  letter-spacing:.2px;
+  line-height:1.35;
+  color:#111827;
+  min-height:46px;
 }
 
 .small{
   margin-top:14px;
   color:var(--muted);
   font-size:14px;
+  line-height:1.6;
 }
 
 /* =========================
@@ -131,7 +164,7 @@ button:hover{
   background:#ffffff;
   border-radius:24px;
   padding:34px 38px;
-  box-shadow:0 18px 45px rgba(0,0,0,.10);
+  box-shadow:var(--shadow-lg);
   border:1px solid rgba(17,24,39,.05);
 }
 
@@ -248,7 +281,6 @@ button:hover{
   background:rgba(255,255,255,.85);
 }
 
-/* glow / shimmer */
 .tool-card::before{
   content:"";
   position:absolute;
@@ -283,7 +315,6 @@ button:hover{
   opacity:1;
 }
 
-/* card colors */
 .c-purple{ background:linear-gradient(135deg,#c4b5fd,#7c3aed); --glow: rgba(124,58,237,.45); }
 .c-amber{ background:linear-gradient(135deg,#fde68a,#f59e0b); --glow: rgba(245,158,11,.45); }
 .c-slate{ background:linear-gradient(135deg,#e2e8f0,#94a3b8); --glow: rgba(148,163,184,.45); }
@@ -297,6 +328,185 @@ button:hover{
   margin-top:18px;
   color:#6b7280;
   font-size:14px;
+  line-height:1.6;
+}
+
+/* =========================
+   TOOL PAGE
+========================= */
+
+.tool-page{
+  max-width:1000px;
+  margin:40px auto 0;
+  padding:0 20px 80px;
+}
+
+.tool-wrap{
+  display:grid;
+  gap:20px;
+}
+
+.tool-main{
+  background:var(--card);
+  border-radius:20px;
+  box-shadow:0 14px 36px rgba(17,24,39,.08);
+  padding:32px 28px;
+  border:1px solid var(--border);
+}
+
+.tool-kicker{
+  display:inline-block;
+  margin:0 0 14px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(79,70,229,.10);
+  color:var(--brand);
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.tool-main h1{
+  margin:0 0 12px;
+  font-size:2.3rem;
+  line-height:1.08;
+  letter-spacing:-.02em;
+}
+
+.tool-lead{
+  margin:0 0 22px;
+  color:var(--muted-2);
+  font-size:1.08rem;
+  line-height:1.75;
+}
+
+.tool-actions{
+  background:linear-gradient(180deg,#fbfbff 0%, #ffffff 100%);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px 20px;
+  text-align:center;
+}
+
+.tool-actions h2{
+  margin:0 0 10px;
+  font-size:1.45rem;
+}
+
+.tool-actions p{
+  margin:0 0 18px;
+  color:var(--muted);
+  line-height:1.65;
+}
+
+.result-box{
+  margin-top:18px;
+  padding:18px 16px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+}
+
+.tool-sections{
+  display:grid;
+  gap:18px;
+}
+
+.info-card{
+  background:var(--card);
+  border-radius:20px;
+  box-shadow:0 14px 36px rgba(17,24,39,.06);
+  padding:28px 24px;
+  border:1px solid var(--border);
+}
+
+.info-card h2{
+  margin:0 0 12px;
+  font-size:1.35rem;
+  line-height:1.2;
+}
+
+.info-card p{
+  margin:0 0 16px;
+  color:var(--muted-2);
+  line-height:1.8;
+  font-size:1rem;
+}
+
+.info-card p:last-child{
+  margin-bottom:0;
+}
+
+.info-card ul{
+  margin:0;
+  padding-left:20px;
+  color:var(--muted-2);
+  line-height:1.8;
+}
+
+.info-card li + li{
+  margin-top:8px;
+}
+
+.faq{
+  display:grid;
+  gap:12px;
+}
+
+.faq-item{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px 18px 16px;
+  background:#fff;
+}
+
+.faq-item h3{
+  margin:0 0 8px;
+  font-size:1.03rem;
+  line-height:1.4;
+}
+
+.faq-item p{
+  margin:0;
+  color:var(--muted-2);
+  line-height:1.7;
+}
+
+.related-tools{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+
+.related-link{
+  display:block;
+  text-decoration:none;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  color:#111827;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.related-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 25px rgba(17,24,39,.08);
+  border-color:#d1d5db;
+}
+
+.related-link strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:1rem;
+}
+
+.related-link span{
+  display:block;
+  color:var(--muted);
+  line-height:1.55;
+  font-size:.95rem;
 }
 
 /* =========================
@@ -477,6 +687,10 @@ button:hover{
     grid-template-columns:repeat(2, 1fr);
   }
 
+  .related-tools{
+    grid-template-columns:1fr 1fr;
+  }
+
   .ts-footer-top{
     flex-direction:column;
     gap:34px;
@@ -497,6 +711,18 @@ button:hover{
 
   .page-card h1{
     font-size:2rem;
+  }
+
+  .tool-main{
+    padding:26px 20px;
+  }
+
+  .tool-main h1{
+    font-size:2rem;
+  }
+
+  .info-card{
+    padding:24px 20px;
   }
 
   .ts-footer-container{
@@ -546,6 +772,26 @@ button:hover{
     grid-template-columns:1fr;
   }
 
+  .related-tools{
+    grid-template-columns:1fr;
+  }
+
+  .tool-page{
+    padding:0 16px 70px;
+  }
+
+  .tool-main h1{
+    font-size:1.75rem;
+  }
+
+  .tool-lead{
+    font-size:1rem;
+  }
+
+  .result{
+    font-size:28px;
+  }
+
   .ts-footer-shell{
     padding:42px 18px 20px;
   }
@@ -573,7 +819,9 @@ button:hover{
   .tool-card,
   .tool-card::before,
   .tool-card::after,
-  .icon{
+  .icon,
+  button,
+  .related-link{
     transition:none !important;
     animation:none !important;
   }
