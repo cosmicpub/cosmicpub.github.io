@@ -419,6 +419,10 @@
     </div>
   `).join("");
 }
+  async function copyPaletteColor(hex) {
+  await navigator.clipboard.writeText(hex);
+  document.getElementById("copiedMsg").textContent = `${hex} copied.`;
+}
 
   async function copyHex() {
     if (!currentColor) return;
