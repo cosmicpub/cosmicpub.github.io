@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
-<title>Random Movie | Tool Squares</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Movie Picker | Tool Squares</title>
 <meta name="description" content="Pick a random movie instantly when you can't decide what to watch.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.result-box{
+  margin-top:20px;
+  padding:24px;
+  border-radius:18px;
+  background:#f8fafc;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  font-size:24px;
+  font-weight:800;
+  text-align:center;
+  min-height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.subtext{
+  margin-top:10px;
+  text-align:center;
+  font-size:14px;
+  color:#6b7280;
+}
+</style>
 
 </head>
 
@@ -19,175 +47,169 @@
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Entertainment tool</div>
+      <h1>Random Movie Picker</h1>
+      <p class="tool-lead">
+        Get a random movie instantly when you can’t decide what to watch.
+      </p>
 
-<button onclick="pickMovie()">Pick a Movie</button>
+      <div class="tool-actions">
+        <h2>Pick a movie</h2>
+        <p>Tap the button and get a random movie suggestion.</p>
 
-<div class="result" id="result"></div>
+        <button onclick="pickMovie()">Pick a Movie</button>
 
-</div>
+        <div id="result" class="result-box">
+          Tap the button to get a movie.
+        </div>
 
-</div>
+        <div class="subtext">
+          Recent picks are avoided for better variety.
+        </div>
+      </div>
+    </section>
 
-<div id="site-footer"></div>
-<script src="/js/include-footer.js"></script>
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this works</h2>
+        <p>
+          This tool randomly selects a movie while avoiding recently shown results so you don’t see repeats too often.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use this</h2>
+        <ul>
+          <li>Movie night decisions</li>
+          <li>When you can’t agree what to watch</li>
+          <li>Discovering movies you forgot about</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
 
 <script>
+const movies = [
 
-const movies=[
+"The Dark Knight","Inception","Interstellar","The Matrix","Avatar","Titanic","Gladiator","Jurassic Park",
 
-"The Dark Knight",
-"Inception",
-"Interstellar",
-"The Matrix",
-"Avatar",
-"Titanic",
-"Gladiator",
-"Jurassic Park",
-"Spider-Man",
+"Spider-Man","The Batman","The Dark Knight Rises","Joker",
+
 "The Lord of the Rings: The Fellowship of the Ring",
 "The Lord of the Rings: The Two Towers",
 "The Lord of the Rings: The Return of the King",
 
-"Top Gun",
-"Top Gun: Maverick",
-"Mad Max: Fury Road",
-"John Wick",
-"John Wick Chapter 2",
-"John Wick Chapter 3",
-"Mission Impossible",
-"Mission Impossible Fallout",
-"Mission Impossible Rogue Nation",
+"Top Gun","Top Gun: Maverick","Mad Max: Fury Road",
 
-"Star Wars: A New Hope",
-"Star Wars: The Empire Strikes Back",
-"Star Wars: Return of the Jedi",
-"Star Wars: The Force Awakens",
-"Rogue One",
+"John Wick","John Wick Chapter 2","John Wick Chapter 3","John Wick Chapter 4",
 
-"The Avengers",
-"Avengers: Infinity War",
-"Avengers: Endgame",
-"Iron Man",
-"Captain America: The Winter Soldier",
-"Guardians of the Galaxy",
+"Mission Impossible","Mission Impossible Fallout","Mission Impossible Rogue Nation","Mission Impossible Dead Reckoning",
 
-"Black Panther",
-"Doctor Strange",
-"Thor Ragnarok",
-"Spider-Man: Homecoming",
-"Spider-Man: No Way Home",
+"Star Wars: A New Hope","Star Wars: The Empire Strikes Back","Star Wars: Return of the Jedi","Rogue One",
 
-"Harry Potter and the Sorcerer's Stone",
-"Harry Potter and the Chamber of Secrets",
-"Harry Potter and the Prisoner of Azkaban",
-"Harry Potter and the Goblet of Fire",
-"Harry Potter and the Order of the Phoenix",
-"Harry Potter and the Half-Blood Prince",
-"Harry Potter and the Deathly Hallows Part 1",
-"Harry Potter and the Deathly Hallows Part 2",
+"The Avengers","Avengers: Infinity War","Avengers: Endgame","Iron Man","Guardians of the Galaxy",
 
-"The Hunger Games",
-"Catching Fire",
-"Mockingjay",
+"Black Panther","Doctor Strange","Thor Ragnarok","Spider-Man: No Way Home",
 
-"The Shawshank Redemption",
-"Forrest Gump",
-"The Green Mile",
-"Pulp Fiction",
-"Fight Club",
+"Harry Potter and the Sorcerer's Stone","Harry Potter and the Chamber of Secrets","Harry Potter and the Prisoner of Azkaban",
+"Harry Potter and the Goblet of Fire","Harry Potter and the Order of the Phoenix",
+"Harry Potter and the Half-Blood Prince","Harry Potter and the Deathly Hallows Part 1","Harry Potter and the Deathly Hallows Part 2",
 
-"The Social Network",
-"Whiplash",
-"Parasite",
-"Everything Everywhere All At Once",
+"The Hunger Games","Catching Fire","Mockingjay",
 
-"The Wolf of Wall Street",
-"The Big Short",
-"Moneyball",
+"The Shawshank Redemption","Forrest Gump","The Green Mile","Pulp Fiction","Fight Club",
 
-"The Godfather",
-"The Godfather Part II",
-"Goodfellas",
-"Casino",
+"The Social Network","Whiplash","Parasite","Everything Everywhere All At Once","Oppenheimer",
 
-"Saving Private Ryan",
-"Dunkirk",
-"1917",
+"The Wolf of Wall Street","The Big Short","Moneyball",
 
-"Jaws",
-"E.T.",
-"Back to the Future",
-"Back to the Future Part II",
+"The Godfather","The Godfather Part II","Goodfellas","Casino",
 
-"Ghostbusters",
-"Beetlejuice",
+"Saving Private Ryan","Dunkirk","1917",
 
-"Home Alone",
-"Home Alone 2",
+"Jaws","E.T.","Back to the Future","Back to the Future Part II","Back to the Future Part III",
 
-"Toy Story",
-"Toy Story 2",
-"Toy Story 3",
-"Toy Story 4",
+"Ghostbusters","Beetlejuice",
 
-"Shrek",
-"Shrek 2",
+"Home Alone","Home Alone 2",
 
-"Frozen",
-"Frozen II",
+"Toy Story","Toy Story 2","Toy Story 3","Toy Story 4",
 
-"The Incredibles",
-"Incredibles 2",
+"Shrek","Shrek 2",
 
-"Finding Nemo",
-"Finding Dory",
+"Frozen","Frozen II",
 
-"Monsters Inc",
-"Monsters University",
+"The Incredibles","Incredibles 2",
 
-"Coco",
-"Encanto",
+"Finding Nemo","Finding Dory",
 
-"The Lion King",
-"Aladdin",
-"Beauty and the Beast",
-"Mulan",
+"Monsters Inc","Monsters University",
 
-"The Batman",
-"The Dark Knight Rises",
+"Coco","Encanto",
 
-"Joker",
+"The Lion King","Aladdin","Beauty and the Beast","Mulan",
 
-"The Revenant",
-"The Martian",
-"Gravity",
+"The Revenant","The Martian","Gravity","Blade Runner 2049",
 
-"Knives Out",
-"Glass Onion",
+"Knives Out","Glass Onion",
 
-"A Quiet Place",
-"A Quiet Place Part II",
+"A Quiet Place","A Quiet Place Part II",
 
-"Get Out",
-"Us",
+"Get Out","Us","Nope",
 
-"The Conjuring",
-"The Conjuring 2",
+"The Conjuring","The Conjuring 2","Insidious",
 
-"It",
-"It Chapter Two"
+"It","It Chapter Two",
 
+"Barbie","Superbad","Step Brothers","Anchorman","The Hangover",
+
+"La La Land","The Notebook","Crazy Rich Asians",
+
+"Mean Girls","Clueless","10 Things I Hate About You"
 ];
 
-function pickMovie(){
-const movie=movies[Math.floor(Math.random()*movies.length)];
-document.getElementById("result").textContent=movie;
-}
+let history = [];
+const HISTORY_LIMIT = 12;
 
+function pickMovie(){
+  let available = movies.filter(m => !history.includes(m));
+
+  if(available.length === 0){
+    history = [];
+    available = movies;
+  }
+
+  const movie = available[Math.floor(Math.random() * available.length)];
+
+  history.push(movie);
+  if(history.length > HISTORY_LIMIT){
+    history.shift();
+  }
+
+  document.getElementById("result").textContent = movie;
+}
 </script>
+
+<!-- Dynamic related tools -->
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<!-- Footer -->
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
