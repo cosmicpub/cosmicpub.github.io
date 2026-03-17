@@ -928,3 +928,33 @@ button:active{
 .related-link:hover::after{
   opacity:.2;
 }
+
+/* =========================
+   RELATED TOOL GRID (HOMEPAGE STYLE)
+========================= */
+
+.related-tool-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:16px;
+  margin-top:14px;
+  width:100%;
+}
+
+@media (max-width: 900px){
+  .related-tool-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px){
+  .related-tool-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Ensure cards behave correctly inside grid */
+.related-tool-grid .tool-card{
+  display:block;
+  width:100%;
+}
