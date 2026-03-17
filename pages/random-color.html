@@ -400,13 +400,25 @@
   }
 
   function renderPalette(hex) {
-    const palette = buildPalette(hex);
-    const bar = document.getElementById("paletteBar");
+  const palette = buildPalette(hex);
+  const bar = document.getElementById("paletteBar");
 
-    bar.innerHTML = palette.map(color => `
-      <div class="swatch" style="background:${color};" title="${color.toUpperCase()}"></div>
-    `).join("");
-  }
+  bar.innerHTML = palette.map(color => `
+    <div class="swatch-wrap">
+      <div 
+        class="swatch" 
+        style="background:${color};" 
+        title="Click to copy ${color.toUpperCase()}"
+        onclick="copyPaletteColor('${color.toUpperCase()}')">
+      </div>
+      <div 
+        class="swatch-code" 
+        onclick="copyPaletteColor('${color.toUpperCase()}')">
+        ${color.toUpperCase()}
+      </div>
+    </div>
+  `).join("");
+}
 
   async function copyHex() {
     if (!currentColor) return;
