@@ -1,0 +1,17 @@
+const TOOL_CARDS = [
+  {title:"Yes or No", desc:"Instant answer when you’re stuck.", url:"/pages/yes-or-no.html", icon:"✅", color:"c-purple"},
+  {title:"Coin Flip", desc:"Flip a coin instantly.", url:"/pages/coin-flip.html", icon:"🪙", color:"c-amber"},
+  {title:"Random Number", desc:"Generate a random number.", url:"/pages/random-number.html", icon:"🎲", color:"c-slate"},
+  {title:"Eat Tonight", desc:"Get a quick dinner idea.", url:"/pages/what-should-i-eat-tonight.html", icon:"🍽️", color:"c-teal"},
+  {title:"Do Today", desc:"Find something to do.", url:"/pages/what-should-i-do-today.html", icon:"📌", color:"c-green"},
+  {title:"Username", desc:"Generate usernames fast.", url:"/pages/username-generator.html", icon:"👤", color:"c-blue"},
+  {title:"Excuse", desc:"Funny random excuses.", url:"/pages/excuse-generator.html", icon:"😅", color:"c-pink"},
+  {title:"Truth or Dare", desc:"Get a random prompt.", url:"/pages/truth-or-dare.html", icon:"🎭", color:"c-purple"},
+  {title:"Would You Rather", desc:"Choose between two options.", url:"/pages/would-you-rather.html", icon:"🤔", color:"c-green"},
+  {title:"Date Night", desc:"Get a date idea instantly.", url:"/pages/date-night.html", icon:"💘", color:"c-pink"},
+  {title:"Random Movie", desc:"Pick a movie fast.", url:"/pages/random-movie.html", icon:"🎬", color:"c-slate"},
+  {title:"Outfit Picker", desc:"Pick your outfit.", url:"/pages/outfit-picker.html", icon:"👕", color:"c-teal"},
+  {title:"Dice Roller", desc:"Roll a digital die.", url:"/pages/dice-roller.html", icon:"🎲", color:"c-amber"},
+  {title:"Team Generator", desc:"Split into teams.", url:"/pages/team-generator.html", icon:"👥", color:"c-blue"},
+  {title:"Random Color", desc:"Generate a color.", url:"/pages/random-color.html", icon:"🎨", color:"c-purple"}
+];
