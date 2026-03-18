@@ -1,39 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>What Should I Do Today?</title>
-<meta name="description" content="Get a random activity idea when you're bored. Avoid repeats and discover something new to do today.">
+<title>What Should I Do Today? | Tool Squares</title>
+<meta name="description" content="Get a random activity idea instantly. Choose from categories like productive, fun, or relaxing and avoid repeats.">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
 
 <style>
-  .sub{
-    margin-top:8px;
-    color:#6b7280;
-    font-size:14px;
-  }
-  .row{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:14px;
-  }
-  .ghost{
-    background: transparent;
-    border: 2px solid rgba(79,70,229,.25);
-    color:#111827;
-  }
-  .tiny{
-    margin-top:12px;
-    font-size:13px;
-    color:#6b7280;
-  }
+.sub{
+  margin-top:8px;
+  color:#6b7280;
+  font-size:14px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.ghost{
+  background: transparent;
+  border: 2px solid rgba(79,70,229,.25);
+  color:#111827;
+}
+
+.tiny{
+  margin-top:12px;
+  font-size:13px;
+  color:#6b7280;
+}
+
+.select-row{
+  margin-top:16px;
+  text-align:center;
+}
+
+.select-row select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+}
 </style>
 
 </head>
@@ -41,157 +55,185 @@
 <body>
 
 <header>
-  <h1>Tool Squares</h1>
-  <p>Stop overthinking. Let the internet decide.</p>
-  <div class="nav"><a href="/">← Back to all tools</a></div>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
-  <div class="card">
+<main class="tool-page">
+<div class="tool-wrap">
 
-    <h2>What Should I Do Today?</h2>
-    <p class="sub">Tap for a random idea. Recent picks are skipped so it stays fresh.</p>
+<section class="tool-main">
 
-    <div class="row">
-      <button id="goBtn" onclick="pickIdea()">Give me an idea</button>
-      <button class="ghost" onclick="resetHistory()">Reset history</button>
-    </div>
+<h1>What Should I Do Today?</h1>
+<p class="tool-lead">
+Get a random activity idea instantly when you're bored or stuck. Choose a category or let it pick from everything.
+</p>
 
-    <div id="result" class="result" style="margin-top:18px;"></div>
-    <div id="meta" class="tiny"></div>
+<div class="tool-actions">
 
-  </div>
+<div class="select-row">
+<select id="category">
+<option value="all">All ideas</option>
+<option value="productive">Be productive</option>
+<option value="fun">Have fun</option>
+<option value="relax">Relax</option>
+</select>
 </div>
 
+<div class="row">
+<button id="goBtn" onclick="pickIdea()">Give me an idea</button>
+<button class="ghost" onclick="resetHistory()">Reset history</button>
+</div>
+
+<div id="result" class="result" style="margin-top:18px;"></div>
+<div id="meta" class="tiny"></div>
+
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How this works</h2>
+<p>
+This tool gives you a random activity idea from a large pool of options. It also avoids repeating your most recent picks, so each suggestion feels fresh and useful.
+</p>
+</section>
+
+<section class="info-card">
+<h2>When to use this tool</h2>
+<ul>
+<li>When you're bored and don’t know what to do</li>
+<li>When you need a quick productive task</li>
+<li>When you want to try something new</li>
+<li>When you feel stuck or unmotivated</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Tips to get the most out of it</h2>
+<p>
+Don’t overthink the result. The point is to take action quickly. Even if the idea isn’t perfect, it can help you build momentum and get out of a rut.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Try another random tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+
+</div>
+</main>
+
 <script>
-/* -----------------------------
-   No-repeat logic (static)
-   ----------------------------- */
 const RECENT_KEY = "dfm_today_recent";
 const RECENT_KEEP = 8;
 
-/* Expanded idea pool (100+)
-   You can add more any time. */
+// 🔥 categorized ideas
 const ideas = [
-"Go for a 30 minute walk",
-"Clean your room",
-"Try a new recipe",
-"Watch a documentary",
-"Call a friend",
-"Start a new book",
-"Go explore a new coffee shop",
-"Take photos around your town",
-"Do a quick workout",
-"Organize your workspace",
-"Listen to a podcast",
-"Write down your goals",
-"Try a new hobby",
-"Learn a random fact",
-"Plan your next trip",
+     // --- PRODUCTIVE ---
+{ text:"Plan your week ahead", type:"productive" },
+{ text:"Update your resume", type:"productive" },
+{ text:"Clean out your closet", type:"productive" },
+{ text:"Organize your downloads folder", type:"productive" },
+{ text:"Write a short to-do list and complete it", type:"productive" },
+{ text:"Back up your important files", type:"productive" },
+{ text:"Set a budget for the week", type:"productive" },
+{ text:"Research a new skill to learn", type:"productive" },
+{ text:"Create a morning routine", type:"productive" },
+{ text:"Deep clean one area of your home", type:"productive" },
+{ text:"Write down 3 goals for the month", type:"productive" },
+{ text:"Fix something small you've been ignoring", type:"productive" },
+{ text:"Unsubscribe from unwanted emails", type:"productive" },
+{ text:"Organize your notes or documents", type:"productive" },
+{ text:"Plan your meals for the next few days", type:"productive" },
 
-"Go for a bike ride",
-"Stretch for 10 minutes",
-"Declutter one drawer",
-"Write a journal entry",
-"Cook a meal from another culture",
-"Rearrange your room",
-"Watch a classic movie",
-"Create a playlist",
-"Read 10 pages of a book",
-"Learn a new word",
-"Take a power nap",
-"Go watch the sunset",
-"Drink a full glass of water",
-"Clean your phone screen",
-"Sort your email inbox",
+// --- FUN ---
+{ text:"Watch a movie you've never seen", type:"fun" },
+{ text:"Play a video game for an hour", type:"fun" },
+{ text:"Try a random recipe online", type:"fun" },
+{ text:"Make a fun TikTok or short video", type:"fun" },
+{ text:"Explore a new place in your city", type:"fun" },
+{ text:"Have a mini photoshoot", type:"fun" },
+{ text:"Try a new snack or drink", type:"fun" },
+{ text:"Watch funny videos", type:"fun" },
+{ text:"Start a small creative project", type:"fun" },
+{ text:"Play a board game or puzzle", type:"fun" },
+{ text:"Listen to a new album", type:"fun" },
+{ text:"Try drawing something random", type:"fun" },
+{ text:"Watch a trending show", type:"fun" },
+{ text:"Make a meme", type:"fun" },
+{ text:"Play music and dance", type:"fun" },
 
-"Do 20 pushups",
-"Take a cold shower",
-"Write a thank-you message to someone",
-"Go people-watch at a park",
-"Visit a bookstore",
-"Look up a new skill on YouTube",
-"Try a new restaurant",
-"Go somewhere you’ve never been in your city",
-"Take a scenic drive",
-"Write a short story",
+// --- RELAX ---
+{ text:"Sit outside and enjoy fresh air", type:"relax" },
+{ text:"Do nothing for 10 minutes", type:"relax" },
+{ text:"Take a warm shower", type:"relax" },
+{ text:"Listen to calming music", type:"relax" },
+{ text:"Watch clouds or the sky", type:"relax" },
+{ text:"Close your eyes and breathe deeply", type:"relax" },
+{ text:"Lay down and rest your mind", type:"relax" },
+{ text:"Drink water slowly and relax", type:"relax" },
+{ text:"Stretch your body gently", type:"relax" },
+{ text:"Sit in silence for a few minutes", type:"relax" },
+{ text:"Light a candle and unwind", type:"relax" },
+{ text:"Take a break from screens", type:"relax" },
+{ text:"Read something calming", type:"relax" },
+{ text:"Listen to nature sounds", type:"relax" },
+{ text:"Slow down and do one thing at a time", type:"relax" }
+{ text:"Go for a 30 minute walk", type:"relax" },
+{ text:"Clean your room", type:"productive" },
+{ text:"Try a new recipe", type:"fun" },
+{ text:"Watch a documentary", type:"relax" },
+{ text:"Call a friend", type:"fun" },
+{ text:"Start a new book", type:"relax" },
+{ text:"Do a quick workout", type:"productive" },
+{ text:"Organize your workspace", type:"productive" },
+{ text:"Listen to a podcast", type:"relax" },
+{ text:"Write down your goals", type:"productive" },
 
-"Sketch something around you",
-"Make a simple dessert",
-"Watch a TED talk",
-"Organize your photos",
-"Delete unused apps",
-"Learn 5 words in another language",
-"Watch stand-up comedy",
-"Do a 10-minute meditation",
-"Stretch your legs outside",
-"Plan your weekend",
+{ text:"Go for a bike ride", type:"fun" },
+{ text:"Declutter one drawer", type:"productive" },
+{ text:"Write a journal entry", type:"relax" },
+{ text:"Rearrange your room", type:"productive" },
+{ text:"Create a playlist", type:"fun" },
+{ text:"Take a power nap", type:"relax" },
+{ text:"Go watch the sunset", type:"relax" },
+{ text:"Sort your email inbox", type:"productive" },
 
-"Research a topic you're curious about",
-"Start a small DIY project",
-"Water your plants",
-"Clean your desk",
-"Take a deep breathing break",
-"Watch a nature video",
-"Practice handwriting",
-"Try a brain puzzle",
-"Read a random Wikipedia article",
-"Make a cup of tea or coffee",
+{ text:"Visit a bookstore", type:"fun" },
+{ text:"Try a new restaurant", type:"fun" },
+{ text:"Take a scenic drive", type:"relax" },
+{ text:"Write a short story", type:"fun" },
 
-"Write down three things you're grateful for",
-"Try a new workout routine",
-"Organize your bookmarks",
-"Explore a new music genre",
-"Look through old photos",
-"Plan a future goal",
-"Write a bucket list",
-"Watch a travel vlog",
-"Do a mini home workout",
-"Learn a simple magic trick",
+{ text:"Sketch something", type:"fun" },
+{ text:"Organize your photos", type:"productive" },
+{ text:"Delete unused apps", type:"productive" },
+{ text:"Watch stand-up comedy", type:"fun" },
+{ text:"Meditate for 10 minutes", type:"relax" },
 
-"Go sit outside for 10 minutes",
-"Compliment someone",
-"Make a smoothie",
-"Learn a new keyboard shortcut",
-"Practice typing speed",
-"Take a short walk without your phone",
-"Look up a new recipe",
-"Write a poem",
-"Listen to instrumental music",
-"Explore a new podcast",
+{ text:"Start a DIY project", type:"productive" },
+{ text:"Water your plants", type:"relax" },
+{ text:"Try a brain puzzle", type:"fun" },
+{ text:"Make a cup of tea", type:"relax" },
 
-"Clean out your wallet",
-"Read a motivational quote",
-"Create a vision board idea list",
-"Make a grocery list",
-"Watch a short educational video",
-"Practice drawing shapes",
-"Look up a random historical event",
-"Research a place you'd like to visit",
-"Check the weather somewhere else in the world",
-"Look up interesting space facts",
+{ text:"Write 3 things you're grateful for", type:"relax" },
+{ text:"Explore a new music genre", type:"fun" },
+{ text:"Plan a future goal", type:"productive" },
+{ text:"Make a smoothie", type:"fun" },
 
-"Try a quick yoga stretch",
-"Walk around your neighborhood",
-"Write a letter to your future self",
-"Organize your desktop files",
-"Create a simple daily routine",
-"Learn a fun science fact",
-"Watch a movie trailer",
-"Try a new snack",
-"Make a to-do list",
-"Do something kind for someone",
+{ text:"Take a walk without your phone", type:"relax" },
+{ text:"Write a poem", type:"fun" },
+{ text:"Clean out your wallet", type:"productive" },
+{ text:"Look up space facts", type:"fun" },
 
-"Set a small goal for tomorrow",
-"Look up something inspiring",
-"Think of a new business idea",
-"Read a chapter of a book",
-"Take a moment to relax",
-"Step outside for fresh air",
-"Reflect on your day",
-"Try a quick creativity exercise",
-"Write down an idea you've had",
-"Start planning your next adventure"
+{ text:"Stretch for 10 minutes", type:"relax" },
+{ text:"Make a to-do list", type:"productive" },
+{ text:"Do something kind for someone", type:"fun" },
+{ text:"Set a small goal for tomorrow", type:"productive" }
 ];
 
 function randIndex(max){
@@ -200,60 +242,64 @@ function randIndex(max){
 
 function getRecent(){
   try{
-    const raw = localStorage.getItem(RECENT_KEY);
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  }catch(e){
+    return JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+  }catch{
     return [];
   }
 }
 
 function setRecent(arr){
-  try{
-    localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0, RECENT_KEEP)));
-  }catch(e){}
+  localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0, RECENT_KEEP)));
 }
 
 function pickIdea(){
+  const category = document.getElementById("category").value;
+
+  let pool = ideas;
+
+  if(category !== "all"){
+    pool = ideas.filter(i => i.type === category);
+  }
+
   const recent = getRecent();
   let pick = null;
 
-  // Try up to 30 times to avoid recent repeats
   for(let i=0;i<30;i++){
-    const candidate = ideas[randIndex(ideas.length)];
-    if(!recent.includes(candidate)){
-      pick = candidate;
+    const candidate = pool[randIndex(pool.length)];
+    if(!recent.includes(candidate.text)){
+      pick = candidate.text;
       break;
     }
   }
 
-  // Fallback (rare)
-  if(!pick) pick = ideas[randIndex(ideas.length)];
+  if(!pick){
+    pick = pool[randIndex(pool.length)].text;
+  }
 
-  // Update UI
   document.getElementById("result").textContent = pick;
 
-  // Save recent
   const updated = [pick, ...recent.filter(x => x !== pick)];
   setRecent(updated);
 
-  // Meta
   document.getElementById("meta").textContent =
-    `Idea pool: ${ideas.length} • Skipping last ${RECENT_KEEP} picks`;
-  
-  // Change button label after first run (nice UX)
-  const btn = document.getElementById("goBtn");
-  if(btn) btn.textContent = "Another idea";
+    `Ideas: ${pool.length} • Skipping last ${RECENT_KEEP}`;
+
+  document.getElementById("goBtn").textContent = "Another idea";
 }
 
 function resetHistory(){
-  try{ localStorage.removeItem(RECENT_KEY); }catch(e){}
+  localStorage.removeItem(RECENT_KEY);
   document.getElementById("result").textContent = "";
   document.getElementById("meta").textContent = "History cleared.";
-  const btn = document.getElementById("goBtn");
-  if(btn) btn.textContent = "Give me an idea";
+  document.getElementById("goBtn").textContent = "Give me an idea";
 }
 </script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
