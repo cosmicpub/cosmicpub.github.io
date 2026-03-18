@@ -4,9 +4,8 @@ function loadRelatedTools(){
 
   const current = window.location.pathname;
 
-  let filtered = TOOL_CARDS.filter(t => !current.includes(t.url));
+  let filtered = TOOL_CARDS.filter(t => t.url !== current);
 
-  // shuffle
   filtered.sort(() => 0.5 - Math.random());
 
   const selected = filtered.slice(0, 3);
