@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Name Picker | Tool Squares</title>
+<meta name="description" content="Pick a random name instantly. Paste names one per line, choose whether to remove winners, and select a winner fast for classrooms, raffles, giveaways, and groups.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.name-tool-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+textarea{
+  width:100%;
+  max-width:520px;
+  min-height:180px;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  font-size:16px;
+  line-height:1.5;
+  resize:vertical;
+  background:#fff;
+  color:#111827;
+}
+
+.picker-options{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+
+.toggle-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted-2);
+  font-size:15px;
+  font-weight:600;
+}
+
+.toggle-row input{
+  width:18px;
+  height:18px;
+}
+
+.name-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.secondary-btn{
+  background:#111827;
+}
+
+.secondary-btn:hover{
+  filter:brightness(.98);
+}
+
+.result-panel{
+  width:100%;
+  max-width:560px;
+  padding:22px 18px;
+  border-radius:18px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  text-align:center;
+}
+
+.name-result{
+  font-size:42px;
+  font-weight:900;
+  line-height:1.15;
+  margin:0;
+  word-break:break-word;
+}
+
+.helper-text{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  text-align:center;
+  max-width:560px;
+}
+
+.count-row{
+  font-size:14px;
+  color:var(--muted);
+  text-align:center;
+}
+
+@media (max-width: 640px){
+  .name-result{
+    font-size:34px;
+  }
+
+  .name-buttons{
+    flex-direction:column;
+    width:100%;
+    max-width:520px;
+  }
+
+  .name-buttons button{
+    width:100%;
+  }
+
+  textarea{
+    min-height:200px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Random picker</div>
+
+<h1>Random Name Picker</h1>
+
+<p class="tool-lead">
+Paste names one per line, then pick a random winner instantly. Great for classrooms, raffles, giveaways, games, and group selections.
+</p>
+
+<div class="tool-actions">
+<h2>Pick a random name</h2>
+<p>Enter one name per line, then click the button to choose a winner.</p>
+
+<div class="name-tool-wrap">
+
+<div class="picker-options">
+  <textarea id="namesInput">Ava
+Noah
+Emma
+Liam
+Sophia
+Mason</textarea>
+
+  <label class="toggle-row">
+    <input type="checkbox" id="removeWinner">
+    <span>Remove selected name after pick</span>
+  </label>
+
+  <div class="count-row" id="nameCount">6 names loaded</div>
+
+  <div class="name-buttons">
+    <button type="button" onclick="pickRandomName()">Pick a Name</button>
+    <button type="button" class="secondary-btn" onclick="clearNames()">Clear</button>
+  </div>
+</div>
+
+<div class="result-panel">
+  <div id="result" class="name-result">Ready to pick</div>
+</div>
+
+<div id="hint" class="helper-text">
+Each click selects one random name from your list.
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How the random name picker works</h2>
+<p>
+This tool takes a list of names and selects one at random. Just paste or type one name per line, then click the button to choose a winner instantly.
+</p>
+<p>
+You can also turn on the remove option to prevent the same name from being picked again on the next round.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Common ways to use a name picker</h2>
+<ul>
+<li>Choosing students in class</li>
+<li>Picking raffle or giveaway winners</li>
+<li>Selecting teams or volunteers</li>
+<li>Running games and group activities</li>
+<li>Making fair random choices from a list</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Why people use random pickers</h2>
+<p>
+A random name picker makes selection feel fast, fair, and simple. Instead of deciding manually, you can let the tool choose for you in seconds.
+</p>
+<p>
+That makes it useful for teachers, organizers, hosts, and anyone who needs a quick random winner or participant from a list of names.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+
+</div>
+</main>
+
+<script>
+function getNames(){
+  const text = document.getElementById("namesInput").value;
+
+  return text
+    .split("\n")
+    .map(name => name.trim())
+    .filter(name => name.length > 0);
+}
+
+function setNames(list){
+  document.getElementById("namesInput").value = list.join("\n");
+  updateNameCount();
+}
+
+function updateNameCount(){
+  const names = getNames();
+  const countEl = document.getElementById("nameCount");
+
+  if(names.length === 1){
+    countEl.textContent = "1 name loaded";
+  } else {
+    countEl.textContent = names.length + " names loaded";
+  }
+}
+
+function pickRandomName(){
+  const names = getNames();
+  const resultEl = document.getElementById("result");
+  const hintEl = document.getElementById("hint");
+  const removeWinner = document.getElementById("removeWinner").checked;
+
+  if(names.length === 0){
+    resultEl.textContent = "Add some names";
+    hintEl.textContent = "Enter one name per line to use the picker.";
+    updateNameCount();
+    return;
+  }
+
+  const index = Math.floor(Math.random() * names.length);
+  const winner = names[index];
+
+  resultEl.textContent = winner;
+  hintEl.textContent = "Winner selected at random.";
+
+  if(removeWinner && names.length > 1){
+    const updated = names.filter((_, i) => i !== index);
+    setNames(updated);
+    hintEl.textContent = "Winner selected and removed from the list.";
+  }
+
+  updateNameCount();
+}
+
+function clearNames(){
+  document.getElementById("namesInput").value = "";
+  document.getElementById("result").textContent = "Ready to pick";
+  document.getElementById("hint").textContent = "Each click selects one random name from your list.";
+  updateNameCount();
+}
+
+document.getElementById("namesInput").addEventListener("input", updateNameCount);
+
+updateNameCount();
+</script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
