@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Team Generator | Tool Squares</title>
-  <meta name="description" content="Split people into random teams instantly. Paste names, choose the number of teams, and generate balanced groups.">
+  <meta name="description" content="Split people into random teams instantly. Paste names, choose the number of teams, and generate balanced groups for classrooms, games, sports, and group activities.">
+  <meta name="robots" content="index, follow">
 
   <link rel="stylesheet" href="/assets/style.css">
 
@@ -13,21 +14,9 @@
        crossorigin="anonymous"></script>
 
   <style>
-    .tool-wrap{
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .intro{
-      text-align:center;
-      margin-bottom:20px;
-      color:#6b7280;
-      font-size:16px;
-    }
-
     .input-grid{
       display:grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns:2fr 1fr;
       gap:16px;
       margin-top:20px;
       align-items:start;
@@ -35,7 +24,7 @@
 
     @media (max-width: 760px){
       .input-grid{
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
       }
     }
 
@@ -44,6 +33,7 @@
       border-radius:16px;
       padding:18px;
       box-shadow:0 10px 24px rgba(0,0,0,.08);
+      border:1px solid rgba(17,24,39,.05);
     }
 
     .field-label{
@@ -77,7 +67,7 @@
       margin-top:8px;
       color:#6b7280;
       font-size:14px;
-      line-height:1.4;
+      line-height:1.45;
     }
 
     .btn-row{
@@ -94,20 +84,25 @@
       border:2px solid #d1d5db;
     }
 
+    .ghost-btn:hover{
+      background:#f8fafc;
+      filter:none;
+    }
+
     .result-section{
       margin-top:28px;
     }
 
     .teams-grid{
       display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:16px;
       margin-top:18px;
     }
 
     @media (max-width: 760px){
       .teams-grid{
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
       }
     }
 
@@ -116,6 +111,13 @@
       border-radius:16px;
       padding:18px;
       box-shadow:0 10px 24px rgba(0,0,0,.08);
+      border-top:6px solid transparent;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+
+    .team-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 28px rgba(0,0,0,.12);
     }
 
     .team-title{
@@ -152,6 +154,7 @@
       font-size:15px;
       text-align:center;
       box-shadow:0 8px 20px rgba(0,0,0,.06);
+      border:1px solid rgba(17,24,39,.05);
     }
 
     .empty-state{
@@ -163,7 +166,30 @@
       text-align:center;
       font-size:16px;
       box-shadow:0 8px 20px rgba(0,0,0,.06);
+      border:1px solid rgba(17,24,39,.05);
     }
+
+    .team-0{ border-color:#4f46e5; }
+    .team-1{ border-color:#22c55e; }
+    .team-2{ border-color:#f59e0b; }
+    .team-3{ border-color:#ef4444; }
+    .team-4{ border-color:#06b6d4; }
+    .team-5{ border-color:#a855f7; }
+    .team-6{ border-color:#ec4899; }
+    .team-7{ border-color:#84cc16; }
+    .team-8{ border-color:#f97316; }
+    .team-9{ border-color:#14b8a6; }
+
+    .team-0 .team-title{ color:#4f46e5; }
+    .team-1 .team-title{ color:#22c55e; }
+    .team-2 .team-title{ color:#f59e0b; }
+    .team-3 .team-title{ color:#ef4444; }
+    .team-4 .team-title{ color:#06b6d4; }
+    .team-5 .team-title{ color:#a855f7; }
+    .team-6 .team-title{ color:#ec4899; }
+    .team-7 .team-title{ color:#84cc16; }
+    .team-8 .team-title{ color:#f97316; }
+    .team-9 .team-title{ color:#14b8a6; }
   </style>
 </head>
 
@@ -175,41 +201,102 @@
   <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
-  <div class="card tool-wrap">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-    <h2>Team Generator</h2>
-    <p class="intro">Paste one name per line, choose how many teams you want, and generate balanced groups.</p>
+    <section class="tool-main">
+      <div class="tool-kicker">Group tool</div>
+      <h1>Team Generator</h1>
+      <p class="tool-lead">
+        Paste a list of names, choose how many teams you want, and generate balanced random groups in seconds. This free team generator is useful for classrooms, games, sports, workshops, study groups, and any activity where you want a quick and fair split.
+      </p>
 
-    <div class="input-grid">
+      <div class="tool-actions">
+        <h2>Generate random teams</h2>
+        <p>Enter one name per line, choose the number of teams, and create your groups instantly.</p>
 
-      <div class="field-card">
-        <label for="namesInput" class="field-label">Names</label>
-        <textarea id="namesInput" placeholder="Enter one name per line&#10;&#10;Ava&#10;Noah&#10;Mia&#10;Liam&#10;Sophia"></textarea>
-        <div class="helper">Tip: One name per line works best.</div>
+        <div class="input-grid">
+
+          <div class="field-card">
+            <label for="namesInput" class="field-label">Names</label>
+            <textarea id="namesInput" placeholder="Enter one name per line&#10;&#10;Ava&#10;Noah&#10;Mia&#10;Liam&#10;Sophia"></textarea>
+            <div class="helper">Tip: One name per line works best. Duplicate names are removed automatically.</div>
+          </div>
+
+          <div class="field-card">
+            <label for="teamCount" class="field-label">Number of teams</label>
+            <input id="teamCount" type="number" min="2" max="20" value="2">
+            <div class="helper">Choose between 2 and 20 teams. The number of teams cannot be greater than the number of names.</div>
+          </div>
+
+        </div>
+
+        <div class="btn-row">
+          <button type="button" onclick="generateTeams()">Generate Teams</button>
+          <button type="button" class="ghost-btn" onclick="reshuffleTeams()">Reshuffle</button>
+          <button type="button" class="ghost-btn" onclick="clearAllFields()">Clear</button>
+        </div>
+
+        <div class="result-section">
+          <div id="statusBox" class="status-box">Your teams will appear below.</div>
+          <div id="teamsOutput"></div>
+        </div>
       </div>
+    </section>
 
-      <div class="field-card">
-        <label for="teamCount" class="field-label">Number of teams</label>
-        <input id="teamCount" type="number" min="2" max="20" value="2">
-        <div class="helper">Choose between 2 and 20 teams.</div>
-      </div>
+    <div class="tool-sections">
 
-    </div>
+      <section class="info-card">
+        <h2>How this team generator works</h2>
+        <p>
+          This random team generator takes your list of names, shuffles them, and distributes them as evenly as possible across the number of teams you choose. That means each person has an equal chance of landing on any team, and the final groups stay balanced without you having to sort names manually.
+        </p>
+        <p>
+          The reshuffle option is useful when you want a different grouping without retyping your list. This makes the tool fast, flexible, and practical for repeated classroom use, game nights, practice groups, or collaborative activities.
+        </p>
+      </section>
 
-    <div class="btn-row">
-      <button type="button" onclick="generateTeams()">Generate Teams</button>
-      <button type="button" class="ghost-btn" onclick="reshuffleTeams()">Reshuffle</button>
-      <button type="button" class="ghost-btn" onclick="clearAllFields()">Clear</button>
-    </div>
+      <section class="info-card">
+        <h2>Why use a random team generator?</h2>
+        <p>
+          Making teams by hand can take longer than it should, especially when you are working with a large group. It can also create awkward moments if people feel groups were chosen unfairly. A random team generator removes that pressure and gives you a quick, neutral way to split people into groups.
+        </p>
+        <p>
+          This is especially helpful for teachers, coaches, facilitators, youth leaders, and anyone running events or team-based activities. Instead of debating who goes where, you can generate teams instantly and move on with the activity.
+        </p>
+      </section>
 
-    <div class="result-section">
-      <div id="statusBox" class="status-box">Your teams will appear below.</div>
-      <div id="teamsOutput"></div>
+      <section class="info-card">
+        <h2>Common ways to use this tool</h2>
+        <ul>
+          <li>Classroom partner work and small group stations</li>
+          <li>Sports drills and practice teams</li>
+          <li>Trivia nights, board games, and competitions</li>
+          <li>Training sessions and workshops</li>
+          <li>Church groups, camps, and youth events</li>
+          <li>Study groups and collaborative projects</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Tips for better team results</h2>
+        <p>
+          If you want the most balanced outcome, start with a clean list of names and make sure each person appears only once. If you are grouping students or players with mixed abilities, you can reshuffle multiple times until the teams feel right for your situation.
+        </p>
+        <p>
+          For very small groups, fewer teams usually works better. For larger groups, increasing the team count can make activities feel more manageable and keep everyone involved.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
     </div>
 
   </div>
-</div>
+</main>
 
 <script>
   let lastNames = [];
@@ -222,7 +309,6 @@
       .map(name => name.trim())
       .filter(Boolean);
 
-    // remove exact duplicates while preserving order
     return [...new Set(names)];
   }
 
@@ -255,9 +341,12 @@
     }
 
     let html = '<div class="teams-grid">';
+
     teams.forEach((team, i) => {
+      const colorClass = `team-${i % 10}`;
+
       html += `
-        <div class="team-card">
+        <div class="team-card ${colorClass}">
           <div class="team-title">Team ${i + 1}</div>
           <ul class="team-list">
             ${team.map(member => `<li>${escapeHtml(member)}</li>`).join("")}
@@ -265,6 +354,7 @@
         </div>
       `;
     });
+
     html += '</div>';
 
     output.innerHTML = html;
@@ -330,6 +420,12 @@
     lastTeamCount = 0;
   }
 </script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
