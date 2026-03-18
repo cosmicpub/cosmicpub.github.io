@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compliment Generator | Tool Squares</title>
-<meta name="description" content="Get a random compliment instantly. Fun, positive, and perfect for sharing.">
+<meta name="description" content="Get a random compliment instantly. Choose funny, deep, or romantic compliments, then copy your result in one click.">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
@@ -16,6 +16,80 @@ crossorigin="anonymous"></script>
 .compliment-result{
   font-size:28px;
   font-weight:700;
+}
+
+.category-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:0 0 16px;
+}
+
+.category-btn{
+  background:#eef2ff;
+  color:#312e81;
+  border:1px solid #c7d2fe;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
+}
+
+.category-btn:hover{
+  filter:brightness(.98);
+  transform:translateY(-1px);
+}
+
+.category-btn.active{
+  background:var(--brand);
+  color:#fff;
+  border-color:var(--brand);
+}
+
+.action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.copy-btn{
+  background:#111827;
+}
+
+.copy-btn:hover{
+  filter:brightness(.98);
+}
+
+.copy-status{
+  margin-top:12px;
+  font-size:14px;
+  color:#6b7280;
+  min-height:20px;
+}
+
+.category-note{
+  margin-top:12px;
+  font-size:14px;
+  color:#6b7280;
+}
+
+@media (max-width: 640px){
+  .compliment-result{
+    font-size:24px;
+  }
+
+  .action-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .action-row button{
+    width:100%;
+  }
 }
 </style>
 
@@ -38,35 +112,65 @@ crossorigin="anonymous"></script>
 <h1>Compliment Generator</h1>
 
 <p class="tool-lead">
-Get a random compliment instantly. Share it with someone or keep it for yourself.
+Get a random compliment instantly. Choose a funny, deep, or romantic style, then copy the result in one click.
 </p>
 
 <div class="tool-actions">
-<h2>Get a compliment</h2>
-<p>Click below and enjoy.</p>
+<h2>Generate a compliment</h2>
+<p>Pick a category below and click generate.</p>
 
-<button onclick="ToolEngine.run()">Generate</button>
+<div class="category-row">
+  <button type="button" class="category-btn active" data-category="funny" onclick="setCategory('funny', this)">Funny</button>
+  <button type="button" class="category-btn" data-category="deep" onclick="setCategory('deep', this)">Deep</button>
+  <button type="button" class="category-btn" data-category="romantic" onclick="setCategory('romantic', this)">Romantic</button>
+</div>
 
-<div id="result" class="result compliment-result"></div>
+<div class="action-row">
+  <button type="button" onclick="runCompliment()">Generate</button>
+  <button type="button" class="copy-btn" onclick="copyCompliment()">Copy</button>
+</div>
+
+<div class="result-box">
+  <div id="result" class="result compliment-result"></div>
+  <div id="hint" class="category-note">Current category: Funny</div>
+  <div id="copyStatus" class="copy-status"></div>
+</div>
 </div>
 </section>
 
 <div class="tool-sections">
 
 <section class="info-card">
-<h2>Why compliments matter</h2>
+<h2>Choose the kind of compliment you want</h2>
 <p>
-A simple compliment can boost confidence, improve mood, and make someone’s day better.
+This compliment generator gives you three styles to choose from. Funny compliments are playful and light.
+Deep compliments are more meaningful and personal. Romantic compliments are warmer and better for partners, crushes, or sweet messages.
+</p>
+<p>
+Each category now has a much larger pool, so the tool feels fresher and repeats far less when people click multiple times.
 </p>
 </section>
 
 <section class="info-card">
 <h2>Ways to use this tool</h2>
 <ul>
-<li>Send a kind message to a friend</li>
-<li>Use it as a daily positivity boost</li>
-<li>Break the ice in conversations</li>
+<li>Send a quick kind message to a friend or partner</li>
+<li>Use funny compliments for light conversation</li>
+<li>Pick a deeper compliment when you want something more meaningful</li>
+<li>Copy a romantic line for a text or note</li>
+<li>Click again when you want a fresh result</li>
 </ul>
+</section>
+
+<section class="info-card">
+<h2>Why compliments work</h2>
+<p>
+A good compliment can instantly improve someone’s mood, start a conversation, or make a message feel more personal.
+Sometimes all you need is one sentence that feels warm, genuine, or fun.
+</p>
+<p>
+This tool keeps it simple: choose a style, generate a compliment, and copy it if you want to share it right away.
+</p>
 </section>
 
 <section class="info-card">
@@ -80,22 +184,293 @@ A simple compliment can boost confidence, improve mood, and make someone’s day
 
 <script type="application/json" id="tool-config">
 {
-"type":"picker",
-"options":[
-"You have a great sense of humor",
-"You make people feel comfortable",
-"You're doing better than you think",
-"You have amazing energy",
-"You bring out the best in others",
-"You're stronger than you realize",
-"Your ideas are valuable",
-"You have a great personality"
-]
+  "type":"picker",
+  "title":"Compliment Generator",
+  "description":"Generate a random compliment instantly.",
+  "buttonText":"Generate",
+  "options":[
+    "You’re like a human espresso shot, but somehow less jittery",
+    "You have the kind of energy that makes boring things feel less boring",
+    "You’re weird in a very premium way",
+    "You could probably make a grocery list sound interesting",
+    "You’re dangerously easy to like",
+    "You have main-character confidence on your best days",
+    "You’re the kind of person even pets seem to trust immediately",
+    "You make awkward moments feel almost professional",
+    "You’re cooler than finding money in an old jacket",
+    "You have the rare talent of being funny without trying too hard"
+  ]
 }
 </script>
 
 <script src="/assets/tool-engine.js"></script>
-<script>ToolEngine.init();</script>
+<script>
+const complimentSets = {
+  funny: [
+    "You’re like a human espresso shot, but somehow less jittery",
+    "You have the kind of energy that makes boring things feel less boring",
+    "You’re weird in a very premium way",
+    "You could probably make a grocery list sound interesting",
+    "You’re dangerously easy to like",
+    "You have main-character confidence on your best days",
+    "You’re the kind of person even pets seem to trust immediately",
+    "You make awkward moments feel almost professional",
+    "You’re cooler than finding money in an old jacket",
+    "You have the rare talent of being funny without trying too hard",
+    "You bring just enough chaos to keep life interesting",
+    "You’re like a plot twist, but a good one",
+    "You somehow make normal conversations more entertaining",
+    "You look like you know what you’re doing, and honestly that’s impressive",
+    "You have elite snack-picking energy",
+    "You’re the type of person people text back fast",
+    "You make being around other humans feel less exhausting",
+    "You could probably win an argument with just a facial expression",
+    "You have excellent taste in being yourself",
+    "You’re more refreshing than canceling plans you didn’t want to attend",
+    "You’re funny in a way that sneaks up on people",
+    "You have strong favorite-person energy",
+    "You make random moments more memorable",
+    "You’re the kind of person people mention in a good way after you leave",
+    "You have a face that looks like it knows good secrets",
+    "You could make small talk feel like an actual event",
+    "You’re effortlessly more interesting than most group chats",
+    "You have the kind of vibe that makes people sit up straighter",
+    "You’re a solid reminder that personality matters",
+    "You’re honestly a little too iconic for average situations",
+    "You have the confidence of someone who definitely knows where the good snacks are",
+    "You’re like free fries at the bottom of the bag",
+    "You somehow make being late look emotionally understandable",
+    "You have the energy of someone who always gets the good seat",
+    "You’re surprisingly good at being memorable",
+    "You make random nonsense sound intelligent",
+    "You could probably charm a customer service robot",
+    "You have elite comeback energy",
+    "You somehow look like you know the shortcut everywhere",
+    "You make chaos feel well-managed",
+    "You have a face that could get away with one extra cookie",
+    "You’re the human version of finding the remote right away",
+    "You could make a waiting room feel fun",
+    "You have suspiciously good timing",
+    "You’re cooler than pretending not to care and actually pulling it off",
+    "You bring premium-level vibes to regular situations",
+    "You seem like someone who would win a staring contest by accident",
+    "You make confidence look less annoying than usual",
+    "You’re the kind of person who could improve a group project just by showing up",
+    "You have the charisma of someone who always picks the best playlist",
+    "You could absolutely make a boring story worth hearing",
+    "You give off the energy of someone who never loses their charger for long",
+    "You seem custom-built for good banter",
+    "You’re funny enough to get away with saying almost anything once",
+    "You have excellent ‘I know something you don’t’ energy",
+    "You make awkward silences feel like part of the plan",
+    "You’re more fun than pretending to work while actually doing nothing",
+    "You have the kind of face people trust in a trivia game",
+    "You could probably make folding laundry look dramatic",
+    "You’re the reason inside jokes survive",
+    "You make casual confidence look easy",
+    "You have the vibe of someone who definitely gets picked first for the fun table",
+    "You’re the human version of a surprisingly good side quest",
+    "You seem like someone who could pull off a ridiculous idea and somehow make it work",
+    "You have the kind of energy that improves the group chat instantly",
+    "You’re weird in the exact way that makes people want to keep talking to you",
+    "You could probably turn an inconvenience into a story worth retelling",
+    "You make regular days feel slightly less regular",
+    "You’ve got premium nonsense energy in the best way",
+    "You seem like someone who would accidentally become the favorite",
+    "You have too much personality to ever be boring"
+  ],
+  deep: [
+    "You make people feel understood without needing many words",
+    "You carry a quiet strength that people notice",
+    "Your presence has a calming effect on the people around you",
+    "You have a way of making others feel valued",
+    "You bring sincerity into spaces that need it",
+    "You have a depth that makes conversations feel real",
+    "You make kindness look natural",
+    "People feel safer being themselves around you",
+    "You listen in a way that makes people feel important",
+    "You have a thoughtful mind and a steady heart",
+    "You leave a positive mark on people more often than you realize",
+    "You make honesty feel comfortable",
+    "You have a strong sense of who you are becoming",
+    "There is something grounding about the way you carry yourself",
+    "You notice things that other people miss",
+    "You have a gentle kind of wisdom",
+    "You bring meaning into ordinary moments",
+    "Your words often matter more than you think",
+    "You make people feel less alone",
+    "You have a rare balance of softness and strength",
+    "You are the kind of person people remember for the right reasons",
+    "You have an inner steadiness that is hard to fake",
+    "You show care in ways that feel genuine",
+    "You make room for people to breathe",
+    "You have a quiet power about you",
+    "You are more impactful than you probably realize",
+    "You make conversations feel deeper without forcing them",
+    "You carry yourself with real substance",
+    "There is something deeply trustworthy about you",
+    "You remind people that goodness still feels real",
+    "You have a presence that makes people feel less rushed",
+    "You bring clarity when things feel noisy",
+    "You have a way of helping people feel settled",
+    "You show up with a kind of honesty that stands out",
+    "You make empathy feel strong, not weak",
+    "There is depth in the way you think and care",
+    "You make people feel like they matter",
+    "You carry resilience in a quiet but powerful way",
+    "You understand more than you let on",
+    "You make difficult things feel easier to say",
+    "You have a heart that stays open without losing strength",
+    "You bring calm without asking for attention",
+    "You seem to understand the weight people carry",
+    "You have a way of making others feel respected",
+    "You make kindness feel substantial",
+    "You offer the kind of presence people remember in hard seasons",
+    "You have emotional strength that does not need to be loud",
+    "You make patience look beautiful",
+    "You bring steadiness into places that need it",
+    "You have a rare ability to be both gentle and strong",
+    "You make people feel heard in a deep way",
+    "You carry wisdom with humility",
+    "You give people room to be honest",
+    "You have a way of making life feel a little less heavy",
+    "You bring dignity into how you treat people",
+    "You make reflection feel safe",
+    "You seem to know how to hold both truth and grace",
+    "You have a depth that builds trust naturally",
+    "You make sincerity feel refreshing",
+    "You carry compassion without making it performative",
+    "You bring real substance into the lives around you",
+    "You have a way of making people feel more whole",
+    "You leave people feeling better, not because you try hard, but because of who you are",
+    "You make quiet goodness feel visible",
+    "You show strength in ways that many people miss at first",
+    "You have a way of making others feel grounded",
+    "You seem built for meaningful things",
+    "You make gentleness feel powerful",
+    "You help people feel less guarded",
+    "You have a way of making life feel more human",
+    "You are the kind of person people trust with what matters most"
+  ],
+  romantic: [
+    "You make my day feel softer just by being in it",
+    "You have a smile that stays in people’s minds",
+    "You make ordinary moments feel special",
+    "You’re the kind of person someone could think about all day",
+    "You have a way of making hearts feel a little less guarded",
+    "You look good, but it’s your energy that really gets people",
+    "You make sweetness feel effortless",
+    "You have the kind of presence that people want to stay close to",
+    "You make affection feel easy",
+    "You have a warmth that pulls people in",
+    "You are genuinely hard to forget",
+    "You make being near you feel like a privilege",
+    "You have the kind of eyes people could get lost in",
+    "You make attention feel natural, not forced",
+    "You have a softness that feels rare",
+    "You make romance feel less cheesy and more real",
+    "You have the kind of charm that sneaks up on people",
+    "You make someone want to write a better text back",
+    "You feel like the kind of person people hope to meet",
+    "You have a beautiful way of making people feel wanted",
+    "You make closeness feel safe",
+    "You have a sweetness that does not feel fake",
+    "You make simple moments feel worth remembering",
+    "You’re the kind of person someone would gladly lose sleep talking to",
+    "You have a really magnetic kind of beauty",
+    "You make warmth feel personal",
+    "You are the kind of person who turns interest into a real crush",
+    "You have a naturally romantic presence",
+    "You make tenderness feel easy to believe in",
+    "You are the kind of person someone would feel lucky to adore",
+    "You have a look that could stop a thought mid-sentence",
+    "You make attention feel like comfort",
+    "You have a way of making someone feel chosen",
+    "You make chemistry feel obvious",
+    "You have the kind of smile people replay later",
+    "You bring a softness that does not feel fragile",
+    "You make sweetness feel grown and real",
+    "You have the kind of presence that makes people lean in",
+    "You make affection feel natural instead of awkward",
+    "You have a warmth that lingers",
+    "You make being noticed feel special",
+    "You have a charm that feels effortless",
+    "You make romantic energy feel easy to believe in",
+    "You have a way of making a person want to stay a little longer",
+    "You make someone feel lucky just for getting your attention",
+    "You have the kind of beauty that feels personal, not distant",
+    "You make closeness feel gentle instead of rushed",
+    "You have a softness people want to protect",
+    "You make simple words feel sweeter",
+    "You have a naturally inviting kind of energy",
+    "You make a text feel like more than a text",
+    "You have the kind of glow that changes a room",
+    "You make interest feel deeper than surface-level attraction",
+    "You have a presence that makes people want to know more",
+    "You make tenderness feel safe",
+    "You have the kind of vibe people write songs about",
+    "You make romantic moments feel less scripted and more real",
+    "You have a way of making someone feel completely seen",
+    "You make ordinary closeness feel unforgettable",
+    "You have the kind of energy that turns a crush into a problem",
+    "You make sweetness feel a little dangerous in the best way",
+    "You have a face that could make someone forget what they were saying",
+    "You make attention feel like a gift",
+    "You have the kind of presence people daydream about later",
+    "You make being around you feel like the best part of the day",
+    "You have a pull that is hard to explain and harder to ignore",
+    "You make even small moments feel charged",
+    "You have a naturally romantic kind of gravity",
+    "You make someone want to be a little more honest",
+    "You have a kind of beauty that feels warm up close",
+    "You make liking you feel very easy and getting over you feel impossible"
+  ]
+};
+
+let currentCategory = "funny";
+
+function setCategory(category, btn){
+  currentCategory = category;
+
+  document.querySelectorAll(".category-btn").forEach((button) => {
+    button.classList.remove("active");
+  });
+
+  btn.classList.add("active");
+
+  const label = category.charAt(0).toUpperCase() + category.slice(1);
+  document.getElementById("hint").textContent = "Current category: " + label;
+  document.getElementById("copyStatus").textContent = "";
+}
+
+function runCompliment(){
+  const cfg = window.__TOOL_CFG__ || {};
+  cfg.options = complimentSets[currentCategory] || complimentSets.funny;
+  window.__TOOL_CFG__ = cfg;
+  ToolEngine.run();
+  document.getElementById("copyStatus").textContent = "";
+}
+
+async function copyCompliment(){
+  const resultEl = document.getElementById("result");
+  const statusEl = document.getElementById("copyStatus");
+  const text = (resultEl.textContent || "").trim();
+
+  if(!text){
+    statusEl.textContent = "Generate a compliment first.";
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(text);
+    statusEl.textContent = "Copied to clipboard.";
+  }catch(e){
+    statusEl.textContent = "Could not copy right now.";
+  }
+}
+
+ToolEngine.init();
+</script>
 
 <script src="/js/load-related-tools.js"></script>
 
