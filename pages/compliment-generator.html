@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compliment Generator | Tool Squares</title>
+<meta name="description" content="Get a random compliment instantly. Fun, positive, and perfect for sharing.">
+
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.compliment-result{
+  font-size:28px;
+  font-weight:700;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Feel good</div>
+
+<h1>Compliment Generator</h1>
+
+<p class="tool-lead">
+Get a random compliment instantly. Share it with someone or keep it for yourself.
+</p>
+
+<div class="tool-actions">
+<h2>Get a compliment</h2>
+<p>Click below and enjoy.</p>
+
+<button onclick="ToolEngine.run()">Generate</button>
+
+<div id="result" class="result compliment-result"></div>
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>Why compliments matter</h2>
+<p>
+A simple compliment can boost confidence, improve mood, and make someone’s day better.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Ways to use this tool</h2>
+<ul>
+<li>Send a kind message to a friend</li>
+<li>Use it as a daily positivity boost</li>
+<li>Break the ice in conversations</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+</div>
+</main>
+
+<script type="application/json" id="tool-config">
+{
+"type":"picker",
+"options":[
+"You have a great sense of humor",
+"You make people feel comfortable",
+"You're doing better than you think",
+"You have amazing energy",
+"You bring out the best in others",
+"You're stronger than you realize",
+"Your ideas are valuable",
+"You have a great personality"
+]
+}
+</script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
+
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
