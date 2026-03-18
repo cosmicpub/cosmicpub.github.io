@@ -1,15 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Would You Rather</title>
+<title>Would You Rather | Tool Squares</title>
+<meta name="description" content="Get random Would You Rather questions instantly. Fun, clean prompts for friends, classrooms, parties, and group games.">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.wyr-actions{
+  text-align:center;
+}
+
+.wyr-buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.ghost-btn{
+  background:#fff;
+  color:#111827;
+  border:2px solid #d1d5db;
+}
+
+.ghost-btn:hover{
+  background:#f8fafc;
+  filter:none;
+}
+
+.wyr-grid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:14px;
+}
+
+@media (max-width: 700px){
+  .wyr-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.wyr-option{
+  background:#f8fafc;
+  border:1px solid rgba(17,24,39,.06);
+  border-radius:18px;
+  padding:22px 18px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+  text-align:center;
+  min-height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.wyr-option-label{
+  position:absolute;
+  top:12px;
+  left:12px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#4f46e5;
+  background:#eef2ff;
+  padding:6px 10px;
+  border-radius:999px;
+}
+
+.wyr-option-text{
+  font-size:22px;
+  font-weight:800;
+  line-height:1.35;
+  color:#111827;
+}
+
+.wyr-or{
+  margin-top:14px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#6b7280;
+}
+
+.wyr-result-plain{
+  margin-top:20px;
+  padding:18px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px solid rgba(17,24,39,.06);
+  font-size:20px;
+  line-height:1.5;
+  font-weight:700;
+  color:#111827;
+}
+
+.status-note{
+  margin-top:12px;
+  font-size:14px;
+  color:#6b7280;
+  min-height:20px;
+}
+</style>
 
 </head>
 
@@ -21,132 +123,275 @@
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Fun tool</div>
+      <h1>Would You Rather</h1>
+      <p class="tool-lead">
+        Get a random Would You Rather question instantly. This tool is great for friend groups, classrooms, icebreakers, parties, and casual conversations when you want something fun, simple, and quick.
+      </p>
 
-<h2>Would You Rather</h2>
-<p>Pick one.</p>
+      <div class="tool-actions wyr-actions">
+        <h2>Get a new question</h2>
+        <p>Tap the button to get a fresh dilemma. Recent questions are skipped when possible so it stays interesting.</p>
 
-<button onclick="generate()">New Question</button>
+        <div class="wyr-buttons">
+          <button onclick="generate()">New Question</button>
+          <button type="button" class="ghost-btn" onclick="resetHistory()">Reset history</button>
+        </div>
 
-<div class="result" id="result"></div>
+        <div class="wyr-or">Choose one</div>
 
-</div>
+        <div id="wyrGrid" class="wyr-grid" style="display:none;">
+          <div class="wyr-option">
+            <div class="wyr-option-label">Option A</div>
+            <div id="optionA" class="wyr-option-text"></div>
+          </div>
 
-</div>
+          <div class="wyr-option">
+            <div class="wyr-option-label">Option B</div>
+            <div id="optionB" class="wyr-option-text"></div>
+          </div>
+        </div>
+
+        <div id="fallbackResult" class="wyr-result-plain" style="display:none;"></div>
+
+        <div id="statusNote" class="status-note">Fun for friends, classrooms, and group conversations.</div>
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this Would You Rather tool works</h2>
+        <p>
+          This page gives you a random Would You Rather question with two choices. It is designed to keep things simple and quick, so you can tap once and instantly get a fresh prompt for discussion, debate, or just a laugh.
+        </p>
+        <p>
+          The tool also avoids showing the most recent questions again right away. That helps it feel less repetitive when you are clicking through multiple prompts in one session.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use Would You Rather questions</h2>
+        <ul>
+          <li>Icebreakers for classrooms or group activities</li>
+          <li>Party games and sleepovers</li>
+          <li>Conversation starters with friends</li>
+          <li>Warm-up activities for meetings or events</li>
+          <li>Fun social prompts when people need something easy to react to</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Why this kind of tool is useful</h2>
+        <p>
+          Good conversation prompts are harder to come up with than most people expect. A random Would You Rather generator helps by removing the pause between questions and keeping the activity moving. That is especially useful in classrooms, youth groups, and casual game settings where momentum matters.
+        </p>
+        <p>
+          The best prompts are simple enough to answer quickly but interesting enough to spark discussion. That is the balance this tool is trying to hit.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
 
 <script>
+const RECENT_KEY = "ts_wyr_recent";
+const RECENT_KEEP = 10;
 
 const questions = [
-
-"Live in the mountains OR live at the beach",
-"Always be 10 minutes late OR always be 20 minutes early",
-"Never use social media again OR never watch TV again",
-"Travel the world OR have your dream home",
-"Be able to fly OR be invisible",
-"Eat pizza forever OR tacos forever",
-"Have unlimited money OR unlimited time",
-"Live without music OR live without movies",
-"Only text OR only call",
-"Always summer OR always winter",
-"Never sleep OR never eat",
-"Be famous OR be extremely wealthy",
-"Give up coffee OR give up dessert",
-"Live in space OR live underwater",
-"Always whisper OR always shout",
-
-"Wear the same outfit every day OR never repeat an outfit",
-"Be able to read minds OR control time",
-"Only watch comedy movies OR only watch horror movies",
-"Have super strength OR super speed",
-"Live without internet OR live without air conditioning",
-"Eat only sweet foods OR only salty foods",
-"Live in a tiny house OR live in a mansion you must clean yourself",
-"Always have bad WiFi OR always have a dying phone battery",
-"Only listen to one song forever OR never listen to music again",
-"Give up chocolate OR give up chips",
-"Only walk everywhere OR only ride a bicycle",
-"Have a rewind button for life OR a pause button",
-"Be stuck in traffic for 2 hours OR stand in line for 2 hours",
-"Only drink water OR only drink soda",
-"Be able to teleport OR time travel",
-
-"Live without your phone OR without your computer",
-"Eat breakfast foods forever OR dinner foods forever",
-"Always be too hot OR always be too cold",
-"Have unlimited pizza OR unlimited burgers",
-"Never watch movies again OR never play games again",
-"Only watch YouTube OR only watch Netflix",
-"Have a robot assistant OR a personal chef",
-"Have free travel forever OR free food forever",
-"Always forget names OR always forget faces",
-"Only wear shoes OR only wear sandals",
-"Live in a big city OR live in the countryside",
-"Be able to speak every language OR play every instrument",
-"Have a 3 day weekend every week OR 3 month vacation every year",
-"Be the funniest person OR the smartest person",
-"Never use emojis again OR only communicate with emojis",
-
-"Have super hearing OR super vision",
-"Be able to breathe underwater OR survive in space",
-"Live without music OR live without books",
-"Eat only home cooked meals OR only restaurant food",
-"Only watch old movies OR only watch new movies",
-"Give up ice cream OR give up cake",
-"Have unlimited money but never travel OR travel forever but stay broke",
-"Always know the future OR change the past once",
-"Be able to talk to animals OR talk to machines",
-"Have perfect memory OR forget every bad memory",
-"Be able to stop time OR slow time",
-"Be a famous actor OR famous athlete",
-"Live without a car OR without public transportation",
-"Be extremely lucky OR extremely talented",
-"Only watch sports OR never watch sports again",
-
-"Be stuck in the past OR stuck in the future",
-"Have a private island OR a penthouse in every city",
-"Have unlimited books OR unlimited movies",
-"Only eat spicy food OR only eat bland food",
-"Live without weekends OR live without vacations",
-"Be able to control weather OR control technology",
-"Have a 4 hour workday OR a 3 day workweek",
-"Always win arguments OR always win games",
-"Have unlimited energy OR unlimited motivation",
-"Never wait in traffic OR never wait in lines",
-"Only watch TV shows OR only watch movies",
-"Always have perfect weather OR perfect internet",
-"Have unlimited snacks OR unlimited drinks",
-"Have a time machine OR a teleportation device",
-"Always be early OR always be fashionable late",
-
-"Live without chocolate OR without cheese",
-"Be a superhero OR a famous villain",
-"Have your dream job OR win the lottery",
-"Never lose your keys OR never lose your phone",
-"Have free concert tickets OR free sports tickets",
-"Always have great luck OR great skill",
-"Live without coffee OR without tea",
-"Eat breakfast for dinner OR dinner for breakfast",
-"Have unlimited hobbies OR unlimited travel",
-"Be a great singer OR great dancer",
-"Only read books OR only listen to podcasts",
-"Always be relaxed OR always be productive",
-"Live without sugar OR without salt",
-"Be the leader OR the advisor",
-"Have unlimited creativity OR unlimited knowledge"
-
+  "Live in the mountains OR live at the beach",
+  "Always be 10 minutes late OR always be 20 minutes early",
+  "Never use social media again OR never watch TV again",
+  "Travel the world OR have your dream home",
+  "Be able to fly OR be invisible",
+  "Eat pizza forever OR tacos forever",
+  "Have unlimited money OR unlimited time",
+  "Live without music OR live without movies",
+  "Only text OR only call",
+  "Always summer OR always winter",
+  "Never sleep OR never eat",
+  "Be famous OR be extremely wealthy",
+  "Give up coffee OR give up dessert",
+  "Live in space OR live underwater",
+  "Always whisper OR always shout",
+  "Wear the same outfit every day OR never repeat an outfit",
+  "Be able to read minds OR control time",
+  "Only watch comedy movies OR only watch horror movies",
+  "Have super strength OR super speed",
+  "Live without internet OR live without air conditioning",
+  "Eat only sweet foods OR only salty foods",
+  "Live in a tiny house OR live in a mansion you must clean yourself",
+  "Always have bad WiFi OR always have a dying phone battery",
+  "Only listen to one song forever OR never listen to music again",
+  "Give up chocolate OR give up chips",
+  "Only walk everywhere OR only ride a bicycle",
+  "Have a rewind button for life OR a pause button",
+  "Be stuck in traffic for 2 hours OR stand in line for 2 hours",
+  "Only drink water OR only drink soda",
+  "Be able to teleport OR time travel",
+  "Live without your phone OR without your computer",
+  "Eat breakfast foods forever OR dinner foods forever",
+  "Always be too hot OR always be too cold",
+  "Have unlimited pizza OR unlimited burgers",
+  "Never watch movies again OR never play games again",
+  "Only watch YouTube OR only watch Netflix",
+  "Have a robot assistant OR a personal chef",
+  "Have free travel forever OR free food forever",
+  "Always forget names OR always forget faces",
+  "Only wear shoes OR only wear sandals",
+  "Live in a big city OR live in the countryside",
+  "Be able to speak every language OR play every instrument",
+  "Have a 3 day weekend every week OR 3 month vacation every year",
+  "Be the funniest person OR the smartest person",
+  "Never use emojis again OR only communicate with emojis",
+  "Have super hearing OR super vision",
+  "Be able to breathe underwater OR survive in space",
+  "Live without music OR live without books",
+  "Eat only home cooked meals OR only restaurant food",
+  "Only watch old movies OR only watch new movies",
+  "Give up ice cream OR give up cake",
+  "Have unlimited money but never travel OR travel forever but stay broke",
+  "Always know the future OR change the past once",
+  "Be able to talk to animals OR talk to machines",
+  "Have perfect memory OR forget every bad memory",
+  "Be able to stop time OR slow time",
+  "Be a famous actor OR famous athlete",
+  "Live without a car OR without public transportation",
+  "Be extremely lucky OR extremely talented",
+  "Only watch sports OR never watch sports again",
+  "Be stuck in the past OR stuck in the future",
+  "Have a private island OR a penthouse in every city",
+  "Have unlimited books OR unlimited movies",
+  "Only eat spicy food OR only eat bland food",
+  "Live without weekends OR live without vacations",
+  "Be able to control weather OR control technology",
+  "Have a 4 hour workday OR a 3 day workweek",
+  "Always win arguments OR always win games",
+  "Have unlimited energy OR unlimited motivation",
+  "Never wait in traffic OR never wait in lines",
+  "Only watch TV shows OR only watch movies",
+  "Always have perfect weather OR perfect internet",
+  "Have unlimited snacks OR unlimited drinks",
+  "Have a time machine OR a teleportation device",
+  "Always be early OR always be fashionable late",
+  "Live without chocolate OR without cheese",
+  "Be a superhero OR a famous villain",
+  "Have your dream job OR win the lottery",
+  "Never lose your keys OR never lose your phone",
+  "Have free concert tickets OR free sports tickets",
+  "Always have great luck OR great skill",
+  "Live without coffee OR without tea",
+  "Eat breakfast for dinner OR dinner for breakfast",
+  "Have unlimited hobbies OR unlimited travel",
+  "Be a great singer OR great dancer",
+  "Only read books OR only listen to podcasts",
+  "Always be relaxed OR always be productive",
+  "Live without sugar OR without salt",
+  "Be the leader OR the advisor",
+  "Have unlimited creativity OR unlimited knowledge",
+  "Always have to sing when you speak OR always have to dance when you walk",
+  "Have a room full of books OR a room full of snacks",
+  "Know every answer in school OR always win every game",
+  "Spend a day with no phone OR a day with no talking",
+  "Be able to instantly cook anything OR instantly fix anything",
+  "Only use paper maps OR only ask people for directions",
+  "Have a free shopping spree OR a free vacation",
+  "Be amazing at art OR amazing at sports",
+  "Only wear bright colors OR only wear black and white",
+  "Watch the same movie every week OR hear the same song every day",
+  "Have a treehouse OR a secret tunnel",
+  "Always have your favorite meal OR always try something new",
+  "Be known for being kind OR known for being brilliant"
 ];
 
-function generate(){
-
-const q = questions[Math.floor(Math.random()*questions.length)];
-
-document.getElementById("result").textContent = q;
-
+function getRecent(){
+  try{
+    const raw = localStorage.getItem(RECENT_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){
+    return [];
+  }
 }
 
+function setRecent(arr){
+  try{
+    localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0, RECENT_KEEP)));
+  }catch(e){}
+}
+
+function parseQuestion(question){
+  const parts = question.split(/\s+OR\s+/i);
+  if(parts.length === 2){
+    return {
+      a: parts[0].trim(),
+      b: parts[1].trim()
+    };
+  }
+  return null;
+}
+
+function generate(){
+  const recent = getRecent();
+  let available = questions.filter(q => !recent.includes(q));
+  if(!available.length){
+    available = questions;
+  }
+
+  const q = available[Math.floor(Math.random() * available.length)];
+  const parsed = parseQuestion(q);
+
+  const grid = document.getElementById("wyrGrid");
+  const fallback = document.getElementById("fallbackResult");
+  const status = document.getElementById("statusNote");
+
+  if(parsed){
+    document.getElementById("optionA").textContent = parsed.a;
+    document.getElementById("optionB").textContent = parsed.b;
+    grid.style.display = "grid";
+    fallback.style.display = "none";
+    fallback.textContent = "";
+  } else {
+    grid.style.display = "none";
+    fallback.style.display = "block";
+    fallback.textContent = q;
+  }
+
+  const updated = [q, ...recent.filter(item => item !== q)];
+  setRecent(updated);
+
+  status.textContent = `Question pool: ${questions.length} • Skipping last ${RECENT_KEEP} when possible.`;
+}
+
+function resetHistory(){
+  try{
+    localStorage.removeItem(RECENT_KEY);
+  }catch(e){}
+  document.getElementById("optionA").textContent = "";
+  document.getElementById("optionB").textContent = "";
+  document.getElementById("wyrGrid").style.display = "none";
+  document.getElementById("fallbackResult").style.display = "none";
+  document.getElementById("fallbackResult").textContent = "";
+  document.getElementById("statusNote").textContent = "History cleared. Tap for a fresh question.";
+}
 </script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
