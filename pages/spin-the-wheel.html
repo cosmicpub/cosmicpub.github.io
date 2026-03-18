@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Spin the Wheel | Tool Squares</title>
+<meta name="description" content="Spin the wheel to make a random decision instantly. Add your own options and let the wheel decide.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.wheel-container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+canvas{
+  border-radius:50%;
+  background:#fff;
+}
+
+.pointer{
+  font-size:28px;
+}
+
+.inputs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.inputs input{
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  width:120px;
+  text-align:center;
+}
+
+.result{
+  font-size:32px;
+  font-weight:800;
+  margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Decision wheel</div>
+
+<h1>Spin the Wheel</h1>
+
+<p class="tool-lead">
+Add your own options and spin the wheel to make a random decision instantly.
+</p>
+
+<div class="tool-actions">
+
+<h2>Spin your wheel</h2>
+<p>Enter options, then spin to decide.</p>
+
+<div class="wheel-container">
+<div class="pointer">▼</div>
+<canvas id="wheel" width="300" height="300"></canvas>
+
+<button onclick="spinWheel()">Spin</button>
+
+<div id="result" class="result"></div>
+</div>
+
+<div class="inputs" id="inputs"></div>
+
+<button onclick="addInput()">+ Add Option</button>
+
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How the spin wheel works</h2>
+<p>
+Each segment on the wheel represents one of your options. When you spin, the wheel rotates randomly and lands on a result.
+</p>
+</section>
+
+<section class="info-card">
+<h2>When to use a decision wheel</h2>
+<ul>
+<li>Group decisions</li>
+<li>Classroom activities</li>
+<li>Games and challenges</li>
+<li>Choosing between multiple options</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Why random decision tools help</h2>
+<p>
+Sometimes the hardest part of a decision is getting started. A random wheel removes hesitation and helps you take action quickly.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+
+</div>
+</main>
+
+<script>
+let options = ["Yes","No","Maybe","Go for it"];
+let angle = 0;
+let spinning = false;
+
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+
+function drawWheel(){
+  const arc = (2 * Math.PI) / options.length;
+
+  ctx.clearRect(0,0,300,300);
+
+  options.forEach((opt, i)=>{
+    const start = i * arc + angle;
+
+    ctx.beginPath();
+    ctx.moveTo(150,150);
+    ctx.arc(150,150,150,start,start+arc);
+    ctx.fillStyle = `hsl(${i*360/options.length},70%,60%)`;
+    ctx.fill();
+
+    ctx.save();
+    ctx.translate(150,150);
+    ctx.rotate(start + arc/2);
+    ctx.fillStyle="#000";
+    ctx.fillText(opt, 80, 5);
+    ctx.restore();
+  });
+}
+
+function spinWheel(){
+  if(spinning) return;
+
+  spinning = true;
+
+  const spinTime = 2000;
+  const start = Date.now();
+  const startAngle = angle;
+  const spinAngle = Math.random() * 10 + 10;
+
+  function animate(){
+    const now = Date.now();
+    const elapsed = now - start;
+
+    if(elapsed < spinTime){
+      angle = startAngle + spinAngle * (1 - elapsed / spinTime);
+      drawWheel();
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      calculateResult();
+    }
+  }
+
+  animate();
+}
+
+function calculateResult(){
+  const arc = (2 * Math.PI) / options.length;
+  const index = Math.floor((2*Math.PI - angle % (2*Math.PI)) / arc) % options.length;
+
+  document.getElementById("result").textContent = options[index];
+}
+
+function addInput(){
+  const input = document.createElement("input");
+  input.placeholder = "Option";
+  input.oninput = updateOptions;
+  document.getElementById("inputs").appendChild(input);
+}
+
+function updateOptions(){
+  const inputs = document.querySelectorAll("#inputs input");
+  options = Array.from(inputs).map(i=>i.value).filter(Boolean);
+
+  if(options.length < 2){
+    options = ["Yes","No"];
+  }
+
+  drawWheel();
+}
+
+function initInputs(){
+  const container = document.getElementById("inputs");
+  options.forEach(val=>{
+    const input = document.createElement("input");
+    input.value = val;
+    input.oninput = updateOptions;
+    container.appendChild(input);
+  });
+}
+
+initInputs();
+drawWheel();
+</script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
