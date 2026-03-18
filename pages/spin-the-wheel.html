@@ -30,26 +30,22 @@ canvas{
   font-size:28px;
 }
 
-.inputs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  margin-top:10px;
-}
-
-.inputs input{
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  width:120px;
-  text-align:center;
+textarea{
+  width:100%;
+  max-width:420px;
+  height:120px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  font-size:15px;
+  resize:none;
 }
 
 .result{
-  font-size:32px;
-  font-weight:800;
+  font-size:36px;
+  font-weight:900;
   margin-top:10px;
+  text-align:center;
 }
 </style>
 
@@ -72,26 +68,27 @@ canvas{
 <h1>Spin the Wheel</h1>
 
 <p class="tool-lead">
-Add your own options and spin the wheel to make a random decision instantly.
+Enter your options (one per line), then spin to make a decision instantly.
 </p>
 
 <div class="tool-actions">
 
 <h2>Spin your wheel</h2>
-<p>Enter options, then spin to decide.</p>
+<p>Add options below, then spin.</p>
+
+<textarea id="optionsInput">Yes
+No
+Maybe
+Go for it</textarea>
 
 <div class="wheel-container">
 <div class="pointer">▼</div>
-<canvas id="wheel" width="300" height="300"></canvas>
+<canvas id="wheel" width="320" height="320"></canvas>
 
 <button onclick="spinWheel()">Spin</button>
 
 <div id="result" class="result"></div>
 </div>
-
-<div class="inputs" id="inputs"></div>
-
-<button onclick="addInput()">+ Add Option</button>
 
 </div>
 </section>
@@ -101,7 +98,7 @@ Add your own options and spin the wheel to make a random decision instantly.
 <section class="info-card">
 <h2>How the spin wheel works</h2>
 <p>
-Each segment on the wheel represents one of your options. When you spin, the wheel rotates randomly and lands on a result.
+Each line you enter becomes a segment on the wheel. When you spin, the wheel rotates randomly and lands on one option.
 </p>
 </section>
 
@@ -118,7 +115,7 @@ Each segment on the wheel represents one of your options. When you spin, the whe
 <section class="info-card">
 <h2>Why random decision tools help</h2>
 <p>
-Sometimes the hardest part of a decision is getting started. A random wheel removes hesitation and helps you take action quickly.
+A random decision tool removes hesitation and helps you move forward quickly without overthinking.
 </p>
 </section>
 
@@ -133,32 +130,50 @@ Sometimes the hardest part of a decision is getting started. A random wheel remo
 </main>
 
 <script>
-let options = ["Yes","No","Maybe","Go for it"];
+let options = [];
 let angle = 0;
 let spinning = false;
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
+function getOptions(){
+  const text = document.getElementById("optionsInput").value;
+
+  options = text
+    .split("\n")
+    .map(o => o.trim())
+    .filter(o => o.length > 0);
+
+  if(options.length < 2){
+    options = ["Yes","No"];
+  }
+}
+
 function drawWheel(){
+  getOptions();
+
   const arc = (2 * Math.PI) / options.length;
 
-  ctx.clearRect(0,0,300,300);
+  ctx.clearRect(0,0,320,320);
 
   options.forEach((opt, i)=>{
     const start = i * arc + angle;
 
     ctx.beginPath();
-    ctx.moveTo(150,150);
-    ctx.arc(150,150,150,start,start+arc);
+    ctx.moveTo(160,160);
+    ctx.arc(160,160,160,start,start+arc);
     ctx.fillStyle = `hsl(${i*360/options.length},70%,60%)`;
     ctx.fill();
 
+    // TEXT
     ctx.save();
-    ctx.translate(150,150);
+    ctx.translate(160,160);
     ctx.rotate(start + arc/2);
-    ctx.fillStyle="#000";
-    ctx.fillText(opt, 80, 5);
+    ctx.fillStyle="#111";
+    ctx.font = "bold 16px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText(opt, 140, 5);
     ctx.restore();
   });
 }
@@ -166,19 +181,23 @@ function drawWheel(){
 function spinWheel(){
   if(spinning) return;
 
-  spinning = true;
+  getOptions();
 
-  const spinTime = 2000;
+  spinning = true;
+  document.getElementById("result").textContent = "";
+
+  const spinTime = 2200;
   const start = Date.now();
   const startAngle = angle;
-  const spinAngle = Math.random() * 10 + 10;
+  const spinAngle = Math.random() * 12 + 10;
 
   function animate(){
     const now = Date.now();
     const elapsed = now - start;
 
     if(elapsed < spinTime){
-      angle = startAngle + spinAngle * (1 - elapsed / spinTime);
+      const ease = 1 - Math.pow(1 - elapsed / spinTime, 3);
+      angle = startAngle + spinAngle * ease;
       drawWheel();
       requestAnimationFrame(animate);
     } else {
@@ -194,38 +213,12 @@ function calculateResult(){
   const arc = (2 * Math.PI) / options.length;
   const index = Math.floor((2*Math.PI - angle % (2*Math.PI)) / arc) % options.length;
 
-  document.getElementById("result").textContent = options[index];
+  const result = options[index];
+  document.getElementById("result").textContent = result;
 }
 
-function addInput(){
-  const input = document.createElement("input");
-  input.placeholder = "Option";
-  input.oninput = updateOptions;
-  document.getElementById("inputs").appendChild(input);
-}
+document.getElementById("optionsInput").addEventListener("input", drawWheel);
 
-function updateOptions(){
-  const inputs = document.querySelectorAll("#inputs input");
-  options = Array.from(inputs).map(i=>i.value).filter(Boolean);
-
-  if(options.length < 2){
-    options = ["Yes","No"];
-  }
-
-  drawWheel();
-}
-
-function initInputs(){
-  const container = document.getElementById("inputs");
-  options.forEach(val=>{
-    const input = document.createElement("input");
-    input.value = val;
-    input.oninput = updateOptions;
-    container.appendChild(input);
-  });
-}
-
-initInputs();
 drawWheel();
 </script>
 
