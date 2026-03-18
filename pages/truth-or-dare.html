@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Truth or Dare</title>
+<title>Truth or Dare | Tool Squares</title>
+<meta name="description" content="Play Truth or Dare instantly with fun, random prompts. Perfect for friends, classrooms, parties, and icebreakers.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.button-row{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.result-box{
+  margin-top:20px;
+  text-align:center;
+}
+
+.result{
+  font-size:20px;
+  font-weight:700;
+  padding:20px;
+}
+</style>
 
 </head>
 
@@ -21,20 +44,83 @@
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Party tool</div>
+      <h1>Truth or Dare</h1>
 
-<h2>Truth or Dare</h2>
+      <p class="tool-lead">
+        Play Truth or Dare instantly with random prompts. Perfect for parties, classrooms, game nights, or anytime you want to break the ice and have some fun.
+      </p>
 
-<button onclick="truth()">Truth</button>
-<button onclick="dare()">Dare</button>
+      <div class="tool-actions">
 
-<div class="result" id="result"></div>
+        <h2>Pick your challenge</h2>
+        <p>Choose truth for a question or dare for a challenge.</p>
 
-</div>
+        <div class="button-row">
+          <button onclick="truth()">Truth</button>
+          <button onclick="dare()">Dare</button>
+        </div>
 
-</div>
+        <div class="result-box">
+          <div id="result" class="result"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this game works</h2>
+        <p>
+          Truth or Dare is a classic game where players choose between answering a question honestly or completing a fun challenge. This tool removes the pressure of coming up with ideas and instantly gives you a random prompt.
+        </p>
+        <p>
+          Each truth or dare is selected randomly and avoids repeating recent prompts, so the game stays fresh and engaging. You can keep clicking as long as you want to continue playing.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use this tool</h2>
+        <ul>
+          <li>Parties and sleepovers</li>
+          <li>Icebreakers in classrooms</li>
+          <li>Team bonding activities</li>
+          <li>Game nights with friends or family</li>
+          <li>Passing time and having fun</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Tips for playing</h2>
+        <p>
+          Keep the game fun and respectful by setting clear boundaries before starting. Players should feel comfortable skipping any prompt they do not want to answer or perform.
+        </p>
+        <p>
+          You can also add your own house rules, like increasing difficulty over time or adding a “double dare” option for extra fun.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Why use a random truth or dare generator?</h2>
+        <p>
+          Coming up with good truth or dare ideas can be harder than it sounds, especially when the group runs out of creativity. This tool keeps the game moving by providing instant prompts so you can focus on having fun instead of thinking of the next question or challenge.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
 
 <script>
 
@@ -54,208 +140,75 @@ const truths = [
 "What’s a song you love but would never play on aux?",
 "What’s something you’ve bought that was a total waste?",
 "What’s your most awkward “small talk” moment?",
-"What’s a rule you love breaking (harmlessly)?",
-"What’s your worst “I thought I sent that privately” moment?",
 "What’s something you’d do if you knew you couldn’t fail?",
 "What’s a talent you wish you had?",
 "What’s a smell that instantly brings back memories?",
 "What’s the funniest thing you’ve ever overheard?",
-"What’s the most childish thing you still enjoy?",
-"What’s the most random thing in your bag/pockets right now?",
-"What’s your guilty pleasure snack?",
-"What’s something you pretended to understand but didn’t?",
-"What’s the most awkward compliment you’ve ever given?",
-"What’s a lie you told as a kid that got out of hand?",
-"What’s a trend you never understood?",
-"What’s the weirdest dream you’ve had recently?",
-"What’s a word you hate hearing?",
-"What’s a “green flag” you look for in people?",
-"What’s a “red flag” you ignored before?",
-"What’s your biggest “I can’t believe I did that” moment?",
-"What’s the most dramatic thing you’ve ever done?",
-"What’s a secret nickname you’ve had or given someone?",
-"What’s the most awkward time you laughed at the wrong moment?",
-"What’s the last thing that made you cry (happy or sad)?",
-"What’s a moment you felt instantly confident?",
-"What’s the most random fear you had as a kid?",
-"What’s your biggest procrastination habit?",
-"What’s the strangest compliment you’ve received?",
-"What’s a food you disliked as a kid but like now?",
-"What’s a food you liked as a kid but can’t stand now?",
-"What’s the most rebellious thing you’ve done (PG)?",
-"What’s a skill you learned the hard way?",
-"What’s a TV character you relate to too much?",
-"What’s a movie scene you can quote perfectly?",
-"What’s your most “main character” moment?",
-"What’s the funniest thing that’s happened to you this month?",
-"What’s something you’ve never tried but want to?",
-"If your life had a theme song right now, what would it be?",
-"What’s a hobby you’ve tried and quit immediately?",
-"What’s the most awkward “wrong person” text you’ve sent?",
-"What’s something you’d do with a free full day and no responsibilities?",
-"What’s a harmless thing you judge people for?",
-"What’s your weirdest “I’ll do it tomorrow” excuse?",
-"What’s a smell you absolutely can’t stand?",
-"What’s the last thing that made you laugh really hard?",
-"What’s the most random thing you’re good at?",
-"What’s a fear you’ve mostly gotten over?",
-"What’s a “hot take” you have that most people disagree with?",
-"What’s your go-to comfort movie or show?",
-"What’s one thing you’re overthinking right now?",
-"What’s a compliment you wish you got more often?",
-"If you could delete one app forever, which would it be?",
-"What’s the most awkward time you realized you were wrong?",
-"What’s the last thing you impulse bought?",
-"What’s one thing you’d change about your daily routine?",
-"What’s a small win you’ve had recently?",
-"What’s the most “me” thing you’ve ever done?",
-"What’s your biggest “I can’t believe I said that” moment?",
-"What’s the weirdest thing you’ve eaten?",
-"What’s a random fact you know for no reason?",
-"What’s your most used phrase lately?",
-"What’s something you’re secretly competitive about?",
-"What’s a sound that instantly irritates you?",
-"What’s the most awkward time you got caught staring?",
-"What’s the weirdest thing you believed as a kid?",
-"What’s your most embarrassing autocorrect story?",
-"What’s your most chaotic travel story (PG)?",
-"What’s something you’d do if you were invisible for 10 minutes?",
-"What’s something you’ve done that was totally out of character?",
-"What’s the most awkward compliment you’ve received?",
-"What’s your “I’m stressed” snack or habit?",
-"What’s the last thing you were genuinely excited about?",
-"What’s a fictional world you’d live in for a week?",
-"What’s your least favorite chore and why?",
-"What’s something you’d never do again even for money (reasonable money)?",
-"What’s one thing you want to get better at this year?",
-"What’s the most awkward time you called someone the wrong name?"
+"What’s your guilty pleasure snack?"
 ];
 
 const dares = [
 "Do 10 jumping jacks.",
-"Do 10 pushups (or 5 if you’re not feeling it).",
-"Hold a plank for 20 seconds.",
-"Speak in a dramatic movie trailer voice for 30 seconds.",
-"Talk like a robot for the next minute.",
-"Talk like a cowboy for the next minute.",
-"Do your best celebrity impression for 10 seconds.",
+"Do your best celebrity impression.",
+"Talk like a robot for 30 seconds.",
+"Do a silly dance.",
+"Act like a chicken.",
+"Spin in a circle and walk straight.",
+"Sing a song in a whisper.",
 "Do your best evil laugh.",
-"Do your best “news reporter” voice and announce something random.",
-"Do a silly dance for 15 seconds.",
-"Do a slow-motion runway walk across the room.",
-"Try to lick your elbow (yes, really).",
-"Spin in a circle 8 times, then walk straight.",
-"Do your best animal sound (your choice).",
-"Act like a chicken for 10 seconds.",
-"Act like a cat for 10 seconds.",
-"Act like a superhero entering a scene.",
-"Act like you just won an award and give a 10-second speech.",
-"Make a fake commercial for the nearest object.",
-"Make a “serious” speech about why socks are important.",
-"Attempt to juggle 3 small items (or pretend if you can’t).",
-"Balance something on your head for 10 seconds.",
-"Do a tongue twister 3 times fast: 'Red leather yellow leather.'",
-"Try to say the alphabet backwards (as far as you can).",
-"Text someone: 'I have a very important question…' then wait 30 seconds before sending the question.",
-"Send a friend a random emoji and nothing else.",
-"Take a selfie making your best “model face.”",
-"Take a selfie making your worst “model face.”",
-"Do your best villain monologue for 15 seconds.",
-"Do your best game show host voice and ask the room a question.",
-"Attempt a one-hand clap (yes, it’s impossible).",
-"Whisper everything you say for the next minute.",
-"Say the next 3 sentences in rhyme.",
-"Speak only in questions for the next minute.",
-"Do the next 10 seconds in slow motion.",
-"Try to touch your toes and hold for 10 seconds.",
+"Balance something on your head.",
+"Try to lick your elbow.",
+"Speak in a British accent.",
 "Do 15 squats.",
-"Do 20 high knees.",
-"Do a wall sit for 15 seconds.",
-"Try to whistle a song (even if you can’t).",
-"Sing the chorus of a song in a whisper.",
-"Hum a song and have someone guess it (or just hum anyway).",
-"Do your best “opera” voice for 5 seconds.",
-"Make a funny face and hold it for 10 seconds.",
-"Try to do the worm (or a very sad version of it).",
-"Say 'I am the main character' with full confidence.",
-"Introduce yourself like you’re on a cooking show.",
-"Give a weather report for today like it’s an extreme storm.",
-"Make up a handshake with yourself and perform it.",
-"Do 3 different poses like you’re in a photoshoot.",
-"Walk like a penguin to the nearest door and back.",
-"Walk like a zombie to the nearest wall and back.",
-"Do an invisible jump rope for 15 seconds.",
-"Do a “mic drop” moment after saying something dramatic.",
-"Make a sound effect for everything you do for the next 30 seconds.",
-"Try to say: 'Unique New York' five times fast.",
-"Attempt a cartwheel (only if safe) OR do a dramatic arm wave.",
-"Do a “power pose” for 10 seconds.",
-"Do a slow clap for yourself like you did something amazing.",
-"Pretend to be a waiter and take an order from someone.",
-"Pretend you’re a tour guide showing off the room like it’s famous.",
-"Say 'I regret nothing' with full dramatic intensity.",
-"Act out brushing your teeth in slow motion for 10 seconds.",
-"Act like you’re stuck in a wind tunnel for 10 seconds.",
-"Do your best “this is fine” meme face.",
-"Do 5 pushups, then celebrate like you won a championship.",
-"Try to keep a straight face while saying 'banana' 10 times.",
-"Say three nice compliments to yourself out loud.",
-"Do a victory dance like you just beat a boss level.",
-"Try to balance on one foot for 15 seconds.",
-"Make up a short rap about your day (10 seconds).",
-"Say a tongue twister: 'She sells seashells by the seashore.'",
-"Do an exaggerated yawn and stretch like a cartoon character.",
-"Speak in a British accent for 30 seconds.",
-"Speak in a “tiny mouse” voice for 30 seconds.",
-"Speak in a “giant” voice for 30 seconds.",
-"Do a slow, dramatic point at someone or something.",
-"Pretend the floor is lava for 10 seconds.",
-"Do 10 arm circles forward and 10 backward.",
-"Say 'I can’t believe you’ve done this' in a serious voice.",
-"Make a fake award and present it to yourself."
+"Make a funny face and hold it.",
+"Act like a superhero.",
+"Do a slow-motion walk.",
+"Say a tongue twister 3 times fast.",
+"Pretend the floor is lava.",
+"Do a dramatic movie speech.",
+"Act like a zombie.",
+"Give yourself a fake award speech."
 ];
 
 let truthHistory = [];
 let dareHistory = [];
 
 function getRandom(arr, history){
+  let available = arr.filter(item => !history.includes(item));
 
-let available = arr.filter(item => !history.includes(item));
+  if(available.length === 0){
+    history.length = 0;
+    available = arr;
+  }
 
-if(available.length === 0){
-history.length = 0;
-available = arr;
-}
+  const pick = available[Math.floor(Math.random()*available.length)];
 
-const pick = available[Math.floor(Math.random()*available.length)];
+  history.push(pick);
 
-history.push(pick);
+  if(history.length > 10){
+    history.shift();
+  }
 
-if(history.length > 10){
-history.shift();
-}
-
-return pick;
-
+  return pick;
 }
 
 function truth(){
-
-const t = getRandom(truths, truthHistory);
-
-document.getElementById("result").textContent = t;
-
+  const t = getRandom(truths, truthHistory);
+  document.getElementById("result").textContent = t;
 }
 
 function dare(){
-
-const d = getRandom(dares, dareHistory);
-
-document.getElementById("result").textContent = d;
-
+  const d = getRandom(dares, dareHistory);
+  document.getElementById("result").textContent = d;
 }
 
 </script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
