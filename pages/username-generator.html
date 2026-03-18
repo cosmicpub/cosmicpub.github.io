@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Username Generator | Tool Squares</title>
-<meta name="description" content="Generate unique username ideas instantly. Great for social media, gaming, content creation, online accounts, and fun screen name ideas.">
+<meta name="description" content="Generate unique username ideas instantly. Great for social media, gaming, creator accounts, online profiles, and random string ideas.">
 <meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="/assets/style.css">
@@ -140,7 +140,7 @@
       <div class="tool-kicker">Creative tool</div>
       <h1>Username Generator</h1>
       <p class="tool-lead">
-        Generate random username ideas instantly for gaming, social media, creator accounts, forums, and online profiles. Click once and get a fresh batch of name ideas without having to brainstorm from scratch.
+        Generate random username ideas instantly for gaming, social media, creator accounts, forums, and online profiles. You can create readable username ideas or switch to random string mode for more chaotic combinations of uppercase letters, lowercase letters, and numbers.
       </p>
 
       <div class="tool-actions">
@@ -155,6 +155,10 @@
           <label class="option-pill">
             <input type="checkbox" id="useUnderscore">
             Allow underscore style
+          </label>
+          <label class="option-pill">
+            <input type="checkbox" id="useRandomString">
+            Random string mode
           </label>
         </div>
 
@@ -173,10 +177,10 @@
       <section class="info-card">
         <h2>How this username generator works</h2>
         <p>
-          This tool combines short adjectives, nouns, and optional numbers to create quick username ideas. Each time you generate, it builds a fresh set of eight names so you can compare options quickly instead of thinking one name at a time.
+          This tool combines short adjectives, nouns, and optional numbers to create quick username ideas. Each time you generate, it builds a fresh set of eight names so you can compare options quickly instead of thinking of one name at a time.
         </p>
         <p>
-          The goal is speed and variety. You can use these ideas directly, tweak them, or combine parts of different results to make something more personal and unique.
+          If you want something less readable and more random, you can turn on random string mode. That option creates usernames made from mixed uppercase letters, lowercase letters, and numbers, which is useful when you want a more unique or unpredictable result.
         </p>
       </section>
 
@@ -202,9 +206,9 @@
       </section>
 
       <section class="info-card">
-        <h2>Why this page adds value</h2>
+        <h2>Why this page is useful</h2>
         <p>
-          A lot of username generators feel too thin or repetitive. This page is designed to be genuinely useful by giving multiple ideas per click, quick copy actions, simple options, and enough variation to help you land on a name faster. Even if you do not use a generated username exactly as shown, it can still give you the spark you need to create the right one.
+          A lot of username generators feel repetitive or too limited. This page is built to be more useful by giving multiple ideas per click, quick copy buttons, optional formatting choices, and a random string mode for users who want something that does not need to make sense. That gives you more variety and helps you find a usable name faster.
         </p>
       </section>
 
@@ -220,48 +224,64 @@
 
 <script>
 const adjectives = [
-"Shadow","Epic","Crazy","Swift","Dark","Electric","Silent","Frozen","Cosmic","Turbo",
-"Golden","Rapid","Savage","Mystic","Neon","Alpha","Ultra","Phantom","Wild","Atomic",
-"Clever","Nova","Stealth","Lucky","Hyper","Crimson","Silver","Bold","Solar","Pixel",
-"Lunar","Secret","Chill","Blazing","Prime","Rogue","Stormy","Bright","Vivid","Zero",
-"Fierce","Rapid","Glowing","Radiant","Thunder","Electric","Inferno","Icy","Frosty","Smoky",
-"Obsidian","Emerald","Scarlet","Azure","Velvet","Iron","Steel","Quantum","Turbocharged","Dynamic",
-"Fearless","Limitless","Savvy","Brave","Mighty","Noble","Witty","Sharp","Savvy","Zany",
-"Retro","Future","Digital","Virtual","Analog","Binary","Cyber","Quantum","Encrypted","Pixelated",
-"Glitchy","Infinite","Minimal","Major","Minor","Grand","Elite","Supreme","Ultimate","Classic",
-"Legendary","Mythic","Arcane","Hidden","Lost","Ancient","Modern","Urban","Rural","Cosmic",
-"Playful","Cheeky","Sneaky","Tricky","Curious","Crafty","Goofy","Silly","Charming","Quirky"
+  "Shadow","Epic","Crazy","Swift","Dark","Electric","Silent","Frozen","Cosmic","Turbo",
+  "Golden","Rapid","Savage","Mystic","Neon","Alpha","Ultra","Phantom","Wild","Atomic",
+  "Clever","Nova","Stealth","Lucky","Hyper","Crimson","Silver","Bold","Solar","Pixel",
+  "Lunar","Secret","Chill","Blazing","Prime","Rogue","Stormy","Bright","Vivid","Zero",
+  "Fierce","Glowing","Radiant","Thunder","Inferno","Icy","Frosty","Smoky",
+  "Obsidian","Emerald","Scarlet","Azure","Velvet","Iron","Steel","Quantum","Dynamic",
+  "Fearless","Limitless","Savvy","Brave","Mighty","Noble","Witty","Sharp","Zany",
+  "Retro","Future","Digital","Virtual","Analog","Binary","Cyber","Encrypted","Pixelated",
+  "Glitchy","Infinite","Minimal","Major","Minor","Grand","Elite","Supreme","Ultimate","Classic",
+  "Legendary","Mythic","Arcane","Hidden","Lost","Ancient","Modern","Urban","Rural",
+  "Playful","Cheeky","Sneaky","Tricky","Curious","Crafty","Goofy","Silly","Charming","Quirky"
 ];
 
 const nouns = [
-"Falcon","Wolf","Tiger","Ninja","Wizard","Knight","Hunter","Dragon","Vortex","Storm",
-"Ghost","Blaze","Rider","Pirate","Sniper","Samurai","Glitch","Titan","Phantom","Rocket",
-"Panda","Comet","Raven","Echo","Phoenix","Cobra","Mantis","Orbit","Byte","Shark",
-"Panther","Frost","Spark","Crusher","Voyager","Bandit","Saber","Jet","Hawk","Cyclone",
-"Shadow","Pulse","Core","Matrix","Vector","Signal","Circuit","Drive","System","Code",
-"Pixel","Frame","Stream","Server","Portal","Link","Node","Grid","Zone","Realm",
-"Galaxy","Planet","Meteor","Nova","Asteroid","Universe","Nebula","Cosmos","Orbit","Eclipse",
-"Warrior","Guardian","Champion","Hero","Outlaw","Nomad","Explorer","Raider","Scout","Pilot",
-"Captain","Chief","Commander","Ranger","Agent","Operative","Striker","Sniper","Defender","Breaker",
-"Beast","Creature","Monster","Spirit","Demon","Angel","Myth","Legend","Entity","Phantom",
-"Builder","Maker","Creator","Designer","Artist","Player","Gamer","Thinker","Dreamer","Solver",
-"Machine","Engine","Motor","Gear","Bolt","Forge","Anvil","Hammer","Blade","Shield",
-"Flame","Ice","Wind","Stone","Thunder","Lightning","Wave","Tide","Current","Storm",
-"Claw","Fang","Wing","Horn","Tail","Eye","Mind","Brain","Heart","Soul"
+  "Falcon","Wolf","Tiger","Ninja","Wizard","Knight","Hunter","Dragon","Vortex","Storm",
+  "Ghost","Blaze","Rider","Pirate","Sniper","Samurai","Glitch","Titan","Phantom","Rocket",
+  "Panda","Comet","Raven","Echo","Phoenix","Cobra","Mantis","Orbit","Byte","Shark",
+  "Panther","Frost","Spark","Crusher","Voyager","Bandit","Saber","Jet","Hawk","Cyclone",
+  "Shadow","Pulse","Core","Matrix","Vector","Signal","Circuit","Drive","System","Code",
+  "Pixel","Frame","Stream","Server","Portal","Link","Node","Grid","Zone","Realm",
+  "Galaxy","Planet","Meteor","Nova","Asteroid","Universe","Nebula","Cosmos","Eclipse",
+  "Warrior","Guardian","Champion","Hero","Outlaw","Nomad","Explorer","Raider","Scout","Pilot",
+  "Captain","Chief","Commander","Ranger","Agent","Operative","Striker","Defender","Breaker",
+  "Beast","Creature","Monster","Spirit","Demon","Angel","Myth","Legend","Entity",
+  "Builder","Maker","Creator","Designer","Artist","Player","Gamer","Thinker","Dreamer","Solver",
+  "Machine","Engine","Motor","Gear","Bolt","Forge","Anvil","Hammer","Blade","Shield",
+  "Flame","Ice","Wind","Stone","Thunder","Lightning","Wave","Tide","Current",
+  "Claw","Fang","Wing","Horn","Eye","Mind","Brain","Heart","Soul"
 ];
 
 function random(arr){
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function randomString(length = 10){
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+
+  for(let i = 0; i < length; i++){
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return result;
+}
+
 function buildUsername(){
   const useNumbers = document.getElementById("useNumbers").checked;
   const useUnderscore = document.getElementById("useUnderscore").checked;
+  const useRandomString = document.getElementById("useRandomString").checked;
+
+  if(useRandomString){
+    const length = Math.floor(Math.random() * 6) + 8;
+    return randomString(length);
+  }
 
   let left = random(adjectives);
   let right = random(nouns);
 
-  // optional lowercase FIRST (so it affects everything)
   if(Math.random() < 0.25){
     left = left.toLowerCase();
     right = right.toLowerCase();
@@ -269,19 +289,21 @@ function buildUsername(){
 
   let name;
 
-  // build structure
   if(useUnderscore && Math.random() < 0.35){
     name = left + "_" + right;
   } else {
     name = left + right;
   }
 
-  // optional numbers
   if(useNumbers){
     const num = Math.floor(Math.random() * 900) + 10;
     if(Math.random() < 0.7){
       name += num;
     }
+  }
+
+  if(!useRandomString && Math.random() < 0.2){
+    name = left + right + "_" + Math.floor(Math.random() * 99);
   }
 
   return name;
@@ -305,7 +327,7 @@ function generate(){
   const used = new Set();
   let attempts = 0;
 
-  while(used.size < 8 && attempts < 100){
+  while(used.size < 8 && attempts < 200){
     used.add(buildUsername());
     attempts++;
   }
@@ -338,6 +360,12 @@ function clearNames(){
   list.innerHTML = '<div class="name-empty">Click generate to see username ideas.</div>';
   status.textContent = "";
 }
+
+document.getElementById("useRandomString").addEventListener("change", function(){
+  const disabled = this.checked;
+  document.getElementById("useNumbers").disabled = disabled;
+  document.getElementById("useUnderscore").disabled = disabled;
+});
 
 clearNames();
 </script>
