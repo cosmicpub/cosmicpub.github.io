@@ -13,5 +13,8 @@ const TOOL_CARDS = [
   {title:"Outfit Picker", desc:"Pick your outfit.", url:"/pages/outfit-picker.html", icon:"👕", color:"c-teal"},
   {title:"Dice Roller", desc:"Roll a digital die.", url:"/pages/dice-roller.html", icon:"🎲", color:"c-amber"},
   {title:"Team Generator", desc:"Split into teams.", url:"/pages/team-generator.html", icon:"👥", color:"c-blue"},
-  {title:"Random Color", desc:"Generate a color.", url:"/pages/random-color.html", icon:"🎨", color:"c-purple"}
+  {title:"Random Color", desc:"Generate a color.", url:"/pages/random-color.html", icon:"🎨", color:"c-purple"},
+  {title:"Random Letter", desc:"Generate a random letter instantly.", url:"/pages/random-letter.html", icon:"🔤", color:"c-blue"},
+  {title:"Should I Text Them", desc:"Stop overthinking and decide instantly.", url:"/pages/should-i-text-them.html", icon:"📱", color:"c-pink"},
+  {title:"Compliment Generator", desc:"Generate funny, deep, or romantic compliments.", url:"/pages/compliment-generator.html", icon:"💬", color:"c-green"}
 ];
