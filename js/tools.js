@@ -17,6 +17,7 @@ const TOOL_CARDS = [
   {title:"Random Letter", desc:"Generate a random letter instantly.", url:"/pages/random-letter.html", icon:"🔤", color:"c-blue"},
   {title:"Should I Text Them", desc:"Stop overthinking and decide instantly.", url:"/pages/should-i-text-them.html", icon:"📱", color:"c-pink"},
   {title:"Spin the Wheel", desc:"Spin to make a random decision.", url:"/pages/spin-the-wheel.html", icon:"🎡", color:"c-purple"},
+  {title:"Password Generator", desc:"Generate a strong password instantly.", url:"/pages/random-password-generator.html", icon:"🔐", color:"c-slate"},
   {title:"Random Name Picker", desc:"Pick a random name instantly.", url:"/pages/random-name-picker.html", icon:"👥", color:"c-blue"},
   {title:"Compliment Generator", desc:"Generate funny, deep, or romantic compliments.", url:"/pages/compliment-generator.html", icon:"💬", color:"c-green"}
 ];
