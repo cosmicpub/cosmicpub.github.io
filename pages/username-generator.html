@@ -1,32 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Username Generator</title>
-<meta name="description" content="Generate unique username ideas instantly. Perfect for social media, gaming, and online accounts.">
+<title>Username Generator | Tool Squares</title>
+<meta name="description" content="Generate unique username ideas instantly. Great for social media, gaming, content creation, online accounts, and fun screen name ideas.">
+<meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
 
 <style>
+.name-controls{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.ghost-btn{
+  background:#fff;
+  color:#111827;
+  border:2px solid #d1d5db;
+}
+
+.ghost-btn:hover{
+  background:#f8fafc;
+  filter:none;
+}
 
 .name-list{
-margin-top:20px;
-display:grid;
-gap:10px;
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+
+@media (max-width: 640px){
+  .name-list{
+    grid-template-columns:1fr;
+  }
 }
 
 .name{
-background:white;
-padding:12px;
-border-radius:8px;
-font-weight:600;
-box-shadow:0 5px 10px rgba(0,0,0,.08);
+  background:white;
+  padding:14px 16px;
+  border-radius:12px;
+  font-weight:700;
+  box-shadow:0 5px 10px rgba(0,0,0,.08);
+  border:1px solid rgba(17,24,39,.05);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
 }
 
+.name-text{
+  overflow-wrap:anywhere;
+}
+
+.copy-btn{
+  flex-shrink:0;
+  border:none;
+  border-radius:10px;
+  padding:8px 10px;
+  background:#eef2ff;
+  color:#4338ca;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.copy-btn:hover{
+  background:#e0e7ff;
+}
+
+.name-empty{
+  margin-top:20px;
+  padding:20px;
+  border-radius:14px;
+  background:#f8fafc;
+  color:#6b7280;
+  text-align:center;
+  font-size:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  border:1px solid rgba(17,24,39,.05);
+}
+
+.status-note{
+  margin-top:14px;
+  text-align:center;
+  color:#6b7280;
+  font-size:14px;
+  min-height:20px;
+}
+
+.option-row{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:16px;
+}
+
+.option-pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  color:#374151;
+  background:#f8fafc;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(17,24,39,.06);
+}
+
+.option-pill input{
+  margin:0;
+}
 </style>
 
 </head>
@@ -39,57 +133,212 @@ box-shadow:0 5px 10px rgba(0,0,0,.08);
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <section class="tool-main">
+      <div class="tool-kicker">Creative tool</div>
+      <h1>Username Generator</h1>
+      <p class="tool-lead">
+        Generate random username ideas instantly for gaming, social media, creator accounts, forums, and online profiles. Click once and get a fresh batch of name ideas without having to brainstorm from scratch.
+      </p>
 
-<h2>Username Generator</h2>
-<p>Generate cool username ideas instantly.</p>
+      <div class="tool-actions">
+        <h2>Generate username ideas</h2>
+        <p>Pick a batch of names instantly, then copy the one you like best.</p>
 
-<button onclick="generate()">Generate</button>
+        <div class="option-row">
+          <label class="option-pill">
+            <input type="checkbox" id="useNumbers" checked>
+            Include numbers
+          </label>
+          <label class="option-pill">
+            <input type="checkbox" id="useUnderscore">
+            Allow underscore style
+          </label>
+        </div>
 
-<div id="names" class="name-list"></div>
+        <div class="name-controls">
+          <button onclick="generate()">Generate</button>
+          <button type="button" class="ghost-btn" onclick="clearNames()">Clear</button>
+        </div>
 
-</div>
+        <div id="names" class="name-list"></div>
+        <div id="statusNote" class="status-note"></div>
+      </div>
+    </section>
 
-</div>
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this username generator works</h2>
+        <p>
+          This tool combines short adjectives, nouns, and optional numbers to create quick username ideas. Each time you generate, it builds a fresh set of eight names so you can compare options quickly instead of thinking one name at a time.
+        </p>
+        <p>
+          The goal is speed and variety. You can use these ideas directly, tweak them, or combine parts of different results to make something more personal and unique.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use a username generator</h2>
+        <ul>
+          <li>Creating a gaming username or gamer tag</li>
+          <li>Making a new social media account</li>
+          <li>Finding a screen name for a forum or app</li>
+          <li>Starting a creator, streaming, or content profile</li>
+          <li>Getting ideas when your first choices are taken</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Tips for choosing a better username</h2>
+        <p>
+          The best usernames are usually easy to read, easy to remember, and not too long. If you want a cleaner look, use fewer numbers. If you want something more unique, try adding a number or underscore and combining parts of two generated names.
+        </p>
+        <p>
+          If a username is already taken on another platform, use the generated result as a base and make a small change instead of starting over completely.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Why this page adds value</h2>
+        <p>
+          A lot of username generators feel too thin or repetitive. This page is designed to be genuinely useful by giving multiple ideas per click, quick copy actions, simple options, and enough variation to help you land on a name faster. Even if you do not use a generated username exactly as shown, it can still give you the spark you need to create the right one.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
 
 <script>
-
 const adjectives = [
 "Shadow","Epic","Crazy","Swift","Dark","Electric","Silent","Frozen","Cosmic","Turbo",
-"Golden","Rapid","Savage","Mystic","Neon","Alpha","Ultra","Phantom","Wild","Atomic"
+"Golden","Rapid","Savage","Mystic","Neon","Alpha","Ultra","Phantom","Wild","Atomic",
+"Clever","Nova","Stealth","Lucky","Hyper","Crimson","Silver","Bold","Solar","Pixel",
+"Lunar","Secret","Chill","Blazing","Prime","Rogue","Stormy","Bright","Vivid","Zero",
+"Fierce","Rapid","Glowing","Radiant","Thunder","Electric","Inferno","Icy","Frosty","Smoky",
+"Obsidian","Emerald","Scarlet","Azure","Velvet","Iron","Steel","Quantum","Turbocharged","Dynamic",
+"Fearless","Limitless","Savvy","Brave","Mighty","Noble","Witty","Sharp","Savvy","Zany",
+"Retro","Future","Digital","Virtual","Analog","Binary","Cyber","Quantum","Encrypted","Pixelated",
+"Glitchy","Infinite","Minimal","Major","Minor","Grand","Elite","Supreme","Ultimate","Classic",
+"Legendary","Mythic","Arcane","Hidden","Lost","Ancient","Modern","Urban","Rural","Cosmic",
+"Playful","Cheeky","Sneaky","Tricky","Curious","Crafty","Goofy","Silly","Charming","Quirky"
 ];
 
 const nouns = [
 "Falcon","Wolf","Tiger","Ninja","Wizard","Knight","Hunter","Dragon","Vortex","Storm",
-"Ghost","Blaze","Rider","Pirate","Sniper","Samurai","Glitch","Titan","Phantom","Rocket"
+"Ghost","Blaze","Rider","Pirate","Sniper","Samurai","Glitch","Titan","Phantom","Rocket",
+"Panda","Comet","Raven","Echo","Phoenix","Cobra","Mantis","Orbit","Byte","Shark",
+"Panther","Frost","Spark","Crusher","Voyager","Bandit","Saber","Jet","Hawk","Cyclone",
+"Shadow","Pulse","Core","Matrix","Vector","Signal","Circuit","Drive","System","Code",
+"Pixel","Frame","Stream","Server","Portal","Link","Node","Grid","Zone","Realm",
+"Galaxy","Planet","Meteor","Nova","Asteroid","Universe","Nebula","Cosmos","Orbit","Eclipse",
+"Warrior","Guardian","Champion","Hero","Outlaw","Nomad","Explorer","Raider","Scout","Pilot",
+"Captain","Chief","Commander","Ranger","Agent","Operative","Striker","Sniper","Defender","Breaker",
+"Beast","Creature","Monster","Spirit","Demon","Angel","Myth","Legend","Entity","Phantom",
+"Builder","Maker","Creator","Designer","Artist","Player","Gamer","Thinker","Dreamer","Solver",
+"Machine","Engine","Motor","Gear","Bolt","Forge","Anvil","Hammer","Blade","Shield",
+"Flame","Ice","Wind","Stone","Thunder","Lightning","Wave","Tide","Current","Storm",
+"Claw","Fang","Wing","Horn","Tail","Eye","Mind","Brain","Heart","Soul"
 ];
 
 function random(arr){
-return arr[Math.floor(Math.random()*arr.length)];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function buildUsername(){
+  const useNumbers = document.getElementById("useNumbers").checked;
+  const useUnderscore = document.getElementById("useUnderscore").checked;
+
+  const left = random(adjectives);
+  const right = random(nouns);
+
+  let name = left + right;
+     if(Math.random() < 0.25){
+       name = name.toLowerCase();
+     }
+  if(useUnderscore && Math.random() < 0.35){
+    name = left + "_" + right;
+  }
+
+  if(useNumbers){
+    const num = Math.floor(Math.random() * 900) + 10;
+    if(Math.random() < 0.7){
+      name += num;
+    }
+  }
+
+  return name;
+}
+
+function copyName(name){
+  navigator.clipboard.writeText(name)
+    .then(() => {
+      document.getElementById("statusNote").textContent = `"${name}" copied to clipboard.`;
+    })
+    .catch(() => {
+      document.getElementById("statusNote").textContent = "Could not copy automatically. You can still copy it manually.";
+    });
 }
 
 function generate(){
+  const list = document.getElementById("names");
+  const status = document.getElementById("statusNote");
+  list.innerHTML = "";
 
-const list = document.getElementById("names");
-list.innerHTML="";
+  const used = new Set();
+  let attempts = 0;
 
-for(let i=0;i<8;i++){
+  while(used.size < 8 && attempts < 100){
+    used.add(buildUsername());
+    attempts++;
+  }
 
-let name = random(adjectives) + random(nouns) + Math.floor(Math.random()*99);
+  [...used].forEach((name) => {
+    const div = document.createElement("div");
+    div.className = "name";
 
-const div = document.createElement("div");
-div.className="name";
-div.textContent=name;
+    const span = document.createElement("span");
+    span.className = "name-text";
+    span.textContent = name;
 
-list.appendChild(div);
+    const btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.type = "button";
+    btn.textContent = "Copy";
+    btn.addEventListener("click", () => copyName(name));
 
+    div.appendChild(span);
+    div.appendChild(btn);
+    list.appendChild(div);
+  });
+
+  status.textContent = "Fresh username ideas generated.";
 }
 
+function clearNames(){
+  const list = document.getElementById("names");
+  const status = document.getElementById("statusNote");
+  list.innerHTML = '<div class="name-empty">Click generate to see username ideas.</div>';
+  status.textContent = "";
 }
 
+clearNames();
 </script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
