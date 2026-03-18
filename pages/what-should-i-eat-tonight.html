@@ -26,6 +26,13 @@
   line-height:1.25;
 }
 
+.result-side{
+  margin-top:10px;
+  font-size:16px;
+  color:#4b5563;
+  font-weight:600;
+}
+
 .filter-row{
   display:flex;
   justify-content:center;
@@ -95,7 +102,7 @@
       <div class="tool-kicker">Food tool</div>
       <h1>What Should I Eat Tonight?</h1>
       <p class="tool-lead">
-        Get a real dinner idea instantly when you do not know what to make. This version uses a curated list of actual meals, so the results make sense and feel more useful than random food combinations.
+        Get a real dinner idea instantly when you do not know what to make. This version uses a curated list of actual meals with matching sides, so the results make sense and feel more useful than random food combinations.
       </p>
 
       <div class="tool-actions dinner-actions">
@@ -129,6 +136,7 @@
 
         <div class="result-box">
           <div id="result" class="result"></div>
+          <div id="resultSide" class="result-side"></div>
         </div>
 
         <div id="tags" class="tag-pills"></div>
@@ -163,7 +171,7 @@
       <section class="info-card">
         <h2>Why this version is better</h2>
         <p>
-          Random dinner tools often fail because they combine foods that do not belong together. This version avoids that problem by using complete dishes like chicken fajitas, baked ziti, salmon rice bowls, and grilled burgers. It is still random, but it makes sense.
+          Random dinner tools often fail because they combine foods that do not belong together. This version avoids that problem by using complete dishes with matching sides, like chicken fajitas with rice and beans or baked ziti with garlic bread. It is still random, but it makes sense.
         </p>
       </section>
 
@@ -178,85 +186,85 @@
 
 <script>
 const MEALS = [
-  { name:"Chicken fajitas", cuisine:"Mexican", tags:["15 min","Comfort","High-Protein"] },
-  { name:"Ground beef tacos", cuisine:"Mexican", tags:["Comfort","High-Protein"] },
-  { name:"Chicken quesadillas", cuisine:"Mexican", tags:["15 min","Comfort"] },
-  { name:"Shrimp tacos", cuisine:"Mexican", tags:["15 min","High-Protein"] },
-  { name:"Steak burrito bowl", cuisine:"Mexican", tags:["High-Protein"] },
-  { name:"Chicken burrito bowl", cuisine:"Mexican", tags:["Healthy","High-Protein"] },
-  { name:"Black bean burrito bowl", cuisine:"Mexican", tags:["Budget","Healthy"] },
-  { name:"Loaded nachos", cuisine:"Mexican", tags:["Comfort"] },
-  { name:"Chicken enchiladas", cuisine:"Mexican", tags:["Comfort"] },
-  { name:"Beef enchiladas", cuisine:"Mexican", tags:["Comfort"] },
-  { name:"Chicken tostadas", cuisine:"Mexican", tags:["Comfort"] },
-  { name:"Ground turkey tacos", cuisine:"Mexican", tags:["High-Protein"] },
-  { name:"Pinto bean tostadas", cuisine:"Mexican", tags:["Budget","Healthy"] },
-  { name:"Sheet-pan fajitas", cuisine:"Mexican", tags:["15 min","Healthy"] },
-  { name:"Chicken taco salad", cuisine:"Mexican", tags:["Healthy","High-Protein"] },
+  { name:"Chicken fajitas", side:"with rice and black beans", cuisine:"Mexican", tags:["15 min","Comfort","High-Protein"] },
+  { name:"Ground beef tacos", side:"with chips and salsa", cuisine:"Mexican", tags:["Comfort","High-Protein"] },
+  { name:"Chicken quesadillas", side:"with guacamole", cuisine:"Mexican", tags:["15 min","Comfort"] },
+  { name:"Shrimp tacos", side:"with cilantro rice", cuisine:"Mexican", tags:["15 min","High-Protein"] },
+  { name:"Steak burrito bowl", side:"with corn salsa", cuisine:"Mexican", tags:["High-Protein"] },
+  { name:"Chicken burrito bowl", side:"with avocado slices", cuisine:"Mexican", tags:["Healthy","High-Protein"] },
+  { name:"Black bean burrito bowl", side:"with roasted corn", cuisine:"Mexican", tags:["Budget","Healthy"] },
+  { name:"Loaded nachos", side:"with queso and salsa", cuisine:"Mexican", tags:["Comfort"] },
+  { name:"Chicken enchiladas", side:"with Mexican rice", cuisine:"Mexican", tags:["Comfort"] },
+  { name:"Beef enchiladas", side:"with refried beans", cuisine:"Mexican", tags:["Comfort"] },
+  { name:"Chicken tostadas", side:"with guacamole", cuisine:"Mexican", tags:["Comfort"] },
+  { name:"Ground turkey tacos", side:"with black beans", cuisine:"Mexican", tags:["High-Protein"] },
+  { name:"Pinto bean tostadas", side:"with rice", cuisine:"Mexican", tags:["Budget","Healthy"] },
+  { name:"Sheet-pan fajitas", side:"with warm tortillas", cuisine:"Mexican", tags:["15 min","Healthy"] },
+  { name:"Chicken taco salad", side:"with tortilla chips", cuisine:"Mexican", tags:["Healthy","High-Protein"] },
 
-  { name:"Spaghetti with meatballs", cuisine:"Italian", tags:["Comfort","High-Protein"] },
-  { name:"Baked ziti", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Lasagna", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Chicken alfredo pasta", cuisine:"Italian", tags:["Comfort","High-Protein"] },
-  { name:"Pesto chicken pasta", cuisine:"Italian", tags:["High-Protein"] },
-  { name:"Stuffed shells", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Chicken parmesan", cuisine:"Italian", tags:["Comfort","High-Protein"] },
-  { name:"Sausage pasta skillet", cuisine:"Italian", tags:["15 min","Comfort"] },
-  { name:"Margherita flatbread pizza", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Pepperoni flatbread pizza", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Panini night", cuisine:"Italian", tags:["15 min"] },
-  { name:"Mushroom ravioli", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Baked gnocchi", cuisine:"Italian", tags:["Comfort"] },
-  { name:"Caprese chicken", cuisine:"Italian", tags:["Healthy","High-Protein"] },
-  { name:"Meatball subs", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Spaghetti with meatballs", side:"with garlic bread", cuisine:"Italian", tags:["Comfort","High-Protein"] },
+  { name:"Baked ziti", side:"with a Caesar salad", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Lasagna", side:"with garlic bread", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Chicken alfredo pasta", side:"with broccoli", cuisine:"Italian", tags:["Comfort","High-Protein"] },
+  { name:"Pesto chicken pasta", side:"with roasted vegetables", cuisine:"Italian", tags:["High-Protein"] },
+  { name:"Stuffed shells", side:"with a side salad", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Chicken parmesan", side:"with spaghetti", cuisine:"Italian", tags:["Comfort","High-Protein"] },
+  { name:"Sausage pasta skillet", side:"with garlic toast", cuisine:"Italian", tags:["15 min","Comfort"] },
+  { name:"Margherita flatbread pizza", side:"with salad", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Pepperoni flatbread pizza", side:"with roasted veggies", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Panini night", side:"with tomato soup", cuisine:"Italian", tags:["15 min"] },
+  { name:"Mushroom ravioli", side:"with garlic bread", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Baked gnocchi", side:"with spinach salad", cuisine:"Italian", tags:["Comfort"] },
+  { name:"Caprese chicken", side:"with roasted potatoes", cuisine:"Italian", tags:["Healthy","High-Protein"] },
+  { name:"Meatball subs", side:"with chips", cuisine:"Italian", tags:["Comfort"] },
 
-  { name:"Chicken stir-fry", cuisine:"Asian", tags:["15 min","Healthy","High-Protein"] },
-  { name:"Shrimp stir-fry", cuisine:"Asian", tags:["15 min","Healthy","High-Protein"] },
-  { name:"Tofu stir-fry", cuisine:"Asian", tags:["15 min","Healthy"] },
-  { name:"Chicken fried rice", cuisine:"Asian", tags:["15 min","Comfort","High-Protein"] },
-  { name:"Shrimp fried rice", cuisine:"Asian", tags:["15 min","Comfort","High-Protein"] },
-  { name:"Beef and broccoli", cuisine:"Asian", tags:["High-Protein"] },
-  { name:"Teriyaki chicken rice bowl", cuisine:"Asian", tags:["High-Protein"] },
-  { name:"Salmon rice bowl", cuisine:"Asian", tags:["Healthy","High-Protein"] },
-  { name:"Ramen bowl", cuisine:"Asian", tags:["Budget","Comfort"] },
-  { name:"Chicken noodle bowl", cuisine:"Asian", tags:["Comfort","High-Protein"] },
-  { name:"Ground pork lettuce wraps", cuisine:"Asian", tags:["Healthy"] },
-  { name:"Tofu rice bowl", cuisine:"Asian", tags:["Healthy"] },
-  { name:"Edamame noodle bowl", cuisine:"Asian", tags:["Healthy","High-Protein"] },
-  { name:"Chicken curry", cuisine:"Asian", tags:["Healthy","High-Protein"] },
-  { name:"Paneer curry with rice", cuisine:"Asian", tags:["Healthy","High-Protein"] },
+  { name:"Chicken stir-fry", side:"with jasmine rice", cuisine:"Asian", tags:["15 min","Healthy","High-Protein"] },
+  { name:"Shrimp stir-fry", side:"with rice noodles", cuisine:"Asian", tags:["15 min","Healthy","High-Protein"] },
+  { name:"Tofu stir-fry", side:"with brown rice", cuisine:"Asian", tags:["15 min","Healthy"] },
+  { name:"Chicken fried rice", side:"with egg rolls", cuisine:"Asian", tags:["15 min","Comfort","High-Protein"] },
+  { name:"Shrimp fried rice", side:"with steamed broccoli", cuisine:"Asian", tags:["15 min","Comfort","High-Protein"] },
+  { name:"Beef and broccoli", side:"with white rice", cuisine:"Asian", tags:["High-Protein"] },
+  { name:"Teriyaki chicken rice bowl", side:"with edamame", cuisine:"Asian", tags:["High-Protein"] },
+  { name:"Salmon rice bowl", side:"with cucumbers", cuisine:"Asian", tags:["Healthy","High-Protein"] },
+  { name:"Ramen bowl", side:"with dumplings", cuisine:"Asian", tags:["Budget","Comfort"] },
+  { name:"Chicken noodle bowl", side:"with stir-fried vegetables", cuisine:"Asian", tags:["Comfort","High-Protein"] },
+  { name:"Ground pork lettuce wraps", side:"with rice", cuisine:"Asian", tags:["Healthy"] },
+  { name:"Tofu rice bowl", side:"with snap peas", cuisine:"Asian", tags:["Healthy"] },
+  { name:"Edamame noodle bowl", side:"with carrots", cuisine:"Asian", tags:["Healthy","High-Protein"] },
+  { name:"Chicken curry", side:"with basmati rice", cuisine:"Asian", tags:["Healthy","High-Protein"] },
+  { name:"Paneer curry with rice", side:"with naan", cuisine:"Asian", tags:["Healthy","High-Protein"] },
 
-  { name:"Cheeseburgers and fries", cuisine:"American", tags:["Comfort"] },
-  { name:"Grilled chicken with roasted vegetables", cuisine:"American", tags:["Healthy","High-Protein"] },
-  { name:"BBQ chicken with potatoes", cuisine:"American", tags:["Comfort","High-Protein"] },
-  { name:"Pork chops with green beans", cuisine:"American", tags:["High-Protein"] },
-  { name:"Steak and potatoes", cuisine:"American", tags:["Comfort","High-Protein"] },
-  { name:"Sloppy joes", cuisine:"American", tags:["Budget","Comfort"] },
-  { name:"Chili with cornbread", cuisine:"American", tags:["Comfort"] },
-  { name:"Breakfast for dinner", cuisine:"American", tags:["15 min","Budget","Comfort"] },
-  { name:"Baked casserole", cuisine:"American", tags:["Comfort"] },
-  { name:"Chicken tenders and fries", cuisine:"American", tags:["Comfort"] },
-  { name:"Grilled cheese and tomato soup", cuisine:"American", tags:["15 min","Comfort"] },
-  { name:"Loaded baked potatoes", cuisine:"American", tags:["Budget","Comfort"] },
-  { name:"Turkey burger with sweet potato fries", cuisine:"American", tags:["High-Protein"] },
-  { name:"Pulled pork sandwiches", cuisine:"American", tags:["Comfort"] },
-  { name:"Brisket with baked beans", cuisine:"American", tags:["Comfort","High-Protein"] },
+  { name:"Cheeseburgers and fries", side:"with pickles", cuisine:"American", tags:["Comfort"] },
+  { name:"Grilled chicken with roasted vegetables", side:"with potatoes", cuisine:"American", tags:["Healthy","High-Protein"] },
+  { name:"BBQ chicken", side:"with mashed potatoes", cuisine:"American", tags:["Comfort","High-Protein"] },
+  { name:"Pork chops", side:"with green beans", cuisine:"American", tags:["High-Protein"] },
+  { name:"Steak and potatoes", side:"with roasted carrots", cuisine:"American", tags:["Comfort","High-Protein"] },
+  { name:"Sloppy joes", side:"with chips", cuisine:"American", tags:["Budget","Comfort"] },
+  { name:"Chili with cornbread", side:"with shredded cheese", cuisine:"American", tags:["Comfort"] },
+  { name:"Breakfast for dinner", side:"with hash browns", cuisine:"American", tags:["15 min","Budget","Comfort"] },
+  { name:"Baked casserole", side:"with salad", cuisine:"American", tags:["Comfort"] },
+  { name:"Chicken tenders and fries", side:"with coleslaw", cuisine:"American", tags:["Comfort"] },
+  { name:"Grilled cheese and tomato soup", side:"with fruit", cuisine:"American", tags:["15 min","Comfort"] },
+  { name:"Loaded baked potatoes", side:"with sour cream and chives", cuisine:"American", tags:["Budget","Comfort"] },
+  { name:"Turkey burger", side:"with sweet potato fries", cuisine:"American", tags:["High-Protein"] },
+  { name:"Pulled pork sandwiches", side:"with coleslaw", cuisine:"American", tags:["Comfort"] },
+  { name:"Brisket", side:"with baked beans", cuisine:"American", tags:["Comfort","High-Protein"] },
 
-  { name:"Grilled salmon with quinoa", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Chicken grain bowl", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Falafel pita wraps", cuisine:"Mediterranean", tags:["Healthy"] },
-  { name:"Chickpea grain bowl", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
-  { name:"Gyro wraps", cuisine:"Mediterranean", tags:["Comfort"] },
-  { name:"Chicken kabobs with rice", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Shrimp grain bowl", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Hummus pita platter", cuisine:"Mediterranean", tags:["15 min","Healthy"] },
-  { name:"Tuna salad pita", cuisine:"Mediterranean", tags:["15 min","Budget","High-Protein"] },
-  { name:"Lentil bowls with cucumber salad", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
-  { name:"Cod with roasted vegetables", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Greek chicken salad", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"White bean grain bowl", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
-  { name:"Scallops with roasted vegetables", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
-  { name:"Mediterranean veggie wraps", cuisine:"Mediterranean", tags:["15 min","Healthy"] }
+  { name:"Grilled salmon", side:"with quinoa and cucumber salad", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Chicken grain bowl", side:"with hummus", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Falafel pita wraps", side:"with cucumber tomato salad", cuisine:"Mediterranean", tags:["Healthy"] },
+  { name:"Chickpea grain bowl", side:"with roasted vegetables", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
+  { name:"Gyro wraps", side:"with fries", cuisine:"Mediterranean", tags:["Comfort"] },
+  { name:"Chicken kabobs", side:"with rice", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Shrimp grain bowl", side:"with quinoa", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Hummus pita platter", side:"with olives and cucumbers", cuisine:"Mediterranean", tags:["15 min","Healthy"] },
+  { name:"Tuna salad pita", side:"with fruit", cuisine:"Mediterranean", tags:["15 min","Budget","High-Protein"] },
+  { name:"Lentil bowls", side:"with cucumber salad", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
+  { name:"Cod with roasted vegetables", side:"with lemon rice", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Greek chicken salad", side:"with pita", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"White bean grain bowl", side:"with roasted zucchini", cuisine:"Mediterranean", tags:["Budget","Healthy"] },
+  { name:"Scallops", side:"with roasted vegetables", cuisine:"Mediterranean", tags:["Healthy","High-Protein"] },
+  { name:"Mediterranean veggie wraps", side:"with hummus", cuisine:"Mediterranean", tags:["15 min","Healthy"] }
 ];
 
 const RECENT_KEY = "dfm_dinner_recent";
@@ -308,6 +316,7 @@ function pickDinner(){
 
   if(!pool.length){
     document.getElementById("result").textContent = "No meals matched those filters.";
+    document.getElementById("resultSide").textContent = "";
     document.getElementById("tags").innerHTML = "";
     document.getElementById("hint").textContent = "Try a different cuisine or tag.";
     return;
@@ -321,6 +330,7 @@ function pickDinner(){
   const pick = rand(available);
 
   document.getElementById("result").textContent = pick.name;
+  document.getElementById("resultSide").textContent = pick.side;
   renderTags(pick.tags);
 
   const updated = [pick.name, ...recent.filter(x => x !== pick.name)];
@@ -335,6 +345,7 @@ function resetDinnerHistory(){
     localStorage.removeItem(RECENT_KEY);
   }catch(e){}
   document.getElementById("result").textContent = "";
+  document.getElementById("resultSide").textContent = "";
   document.getElementById("tags").innerHTML = "";
   document.getElementById("hint").textContent = "History cleared. Tap again for a fresh dinner idea.";
 }
