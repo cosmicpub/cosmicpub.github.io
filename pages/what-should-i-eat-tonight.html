@@ -100,27 +100,18 @@
 
       <div class="tool-actions dinner-actions">
         <h2>Pick a dinner idea</h2>
-        <p>Choose a vibe or leave it open, then tap the button for a meal idea.</p>
-          <div class="filter-row">
-            <select id="cuisineFilter">
-              <option value="">Any cuisine</option>
-              <option value="Mexican">Mexican</option>
-              <option value="Italian">Italian</option>
-              <option value="Asian">Asian</option>
-              <option value="American">American</option>
-              <option value="Mediterranean">Mediterranean</option>
-            </select>
-          
-            <select id="tagFilter">
-              <option value="">Any style</option>
-              <option value="15 min">15 min</option>
-              <option value="Budget">Budget</option>
-              <option value="Healthy">Healthy</option>
-              <option value="Comfort">Comfort</option>
-              <option value="High-Protein">High-Protein</option>
-            </select>
-          </div>
+        <p>Choose a cuisine or a vibe, or leave both open for anything.</p>
+
         <div class="filter-row">
+          <select id="cuisineFilter">
+            <option value="">Any cuisine</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Italian">Italian</option>
+            <option value="Asian">Asian</option>
+            <option value="American">American</option>
+            <option value="Mediterranean">Mediterranean</option>
+          </select>
+
           <select id="tagFilter">
             <option value="">Any style</option>
             <option value="15 min">15 min</option>
@@ -187,207 +178,179 @@
 
 <script>
 const PROTEINS = [
-{ t:"Chicken", tags:["High-Protein"], cuisine:["American","Mexican"] },
-{ t:"Ground beef", tags:["Comfort"], cuisine:["American","Mexican"] },
-{ t:"Salmon", tags:["Healthy","High-Protein"], cuisine:["American","Mediterranean"] },
-{ t:"Shrimp", tags:["15 min","High-Protein"], cuisine:["Asian","Mediterranean"] },
-{ t:"Tofu", tags:["Healthy"], cuisine:["Asian"] },
-{ t:"Chickpeas", tags:["Budget","Healthy"], cuisine:["Mediterranean"] },
-{ t:"Pasta meat", tags:["Comfort"], cuisine:["Italian"] },
-{ t:"BBQ chicken", tags:["Comfort","High-Protein"] },
-{ t:"Grilled chicken", tags:["Healthy","High-Protein"] },
-{ t:"Shredded chicken", tags:["15 min","High-Protein"] },
-{ t:"Buffalo chicken", tags:["Comfort"] },
-{ t:"Chicken thighs", tags:["Budget","High-Protein"] },
-{ t:"Ground chicken", tags:["High-Protein"] },
-{ t:"Brisket", tags:["Comfort","High-Protein"] },
-{ t:"Ribs", tags:["Comfort"] },
-{ t:"Beef strips", tags:["15 min","High-Protein"] },
-{ t:"Ground pork", tags:["Budget"] },
-{ t:"Pulled chicken", tags:["Comfort"] },
-{ t:"Rotisserie leftovers", tags:["Budget","15 min"] },
-{ t:"Turkey meatballs", tags:["Healthy","High-Protein"] },
-{ t:"Chicken tenders", tags:["Comfort"] },
-{ t:"Fish fillet", tags:["Healthy","High-Protein"] },
-{ t:"Crab meat", tags:["High-Protein"] },
-{ t:"Scallops", tags:["High-Protein"] },
-{ t:"Veggie patties", tags:["Healthy"] },
-{ t:"Falafel", tags:["Healthy"] },
-{ t:"Paneer", tags:["Healthy","High-Protein"] },
-  { t:"Chicken", tags:["High-Protein"] },
-  { t:"Ground beef", tags:["Comfort"] },
-  { t:"Steak", tags:["High-Protein"] },
-  { t:"Pork chops", tags:["Comfort"] },
-  { t:"Bacon", tags:["Comfort"] },
-  { t:"Turkey", tags:["High-Protein"] },
-  { t:"Sausage", tags:["Comfort"] },
-  { t:"Shrimp", tags:["15 min","High-Protein"] },
-  { t:"Salmon", tags:["Healthy","High-Protein"] },
-  { t:"Tuna", tags:["Budget","High-Protein"] },
-  { t:"Eggs", tags:["15 min","Budget","High-Protein"] },
-  { t:"Tofu", tags:["Healthy"] },
-  { t:"Chickpeas", tags:["Budget","Healthy"] },
-  { t:"Black beans", tags:["Budget","Healthy"] },
-  { t:"Lentils", tags:["Budget","Healthy"] },
-  { t:"Veggie mix", tags:["Healthy"] },
-  { t:"Rotisserie chicken", tags:["15 min","High-Protein"] },
-  { t:"Meatballs", tags:["Comfort","High-Protein"] },
-  { t:"Ham", tags:["Comfort","High-Protein"] },
-  { t:"Pulled pork", tags:["Comfort"] },
-  { t:"Ground turkey", tags:["Healthy","High-Protein"] },
-  { t:"Cod", tags:["Healthy","High-Protein"] },
-  { t:"Tilapia", tags:["Healthy","High-Protein"] },
-  { t:"Chicken sausage", tags:["15 min","High-Protein"] },
-  { t:"Turkey sausage", tags:["15 min","High-Protein"] },
-  { t:"White beans", tags:["Budget","Healthy"] },
-  { t:"Pinto beans", tags:["Budget","Healthy"] },
-  { t:"Edamame", tags:["Healthy","High-Protein"] },
-  { t:"Tempeh", tags:["Healthy","High-Protein"] },
-  { t:"Mushrooms", tags:["Healthy"] }
+  { t:"Chicken", tags:["High-Protein"], cuisine:["American","Mexican"] },
+  { t:"Ground beef", tags:["Comfort"], cuisine:["American","Mexican"] },
+  { t:"Steak", tags:["High-Protein"], cuisine:["American"] },
+  { t:"Pork chops", tags:["Comfort"], cuisine:["American"] },
+  { t:"Bacon", tags:["Comfort"], cuisine:["American"] },
+  { t:"Turkey", tags:["High-Protein"], cuisine:["American"] },
+  { t:"Sausage", tags:["Comfort"], cuisine:["American","Italian"] },
+  { t:"Shrimp", tags:["15 min","High-Protein"], cuisine:["Asian","Mediterranean"] },
+  { t:"Salmon", tags:["Healthy","High-Protein"], cuisine:["American","Mediterranean"] },
+  { t:"Tuna", tags:["Budget","High-Protein"], cuisine:["Mediterranean","American"] },
+  { t:"Eggs", tags:["15 min","Budget","High-Protein"], cuisine:["American"] },
+  { t:"Tofu", tags:["Healthy"], cuisine:["Asian"] },
+  { t:"Chickpeas", tags:["Budget","Healthy"], cuisine:["Mediterranean"] },
+  { t:"Black beans", tags:["Budget","Healthy"], cuisine:["Mexican"] },
+  { t:"Lentils", tags:["Budget","Healthy"], cuisine:["Mediterranean"] },
+  { t:"Veggie mix", tags:["Healthy"], cuisine:["American","Mediterranean"] },
+  { t:"Rotisserie chicken", tags:["15 min","High-Protein"], cuisine:["American"] },
+  { t:"Meatballs", tags:["Comfort","High-Protein"], cuisine:["Italian"] },
+  { t:"Ham", tags:["Comfort","High-Protein"], cuisine:["American"] },
+  { t:"Pulled pork", tags:["Comfort"], cuisine:["American"] },
+  { t:"Ground turkey", tags:["Healthy","High-Protein"], cuisine:["American","Mexican"] },
+  { t:"Cod", tags:["Healthy","High-Protein"], cuisine:["Mediterranean"] },
+  { t:"Tilapia", tags:["Healthy","High-Protein"], cuisine:["Mediterranean","American"] },
+  { t:"Chicken sausage", tags:["15 min","High-Protein"], cuisine:["American","Italian"] },
+  { t:"Turkey sausage", tags:["15 min","High-Protein"], cuisine:["American","Italian"] },
+  { t:"White beans", tags:["Budget","Healthy"], cuisine:["Mediterranean"] },
+  { t:"Pinto beans", tags:["Budget","Healthy"], cuisine:["Mexican"] },
+  { t:"Edamame", tags:["Healthy","High-Protein"], cuisine:["Asian"] },
+  { t:"Tempeh", tags:["Healthy","High-Protein"], cuisine:["Asian"] },
+  { t:"Mushrooms", tags:["Healthy"], cuisine:["Italian","American"] },
+  { t:"BBQ chicken", tags:["Comfort","High-Protein"], cuisine:["American"] },
+  { t:"Grilled chicken", tags:["Healthy","High-Protein"], cuisine:["American","Mediterranean"] },
+  { t:"Shredded chicken", tags:["15 min","High-Protein"], cuisine:["Mexican","American"] },
+  { t:"Buffalo chicken", tags:["Comfort"], cuisine:["American"] },
+  { t:"Chicken thighs", tags:["Budget","High-Protein"], cuisine:["American"] },
+  { t:"Ground chicken", tags:["High-Protein"], cuisine:["American","Asian"] },
+  { t:"Brisket", tags:["Comfort","High-Protein"], cuisine:["American"] },
+  { t:"Ribs", tags:["Comfort"], cuisine:["American"] },
+  { t:"Beef strips", tags:["15 min","High-Protein"], cuisine:["Asian","American"] },
+  { t:"Ground pork", tags:["Budget"], cuisine:["Asian","American"] },
+  { t:"Crab meat", tags:["High-Protein"], cuisine:["Mediterranean","American"] },
+  { t:"Scallops", tags:["High-Protein"], cuisine:["Mediterranean"] },
+  { t:"Veggie patties", tags:["Healthy"], cuisine:["American"] },
+  { t:"Falafel", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"Paneer", tags:["Healthy","High-Protein"], cuisine:["Asian"] }
 ];
 
 const STYLES = [
-{ t:"tacos", tags:["Comfort"], cuisine:["Mexican"] },
-{ t:"burrito bowl", tags:["Healthy"], cuisine:["Mexican"] },
-{ t:"pasta", tags:["Comfort"], cuisine:["Italian"] },
-{ t:"lasagna", tags:["Comfort"], cuisine:["Italian"] },
-{ t:"stir-fry", tags:["15 min","Healthy"], cuisine:["Asian"] },
-{ t:"fried rice", tags:["15 min","Comfort"], cuisine:["Asian"] },
-{ t:"grill meal", tags:[], cuisine:["American"] },
-{ t:"burger style", tags:["Comfort"], cuisine:["American"] },
-{ t:"gyro style", tags:["Comfort"], cuisine:["Mediterranean"] },
-{ t:"grain bowl", tags:["Healthy"], cuisine:["Mediterranean"] }
-{ t:"pizza night", tags:["Comfort"] },
-{ t:"flatbread", tags:["Comfort"] },
-{ t:"pita wrap", tags:["15 min"] },
-{ t:"gyro style", tags:["Comfort"] },
-{ t:"loaded fries", tags:["Comfort"] },
-{ t:"rice bowl", tags:["Healthy"] },
-{ t:"noodle bowl", tags:["Comfort"] },
-{ t:"burrito bowl", tags:["Healthy"] },
-{ t:"enchiladas", tags:["Comfort"] },
-{ t:"baked ziti", tags:["Comfort"] },
-{ t:"lasagna", tags:["Comfort"] },
-{ t:"stuffed shells", tags:["Comfort"] },
-{ t:"wrap platter", tags:["15 min"] },
-{ t:"skillet meal", tags:["15 min"] },
-{ t:"one-pot meal", tags:["15 min"] },
-{ t:"sheet-pan fajitas", tags:["15 min"] },
-{ t:"rice casserole", tags:["Comfort"] },
-{ t:"pasta bake", tags:["Comfort"] },
-{ t:"grilled sandwich", tags:["15 min"] },
-{ t:"loaded toast meal", tags:["15 min"] },
-{ t:"tostadas", tags:["Comfort"] },
-{ t:"poke bowl", tags:["Healthy"] },
-{ t:"no-cook meal", tags:["15 min"] },
-{ t:"meal-prep bowls", tags:["Healthy"] },
-  { t:"tacos", tags:["Comfort"] },
-  { t:"bowl (rice + toppings)", tags:["Healthy"] },
-  { t:"stir-fry", tags:["15 min","Healthy"] },
-  { t:"pasta", tags:["Comfort"] },
-  { t:"salad", tags:["Healthy"] },
-  { t:"sandwich / wrap", tags:["15 min"] },
-  { t:"sheet-pan bake", tags:["Healthy"] },
-  { t:"soup", tags:["Comfort"] },
-  { t:"chili", tags:["Comfort"] },
-  { t:"fried rice", tags:["15 min","Comfort"] },
-  { t:"quesadillas", tags:["Comfort"] },
-  { t:"burger style", tags:["Comfort"] },
-  { t:"curry", tags:["Healthy"] },
-  { t:"breakfast-for-dinner", tags:["15 min","Budget","Comfort"] },
-  { t:"air-fryer meal", tags:["15 min"] },
-  { t:"grill meal", tags:[] },
-  { t:"baked casserole", tags:["Comfort"] },
-  { t:"flatbread pizza", tags:["Comfort"] },
-  { t:"loaded baked potato night", tags:["Budget","Comfort"] },
-  { t:"lettuce wrap meal", tags:["Healthy"] },
-  { t:"ramen bowl", tags:["Budget","Comfort"] },
-  { t:"noodle skillet", tags:["15 min","Comfort"] },
-  { t:"grain bowl", tags:["Healthy"] },
-  { t:"stuffed peppers", tags:["Healthy"] },
-  { t:"sliders", tags:["Comfort"] },
-  { t:"fajitas", tags:["15 min","Comfort"] },
-  { t:"kabobs", tags:["Healthy"] },
-  { t:"foil packet dinner", tags:["Healthy"] },
-  { t:"burrito night", tags:["Comfort"] },
-  { t:"sloppy joe style meal", tags:["Budget","Comfort"] },
-  { t:"pot pie filling bowl", tags:["Comfort"] },
-  { t:"panini night", tags:["15 min"] },
-  { t:"loaded nachos", tags:["Comfort"] },
-  { t:"rice skillet", tags:["Budget"] },
-  { t:"pita pocket meal", tags:["15 min"] }
+  { t:"tacos", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"burrito bowl", tags:["Healthy"], cuisine:["Mexican"] },
+  { t:"pasta", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"lasagna", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"stir-fry", tags:["15 min","Healthy"], cuisine:["Asian"] },
+  { t:"fried rice", tags:["15 min","Comfort"], cuisine:["Asian"] },
+  { t:"grill meal", tags:[], cuisine:["American"] },
+  { t:"burger style", tags:["Comfort"], cuisine:["American"] },
+  { t:"gyro style", tags:["Comfort"], cuisine:["Mediterranean"] },
+  { t:"grain bowl", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"pizza night", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"flatbread", tags:["Comfort"], cuisine:["Italian","Mediterranean"] },
+  { t:"pita wrap", tags:["15 min"], cuisine:["Mediterranean"] },
+  { t:"loaded fries", tags:["Comfort"], cuisine:["American"] },
+  { t:"rice bowl", tags:["Healthy"], cuisine:["Asian"] },
+  { t:"noodle bowl", tags:["Comfort"], cuisine:["Asian"] },
+  { t:"enchiladas", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"baked ziti", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"stuffed shells", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"wrap platter", tags:["15 min"], cuisine:["American","Mediterranean"] },
+  { t:"skillet meal", tags:["15 min"], cuisine:["American"] },
+  { t:"one-pot meal", tags:["15 min"], cuisine:["American","Italian"] },
+  { t:"sheet-pan fajitas", tags:["15 min"], cuisine:["Mexican"] },
+  { t:"rice casserole", tags:["Comfort"], cuisine:["American"] },
+  { t:"pasta bake", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"grilled sandwich", tags:["15 min"], cuisine:["American"] },
+  { t:"loaded toast meal", tags:["15 min"], cuisine:["American"] },
+  { t:"tostadas", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"poke bowl", tags:["Healthy"], cuisine:["Asian"] },
+  { t:"no-cook meal", tags:["15 min"], cuisine:["Mediterranean"] },
+  { t:"meal-prep bowls", tags:["Healthy"], cuisine:["American","Mediterranean"] },
+  { t:"bowl (rice + toppings)", tags:["Healthy"], cuisine:["Asian","Mexican"] },
+  { t:"salad", tags:["Healthy"], cuisine:["Mediterranean","American"] },
+  { t:"sandwich / wrap", tags:["15 min"], cuisine:["American","Mediterranean"] },
+  { t:"sheet-pan bake", tags:["Healthy"], cuisine:["American"] },
+  { t:"soup", tags:["Comfort"], cuisine:["American","Italian"] },
+  { t:"chili", tags:["Comfort"], cuisine:["American"] },
+  { t:"quesadillas", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"curry", tags:["Healthy"], cuisine:["Asian"] },
+  { t:"breakfast-for-dinner", tags:["15 min","Budget","Comfort"], cuisine:["American"] },
+  { t:"air-fryer meal", tags:["15 min"], cuisine:["American"] },
+  { t:"baked casserole", tags:["Comfort"], cuisine:["American"] },
+  { t:"flatbread pizza", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"loaded baked potato night", tags:["Budget","Comfort"], cuisine:["American"] },
+  { t:"lettuce wrap meal", tags:["Healthy"], cuisine:["Asian","American"] },
+  { t:"ramen bowl", tags:["Budget","Comfort"], cuisine:["Asian"] },
+  { t:"noodle skillet", tags:["15 min","Comfort"], cuisine:["Asian"] },
+  { t:"stuffed peppers", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"sliders", tags:["Comfort"], cuisine:["American"] },
+  { t:"fajitas", tags:["15 min","Comfort"], cuisine:["Mexican"] },
+  { t:"kabobs", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"foil packet dinner", tags:["Healthy"], cuisine:["American"] },
+  { t:"burrito night", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"sloppy joe style meal", tags:["Budget","Comfort"], cuisine:["American"] },
+  { t:"pot pie filling bowl", tags:["Comfort"], cuisine:["American"] },
+  { t:"panini night", tags:["15 min"], cuisine:["Italian"] },
+  { t:"loaded nachos", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"rice skillet", tags:["Budget"], cuisine:["American","Asian"] },
+  { t:"pita pocket meal", tags:["15 min"], cuisine:["Mediterranean"] }
 ];
 
 const SIDES = [
-{ t:"with tortillas", tags:["Budget"], cuisine:["Mexican"] },
-{ t:"with garlic bread", tags:["Comfort"], cuisine:["Italian"] },
-{ t:"with rice", tags:["Budget"], cuisine:["Asian","Mexican"] },
-{ t:"with hummus + pita", tags:["Healthy"], cuisine:["Mediterranean"] },
-{ t:"with fries", tags:["Comfort"], cuisine:["American"] }
-{ t:"with fries", tags:["Comfort"] },
-{ t:"with sweet corn", tags:["Budget"] },
-{ t:"with mixed greens", tags:["Healthy"] },
-{ t:"with pasta salad", tags:["Comfort"] },
-{ t:"with potato wedges", tags:["Comfort"] },
-{ t:"with baked potato", tags:["Budget"] },
-{ t:"with roasted zucchini", tags:["Healthy"] },
-{ t:"with green beans", tags:["Healthy"] },
-{ t:"with pickles", tags:[] },
-{ t:"with chips", tags:["Comfort"] },
-{ t:"with salsa + guac", tags:["Comfort"] },
-{ t:"with hummus + pita", tags:["Healthy"] },
-{ t:"with coleslaw", tags:[] },
-{ t:"with fruit salad", tags:["Healthy"] },
-{ t:"with yogurt dip", tags:["Healthy"] },
-{ t:"with eggs", tags:["High-Protein"] },
-{ t:"with avocado toast", tags:["Healthy"] },
-{ t:"with sautéed mushrooms", tags:["Healthy"] },
-{ t:"with roasted peppers", tags:["Healthy"] },
-{ t:"with side of soup", tags:["Comfort"] },
-  { t:"with roasted veggies", tags:["Healthy"] },
-  { t:"with rice", tags:["Budget"] },
-  { t:"with potatoes", tags:["Comfort"] },
-  { t:"with tortilla chips + salsa", tags:["Comfort"] },
-  { t:"with steamed broccoli", tags:["Healthy"] },
-  { t:"with a side salad", tags:["Healthy"] },
-  { t:"with corn + beans", tags:["Budget"] },
-  { t:"with garlic bread", tags:["Comfort"] },
-  { t:"with fruit", tags:["Healthy"] },
-  { t:"with mac & cheese", tags:["Comfort"] },
-  { t:"with quinoa", tags:["Healthy"] },
-  { t:"with tortillas", tags:["Budget"] },
-  { t:"with sweet potato fries", tags:["Comfort"] },
-  { t:"with coleslaw", tags:[] },
-  { t:"with roasted carrots", tags:["Healthy"] },
-  { t:"with sautéed spinach", tags:["Healthy"] },
-  { t:"with mashed potatoes", tags:["Comfort"] },
-  { t:"with cauliflower rice", tags:["Healthy"] },
-  { t:"with dinner rolls", tags:["Comfort"] },
-  { t:"with cucumber salad", tags:["Healthy"] },
-  { t:"with avocado slices", tags:["Healthy"] },
-  { t:"with baked beans", tags:["Budget","Comfort"] },
-  { t:"with sautéed peppers and onions", tags:["Healthy"] },
-  { t:"with cottage cheese", tags:["High-Protein"] },
-  { t:"with roasted corn", tags:["Budget"] },
-  { t:"with noodles", tags:["Comfort"] }
+  { t:"with tortillas", tags:["Budget"], cuisine:["Mexican"] },
+  { t:"with garlic bread", tags:["Comfort"], cuisine:["Italian"] },
+  { t:"with rice", tags:["Budget"], cuisine:["Asian","Mexican"] },
+  { t:"with hummus + pita", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with fries", tags:["Comfort"], cuisine:["American"] },
+  { t:"with sweet corn", tags:["Budget"], cuisine:["American","Mexican"] },
+  { t:"with mixed greens", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with pasta salad", tags:["Comfort"], cuisine:["Italian","American"] },
+  { t:"with potato wedges", tags:["Comfort"], cuisine:["American"] },
+  { t:"with baked potato", tags:["Budget"], cuisine:["American"] },
+  { t:"with roasted zucchini", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with green beans", tags:["Healthy"], cuisine:["American"] },
+  { t:"with pickles", tags:[], cuisine:["American"] },
+  { t:"with chips", tags:["Comfort"], cuisine:["American","Mexican"] },
+  { t:"with salsa + guac", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"with coleslaw", tags:[], cuisine:["American"] },
+  { t:"with fruit salad", tags:["Healthy"], cuisine:["Mediterranean","American"] },
+  { t:"with yogurt dip", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with eggs", tags:["High-Protein"], cuisine:["American"] },
+  { t:"with avocado toast", tags:["Healthy"], cuisine:["American","Mediterranean"] },
+  { t:"with sautéed mushrooms", tags:["Healthy"], cuisine:["Italian"] },
+  { t:"with roasted peppers", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with side of soup", tags:["Comfort"], cuisine:["American","Italian"] },
+  { t:"with roasted veggies", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with potatoes", tags:["Comfort"], cuisine:["American"] },
+  { t:"with tortilla chips + salsa", tags:["Comfort"], cuisine:["Mexican"] },
+  { t:"with steamed broccoli", tags:["Healthy"], cuisine:["American"] },
+  { t:"with a side salad", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with corn + beans", tags:["Budget"], cuisine:["Mexican"] },
+  { t:"with fruit", tags:["Healthy"], cuisine:["American"] },
+  { t:"with mac & cheese", tags:["Comfort"], cuisine:["American"] },
+  { t:"with quinoa", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with sweet potato fries", tags:["Comfort"], cuisine:["American"] },
+  { t:"with roasted carrots", tags:["Healthy"], cuisine:["American"] },
+  { t:"with sautéed spinach", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with mashed potatoes", tags:["Comfort"], cuisine:["American"] },
+  { t:"with cauliflower rice", tags:["Healthy"], cuisine:["Asian","American"] },
+  { t:"with dinner rolls", tags:["Comfort"], cuisine:["American"] },
+  { t:"with cucumber salad", tags:["Healthy"], cuisine:["Mediterranean"] },
+  { t:"with avocado slices", tags:["Healthy"], cuisine:["Mexican"] },
+  { t:"with baked beans", tags:["Budget","Comfort"], cuisine:["American"] },
+  { t:"with sautéed peppers and onions", tags:["Healthy"], cuisine:["Mexican"] },
+  { t:"with cottage cheese", tags:["High-Protein"], cuisine:["American"] },
+  { t:"with roasted corn", tags:["Budget"], cuisine:["Mexican","American"] },
+  { t:"with noodles", tags:["Comfort"], cuisine:["Asian"] }
 ];
 
 const EXTRAS = [
-{ t:"(extra crispy)", tags:["Comfort"] },
-{ t:"(sweet and spicy)", tags:[] },
-{ t:"(honey glazed)", tags:["Comfort"] },
-{ t:"(garlic butter)", tags:["Comfort"] },
-{ t:"(lemon herb)", tags:["Healthy"] },
-{ t:"(teriyaki style)", tags:[] },
-{ t:"(BBQ style)", tags:["Comfort"] },
-{ t:"(loaded toppings)", tags:["Comfort"] },
-{ t:"(protein packed)", tags:["High-Protein"] },
-{ t:"(quick and easy)", tags:["15 min"] },
-{ t:"(family style)", tags:["Comfort"] },
-{ t:"(meal prep batch)", tags:["Healthy"] },
-{ t:"(low budget meal)", tags:["Budget"] },
-{ t:"(restaurant style)", tags:[] },
-{ t:"(simple 5 ingredients)", tags:["Budget"] },
+  { t:"(extra crispy)", tags:["Comfort"] },
+  { t:"(sweet and spicy)", tags:[] },
+  { t:"(honey glazed)", tags:["Comfort"] },
+  { t:"(garlic butter)", tags:["Comfort"] },
+  { t:"(lemon herb)", tags:["Healthy"] },
+  { t:"(teriyaki style)", tags:[] },
+  { t:"(BBQ style)", tags:["Comfort"] },
+  { t:"(loaded toppings)", tags:["Comfort"] },
+  { t:"(protein packed)", tags:["High-Protein"] },
+  { t:"(quick and easy)", tags:["15 min"] },
+  { t:"(family style)", tags:["Comfort"] },
+  { t:"(meal prep batch)", tags:["Healthy"] },
+  { t:"(low budget meal)", tags:["Budget"] },
+  { t:"(restaurant style)", tags:[] },
+  { t:"(simple 5 ingredients)", tags:["Budget"] },
   { t:"(spicy)", tags:[] },
   { t:"(extra cheesy)", tags:["Comfort"] },
   { t:"(low-carb style)", tags:["Healthy"] },
@@ -437,49 +400,27 @@ function setRecent(arr){
 }
 
 function buildPick(cuisine){
-  let protein, style, side, extra;
+  const proteinPool = cuisine
+    ? PROTEINS.filter(item => item.cuisine && item.cuisine.includes(cuisine))
+    : PROTEINS;
 
-  for(let i = 0; i < 50; i++){
-    protein = rand(PROTEINS);
-    style = rand(STYLES);
-    side = rand(SIDES);
-    extra = rand(EXTRAS);
+  const stylePool = cuisine
+    ? STYLES.filter(item => item.cuisine && item.cuisine.includes(cuisine))
+    : STYLES;
 
-    const cuisineMatch =
-      !cuisine ||
-      (protein.cuisine && protein.cuisine.includes(cuisine)) ||
-      (style.cuisine && style.cuisine.includes(cuisine)) ||
-      (side.cuisine && side.cuisine.includes(cuisine));
+  const sidePool = cuisine
+    ? SIDES.filter(item => item.cuisine && item.cuisine.includes(cuisine))
+    : SIDES;
 
-    if(cuisineMatch) break;
-  }
+  const protein = rand(proteinPool.length ? proteinPool : PROTEINS);
+  const style = rand(stylePool.length ? stylePool : STYLES);
+  const side = rand(sidePool.length ? sidePool : SIDES);
+  const extra = rand(EXTRAS);
 
-  const text = `${protein.t} ${style.t} ${side.t} ${extra.t}`
-    .replace(/\s+/g," ")
-    .trim();
-
+  const text = `${protein.t} ${style.t} ${side.t} ${extra.t}`.replace(/\s+/g, " ").trim();
   const tags = mergeTags(protein.tags, style.tags, side.tags, extra.tags);
 
   return { text, tags };
-}
-
-function buildFilteredPick(filterTag, cuisine){
-  for(let i = 0; i < 80; i++){
-    const candidate = buildPick();
-
-    const tagOk = !filterTag || candidate.tags.includes(filterTag);
-
-    // NEW: cuisine check
-    const cuisineOk = !cuisine || (
-      (candidate.text.includes(cuisine)) || true
-    );
-
-    if(tagOk && cuisineOk){
-      return candidate;
-    }
-  }
-
-  return buildPick();
 }
 
 function renderTags(tags){
@@ -494,29 +435,38 @@ function renderTags(tags){
 function pickDinner(){
   const filterTag = document.getElementById("tagFilter").value;
   const cuisine = document.getElementById("cuisineFilter").value;
-
   const recent = getRecent();
   let pick = null;
 
   for(let i = 0; i < 30; i++){
     const candidate = buildPick(cuisine);
-
-    if(
-      (!filterTag || candidate.tags.includes(filterTag)) &&
-      !recent.includes(candidate.text)
-    ){
+    if((!filterTag || candidate.tags.includes(filterTag)) && !recent.includes(candidate.text)){
       pick = candidate;
       break;
     }
   }
 
-  if(!pick) pick = buildPick(cuisine);
+  if(!pick){
+    for(let i = 0; i < 30; i++){
+      const candidate = buildPick(cuisine);
+      if(!filterTag || candidate.tags.includes(filterTag)){
+        pick = candidate;
+        break;
+      }
+    }
+  }
+
+  if(!pick){
+    pick = buildPick(cuisine);
+  }
 
   document.getElementById("result").textContent = pick.text;
   renderTags(pick.tags);
 
   const updated = [pick.text, ...recent.filter(x => x !== pick.text)];
   setRecent(updated);
+
+  document.getElementById("hint").textContent = `Idea pool expanded • Skipping last ${RECENT_KEEP} picks when possible.`;
 }
 
 function resetDinnerHistory(){
