@@ -211,7 +211,14 @@ function spinWheel(){
 
 function calculateResult(){
   const arc = (2 * Math.PI) / options.length;
-  const index = Math.floor((2*Math.PI - angle % (2*Math.PI)) / arc) % options.length;
+
+  // Normalize angle
+  const normalized = angle % (2 * Math.PI);
+
+  // Adjust because pointer is at TOP (12 o'clock)
+  const pointerAngle = (Math.PI / 2) - normalized;
+
+  const index = Math.floor((pointerAngle + 2 * Math.PI) % (2 * Math.PI) / arc);
 
   const result = options[index];
   document.getElementById("result").textContent = result;
