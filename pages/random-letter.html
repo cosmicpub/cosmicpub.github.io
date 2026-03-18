@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Letter Generator | Tool Squares</title>
+<meta name="description" content="Generate a random letter instantly. Perfect for games, classrooms, prompts, and quick ideas.">
+
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.letter-result{
+  font-size:56px;
+  font-weight:900;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Random generator</div>
+
+<h1>Random Letter Generator</h1>
+
+<p class="tool-lead">
+Generate a random letter instantly. Great for games, classroom activities, prompts, and quick challenges.
+</p>
+
+<div class="tool-actions">
+<h2>Generate a letter</h2>
+<p>Click below to get a random letter.</p>
+
+<button onclick="ToolEngine.run()">Generate</button>
+
+<div id="result" class="result letter-result"></div>
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How it works</h2>
+<p>
+This tool randomly selects a letter from A to Z each time you click the button. It is simple, fast, and useful for a variety of situations.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Common uses</h2>
+<ul>
+<li>Classroom games and activities</li>
+<li>Creative writing prompts</li>
+<li>Alphabet challenges</li>
+<li>Icebreaker games</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+</div>
+</main>
+
+<script type="application/json" id="tool-config">
+{
+"type":"picker",
+"options":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+}
+</script>
+
+<script src="/assets/tool-engine.js"></script>
+<script>ToolEngine.init();</script>
+
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
