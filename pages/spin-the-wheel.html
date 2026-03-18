@@ -47,6 +47,45 @@ textarea{
   margin-top:10px;
   text-align:center;
 }
+
+.option-row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+
+.remove-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted-2);
+  font-size:15px;
+  font-weight:600;
+}
+
+.remove-wrap input{
+  width:18px;
+  height:18px;
+}
+
+.small-note{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  text-align:center;
+  max-width:500px;
+}
+
+@media (max-width: 640px){
+  .result{
+    font-size:30px;
+  }
+
+  textarea{
+    height:140px;
+  }
+}
 </style>
 
 </head>
@@ -68,7 +107,7 @@ textarea{
 <h1>Spin the Wheel</h1>
 
 <p class="tool-lead">
-Enter your options (one per line), then spin to make a decision instantly.
+Enter your options one per line, then spin to make a decision instantly.
 </p>
 
 <div class="tool-actions">
@@ -76,16 +115,27 @@ Enter your options (one per line), then spin to make a decision instantly.
 <h2>Spin your wheel</h2>
 <p>Add options below, then spin.</p>
 
-<textarea id="optionsInput">Yes
+<div class="option-row">
+  <textarea id="optionsInput">Yes
 No
 Maybe
 Go for it</textarea>
+
+  <label class="remove-wrap">
+    <input type="checkbox" id="removeWinner">
+    <span>Remove winner after spin</span>
+  </label>
+
+  <div class="small-note">
+    If enabled, the winning option will be removed from the list after each spin.
+  </div>
+</div>
 
 <div class="wheel-container">
 <div class="pointer">▼</div>
 <canvas id="wheel" width="320" height="320"></canvas>
 
-<button onclick="spinWheel()">Spin</button>
+<button type="button" onclick="spinWheel()">Spin</button>
 
 <div id="result" class="result"></div>
 </div>
@@ -109,6 +159,7 @@ Each line you enter becomes a segment on the wheel. When you spin, the wheel rot
 <li>Classroom activities</li>
 <li>Games and challenges</li>
 <li>Choosing between multiple options</li>
+<li>Picking winners without repeats</li>
 </ul>
 </section>
 
@@ -150,30 +201,37 @@ function getOptions(){
   }
 }
 
+function setOptionsToTextarea(list){
+  document.getElementById("optionsInput").value = list.join("\n");
+}
+
 function drawWheel(){
   getOptions();
 
   const arc = (2 * Math.PI) / options.length;
 
-  ctx.clearRect(0,0,320,320);
+  ctx.clearRect(0, 0, 320, 320);
 
-  options.forEach((opt, i)=>{
+  options.forEach((opt, i) => {
     const start = i * arc + angle;
 
     ctx.beginPath();
-    ctx.moveTo(160,160);
-    ctx.arc(160,160,160,start,start+arc);
-    ctx.fillStyle = `hsl(${i*360/options.length},70%,60%)`;
+    ctx.moveTo(160, 160);
+    ctx.arc(160, 160, 160, start, start + arc);
+    ctx.fillStyle = `hsl(${i * 360 / options.length}, 70%, 60%)`;
     ctx.fill();
 
-    // TEXT
     ctx.save();
-    ctx.translate(160,160);
-    ctx.rotate(start + arc/2);
-    ctx.fillStyle="#111";
-    ctx.font = "bold 16px Arial";
+    ctx.translate(160, 160);
+    ctx.rotate(start + arc / 2);
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 20px Arial";
     ctx.textAlign = "right";
-    ctx.fillText(opt, 140, 5);
+    ctx.textBaseline = "middle";
+
+    const label = opt.length > 14 ? opt.slice(0, 12) + "…" : opt;
+    ctx.fillText(label, 138, 0);
+
     ctx.restore();
   });
 }
@@ -183,22 +241,31 @@ function spinWheel(){
 
   getOptions();
 
+  if(options.length < 2){
+    document.getElementById("result").textContent = "Add at least 2 options.";
+    return;
+  }
+
   spinning = true;
   document.getElementById("result").textContent = "";
 
-  const spinTime = 2200;
-  const start = Date.now();
+  const extraTurns = (Math.random() * 4) + 6;
+  const finalOffset = Math.random() * (2 * Math.PI);
+  const targetAngle = angle + (extraTurns * 2 * Math.PI) + finalOffset;
+
+  const spinTime = 2600;
+  const start = performance.now();
   const startAngle = angle;
-  const spinAngle = Math.random() * 12 + 10;
 
-  function animate(){
-    const now = Date.now();
+  function animate(now){
     const elapsed = now - start;
+    const t = Math.min(elapsed / spinTime, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
 
-    if(elapsed < spinTime){
-      const ease = 1 - Math.pow(1 - elapsed / spinTime, 3);
-      angle = startAngle + spinAngle * ease;
-      drawWheel();
+    angle = startAngle + (targetAngle - startAngle) * ease;
+    drawWheel();
+
+    if(t < 1){
       requestAnimationFrame(animate);
     } else {
       spinning = false;
@@ -206,23 +273,30 @@ function spinWheel(){
     }
   }
 
-  animate();
+  requestAnimationFrame(animate);
 }
 
 function calculateResult(){
+  getOptions();
+
   const arc = (2 * Math.PI) / options.length;
-
-  // Normalize angle
   const normalized = angle % (2 * Math.PI);
-
-  // Shift so 12 o’clock (top) is the pointer
   const pointerAngle = (3 * Math.PI / 2) - normalized;
-
-  const index = Math.floor((pointerAngle + 2 * Math.PI) % (2 * Math.PI) / arc);
+  const index = Math.floor(((pointerAngle + 2 * Math.PI) % (2 * Math.PI)) / arc);
 
   const result = options[index];
   document.getElementById("result").textContent = result;
+
+  const removeWinner = document.getElementById("removeWinner").checked;
+
+  if(removeWinner && options.length > 2){
+    const updated = options.filter((_, i) => i !== index);
+    setOptionsToTextarea(updated);
+    options = updated;
+    drawWheel();
+  }
 }
+
 document.getElementById("optionsInput").addEventListener("input", drawWheel);
 
 drawWheel();
