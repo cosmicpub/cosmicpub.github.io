@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Yes or No Decision Maker</title>
-<meta name="description" content="Yes or No decision maker. Get an instant answer.">
+<title>Yes or No Decision Maker | Tool Squares</title>
+<meta name="description" content="Get a quick yes or no answer instantly. Simple decision maker for everyday choices, questions, and quick decisions.">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
+<style>
+.yesno-result{
+  font-size:48px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.yes{
+  color:#16a34a;
+}
+
+.no{
+  color:#dc2626;
+}
+
+.hint{
+  margin-top:12px;
+  font-size:14px;
+  color:#6b7280;
+}
+</style>
 
 </head>
 
@@ -21,24 +44,77 @@
 <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
-<div class="container">
+<main class="tool-page">
+  <div class="tool-wrap">
 
-<div class="card">
+    <!-- MAIN TOOL -->
+    <section class="tool-main">
+      <div class="tool-kicker">Quick decision</div>
 
-<h2 id="toolH2"></h2>
-<p id="toolDesc"></p>
+      <h1 id="toolH1">Yes or No</h1>
 
-<button onclick="ToolEngine.run()">
-<span id="btnText"></span>
-</button>
+      <p class="tool-lead" id="toolDesc">
+        Get an instant yes or no answer. Perfect for quick decisions, overthinking moments, and simple choices.
+      </p>
 
-<div id="result" class="result"></div>
-<div id="hint"></div>
+      <div class="tool-actions">
+        <h2>Make your decision</h2>
+        <p>Tap the button and get a clear answer instantly.</p>
 
-</div>
+        <button onclick="runTool()">Decide</button>
 
-</div>
+        <div id="result" class="result yesno-result"></div>
+        <div id="hint" class="hint"></div>
+      </div>
+    </section>
 
+    <!-- CONTENT SECTIONS -->
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How the Yes or No tool works</h2>
+        <p>
+          This tool gives you a simple yes or no answer with one click. It is designed for moments when you feel stuck,
+          overthinking, or just want a quick push in one direction.
+        </p>
+        <p>
+          While the result is random, the real value is helping you break indecision and move forward.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>When to use a Yes or No generator</h2>
+        <ul>
+          <li>Quick everyday decisions</li>
+          <li>Breaking out of overthinking</li>
+          <li>Fun challenges with friends</li>
+          <li>Games and group activities</li>
+          <li>Making small choices faster</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Why simple decision tools work</h2>
+        <p>
+          Most decisions do not actually require deep analysis. The hardest part is getting started.
+          A simple yes or no answer helps you take action instead of staying stuck.
+        </p>
+        <p>
+          In many cases, your reaction to the answer tells you what you really wanted all along.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- CONFIG -->
 <script type="application/json" id="tool-config">
 {
 "type":"picker",
@@ -49,8 +125,32 @@
 }
 </script>
 
+<!-- ENGINE -->
 <script src="/assets/tool-engine.js"></script>
+
+<script>
+function runTool(){
+  ToolEngine.run();
+
+  const resultEl = document.getElementById("result");
+
+  // Apply styling based on result
+  if(resultEl.textContent === "YES"){
+    resultEl.classList.remove("no");
+    resultEl.classList.add("yes");
+  } else {
+    resultEl.classList.remove("yes");
+    resultEl.classList.add("no");
+  }
+}
+</script>
+
 <script>ToolEngine.init();</script>
+
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
 
 </body>
 </html>
