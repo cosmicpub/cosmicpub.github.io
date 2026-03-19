@@ -3,6 +3,7 @@ const TOOL_CARDS = [
   {title:"Coin Flip", desc:"Flip a coin instantly.", url:"/pages/coin-flip.html", icon:"🪙", color:"c-amber"},
   {title:"Random Number", desc:"Generate a random number.", url:"/pages/random-number.html", icon:"🎲", color:"c-slate"},
   {title:"Eat Tonight", desc:"Get a quick dinner idea.", url:"/pages/what-should-i-eat-tonight.html", icon:"🍽️", color:"c-teal"},
+  {title:"Random Question", desc:"Generate fun or deep questions instantly.", url:"/pages/random-question-generator.html", icon:"❓", color:"c-blue"},
   {title:"Do Today", desc:"Find something to do.", url:"/pages/what-should-i-do-today.html", icon:"📌", color:"c-green"},
   {title:"Username", desc:"Generate usernames fast.", url:"/pages/username-generator.html", icon:"👤", color:"c-blue"},
   {title:"Excuse", desc:"Funny random excuses.", url:"/pages/excuse-generator.html", icon:"😅", color:"c-pink"},
