@@ -9,6 +9,7 @@ const TOOL_CARDS = [
   {title:"Truth or Dare", desc:"Get a random prompt.", url:"/pages/truth-or-dare.html", icon:"🎭", color:"c-purple"},
   {title:"Would You Rather", desc:"Choose between two options.", url:"/pages/would-you-rather.html", icon:"🤔", color:"c-green"},
   {title:"Date Night", desc:"Get a date idea instantly.", url:"/pages/date-night.html", icon:"💘", color:"c-pink"},
+  {title:"Random Sentence", desc:"Generate sentences instantly.", url:"/pages/random-sentence-generator.html", icon:"🧠", color:"c-green"},
   {title:"Random Word", desc:"Generate random words instantly.", url:"/pages/random-word-generator.html", icon:"📝", color:"c-green"},
   {title:"Random Movie", desc:"Pick a movie fast.", url:"/pages/random-movie.html", icon:"🎬", color:"c-slate"},
   {title:"Outfit Picker", desc:"Pick your outfit.", url:"/pages/outfit-picker.html", icon:"👕", color:"c-teal"},
