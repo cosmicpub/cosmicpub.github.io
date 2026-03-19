@@ -6,12 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Random Sentence Generator | Tool Squares</title>
-<meta name="description" content="Generate random sentences instantly for writing prompts, creativity, brainstorming, classroom activities, and games.">
+<meta name="description" content="Generate random sentences that actually make sense. Perfect for writing prompts, creativity, classroom use, and brainstorming.">
 
 <link rel="stylesheet" href="/assets/style.css">
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
-crossorigin="anonymous"></script>
 
 <style>
 .sentence-result{
@@ -19,7 +16,6 @@ crossorigin="anonymous"></script>
   font-weight:600;
   text-align:center;
   line-height:1.7;
-  word-break:break-word;
 }
 
 .sentence-controls{
@@ -31,11 +27,9 @@ crossorigin="anonymous"></script>
 }
 
 .sentence-controls select{
-  padding:10px 12px;
+  padding:10px;
   border-radius:10px;
-  border:1px solid #d1d5db;
-  font-size:15px;
-  background:#fff;
+  border:1px solid #ddd;
 }
 
 .tool-btn-row{
@@ -47,28 +41,6 @@ crossorigin="anonymous"></script>
 
 .secondary-btn{
   background:#111827;
-}
-
-.small-note{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-  text-align:center;
-}
-
-@media (max-width: 640px){
-  .sentence-result{
-    font-size:23px;
-  }
-
-  .tool-btn-row{
-    flex-direction:column;
-  }
-
-  .tool-btn-row button{
-    width:100%;
-  }
 }
 </style>
 
@@ -91,13 +63,13 @@ crossorigin="anonymous"></script>
 <h1>Random Sentence Generator</h1>
 
 <p class="tool-lead">
-Generate random sentences instantly for writing prompts, classroom activities, brainstorming, games, and creative practice.
+Generate random sentences that actually make sense. Great for writing prompts, classrooms, and creative thinking.
 </p>
 
 <div class="tool-actions">
 
 <h2>Create a sentence</h2>
-<p>Choose a style, then generate a fresh sentence instantly.</p>
+<p>Choose a style and generate a fresh sentence instantly.</p>
 
 <div class="sentence-controls">
   <select id="styleSelect">
@@ -108,15 +80,12 @@ Generate random sentences instantly for writing prompts, classroom activities, b
 </div>
 
 <div class="tool-btn-row">
-  <button type="button" onclick="generateSentence()">Generate</button>
-  <button type="button" class="secondary-btn" onclick="copySentence()">Copy</button>
+  <button onclick="generateSentence()">Generate</button>
+  <button class="secondary-btn" onclick="copySentence()">Copy</button>
 </div>
 
 <div class="result-box">
   <div id="result" class="sentence-result">Click generate to begin</div>
-  <div id="hint" class="small-note">
-    This tool uses multiple sentence patterns to reduce repetition and create more variety.
-  </div>
 </div>
 
 </div>
@@ -125,35 +94,20 @@ Generate random sentences instantly for writing prompts, classroom activities, b
 <div class="tool-sections">
 
 <section class="info-card">
-<h2>How this random sentence generator works</h2>
+<h2>How this works</h2>
 <p>
-This tool creates random sentences by combining subjects, verbs, objects, locations, transitions, and extra clauses in different patterns.
-That gives the sentences more variety and helps them feel less repetitive.
-</p>
-<p>
-You can choose a normal, funny, or creative style depending on what kind of sentence you want.
+This tool builds sentences using structured word pairs that match naturally. That means the sentences make sense while still being random.
 </p>
 </section>
 
 <section class="info-card">
-<h2>When to use a random sentence generator</h2>
+<h2>Common uses</h2>
 <ul>
-<li>Writing prompts and creative warmups</li>
-<li>Classroom activities and language practice</li>
-<li>Brainstorming story ideas</li>
-<li>Games, improv, and fun challenges</li>
-<li>Breaking creative blocks when you feel stuck</li>
+<li>Writing prompts</li>
+<li>Creative exercises</li>
+<li>Classroom activities</li>
+<li>Story starters</li>
 </ul>
-</section>
-
-<section class="info-card">
-<h2>Why sentence generators are useful</h2>
-<p>
-A random sentence generator helps you get started fast. Instead of staring at a blank page, you get an instant prompt you can build from.
-</p>
-<p>
-That makes it useful for writers, teachers, students, content creators, and anyone who wants a quick spark of inspiration.
-</p>
 </section>
 
 <section class="info-card">
@@ -171,30 +125,104 @@ const subjects = [
   "A mysterious stranger","The quiet kid","An astronaut","The gamer","A chef","The detective","A wizard","The athlete","A musician","The artist",
   "A curious child","The engineer","A traveler","The gardener","A writer","The driver","A photographer","The mechanic","A farmer","The explorer",
   "A time traveler","The villain","A hero","The inventor","A student","The coach","A pilot","The baker","A firefighter","The librarian",
-  "A ninja","The hacker","A magician","The knight","A dancer","The singer","A builder","The designer","A swimmer","The captain"
+  "A ninja","The hacker","A magician","The knight","A dancer","The singer","A builder","The designer","A swimmer","The captain",
+  "The cashier","A delivery driver","The manager","A customer","The barber","A nurse","The doctor","A police officer","The security guard",
+  "A gamer","The streamer","A YouTuber","The influencer","A business owner","The CEO","A startup founder","The intern",
+  "A teenager","The babysitter","A college student","The roommate","A neighbor","The landlord","A homeowner"
 ];
 
-const verbs = [
-  "eats","builds","finds","destroys","creates","discovers","hides","throws","writes","draws",
-  "explores","fixes","breaks","analyzes","investigates","chases","catches","designs","tests","improves",
-  "launches","drives","flies","repairs","teaches","learns","observes","records","delivers","organizes",
-  "climbs","runs","jumps","slides","travels","searches","collects","drops","grabs","pushes",
-  "pulls","spins","moves","opens","closes","starts","stops","transforms","studies","questions"
-];
+const actions = [
+  // food / simple
+  {verb:"eats", object:"a sandwich"},
+  {verb:"orders", object:"fast food"},
+  {verb:"cooks", object:"a meal"},
+  {verb:"burns", object:"dinner"},
+  {verb:"tries", object:"a new recipe"},
 
-const objects = [
-  "a sandwich","a spaceship","a secret code","a treasure map","a strange device","a glowing orb","a mystery","a robot","a book","a portal",
-  "a hidden door","a broken machine","a new idea","a lost key","a strange message","a powerful engine","a secret formula","a rare artifact",
-  "a golden ticket","a puzzle","a map","a signal","a phone","a laptop","a camera","a vehicle","a project","a plan",
-  "a business","a game","a website","a design","a tool","a system","a strategy","a schedule","a report","a solution",
-  "a new recipe","a painting","a song","a video","a story","a challenge","a competition","a device","a structure","a machine"
+  // tech
+  {verb:"builds", object:"a website"},
+  {verb:"fixes", object:"a broken laptop"},
+  {verb:"tests", object:"a new app"},
+  {verb:"launches", object:"a startup"},
+  {verb:"codes", object:"a program"},
+  {verb:"designs", object:"a system"},
+  {verb:"creates", object:"a tool"},
+
+  // everyday
+  {verb:"finds", object:"a lost key"},
+  {verb:"loses", object:"their phone"},
+  {verb:"forgets", object:"their password"},
+  {verb:"cleans", object:"the house"},
+  {verb:"reorganizes", object:"their room"},
+  {verb:"shops for", object:"groceries"},
+  {verb:"returns", object:"a package"},
+
+  // work
+  {verb:"writes", object:"a report"},
+  {verb:"finishes", object:"a project"},
+  {verb:"starts", object:"a business"},
+  {verb:"joins", object:"a meeting"},
+  {verb:"leads", object:"a team"},
+  {verb:"presents", object:"an idea"},
+  {verb:"creates", object:"a plan"},
+
+  // creative
+  {verb:"writes", object:"a story"},
+  {verb:"draws", object:"a portrait"},
+  {verb:"paints", object:"a mural"},
+  {verb:"records", object:"a video"},
+  {verb:"produces", object:"a song"},
+  {verb:"builds", object:"a project"},
+  {verb:"creates", object:"content"},
+
+  // adventure
+  {verb:"explores", object:"a cave"},
+  {verb:"climbs", object:"a mountain"},
+  {verb:"travels to", object:"a new country"},
+  {verb:"discovers", object:"a hidden place"},
+  {verb:"searches for", object:"treasure"},
+  {verb:"finds", object:"a secret passage"},
+
+  // funny / chaos
+  {verb:"argues with", object:"a vending machine"},
+  {verb:"talks to", object:"a wall"},
+  {verb:"dances with", object:"a stranger"},
+  {verb:"accidentally breaks", object:"a chair"},
+  {verb:"drops", object:"their phone"},
+  {verb:"spills", object:"coffee everywhere"},
+  {verb:"laughs at", object:"nothing"},
+
+  // social / modern
+  {verb:"texts", object:"their ex"},
+  {verb:"ignores", object:"a message"},
+  {verb:"posts", object:"a video"},
+  {verb:"goes viral with", object:"a clip"},
+  {verb:"scrolls through", object:"social media"},
+  {verb:"starts", object:"a group chat"},
+  {verb:"joins", object:"a live stream"},
+
+  // school
+  {verb:"studies for", object:"a test"},
+  {verb:"forgets", object:"their homework"},
+  {verb:"answers", object:"a question"},
+  {verb:"fails", object:"a quiz"},
+  {verb:"passes", object:"an exam"},
+
+  // random
+  {verb:"builds", object:"a machine"},
+  {verb:"fixes", object:"a device"},
+  {verb:"creates", object:"a solution"},
+  {verb:"tests", object:"a theory"},
+  {verb:"investigates", object:"a mystery"},
+  {verb:"solves", object:"a problem"},
+  {verb:"starts", object:"a challenge"}
 ];
 
 const adjectives = [
   "strange","ancient","modern","colorful","dark","bright","mysterious","powerful","tiny","massive",
   "unexpected","hidden","secret","fast","slow","creative","dangerous","safe","rare","common",
   "brilliant","clever","awkward","funny","serious","wild","calm","noisy","quiet","bold",
-  "restless","glowing","fragile","fearless","careful","vivid","curious","dramatic","silent","electric"
+  "chaotic","random","focused","lazy","energetic","confident","nervous","relaxed","curious","determined"
 ];
 
 const adverbs = [
@@ -203,54 +231,30 @@ const adverbs = [
 ];
 
 const locations = [
-  "in the backyard","at school","on the roof","in a hidden cave","on another planet","inside a lab",
-  "in the city","at the park","on a mountain","by the ocean","in a dark room","under the bed",
-  "in the garage","at the office","inside a spaceship","in the forest","on a deserted island","in a classroom",
-  "behind the curtain","near the river","inside the castle","under the moonlight","at the station","beside the lighthouse"
+  "at home","at school","at work","in the backyard","on the roof","in a hidden cave","on another planet","inside a lab",
+  "in the city","at the park","on a mountain","by the ocean","in a classroom","in the garage","at the office",
+  "in a store","at a restaurant","in a parking lot","on a street corner","inside a car"
 ];
 
 const times = [
   "at midnight","early in the morning","during lunch","on a Friday night","before sunrise","after school",
-  "during the weekend","late at night","in the afternoon","right before dinner","just before the storm","after everyone left"
+  "during the weekend","late at night","in the afternoon","right before dinner"
 ];
 
 const funnyExtras = [
-  "for no reason","while dancing","without warning","in slow motion","while laughing","upside down",
-  "like it’s totally normal","as if nothing happened","in complete silence","while everyone watches",
-  "with zero explanation","like a professional somehow"
+  "for no reason","while dancing","without warning","in slow motion","while laughing",
+  "like it’s totally normal","with zero explanation","like a professional somehow"
 ];
 
 const creativeExtras = [
-  "under a purple sky","beyond the stars","in a forgotten world","inside a dream","at the edge of time",
-  "where nothing makes sense","in a parallel universe","between reality and imagination",
-  "beneath a silent moon","where the air shimmered with light"
+  "under a purple sky","beyond the stars","inside a dream","at the edge of time","in a forgotten world",
+  "where nothing makes sense","in another dimension","beyond reality"
 ];
 
 const transitions = [
-  "Suddenly","Unexpectedly","For some reason","Without warning","Out of nowhere",
-  "At that moment","Strangely","Oddly enough","As everyone watched","Just then"
+  "Suddenly","Unexpectedly","For some reason","Out of nowhere","Just then",
+  "Without warning","At that moment","Strangely"
 ];
-
-const connectors = [
-  "while","because","even though","just as","right when","after","before","whenever","as if","since"
-];
-
-const secondaryClauses = [
-  "nobody understood what was happening",
-  "the room went completely silent",
-  "everything started to feel different",
-  "it made perfect sense at the time",
-  "someone should have seen it coming",
-  "the whole thing got even stranger",
-  "nobody was ready for what happened next",
-  "it changed the mood instantly",
-  "everyone pretended this was normal",
-  "it raised more questions than answers",
-  "the moment became impossible to ignore",
-  "everything suddenly felt connected"
-];
-
-let lastSentence = "";
 
 function pick(arr){
   return arr[Math.floor(Math.random() * arr.length)];
@@ -260,68 +264,37 @@ function lowerFirst(str){
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
 
-function maybe(probability){
-  return Math.random() < probability;
-}
+let lastSentence = "";
 
-function stripArticle(str){
-  return str.replace(/^an\s+/i, "").replace(/^a\s+/i, "").replace(/^the\s+/i, "");
-}
+function generateSentence(){
+  const style = document.getElementById("styleSelect").value;
 
-function buildBasePhrase(){
   const subject = pick(subjects);
-  const verb = pick(verbs);
-  const object = pick(objects);
+  const action = pick(actions);
   const adjective = pick(adjectives);
   const adverb = pick(adverbs);
   const location = pick(locations);
   const time = pick(times);
   const transition = pick(transitions);
-  const connector = pick(connectors);
-  const clause = pick(secondaryClauses);
-  const strippedSubject = stripArticle(subject);
 
   const templates = [
-    `${subject} ${verb} ${object}`,
-    `${subject} ${adverb} ${verb} ${object}`,
-    `${subject} ${verb} ${object} ${location}`,
-    `${subject} ${verb} ${object} ${time}`,
-    `${transition}, ${lowerFirst(subject)} ${verb} ${object}`,
-    `${transition}, ${lowerFirst(subject)} ${adverb} ${verb} ${object}`,
-    `The ${adjective} ${lowerFirst(strippedSubject)} ${verb} ${object}`,
-    `The ${adjective} ${lowerFirst(strippedSubject)} ${adverb} ${verb} ${object}`,
-    `${subject} ${verb} ${object} ${connector} ${clause}`,
-    `${subject} ${adverb} ${verb} ${object} ${connector} ${clause}`,
-    `${location}, ${lowerFirst(subject)} ${verb} ${object}`,
-    `${time}, ${lowerFirst(subject)} ${verb} ${object}`,
-    `${subject} ${verb} ${object} ${location} ${connector} ${clause}`,
-    `${transition}, ${lowerFirst(subject)} ${verb} ${object} ${location}`,
-    `${transition}, ${lowerFirst(subject)} ${adverb} ${verb} ${object} ${time}`
+    `${subject} ${action.verb} ${action.object}`,
+    `${subject} ${adverb} ${action.verb} ${action.object}`,
+    `${subject} ${action.verb} ${action.object} ${location}`,
+    `${transition}, ${lowerFirst(subject)} ${action.verb} ${action.object}`,
+    `The ${adjective} ${lowerFirst(subject).replace(/^a |the /i,"")} ${action.verb} ${action.object}`,
+    `${subject} ${action.verb} ${action.object} ${time}`
   ];
 
-  return pick(templates);
-}
-
-function generateSentence(){
-  const style = document.getElementById("styleSelect").value;
-
-  let sentence = buildBasePhrase();
+  let sentence = pick(templates);
 
   if(style === "funny"){
-    if(maybe(0.8)) sentence += " " + pick(funnyExtras);
-    if(maybe(0.35)) sentence += ", " + lowerFirst(pick(secondaryClauses));
+    sentence += " " + pick(funnyExtras);
   }
 
   if(style === "creative"){
-    if(maybe(0.8)) sentence += " " + pick(creativeExtras);
-    if(maybe(0.45)) sentence += ", " + lowerFirst(pick(secondaryClauses));
+    sentence += " " + pick(creativeExtras);
   }
-
-  if(style === "normal"){
-    if(maybe(0.25)) sentence += ", " + lowerFirst(pick(secondaryClauses));
-  }
-
-  sentence = sentence.trim();
 
   if(!sentence.endsWith(".")){
     sentence += ".";
@@ -329,21 +302,11 @@ function generateSentence(){
 
   lastSentence = sentence;
   document.getElementById("result").textContent = sentence;
-  document.getElementById("hint").textContent = "Fresh sentence generated.";
 }
 
 async function copySentence(){
-  if(!lastSentence){
-    document.getElementById("hint").textContent = "Generate a sentence first.";
-    return;
-  }
-
-  try{
-    await navigator.clipboard.writeText(lastSentence);
-    document.getElementById("hint").textContent = "Copied to clipboard.";
-  }catch(e){
-    document.getElementById("hint").textContent = "Could not copy right now.";
-  }
+  if(!lastSentence) return;
+  await navigator.clipboard.writeText(lastSentence);
 }
 </script>
 
