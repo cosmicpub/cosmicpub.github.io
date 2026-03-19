@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Word Generator | Tool Squares</title>
+<meta name="description" content="Generate random words instantly. Choose nouns, adjectives, verbs, or mixed words for writing prompts, games, brainstorming, and classroom use.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.word-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin:0 0 18px;
+}
+
+.word-controls select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+  background:#fff;
+}
+
+.word-result{
+  font-size:32px;
+  font-weight:800;
+  line-height:1.5;
+  text-align:center;
+  word-break:break-word;
+}
+
+.word-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.word-chip{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#312e81;
+  font-size:18px;
+  font-weight:700;
+}
+
+.tool-btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.secondary-btn{
+  background:#111827;
+}
+
+.small-note{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  text-align:center;
+}
+
+@media (max-width: 640px){
+  .word-result{
+    font-size:26px;
+  }
+
+  .word-chip{
+    font-size:16px;
+  }
+
+  .tool-btn-row{
+    flex-direction:column;
+  }
+
+  .tool-btn-row button{
+    width:100%;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Writing tool</div>
+
+<h1>Random Word Generator</h1>
+
+<p class="tool-lead">
+Generate random words instantly for writing prompts, games, brainstorming, classroom activities, and creative practice.
+</p>
+
+<div class="tool-actions">
+<h2>Generate random words</h2>
+<p>Choose a word type and how many words you want, then generate a fresh set.</p>
+
+<div class="word-controls">
+  <select id="categorySelect">
+    <option value="mixed">Mixed Words</option>
+    <option value="nouns">Nouns</option>
+    <option value="adjectives">Adjectives</option>
+    <option value="verbs">Verbs</option>
+  </select>
+
+  <select id="countSelect">
+    <option value="1">1 Word</option>
+    <option value="3">3 Words</option>
+    <option value="5">5 Words</option>
+    <option value="10">10 Words</option>
+  </select>
+</div>
+
+<div class="tool-btn-row">
+  <button type="button" onclick="generateWords()">Generate</button>
+  <button type="button" class="secondary-btn" onclick="copyWords()">Copy Words</button>
+  <button type="button" class="secondary-btn" onclick="resetWordPools()">Reset Pool</button>
+</div>
+
+<div class="result-box">
+  <div id="result" class="word-result">Click generate to begin</div>
+  <div id="hint" class="small-note">
+    Words will not repeat within a category until that category’s pool is exhausted.
+  </div>
+</div>
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How this random word generator works</h2>
+<p>
+This tool pulls from a large built-in word bank and generates fresh words instantly. You can choose nouns, adjectives, verbs, or a mixed list depending on what you need.
+</p>
+<p>
+It also includes non-repeating logic, so the same words will not keep showing up over and over within a category until the pool has been used up.
+</p>
+</section>
+
+<section class="info-card">
+<h2>When to use a random word generator</h2>
+<ul>
+<li>Writing prompts and creative exercises</li>
+<li>Classroom warmups and vocabulary games</li>
+<li>Brainstorming ideas for stories or content</li>
+<li>Charades, Pictionary, and word games</li>
+<li>Breaking creative blocks when you feel stuck</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Why random word tools are useful</h2>
+<p>
+A random word generator helps you start faster. Instead of staring at a blank page or trying to come up with ideas from scratch, you get an immediate prompt to work from.
+</p>
+<p>
+That makes it useful for students, writers, teachers, creators, and anyone who wants a quick spark of inspiration.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+
+</div>
+</main>
+
+<script>
+const WORD_BANK = {
+  nouns: [
+    "river","mountain","forest","lantern","mirror","thunder","castle","planet","bridge","garden",
+    "window","ocean","feather","rocket","shadow","island","compass","meadow","storm","pencil",
+    "camera","blanket","harbor","candle","piano","helmet","sunrise","backpack","ladder","tunnel",
+    "dragon","wallet","canyon","button","library","anchor","diamond","cookie","volcano","ticket",
+    "notebook","whistle","fountain","telescope","village","satellite","snowflake","parachute","suitcase","pumpkin",
+    "hammer","rainbow","pebble","moonlight","barn","coral","avalanche","trail","balloon",
+    "campfire","shoreline","jungle","waterfall","chimney","necklace","maze","harvest","portrait","treasure",
+    "glacier","beacon","temple","dolphin","pyramid","firefly","workshop","airplane","sandcastle","mosaic",
+    "carousel","cabin","vineyard","notion","orchard","lighthouse","reef","festival","scroll","planetarium",
+    "shipwreck","trophy","breeze","marble","postcard","bay","cliff","flagpole","attic","courtyard",
+
+    "engine","stadium","locker","backyard","playground","hallway","cafeteria","sidewalk","crosswalk","garage",
+    "basement","ceiling","floorboard","doorway","doorknob","keychain","helmet","glove","jersey","scoreboard",
+    "microphone","speaker","headphones","remote","console","keyboard","monitor","tablet","charger","battery",
+    "network","signal","server","browser","document","folder","file","clipboard","printer","scanner",
+    "market","shop","bakery","restaurant","menu","receipt","counter","cashier","checkout","delivery",
+    "package","envelope","letter","stamp","mailbox","courier","shipment","warehouse","inventory","barcode",
+    "factory","assembly","machine","gear","lever","switch","button","panel","dashboard","console",
+    "vehicle","engine","wheel","tire","brake","mirror","seat","dashboard","steering","ignition",
+    "airport","runway","terminal","ticket","passport","luggage","boarding","flight","pilot","crew",
+    "train","station","platform","track","subway","bus","route","stop","schedule","fare",
+    "school","classroom","desk","whiteboard","marker","eraser","notebook","assignment","project","lesson",
+    "teacher","student","principal","coach","team","club","practice","tournament","championship","medal",
+    "office","desk","chair","cubicle","meeting","calendar","schedule","deadline","report","presentation",
+    "contract","client","project","proposal","invoice","payment","budget","expense","profit","revenue",
+    "city","street","avenue","block","neighborhood","district","building","skyscraper","apartment","condo",
+    "park","bench","tree","fountain","path","trail","playground","garden","pond","statue",
+    "beach","shore","sand","wave","tide","shell","pier","dock","harbor","boat",
+    "farm","field","barn","tractor","crop","harvest","soil","seed","fence","pasture",
+    "desert","dune","oasis","cactus","sandstorm","heat","horizon","mirage","valley","plateau",
+    "space","galaxy","star","planet","orbit","comet","asteroid","nebula","cosmos","universe",
+    "science","experiment","lab","formula","theory","data","research","analysis","result","hypothesis",
+    "art","canvas","paint","brush","palette","sketch","drawing","design","gallery","exhibit",
+    "music","song","melody","rhythm","beat","note","chord","instrument","band","concert"
+  ],
+
+  adjectives: [
+    "brave","gentle","wild","ancient","shiny","restless","quiet","bold","fragile","frozen",
+    "curious","graceful","stormy","lively","careful","rapid","golden","dusty","vivid","playful",
+    "mysterious","clever","sleepy","radiant","hidden","fearless","crisp","massive","tiny","delicate",
+    "electric","peaceful","messy","glowing","steady","jagged","soft","distant","bright","fierce",
+    "nervous","smooth","magnetic","hopeful","wandering","lonely","cheerful","secret","spirited","gentlehearted",
+    "sparkling","eager","fluffy","serious","colorful","patient","timeless","windy","dramatic","courageous",
+    "glassy","noisy","sunlit","verdant","vibrant","elegant","awkward","rugged","fancy",
+    "storm-lit","quiethearted","brisk","foggy","majestic","warm","icy","whimsical","proud","silvery",
+    "golden-eyed","carefree","shadowy","humble","inventive","loyal","refreshing","fragile-looking","radiant-faced","moonlit",
+    "spiral","velvet","rustic","heroic","witty","chilly","sudden","gentle-toned","endless","candid",
+
+    "fast","slow","quick","heavy","light","strong","weak","sharp","dull","smooth",
+    "rough","hard","soft","thick","thin","wide","narrow","deep","shallow","tall",
+    "short","long","big","small","huge","tiny","massive","mini","compact","expanded",
+    "hot","cold","warm","cool","freezing","boiling","chilly","burning","icy","humid",
+    "dry","wet","sticky","slippery","dusty","clean","dirty","messy","tidy","organized",
+    "bright","dark","dim","colorful","pale","faded","vivid","neon","glowing","sparkling",
+    "happy","sad","angry","excited","calm","relaxed","tense","worried","confident","proud",
+    "shy","bold","quiet","loud","friendly","kind","mean","helpful","generous","selfish",
+    "smart","clever","wise","silly","funny","serious","creative","imaginative","focused","distracted",
+    "busy","lazy","active","energetic","tired","sleepy","rested","alert","sharp","slow-moving",
+    "early","late","timely","delayed","punctual","quick-moving","steady","unstable","balanced","unbalanced",
+    "modern","classic","old","new","ancient","future","present-day","updated","outdated","vintage",
+    "popular","famous","unknown","common","rare","unique","special","ordinary","typical","unusual",
+    "safe","dangerous","risky","secure","protected","exposed","hidden","visible","clear","unclear",
+    "simple","complex","easy","difficult","hard","challenging","straightforward","confusing","clear-cut","complicated",
+    "professional","casual","formal","informal","polished","rough","clean-cut","laid-back","strict","flexible",
+    "cheap","expensive","affordable","premium","budget","luxury","high-end","low-cost","valuable","worthless"
+  ],
+
+  verbs: [
+    "run","glow","whisper","build","wander","climb","laugh","drift","charge","stumble",
+    "create","observe","bounce","gather","scatter","imagine","listen","race","twist","sail",
+    "jump","sketch","glimmer","discover","protect","measure","unlock","spin","slide","float",
+    "spark","roar","bloom","balance","march","hover","stretch","explore","shiver","flash",
+    "collect","travel","hustle","shape","dream","lift","crash","reach","crackle","follow",
+    "craft","tumble","trace","dance","pause","sweep","dig","forge","peek",
+    "slice","launch","glide","stare","rattle","chase","grin","clatter",
+    "signal","rush","clap","drum","sprint","loop","lean","arrive","vanish","burst",
+    "invent","rescue","gaze","bundle","anchor","echo","flow","study","roam",
+    "search","stack","swing","breathe","shuffle","shine","push","unfold",
+
+    "start","stop","begin","end","continue","pause","resume","restart","cancel","finish",
+    "open","close","lock","unlock","enter","exit","leave","return","arrive","depart",
+    "move","shift","turn","rotate","flip","spin","slide","roll","drop","lift",
+    "carry","hold","grab","release","throw","catch","pull","push","drag","lift",
+    "walk","jog","run","sprint","crawl","climb","jump","hop","skip","dash",
+    "sit","stand","rest","relax","sleep","wake","stretch","bend","lean","balance",
+    "eat","drink","taste","cook","bake","grill","serve","order","prepare","mix",
+    "read","write","type","edit","review","publish","print","scan","copy","paste",
+    "watch","listen","observe","notice","spot","recognize","identify","analyze","study","inspect",
+    "talk","speak","say","tell","ask","answer","explain","describe","discuss","argue",
+    "call","text","message","email","reply","respond","notify","alert","announce","report",
+    "buy","sell","pay","charge","trade","exchange","order","return","refund","invest",
+    "plan","organize","schedule","arrange","prepare","design","build","create","develop","launch",
+    "test","measure","calculate","compare","evaluate","improve","optimize","adjust","fix","repair",
+    "break","damage","destroy","crash","fail","collapse","explode","fall","drop","slip",
+    "win","lose","compete","train","practice","score","defend","attack","celebrate","improve"
+  ]
+};
+
+let availablePools = {
+  nouns: [],
+  adjectives: [],
+  verbs: [],
+  mixed: []
+};
+
+let lastGenerated = [];
+
+function shuffleArray(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildMixedPool(){
+  return [
+    ...WORD_BANK.nouns,
+    ...WORD_BANK.adjectives,
+    ...WORD_BANK.verbs
+  ];
+}
+
+function initializePools(){
+  availablePools.nouns = shuffleArray(WORD_BANK.nouns);
+  availablePools.adjectives = shuffleArray(WORD_BANK.adjectives);
+  availablePools.verbs = shuffleArray(WORD_BANK.verbs);
+  availablePools.mixed = shuffleArray(buildMixedPool());
+}
+
+function refillPool(category){
+  if(category === "mixed"){
+    availablePools.mixed = shuffleArray(buildMixedPool());
+    return;
+  }
+  availablePools[category] = shuffleArray(WORD_BANK[category]);
+}
+
+function getWordsFromPool(category, count){
+  const chosen = [];
+
+  while(chosen.length < count){
+    if(availablePools[category].length === 0){
+      refillPool(category);
+    }
+
+    const nextWord = availablePools[category].pop();
+
+    if(!chosen.includes(nextWord)){
+      chosen.push(nextWord);
+    }
+  }
+
+  return chosen;
+}
+
+function renderWords(words){
+  const resultEl = document.getElementById("result");
+
+  if(words.length === 1){
+    resultEl.textContent = words[0];
+    return;
+  }
+
+  resultEl.innerHTML = `
+    <div class="word-list">
+      ${words.map(word => `<span class="word-chip">${word}</span>`).join("")}
+    </div>
+  `;
+}
+
+function generateWords(){
+  const category = document.getElementById("categorySelect").value;
+  const count = parseInt(document.getElementById("countSelect").value, 10);
+
+  const words = getWordsFromPool(category, count);
+  lastGenerated = words;
+
+  renderWords(words);
+
+  document.getElementById("hint").textContent =
+    `Generated ${count} ${category === "mixed" ? "mixed" : category} word${count > 1 ? "s" : ""} with no repeats from the current pool.`;
+}
+
+async function copyWords(){
+  if(!lastGenerated.length){
+    document.getElementById("hint").textContent = "Generate some words first.";
+    return;
+  }
+
+  const text = lastGenerated.join(", ");
+
+  try{
+    await navigator.clipboard.writeText(text);
+    document.getElementById("hint").textContent = "Copied to clipboard.";
+  }catch(e){
+    document.getElementById("hint").textContent = "Could not copy right now.";
+  }
+}
+
+function resetWordPools(){
+  initializePools();
+  lastGenerated = [];
+  document.getElementById("result").textContent = "Click generate to begin";
+  document.getElementById("hint").textContent = "Word pools reset. Words will again cycle without repeats until exhausted.";
+}
+
+initializePools();
+</script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
