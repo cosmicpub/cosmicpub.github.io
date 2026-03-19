@@ -6,16 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Random Sentence Generator | Tool Squares</title>
-<meta name="description" content="Generate random sentences instantly for writing prompts, creativity, and classroom use.">
+<meta name="description" content="Generate random sentences instantly for writing prompts, creativity, brainstorming, classroom activities, and games.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
 
 <style>
 .sentence-result{
   font-size:26px;
   font-weight:600;
   text-align:center;
-  line-height:1.6;
+  line-height:1.7;
+  word-break:break-word;
 }
 
 .sentence-controls{
@@ -27,9 +31,44 @@
 }
 
 .sentence-controls select{
-  padding:10px;
+  padding:10px 12px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #d1d5db;
+  font-size:15px;
+  background:#fff;
+}
+
+.tool-btn-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.secondary-btn{
+  background:#111827;
+}
+
+.small-note{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  text-align:center;
+}
+
+@media (max-width: 640px){
+  .sentence-result{
+    font-size:23px;
+  }
+
+  .tool-btn-row{
+    flex-direction:column;
+  }
+
+  .tool-btn-row button{
+    width:100%;
+  }
 }
 </style>
 
@@ -52,13 +91,13 @@
 <h1>Random Sentence Generator</h1>
 
 <p class="tool-lead">
-Generate creative, funny, or simple sentences instantly for writing prompts, games, and ideas.
+Generate random sentences instantly for writing prompts, classroom activities, brainstorming, games, and creative practice.
 </p>
 
 <div class="tool-actions">
 
 <h2>Create a sentence</h2>
-<p>Choose a style and generate a fresh sentence instantly.</p>
+<p>Choose a style, then generate a fresh sentence instantly.</p>
 
 <div class="sentence-controls">
   <select id="styleSelect">
@@ -68,11 +107,16 @@ Generate creative, funny, or simple sentences instantly for writing prompts, gam
   </select>
 </div>
 
-<button onclick="generateSentence()">Generate</button>
-<button class="secondary-btn" onclick="copySentence()">Copy</button>
+<div class="tool-btn-row">
+  <button type="button" onclick="generateSentence()">Generate</button>
+  <button type="button" class="secondary-btn" onclick="copySentence()">Copy</button>
+</div>
 
 <div class="result-box">
   <div id="result" class="sentence-result">Click generate to begin</div>
+  <div id="hint" class="small-note">
+    This tool uses multiple sentence patterns to reduce repetition and create more variety.
+  </div>
 </div>
 
 </div>
@@ -81,20 +125,35 @@ Generate creative, funny, or simple sentences instantly for writing prompts, gam
 <div class="tool-sections">
 
 <section class="info-card">
-<h2>How this works</h2>
+<h2>How this random sentence generator works</h2>
 <p>
-This tool builds sentences using structured word combinations, making each result feel natural while still being random.
+This tool creates random sentences by combining subjects, verbs, objects, locations, transitions, and extra clauses in different patterns.
+That gives the sentences more variety and helps them feel less repetitive.
+</p>
+<p>
+You can choose a normal, funny, or creative style depending on what kind of sentence you want.
 </p>
 </section>
 
 <section class="info-card">
-<h2>Common uses</h2>
+<h2>When to use a random sentence generator</h2>
 <ul>
-<li>Writing prompts</li>
-<li>Creative exercises</li>
-<li>Classroom activities</li>
-<li>Fun sentence generation</li>
+<li>Writing prompts and creative warmups</li>
+<li>Classroom activities and language practice</li>
+<li>Brainstorming story ideas</li>
+<li>Games, improv, and fun challenges</li>
+<li>Breaking creative blocks when you feel stuck</li>
 </ul>
+</section>
+
+<section class="info-card">
+<h2>Why sentence generators are useful</h2>
+<p>
+A random sentence generator helps you get started fast. Instead of staring at a blank page, you get an instant prompt you can build from.
+</p>
+<p>
+That makes it useful for writers, teachers, students, content creators, and anyone who wants a quick spark of inspiration.
+</p>
 </section>
 
 <section class="info-card">
@@ -205,6 +264,10 @@ function maybe(probability){
   return Math.random() < probability;
 }
 
+function stripArticle(str){
+  return str.replace(/^an\s+/i, "").replace(/^a\s+/i, "").replace(/^the\s+/i, "");
+}
+
 function buildBasePhrase(){
   const subject = pick(subjects);
   const verb = pick(verbs);
@@ -216,6 +279,7 @@ function buildBasePhrase(){
   const transition = pick(transitions);
   const connector = pick(connectors);
   const clause = pick(secondaryClauses);
+  const strippedSubject = stripArticle(subject);
 
   const templates = [
     `${subject} ${verb} ${object}`,
@@ -224,8 +288,8 @@ function buildBasePhrase(){
     `${subject} ${verb} ${object} ${time}`,
     `${transition}, ${lowerFirst(subject)} ${verb} ${object}`,
     `${transition}, ${lowerFirst(subject)} ${adverb} ${verb} ${object}`,
-    `The ${adjective} ${lowerFirst(subject).replace(/^a /, "").replace(/^the /, "")} ${verb} ${object}`,
-    `The ${adjective} ${lowerFirst(subject).replace(/^an /, "").replace(/^a /, "").replace(/^the /, "")} ${adverb} ${verb} ${object}`,
+    `The ${adjective} ${lowerFirst(strippedSubject)} ${verb} ${object}`,
+    `The ${adjective} ${lowerFirst(strippedSubject)} ${adverb} ${verb} ${object}`,
     `${subject} ${verb} ${object} ${connector} ${clause}`,
     `${subject} ${adverb} ${verb} ${object} ${connector} ${clause}`,
     `${location}, ${lowerFirst(subject)} ${verb} ${object}`,
@@ -265,51 +329,21 @@ function generateSentence(){
 
   lastSentence = sentence;
   document.getElementById("result").textContent = sentence;
+  document.getElementById("hint").textContent = "Fresh sentence generated.";
 }
 
 async function copySentence(){
-  if(!lastSentence) return;
+  if(!lastSentence){
+    document.getElementById("hint").textContent = "Generate a sentence first.";
+    return;
+  }
 
   try{
     await navigator.clipboard.writeText(lastSentence);
-  }catch(e){}
-}
-
-function generateSentence(){
-  const style = document.getElementById("styleSelect").value;
-
-  const rand = Math.random();
-
-  let sentence = "";
-
-  if(rand < 0.25){
-    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)}`;
-  } else if(rand < 0.5){
-    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)} ${pick(locations)}`;
-  } else if(rand < 0.75){
-    sentence = `${pick(adjectives)} ${pick(subjects).toLowerCase()} ${pick(verbs)} ${pick(objects)}`;
-  } else {
-    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)} ${pick(times)}`;
+    document.getElementById("hint").textContent = "Copied to clipboard.";
+  }catch(e){
+    document.getElementById("hint").textContent = "Could not copy right now.";
   }
-
-  if(style === "funny"){
-    sentence += " " + pick(funnyExtras);
-  }
-
-  if(style === "creative"){
-    sentence += " " + pick(creativeExtras);
-  }
-
-  sentence += ".";
-
-  lastSentence = sentence;
-  document.getElementById("result").textContent = sentence;
-}
-
-async function copySentence(){
-  if(!lastSentence) return;
-
-  await navigator.clipboard.writeText(lastSentence);
 }
 </script>
 
