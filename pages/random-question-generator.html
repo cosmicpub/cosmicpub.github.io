@@ -6,11 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Random Question Generator | Tool Squares</title>
-<meta name="description" content="Generate random questions instantly. Perfect for conversations, classrooms, icebreakers, and fun.">
+<meta name="description" content="Generate random questions instantly for conversations, classrooms, icebreakers, and group activities. Choose fun, deep, or mixed questions and get a fresh prompt fast.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
      crossorigin="anonymous"></script>
+
 <style>
 .question-result{
   font-size:26px;
@@ -28,9 +30,11 @@
 }
 
 .controls select{
-  padding:10px;
+  padding:10px 12px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #d1d5db;
+  font-size:15px;
+  background:#fff;
 }
 
 .tool-btn-row{
@@ -42,6 +46,28 @@
 
 .secondary-btn{
   background:#111827;
+}
+
+.small-note{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  text-align:center;
+}
+
+@media (max-width: 640px){
+  .question-result{
+    font-size:23px;
+  }
+
+  .tool-btn-row{
+    flex-direction:column;
+  }
+
+  .tool-btn-row button{
+    width:100%;
+  }
 }
 </style>
 
@@ -64,13 +90,13 @@
 <h1>Random Question Generator</h1>
 
 <p class="tool-lead">
-Generate interesting, fun, or deep questions instantly for conversations, classrooms, and icebreakers.
+Generate balanced fun and deep questions instantly for conversations, classrooms, icebreakers, group activities, and getting to know people better.
 </p>
 
 <div class="tool-actions">
 
 <h2>Get a question</h2>
-<p>Select a type and generate a question.</p>
+<p>Choose a category and generate a fresh question instantly.</p>
 
 <div class="controls">
   <select id="typeSelect">
@@ -81,12 +107,13 @@ Generate interesting, fun, or deep questions instantly for conversations, classr
 </div>
 
 <div class="tool-btn-row">
-  <button onclick="generateQuestion()">Generate</button>
-  <button class="secondary-btn" onclick="copyQuestion()">Copy</button>
+  <button type="button" onclick="generateQuestion()">Generate</button>
+  <button type="button" class="secondary-btn" onclick="copyQuestion()">Copy</button>
 </div>
 
 <div class="result-box">
   <div id="result" class="question-result">Click generate to begin</div>
+  <div id="hint" class="small-note">Questions will not repeat until the current category pool is exhausted.</div>
 </div>
 
 </div>
@@ -95,20 +122,44 @@ Generate interesting, fun, or deep questions instantly for conversations, classr
 <div class="tool-sections">
 
 <section class="info-card">
-<h2>How this works</h2>
+<h2>What is a random question generator?</h2>
 <p>
-This tool generates structured questions designed to feel natural and engaging. Choose between fun, deep, or mixed questions.
+A random question generator gives you instant prompts for conversations, class discussions, icebreakers, and group activities. Instead of trying to think of what to ask next, you can generate a question immediately and keep things moving.
+</p>
+<p>
+This version is designed to feel more natural by balancing different types of questions instead of leaning too heavily on one pattern.
 </p>
 </section>
 
 <section class="info-card">
-<h2>Common uses</h2>
+<h2>How this question generator works</h2>
+<p>
+This tool separates questions into fun and deep categories, then mixes them when you choose the mixed setting. It also uses non-repeat logic inside each category so you do not keep seeing the same few prompts right away.
+</p>
+<p>
+That makes it more useful for repeated use in classrooms, conversations, team settings, and social groups.
+</p>
+</section>
+
+<section class="info-card">
+<h2>When to use random questions</h2>
 <ul>
-<li>Icebreakers</li>
-<li>Classroom discussions</li>
-<li>Conversations</li>
-<li>Games and group activities</li>
+<li>Icebreakers in meetings, clubs, and classrooms</li>
+<li>Conversation starters with friends or new people</li>
+<li>Warmups for group discussions</li>
+<li>Game nights and party activities</li>
+<li>Journal prompts and reflection exercises</li>
 </ul>
+</section>
+
+<section class="info-card">
+<h2>Why balanced question lists matter</h2>
+<p>
+A weak question generator quickly feels repetitive when too many prompts sound alike. A stronger tool mixes favorites, hypotheticals, habits, memories, opinions, goals, values, and reflection so each click feels more interesting.
+</p>
+<p>
+That balance makes the tool feel fresher and keeps people using it longer.
+</p>
 </section>
 
 <section class="info-card">
@@ -122,109 +173,225 @@ This tool generates structured questions designed to feel natural and engaging. 
 
 <script>
 const funQuestions = [
-  "What is your favorite food?",
-  "What is your favorite movie?",
-  "What is your dream vacation?",
-  "What is your favorite hobby?",
-  "What is your favorite holiday?",
-  "What is your favorite TV show?",
-  "What is your favorite song right now?",
-  "What is your favorite snack?",
-  "What is your favorite restaurant?",
-  "What is your favorite childhood memory?",
-  "What is something that always makes you laugh?",
-  "What is your go-to fast food order?",
-  "What is your favorite app?",
-  "What is your favorite weekend activity?",
-  "What is your favorite dessert?",
-  "What is your favorite color and why?",
-  "What is your favorite thing to do when you're bored?",
-  "What is your favorite game?",
-  "What is your favorite drink?",
-  "What is your favorite season?",
-  "If you could travel anywhere right now, where would you go?",
-  "If you could eat one food forever, what would it be?",
-  "If you could live anywhere, where would it be?",
-  "If you could meet any celebrity, who would it be?",
-  "If you could instantly learn any skill, what would it be?",
-  "What would you do if you won a million dollars?",
-  "What’s something random you’re really good at?",
-  "What’s your most used emoji?",
-  "What’s your guilty pleasure show?",
-  "What’s something you’ve never tried but want to?",
-  "What’s your favorite way to relax?",
-  "What’s your go-to late night snack?",
-  "What’s your favorite thing to buy?",
-  "What’s something that always cheers you up?",
-  "What’s your favorite thing about weekends?",
-  "What’s the last thing you watched?",
-  "What’s your favorite type of music?",
-  "What’s your favorite thing to do outside?",
-  "What’s your favorite memory from school?",
-  "What’s your favorite thing about your friends?"
+  "What is a small thing that instantly improves your day?",
+  "What is the weirdest food combination you actually like?",
+  "If your week had a theme song, what would it be?",
+  "What is a random skill you would love to master?",
+  "What is the most useless talent you have?",
+  "What is something normal that you secretly enjoy more than most people do?",
+  "What is one app you would keep if you could only keep one?",
+  "If you had to swap lives with a fictional character for one day, who would you choose?",
+  "What is a hill you are willing to die on for no good reason?",
+  "What is the funniest thing that has happened to you recently?",
+  "What is something you were obsessed with for a short time?",
+  "If you could rename yourself for one week, what name would you try?",
+  "What is your go-to comfort food?",
+  "What is a movie you can rewatch without getting tired of it?",
+  "What is something you thought was cool as a kid that seems ridiculous now?",
+  "If you could instantly become great at one sport, which would you choose?",
+  "What is one smell that brings back a memory immediately?",
+  "What is the most random thing you have ever bought?",
+  "What is something you always say you will do but rarely do?",
+  "If your life had a mascot, what would it be?",
+  "What is the best snack in the world?",
+  "What is something you enjoy that you know is kind of silly?",
+  "What is the first thing you would do if you had a completely free day?",
+  "What is a TV show you would erase from your memory just to watch it again fresh?",
+  "If you had to wear one color for a year, which would you choose?",
+  "What is a job you think you would be surprisingly good at?",
+  "What is a weird habit you have picked up over time?",
+  "What is your favorite thing to do when you should probably be doing something else?",
+  "If your phone background had to describe your personality, what would it show?",
+  "What is a random opinion you feel strongly about?",
+  "What is the best dessert to bring to a party?",
+  "If you could keep one animal-sized version of anything as a pet, what would be funniest?",
+  "What is your favorite excuse to leave the house?",
+  "What is something you used to hate but now like?",
+  "What is the most fun you can have for almost no money?",
+  "If you had a personal catchphrase, what would it be?",
+  "What is your favorite thing about weekends?",
+  "What is a common task you oddly enjoy doing?",
+  "If you could magically remove one inconvenience from daily life, what would it be?",
+  "What is something that always makes you laugh no matter what?",
+  "What is the most memorable meal you have ever had?",
+  "If you had to eat the same lunch every day for a month, what would you pick?",
+  "What is your favorite season and what makes it win?",
+  "What is one thing you would ban from group chats forever?",
+  "If your home had a secret room, what would you want inside it?",
+  "What is a random place you have always wanted to visit?",
+  "What is the most chaotic thing you have ever done on impulse?",
+  "What is a sound you weirdly enjoy?",
+  "If you had to create a new holiday, what would people celebrate?",
+  "What is your favorite thing to do outside?",
+  "What is one product you would promote for free because you like it that much?",
+  "If you had to pick a mascot for your personality, what would it be?",
+  "What is a trend you never understood?",
+  "What is something small that makes a place instantly feel cozy?",
+  "If your friend group were a TV show, what genre would it be?",
+  "What is the best fast food order you know?",
+  "What is something you could talk about for way too long?",
+  "If you had to swap wardrobes with someone for a week, who would be interesting?",
+  "What is one thing you miss from being younger?",
+  "What is your ideal lazy day?",
+  "What is a random fear that makes no sense but still exists for you?",
+  "What is one place you could hang out for hours without getting bored?",
+  "If you could bring back one old trend, what would it be?",
+  "What is the best kind of weather?",
+  "What is a song that always gives you energy?",
+  "If you had to host a game show, what kind would it be?",
+  "What is the most fun way to waste time?",
+  "What is something you would be excellent at on a game show?",
+  "If you had to invent a new flavor, what would it be?",
+  "What is a random memory that still makes you smile?",
+  "What is one thing you are way pickier about than most people?",
+  "If you had your own signature drink, what would be in it?",
+  "What is something people always assume about you that is wrong?",
+  "What is the best holiday tradition?",
+  "If you had to listen to one artist for a month, who would survive the cut?",
+  "What is a totally ordinary thing that you think is underrated?",
+  "What is the weirdest compliment you have ever received?",
+  "If your day had to be described as a food, what would it be today?",
+  "What is something you are always tempted to buy?",
+  "What is a random thing you could probably teach a class on?",
+  "If you had to live inside one store for 24 hours, which would be most comfortable?",
+  "What is your favorite way to celebrate good news?",
+  "What is the most harmless trouble you got into as a kid?"
 ];
 
 const deepQuestions = [
-  "What motivates you to keep going?",
-  "What does success mean to you?",
-  "What is your biggest fear?",
-  "What is something you want to improve about yourself?",
-  "What makes you feel fulfilled?",
-  "What is a life lesson you learned the hard way?",
-  "What do you value most in relationships?",
-  "What is something you regret not doing?",
-  "What would you change about your life if you could?",
-  "What does happiness mean to you?",
-  "What kind of legacy do you want to leave behind?",
-  "What is something that changed your perspective on life?",
-  "What is your biggest goal right now?",
-  "What is something you struggle with regularly?",
-  "What is something you are proud of?",
-  "What does a perfect life look like to you?",
+  "What motivates you to keep going when things get difficult?",
+  "What does success mean to you now, and has that changed over time?",
+  "What is something you want to improve about yourself right now?",
+  "What kind of person do you want to become over the next few years?",
+  "What is something you have learned about yourself recently?",
+  "What is one fear that influences you more than you like to admit?",
+  "What gives your life meaning at this stage?",
+  "What is something you are proud of that other people may not notice?",
+  "What is a lesson you learned the hard way?",
   "What is something you wish more people understood about you?",
-  "What is something that makes you feel at peace?",
-  "What is something you want to accomplish this year?",
-  "What is something you are afraid to try?",
-  "What is your biggest strength?",
-  "What is your biggest weakness?",
-  "What does success look like in your daily life?",
-  "What kind of person do you want to become?",
-  "What is something that drains your energy?",
-  "What is something that gives you energy?",
-  "What does a meaningful life look like to you?",
-  "What is something you’ve learned recently?",
-  "What is something you wish you could change about the world?",
-  "What is something that inspires you?",
+  "What helps you feel grounded when life feels chaotic?",
+  "What is something you have outgrown?",
+  "What is something you still need to let go of?",
+  "What does peace look like in your everyday life?",
+  "What do you value most in close relationships?",
+  "What makes you feel most like yourself?",
+  "What is something you are still healing from?",
+  "What is one decision that changed your life more than you expected?",
+  "What do you think people misunderstand about strength?",
+  "What is something you wish you had started earlier?",
+  "What does maturity mean to you?",
+  "What is one habit that has improved your life?",
+  "What is something that quietly drains your energy?",
+  "What is something that consistently restores your energy?",
+  "What do you want more of in your life right now?",
+  "What do you want less of in your life right now?",
+  "What is something you have forgiven yourself for?",
+  "What is something you still struggle to forgive?",
+  "What does being fulfilled actually feel like to you?",
+  "What is one belief you have changed your mind about?",
+  "What kind of environment helps you thrive?",
+  "What is something you used to chase that matters less to you now?",
+  "What is one thing you refuse to compromise on anymore?",
+  "What does a meaningful friendship look like to you?",
+  "What does a healthy relationship require most?",
+  "What is something you fear losing?",
+  "What is one truth about life that has become clearer with time?",
   "What is something you want to be remembered for?",
-  "What is something you’ve overcome?",
-  "What is something you’re still working through?",
-  "What does growth mean to you?",
-  "What is something you’ve realized about yourself lately?",
-  "What is something you wish you started earlier?",
-  "What is something you want more of in life?",
-  "What is something you want less of in life?",
-  "What does freedom mean to you?",
-  "What is something that truly matters to you?"
+  "What kind of legacy matters to you most?",
+  "What do you think your best qualities are when you are at your healthiest?",
+  "What does emotional safety feel like to you?",
+  "What is something you have been avoiding that deserves your attention?",
+  "What part of life feels most uncertain for you right now?",
+  "What part of life feels most hopeful for you right now?",
+  "What is something you want to learn before this year ends?",
+  "What does freedom mean to you personally?",
+  "What is something you no longer want to pretend about?",
+  "What role does ambition play in your life right now?",
+  "What does rest mean to you beyond just sleeping?",
+  "What is one boundary that improved your life once you started keeping it?",
+  "What is something you carry that other people may not realize?",
+  "What kind of conversations make you feel most alive?",
+  "What is one memory that shaped the way you see the world?",
+  "What is something you thought would matter forever but did not?",
+  "What is a value you have become more protective of with time?",
+  "What do you think confidence is really built from?",
+  "What helps you trust yourself?",
+  "What makes you feel disconnected from yourself?",
+  "What kind of future are you trying to build?",
+  "What is something you want to do differently in the next chapter of your life?",
+  "What is a sign that you are growing, even if it feels slow?",
+  "What is something you have survived that changed you?",
+  "What does self-respect look like in action?",
+  "What do you need more courage for right now?",
+  "What is something you wish people asked more often?",
+  "What is something you are grateful for that you often forget to notice?",
+  "What part of your life feels most aligned right now?",
+  "What part feels out of alignment?",
+  "What is something you deeply believe even if it is not popular?",
+  "What kind of person makes you feel safe to be honest?",
+  "What helps you feel hopeful when things look unclear?",
+  "What does being successful emotionally look like to you?",
+  "What is something you want to understand better about yourself?",
+  "What are you currently protecting your peace from?",
+  "What does joy look like when it is quiet instead of loud?",
+  "What kind of life would feel simple in the best way?",
+  "What is one thing you have learned from disappointment?",
+  "What is one thing you have learned from joy?",
+  "What do you think matters more as life goes on?",
+  "What kind of pressure are you ready to release?",
+  "What does healing look like for you in practical terms?",
+  "What would it look like to be more honest with yourself this season?",
+  "What is something you want to stop measuring yourself by?",
+  "What do you think your future self would thank you for doing now?"
 ];
 
-function pick(arr){
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+let availablePools = {
+  fun: [],
+  deep: [],
+  mixed: []
+};
 
 let lastQuestion = "";
 
+function shuffleArray(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildMixedPool(){
+  return [...funQuestions, ...deepQuestions];
+}
+
+function initializePools(){
+  availablePools.fun = shuffleArray(funQuestions);
+  availablePools.deep = shuffleArray(deepQuestions);
+  availablePools.mixed = shuffleArray(buildMixedPool());
+}
+
+function refillPool(type){
+  if(type === "fun"){
+    availablePools.fun = shuffleArray(funQuestions);
+  } else if(type === "deep"){
+    availablePools.deep = shuffleArray(deepQuestions);
+  } else {
+    availablePools.mixed = shuffleArray(buildMixedPool());
+  }
+}
+
+function getNextQuestion(type){
+  if(availablePools[type].length === 0){
+    refillPool(type);
+  }
+  return availablePools[type].pop();
+}
+
 function generateQuestion(){
   const type = document.getElementById("typeSelect").value;
-
-  let question = "";
-
-  if(type === "fun"){
-    question = pick(funQuestions);
-  } else if(type === "deep"){
-    question = pick(deepQuestions);
-  } else {
-    question = Math.random() < 0.5 ? pick(funQuestions) : pick(deepQuestions);
-  }
+  let question = getNextQuestion(type);
 
   if(!question.endsWith("?")){
     question += "?";
@@ -232,12 +399,24 @@ function generateQuestion(){
 
   lastQuestion = question;
   document.getElementById("result").textContent = question;
+  document.getElementById("hint").textContent = "Fresh question generated with non-repeat logic.";
 }
 
 async function copyQuestion(){
-  if(!lastQuestion) return;
-  await navigator.clipboard.writeText(lastQuestion);
+  if(!lastQuestion){
+    document.getElementById("hint").textContent = "Generate a question first.";
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(lastQuestion);
+    document.getElementById("hint").textContent = "Copied to clipboard.";
+  }catch(e){
+    document.getElementById("hint").textContent = "Could not copy right now.";
+  }
 }
+
+initializePools();
 </script>
 
 <script src="/js/tools.js"></script>
