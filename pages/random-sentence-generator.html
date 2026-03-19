@@ -107,23 +107,190 @@ This tool builds sentences using structured word combinations, making each resul
 </main>
 
 <script>
-const subjects = ["The cat","A robot","My neighbor","The teacher","A dinosaur","The programmer","A pirate","The dog","A scientist","The king"];
-const verbs = ["eats","builds","finds","destroys","creates","discovers","hides","throws","writes","draws"];
-const objects = ["a sandwich","a spaceship","a secret code","a treasure map","a strange device","a glowing orb","a mystery","a robot","a book","a portal"];
+const subjects = [
+  "The cat","A robot","My neighbor","The teacher","A dinosaur","The programmer","A pirate","The dog","A scientist","The king",
+  "A mysterious stranger","The quiet kid","An astronaut","The gamer","A chef","The detective","A wizard","The athlete","A musician","The artist",
+  "A curious child","The engineer","A traveler","The gardener","A writer","The driver","A photographer","The mechanic","A farmer","The explorer",
+  "A time traveler","The villain","A hero","The inventor","A student","The coach","A pilot","The baker","A firefighter","The librarian",
+  "A ninja","The hacker","A magician","The knight","A dancer","The singer","A builder","The designer","A swimmer","The captain"
+];
 
-const funnyExtras = ["while dancing","for no reason","on a Tuesday","in slow motion","while laughing","upside down"];
-const creativeExtras = ["under a purple sky","beyond the stars","in a forgotten world","inside a dream","at the edge of time"];
+const verbs = [
+  "eats","builds","finds","destroys","creates","discovers","hides","throws","writes","draws",
+  "explores","fixes","breaks","analyzes","investigates","chases","catches","designs","tests","improves",
+  "launches","drives","flies","repairs","teaches","learns","observes","records","delivers","organizes",
+  "climbs","runs","jumps","slides","travels","searches","collects","drops","grabs","pushes",
+  "pulls","spins","moves","opens","closes","starts","stops","transforms","studies","questions"
+];
+
+const objects = [
+  "a sandwich","a spaceship","a secret code","a treasure map","a strange device","a glowing orb","a mystery","a robot","a book","a portal",
+  "a hidden door","a broken machine","a new idea","a lost key","a strange message","a powerful engine","a secret formula","a rare artifact",
+  "a golden ticket","a puzzle","a map","a signal","a phone","a laptop","a camera","a vehicle","a project","a plan",
+  "a business","a game","a website","a design","a tool","a system","a strategy","a schedule","a report","a solution",
+  "a new recipe","a painting","a song","a video","a story","a challenge","a competition","a device","a structure","a machine"
+];
+
+const adjectives = [
+  "strange","ancient","modern","colorful","dark","bright","mysterious","powerful","tiny","massive",
+  "unexpected","hidden","secret","fast","slow","creative","dangerous","safe","rare","common",
+  "brilliant","clever","awkward","funny","serious","wild","calm","noisy","quiet","bold",
+  "restless","glowing","fragile","fearless","careful","vivid","curious","dramatic","silent","electric"
+];
+
+const adverbs = [
+  "quietly","carefully","awkwardly","gracefully","randomly","suddenly","quickly","slowly","boldly","secretly",
+  "unexpectedly","patiently","wildly","smoothly","confidently","nervously","silently","loudly","calmly","eagerly"
+];
+
+const locations = [
+  "in the backyard","at school","on the roof","in a hidden cave","on another planet","inside a lab",
+  "in the city","at the park","on a mountain","by the ocean","in a dark room","under the bed",
+  "in the garage","at the office","inside a spaceship","in the forest","on a deserted island","in a classroom",
+  "behind the curtain","near the river","inside the castle","under the moonlight","at the station","beside the lighthouse"
+];
+
+const times = [
+  "at midnight","early in the morning","during lunch","on a Friday night","before sunrise","after school",
+  "during the weekend","late at night","in the afternoon","right before dinner","just before the storm","after everyone left"
+];
+
+const funnyExtras = [
+  "for no reason","while dancing","without warning","in slow motion","while laughing","upside down",
+  "like it’s totally normal","as if nothing happened","in complete silence","while everyone watches",
+  "with zero explanation","like a professional somehow"
+];
+
+const creativeExtras = [
+  "under a purple sky","beyond the stars","in a forgotten world","inside a dream","at the edge of time",
+  "where nothing makes sense","in a parallel universe","between reality and imagination",
+  "beneath a silent moon","where the air shimmered with light"
+];
+
+const transitions = [
+  "Suddenly","Unexpectedly","For some reason","Without warning","Out of nowhere",
+  "At that moment","Strangely","Oddly enough","As everyone watched","Just then"
+];
+
+const connectors = [
+  "while","because","even though","just as","right when","after","before","whenever","as if","since"
+];
+
+const secondaryClauses = [
+  "nobody understood what was happening",
+  "the room went completely silent",
+  "everything started to feel different",
+  "it made perfect sense at the time",
+  "someone should have seen it coming",
+  "the whole thing got even stranger",
+  "nobody was ready for what happened next",
+  "it changed the mood instantly",
+  "everyone pretended this was normal",
+  "it raised more questions than answers",
+  "the moment became impossible to ignore",
+  "everything suddenly felt connected"
+];
 
 let lastSentence = "";
 
 function pick(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function lowerFirst(str){
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
+function maybe(probability){
+  return Math.random() < probability;
+}
+
+function buildBasePhrase(){
+  const subject = pick(subjects);
+  const verb = pick(verbs);
+  const object = pick(objects);
+  const adjective = pick(adjectives);
+  const adverb = pick(adverbs);
+  const location = pick(locations);
+  const time = pick(times);
+  const transition = pick(transitions);
+  const connector = pick(connectors);
+  const clause = pick(secondaryClauses);
+
+  const templates = [
+    `${subject} ${verb} ${object}`,
+    `${subject} ${adverb} ${verb} ${object}`,
+    `${subject} ${verb} ${object} ${location}`,
+    `${subject} ${verb} ${object} ${time}`,
+    `${transition}, ${lowerFirst(subject)} ${verb} ${object}`,
+    `${transition}, ${lowerFirst(subject)} ${adverb} ${verb} ${object}`,
+    `The ${adjective} ${lowerFirst(subject).replace(/^a /, "").replace(/^the /, "")} ${verb} ${object}`,
+    `The ${adjective} ${lowerFirst(subject).replace(/^an /, "").replace(/^a /, "").replace(/^the /, "")} ${adverb} ${verb} ${object}`,
+    `${subject} ${verb} ${object} ${connector} ${clause}`,
+    `${subject} ${adverb} ${verb} ${object} ${connector} ${clause}`,
+    `${location}, ${lowerFirst(subject)} ${verb} ${object}`,
+    `${time}, ${lowerFirst(subject)} ${verb} ${object}`,
+    `${subject} ${verb} ${object} ${location} ${connector} ${clause}`,
+    `${transition}, ${lowerFirst(subject)} ${verb} ${object} ${location}`,
+    `${transition}, ${lowerFirst(subject)} ${adverb} ${verb} ${object} ${time}`
+  ];
+
+  return pick(templates);
 }
 
 function generateSentence(){
   const style = document.getElementById("styleSelect").value;
 
-  let sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)}`;
+  let sentence = buildBasePhrase();
+
+  if(style === "funny"){
+    if(maybe(0.8)) sentence += " " + pick(funnyExtras);
+    if(maybe(0.35)) sentence += ", " + lowerFirst(pick(secondaryClauses));
+  }
+
+  if(style === "creative"){
+    if(maybe(0.8)) sentence += " " + pick(creativeExtras);
+    if(maybe(0.45)) sentence += ", " + lowerFirst(pick(secondaryClauses));
+  }
+
+  if(style === "normal"){
+    if(maybe(0.25)) sentence += ", " + lowerFirst(pick(secondaryClauses));
+  }
+
+  sentence = sentence.trim();
+
+  if(!sentence.endsWith(".")){
+    sentence += ".";
+  }
+
+  lastSentence = sentence;
+  document.getElementById("result").textContent = sentence;
+}
+
+async function copySentence(){
+  if(!lastSentence) return;
+
+  try{
+    await navigator.clipboard.writeText(lastSentence);
+  }catch(e){}
+}
+
+function generateSentence(){
+  const style = document.getElementById("styleSelect").value;
+
+  const rand = Math.random();
+
+  let sentence = "";
+
+  if(rand < 0.25){
+    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)}`;
+  } else if(rand < 0.5){
+    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)} ${pick(locations)}`;
+  } else if(rand < 0.75){
+    sentence = `${pick(adjectives)} ${pick(subjects).toLowerCase()} ${pick(verbs)} ${pick(objects)}`;
+  } else {
+    sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)} ${pick(times)}`;
+  }
 
   if(style === "funny"){
     sentence += " " + pick(funnyExtras);
