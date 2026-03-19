@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Question Generator | Tool Squares</title>
+<meta name="description" content="Generate random questions instantly. Perfect for conversations, classrooms, icebreakers, and fun.">
+
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+     crossorigin="anonymous"></script>
+<style>
+.question-result{
+  font-size:26px;
+  font-weight:600;
+  text-align:center;
+  line-height:1.7;
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.controls select{
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.tool-btn-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.secondary-btn{
+  background:#111827;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Conversation tool</div>
+
+<h1>Random Question Generator</h1>
+
+<p class="tool-lead">
+Generate interesting, fun, or deep questions instantly for conversations, classrooms, and icebreakers.
+</p>
+
+<div class="tool-actions">
+
+<h2>Get a question</h2>
+<p>Select a type and generate a question.</p>
+
+<div class="controls">
+  <select id="typeSelect">
+    <option value="mixed">Mixed</option>
+    <option value="fun">Fun</option>
+    <option value="deep">Deep</option>
+  </select>
+</div>
+
+<div class="tool-btn-row">
+  <button onclick="generateQuestion()">Generate</button>
+  <button class="secondary-btn" onclick="copyQuestion()">Copy</button>
+</div>
+
+<div class="result-box">
+  <div id="result" class="question-result">Click generate to begin</div>
+</div>
+
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How this works</h2>
+<p>
+This tool generates structured questions designed to feel natural and engaging. Choose between fun, deep, or mixed questions.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Common uses</h2>
+<ul>
+<li>Icebreakers</li>
+<li>Classroom discussions</li>
+<li>Conversations</li>
+<li>Games and group activities</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+</div>
+</main>
+
+<script>
+const funQuestions = [
+  "What is your favorite food?",
+  "What is your favorite movie?",
+  "What is your dream vacation?",
+  "What is your favorite hobby?",
+  "What is your favorite holiday?",
+  "What is your favorite TV show?",
+  "What is your favorite song right now?",
+  "What is your favorite snack?",
+  "What is your favorite restaurant?",
+  "What is your favorite childhood memory?",
+  "What is something that always makes you laugh?",
+  "What is your go-to fast food order?",
+  "What is your favorite app?",
+  "What is your favorite weekend activity?",
+  "What is your favorite dessert?",
+  "What is your favorite color and why?",
+  "What is your favorite thing to do when you're bored?",
+  "What is your favorite game?",
+  "What is your favorite drink?",
+  "What is your favorite season?",
+  "If you could travel anywhere right now, where would you go?",
+  "If you could eat one food forever, what would it be?",
+  "If you could live anywhere, where would it be?",
+  "If you could meet any celebrity, who would it be?",
+  "If you could instantly learn any skill, what would it be?",
+  "What would you do if you won a million dollars?",
+  "What’s something random you’re really good at?",
+  "What’s your most used emoji?",
+  "What’s your guilty pleasure show?",
+  "What’s something you’ve never tried but want to?",
+  "What’s your favorite way to relax?",
+  "What’s your go-to late night snack?",
+  "What’s your favorite thing to buy?",
+  "What’s something that always cheers you up?",
+  "What’s your favorite thing about weekends?",
+  "What’s the last thing you watched?",
+  "What’s your favorite type of music?",
+  "What’s your favorite thing to do outside?",
+  "What’s your favorite memory from school?",
+  "What’s your favorite thing about your friends?"
+];
+
+const deepQuestions = [
+  "What motivates you to keep going?",
+  "What does success mean to you?",
+  "What is your biggest fear?",
+  "What is something you want to improve about yourself?",
+  "What makes you feel fulfilled?",
+  "What is a life lesson you learned the hard way?",
+  "What do you value most in relationships?",
+  "What is something you regret not doing?",
+  "What would you change about your life if you could?",
+  "What does happiness mean to you?",
+  "What kind of legacy do you want to leave behind?",
+  "What is something that changed your perspective on life?",
+  "What is your biggest goal right now?",
+  "What is something you struggle with regularly?",
+  "What is something you are proud of?",
+  "What does a perfect life look like to you?",
+  "What is something you wish more people understood about you?",
+  "What is something that makes you feel at peace?",
+  "What is something you want to accomplish this year?",
+  "What is something you are afraid to try?",
+  "What is your biggest strength?",
+  "What is your biggest weakness?",
+  "What does success look like in your daily life?",
+  "What kind of person do you want to become?",
+  "What is something that drains your energy?",
+  "What is something that gives you energy?",
+  "What does a meaningful life look like to you?",
+  "What is something you’ve learned recently?",
+  "What is something you wish you could change about the world?",
+  "What is something that inspires you?",
+  "What is something you want to be remembered for?",
+  "What is something you’ve overcome?",
+  "What is something you’re still working through?",
+  "What does growth mean to you?",
+  "What is something you’ve realized about yourself lately?",
+  "What is something you wish you started earlier?",
+  "What is something you want more of in life?",
+  "What is something you want less of in life?",
+  "What does freedom mean to you?",
+  "What is something that truly matters to you?"
+];
+
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+let lastQuestion = "";
+
+function generateQuestion(){
+  const type = document.getElementById("typeSelect").value;
+
+  let question = "";
+
+  if(type === "fun"){
+    question = pick(funQuestions);
+  } else if(type === "deep"){
+    question = pick(deepQuestions);
+  } else {
+    question = Math.random() < 0.5 ? pick(funQuestions) : pick(deepQuestions);
+  }
+
+  if(!question.endsWith("?")){
+    question += "?";
+  }
+
+  lastQuestion = question;
+  document.getElementById("result").textContent = question;
+}
+
+async function copyQuestion(){
+  if(!lastQuestion) return;
+  await navigator.clipboard.writeText(lastQuestion);
+}
+</script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
