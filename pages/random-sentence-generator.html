@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Sentence Generator | Tool Squares</title>
+<meta name="description" content="Generate random sentences instantly for writing prompts, creativity, and classroom use.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<style>
+.sentence-result{
+  font-size:26px;
+  font-weight:600;
+  text-align:center;
+  line-height:1.6;
+}
+
+.sentence-controls{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.sentence-controls select{
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Tool Squares</h1>
+<p>Stop overthinking. Let the internet decide.</p>
+<div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+<div class="tool-wrap">
+
+<section class="tool-main">
+<div class="tool-kicker">Writing tool</div>
+
+<h1>Random Sentence Generator</h1>
+
+<p class="tool-lead">
+Generate creative, funny, or simple sentences instantly for writing prompts, games, and ideas.
+</p>
+
+<div class="tool-actions">
+
+<h2>Create a sentence</h2>
+<p>Choose a style and generate a fresh sentence instantly.</p>
+
+<div class="sentence-controls">
+  <select id="styleSelect">
+    <option value="normal">Normal</option>
+    <option value="funny">Funny</option>
+    <option value="creative">Creative</option>
+  </select>
+</div>
+
+<button onclick="generateSentence()">Generate</button>
+<button class="secondary-btn" onclick="copySentence()">Copy</button>
+
+<div class="result-box">
+  <div id="result" class="sentence-result">Click generate to begin</div>
+</div>
+
+</div>
+</section>
+
+<div class="tool-sections">
+
+<section class="info-card">
+<h2>How this works</h2>
+<p>
+This tool builds sentences using structured word combinations, making each result feel natural while still being random.
+</p>
+</section>
+
+<section class="info-card">
+<h2>Common uses</h2>
+<ul>
+<li>Writing prompts</li>
+<li>Creative exercises</li>
+<li>Classroom activities</li>
+<li>Fun sentence generation</li>
+</ul>
+</section>
+
+<section class="info-card">
+<h2>Try another tool</h2>
+<div class="related-tool-grid" id="relatedTools"></div>
+</section>
+
+</div>
+</div>
+</main>
+
+<script>
+const subjects = ["The cat","A robot","My neighbor","The teacher","A dinosaur","The programmer","A pirate","The dog","A scientist","The king"];
+const verbs = ["eats","builds","finds","destroys","creates","discovers","hides","throws","writes","draws"];
+const objects = ["a sandwich","a spaceship","a secret code","a treasure map","a strange device","a glowing orb","a mystery","a robot","a book","a portal"];
+
+const funnyExtras = ["while dancing","for no reason","on a Tuesday","in slow motion","while laughing","upside down"];
+const creativeExtras = ["under a purple sky","beyond the stars","in a forgotten world","inside a dream","at the edge of time"];
+
+let lastSentence = "";
+
+function pick(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function generateSentence(){
+  const style = document.getElementById("styleSelect").value;
+
+  let sentence = `${pick(subjects)} ${pick(verbs)} ${pick(objects)}`;
+
+  if(style === "funny"){
+    sentence += " " + pick(funnyExtras);
+  }
+
+  if(style === "creative"){
+    sentence += " " + pick(creativeExtras);
+  }
+
+  sentence += ".";
+
+  lastSentence = sentence;
+  document.getElementById("result").textContent = sentence;
+}
+
+async function copySentence(){
+  if(!lastSentence) return;
+
+  await navigator.clipboard.writeText(lastSentence);
+}
+</script>
+
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+</body>
+</html>
