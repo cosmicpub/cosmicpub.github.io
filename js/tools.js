@@ -6,6 +6,7 @@ const TOOL_CARDS = [
   {title:"Random Question", desc:"Generate fun or deep questions instantly.", url:"/pages/random-question-generator.html", icon:"❓", color:"c-blue"},
   {title:"Do Today", desc:"Find something to do.", url:"/pages/what-should-i-do-today.html", icon:"📌", color:"c-green"},
   {title:"Username", desc:"Generate usernames fast.", url:"/pages/username-generator.html", icon:"👤", color:"c-blue"},
+  {title:"Random Country", desc:"Generate a random country instantly.", url:"/pages/random-country.html", icon:"🌍", color:"c-blue"},
   {title:"Excuse", desc:"Funny random excuses.", url:"/pages/excuse-generator.html", icon:"😅", color:"c-pink"},
   {title:"Truth or Dare", desc:"Get a random prompt.", url:"/pages/truth-or-dare.html", icon:"🎭", color:"c-purple"},
   {title:"Would You Rather", desc:"Choose between two options.", url:"/pages/would-you-rather.html", icon:"🤔", color:"c-green"},
@@ -22,5 +23,7 @@ const TOOL_CARDS = [
   {title:"Spin the Wheel", desc:"Spin to make a random decision.", url:"/pages/spin-the-wheel.html", icon:"🎡", color:"c-purple"},
   {title:"Password Generator", desc:"Generate a strong password instantly.", url:"/pages/random-password-generator.html", icon:"🔐", color:"c-slate"},
   {title:"Random Name Picker", desc:"Pick a random name instantly.", url:"/pages/random-name-picker.html", icon:"👥", color:"c-blue"},
-  {title:"Compliment Generator", desc:"Generate funny, deep, or romantic compliments.", url:"/pages/compliment-generator.html", icon:"💬", color:"c-green"}
+  {title:"Compliment Generator", desc:"Generate funny, deep, or romantic compliments.", url:"/pages/compliment-generator.html", icon:"💬", color:"c-green"},
+  {title:"Random Animal", desc:"Generate a random animal instantly.", url:"/pages/random-animal.html", icon:"🐾", color:"c-green"},
+  {title:"Random City", desc:"Generate a random city instantly.", url:"/pages/random-city.html", icon:"🏙️", color:"c-blue"}
 ];
