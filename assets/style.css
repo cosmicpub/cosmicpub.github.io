@@ -954,15 +954,15 @@ button:active{
 }
 
 @media (max-width: 640px){
-  header{
+  .hero-header{
     padding:54px 18px;
   }
 
-  header h1{
+  .hero-header h1{
     font-size:40px;
   }
 
-  header p{
+  .hero-header p{
     font-size:18px;
   }
 
