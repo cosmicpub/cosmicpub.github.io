@@ -6,94 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Random Country Generator | Tool Squares</title>
-<meta name="description" content="Generate a random country instantly. Great for geography games, classrooms, travel inspiration, and random country challenges.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://toolsquares.com/pages/random-country.html">
+<meta name="description" content="Generate a random country instantly for games, classrooms, or travel inspiration.">
 
 <link rel="stylesheet" href="/assets/style.css">
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
 crossorigin="anonymous"></script>
 
 <style>
-.country-result{
+.result-big{
   font-size:34px;
   font-weight:800;
-  line-height:1.4;
 }
-
-.country-meta{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:0 0 18px;
-  position:relative;
-}
-
-.country-pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px 12px;
-  border-radius:999px;
-  background:rgba(79,70,229,.08);
-  color:#4338ca;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.02em;
-}
-
-.action-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
-  position:relative;
-}
-
-.copy-btn{
-  background:#111827;
-}
-
-.copy-btn:hover{
-  filter:brightness(.98);
-}
-
-.copy-status{
-  margin-top:12px;
-  font-size:14px;
-  color:#6b7280;
-  min-height:20px;
-}
-
-.result-box{
-  min-height:110px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-
 .result-empty{
   color:#6b7280;
-  font-size:18px;
-  font-weight:700;
-  line-height:1.5;
-}
-
-@media (max-width: 640px){
-  .country-result{
-    font-size:28px;
-  }
-
-  .action-row{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .action-row button{
-    width:100%;
-  }
 }
 </style>
 
@@ -114,29 +40,23 @@ crossorigin="anonymous"></script>
 
     <section class="tool-main">
       <div class="tool-kicker">Geography tool</div>
+
       <h1>Random Country Generator</h1>
+
       <p class="tool-lead">
-        Generate a random country instantly for geography games, classroom activities, travel inspiration, writing prompts, or just plain curiosity.
+        Generate a random country instantly for games, classroom activities, or travel ideas.
       </p>
 
       <div class="tool-actions">
-        <div class="country-meta">
-          <span class="country-pill">Geography</span>
-          <span class="country-pill">Classroom-friendly</span>
-          <span class="country-pill">Travel inspiration</span>
-        </div>
-
         <h2>Generate a country</h2>
-        <p>Click once to get a random country from around the world.</p>
+        <p>Click below to get a random country.</p>
 
-        <div class="action-row">
-          <button type="button" onclick="ToolEngine.run(); clearCopyStatus();">Generate</button>
-          <button type="button" class="copy-btn" onclick="copyCountry()">Copy</button>
-        </div>
+        <button onclick="ToolEngine.run()">Generate</button>
 
         <div class="result-box">
-          <div id="result" class="result country-result result-empty">Your random country will appear here.</div>
-          <div id="copyStatus" class="copy-status"></div>
+          <div id="result" class="result result-big result-empty">
+            Your random country will appear here.
+          </div>
         </div>
       </div>
     </section>
@@ -144,34 +64,21 @@ crossorigin="anonymous"></script>
     <div class="tool-sections">
 
       <section class="info-card">
-        <h2>How this random country generator works</h2>
+        <h2>How this works</h2>
         <p>
-          This tool picks one country at random from a large list of countries around the world. It is designed to be fast, simple, and easy to use whether you are teaching geography, playing a game, or looking for a random place to explore.
-        </p>
-        <p>
-          Because the list is broad, the tool stays useful across many clicks and works well for classroom warmups, trivia, map practice, or travel-themed challenges.
+          This tool randomly selects a country from a large list. It’s useful for geography games,
+          classroom activities, or discovering new places.
         </p>
       </section>
 
       <section class="info-card">
-        <h2>Ways people use a random country generator</h2>
+        <h2>Ways to use it</h2>
         <ul>
-          <li>Geography classroom activities and quizzes</li>
-          <li>Travel bucket list ideas</li>
-          <li>Writing prompts and worldbuilding</li>
-          <li>Games, trivia, and random challenges</li>
-          <li>Picking a country to research or learn about</li>
+          <li>Geography classroom games</li>
+          <li>Travel inspiration</li>
+          <li>Random challenges</li>
+          <li>Learning world countries</li>
         </ul>
-      </section>
-
-      <section class="info-card">
-        <h2>Why random geography tools are useful</h2>
-        <p>
-          A random country generator removes the need to manually choose a place yourself. That makes it useful when you want a fair random result for a game, a class prompt, or a creative challenge.
-        </p>
-        <p>
-          It is also a fun way to discover places you may not have thought about before, which makes it useful for both learning and curiosity.
-        </p>
       </section>
 
       <section class="info-card">
@@ -180,15 +87,15 @@ crossorigin="anonymous"></script>
       </section>
 
     </div>
+
   </div>
 </main>
 
+<!-- TOOL CONFIG -->
 <script type="application/json" id="tool-config">
 {
   "type":"picker",
   "title":"Random Country Generator",
-  "description":"Generate a random country instantly.",
-  "buttonText":"Generate",
   "options":[
     "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria",
     "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan",
@@ -214,50 +121,18 @@ crossorigin="anonymous"></script>
 }
 </script>
 
+<!-- SCRIPTS -->
 <script src="/assets/tool-engine.js"></script>
 <script src="/js/tools.js"></script>
 <script src="/js/load-related-tools.js"></script>
-
-<script>
-function clearCopyStatus(){
-  document.getElementById("copyStatus").textContent = "";
-  const resultEl = document.getElementById("result");
-  resultEl.classList.remove("result-empty");
-}
-
-async function copyCountry(){
-  const resultEl = document.getElementById("result");
-  const statusEl = document.getElementById("copyStatus");
-  const text = (resultEl.textContent || "").trim();
-
-  if(!text || text === "Your random country will appear here."){
-    statusEl.textContent = "Generate a country first.";
-    return;
-  }
-
-  try{
-    await navigator.clipboard.writeText(text);
-    statusEl.textContent = "Country copied to clipboard.";
-  }catch(e){
-    statusEl.textContent = "Could not copy right now.";
-  }
-}
-
-ToolEngine.init();
-</script>
-
-<script src="/assets/tool-engine.js"></script>
-<script src="/js/tools.js"></script>
-<script src="/js/load-related-tools.js"></script>
-
-<script>
-ToolEngine.init();
-</script>
-
 <script src="/js/include-header.js"></script>
 
 <div id="site-footer"></div>
 <script src="/js/include-footer.js"></script>
+
+<script>
+ToolEngine.init();
+</script>
 
 </body>
 </html>
