@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Animal Generator | Tool Squares</title>
+<meta name="description" content="Generate a random animal instantly for games, classrooms, or fun.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.result-big{
+  font-size:34px;
+  font-weight:800;
+}
+.result-empty{
+  color:#6b7280;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="site-header"></div>
+
+<!-- HERO -->
+<header class="hero-header">
+  <h1>Tool Squares</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<!-- MAIN -->
+<main class="tool-page">
+  <div class="tool-wrap">
+
+    <section class="tool-main">
+      <div class="tool-kicker">Animal tool</div>
+
+      <h1>Random Animal Generator</h1>
+
+      <p class="tool-lead">
+        Generate a random animal instantly for games, classroom activities, or just for fun.
+      </p>
+
+      <div class="tool-actions">
+        <h2>Generate an animal</h2>
+        <p>Click below to get a random animal.</p>
+
+        <button onclick="ToolEngine.run()">Generate</button>
+
+        <div class="result-box">
+          <div id="result" class="result result-big result-empty">
+            Your random animal will appear here.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO -->
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this works</h2>
+        <p>
+          This tool randomly selects an animal from a large list. It’s perfect for classrooms, games,
+          creative writing prompts, or quick fun.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Ways to use it</h2>
+        <ul>
+          <li>Classroom games and activities</li>
+          <li>Drawing or sketch prompts</li>
+          <li>Creative writing ideas</li>
+          <li>Fun challenges with friends</li>
+        </ul>
+      </section>
+
+      <!-- RELATED -->
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- TOOL CONFIG -->
+<script type="application/json" id="tool-config">
+{
+  "type":"picker",
+  "title":"Random Animal Generator",
+ "options":[
+"Aardvark","Alligator","Alpaca","Ant","Anteater","Antelope","Armadillo","Baboon","Badger","Barracuda",
+"Bat","Bear","Beaver","Bee","Bison","Boar","Buffalo","Butterfly","Camel","Capybara",
+"Caribou","Cat","Caterpillar","Cattle","Cheetah","Chicken","Chimpanzee","Chinchilla","Clam","Cobra",
+"Cougar","Cow","Coyote","Crab","Crane","Crocodile","Crow","Deer","Dingo","Dog",
+"Dolphin","Donkey","Dragonfly","Duck","Eagle","Eel","Elephant","Elk","Falcon","Ferret",
+"Finch","Flamingo","Fly","Fox","Frog","Gazelle","Gecko","Gerbil","Giraffe","Goat",
+"Goose","Gorilla","Grasshopper","Hamster","Hare","Hawk","Hedgehog","Heron","Hippopotamus","Hornet",
+"Horse","Hummingbird","Hyena","Iguana","Impala","Jackal","Jaguar","Jellyfish","Kangaroo","Kingfisher",
+"Koala","Komodo Dragon","Lemur","Leopard","Lion","Lizard","Llama","Lobster","Locust","Lynx",
+"Macaw","Magpie","Mallard","Manatee","Meerkat","Mink","Mole","Monkey","Moose","Mosquito",
+"Moth","Mouse","Mule","Narwhal","Newt","Octopus","Opossum","Orangutan","Ostrich","Otter",
+"Owl","Ox","Panda","Panther","Parrot","Peacock","Pelican","Penguin","Pig","Pigeon",
+"Polar Bear","Porcupine","Porpoise","Possum","Prairie Dog","Puffin","Puma","Quail","Rabbit","Raccoon",
+"Ram","Rat","Raven","Red Panda","Reindeer","Rhinoceros","Salamander","Salmon","Scorpion","Sea Lion",
+"Sea Turtle","Seal","Shark","Sheep","Shrimp","Skunk","Sloth","Snail","Snake","Snow Leopard",
+"Sparrow","Spider","Squid","Squirrel","Starfish","Stingray","Stork","Swan","Tapir","Termite",
+"Tiger","Toad","Toucan","Turkey","Turtle","Vulture","Walrus","Wasp","Weasel","Whale",
+"Wolf","Wolverine","Wombat","Woodpecker","Yak","Zebra",
+
+"African Wild Dog","Albatross","Anemone","Angelfish","Ape","Asian Elephant","Asp","Axolotl","Bandicoot","Barn Owl",
+"Barnacle","Basilisk","Beetle","Beluga Whale","Binturong","Black Bear","Black Panther","Blue Jay","Blue Whale","Booby Bird",
+"Box Jellyfish","Brown Bear","Bullfrog","Butterfly Fish","Canary","Caracal","Cassowary","Centipede","Chameleon","Cicada",
+"Clownfish","Coati","Cockatoo","Cockroach","Cod","Cormorant","Cottonmouth Snake","Cricket","Cuttlefish","Dachshund",
+"Dalmatian","Desert Tortoise","Dhole","Dodo","Dormouse","Dragonfish","Dugong","Earthworm","Electric Eel","Emu",
+"Ermine","Falcon","Firefly","Flatfish","Flying Fish","Flying Squirrel","Frigatebird","Fur Seal","Gannet","Gaur",
+"Gibbon","Glass Frog","Glow Worm","Goanna","Golden Eagle","Goldfish","Grass Snake","Green Anole","Greyhound","Grouse",
+"Guinea Pig","Hammerhead Shark","Harrier","Herring","Hoatzin","Honey Badger","Hoopoe","Hornbill","Horseshoe Crab","Housefly",
+"Ibex","Ibises","Indian Cobra","Irish Wolfhound","Jackrabbit","Japanese Macaque","Javan Rhino","Jerboa","Kakapo","Kea",
+"Kinkajou","Kiwi","Lamprey","Leafcutter Ant","Leech","Liger","Lionfish","Little Penguin","Loggerhead Turtle","Longhorn Beetle",
+"Loris","Lyrebird","Macaque","Mako Shark","Mamba","Mandrill","Mantis","Marlin","Marmoset","Mayfly",
+"Mudskipper","Musk Ox","Nautilus","Needlefish","Nightingale","Numbat","Oarfish","Okapi","Olm","Oryx",
+"Otterhound","Pademelon","Pangolin","Parakeet","Parrotfish","Peafowl","Pekingese","Perch","Pika","Piranha",
+"Platypus","Plover","Poison Dart Frog","Polecat","Pomsky","Porbeagle Shark","Portuguese Man o War","Potoo","Praying Mantis","Proboscis Monkey",
+"Pufferfish","Quokka","Quoll","Ragdoll Cat","Red Fox","Red Kite","Rock Hyrax","Rottweiler","Saber Tooth Tiger","Sailfish",
+"Sand Cat","Sand Dollar","Sandpiper","Sardine","Sawfish","Scad","Sea Cucumber","Sea Horse","Sea Urchin","Serval",
+"Shiba Inu","Shoebill","Silkworm","Silverback Gorilla","Skimmer","Slow Loris","Smelt","Snowy Owl","Sockeye Salmon","Sole",
+"Sparrowhawk","Spiny Lobster","Sponge","Springbok","Squidworm","Staffordshire Bull Terrier","Stag Beetle","Starling","Steller Sea Lion","Stonefish",
+"Sugar Glider","Sun Bear","Sunfish","Surgeonfish","Tamarin","Tarantula","Tasmanian Devil","Tetra","Thorny Devil","Thresher Shark",
+"Tick","Titi Monkey","Tree Frog","Tree Kangaroo","Triggerfish","Tsetse Fly","Tuatara","Uakari","Umbrellabird","Vaquita",
+"Velvet Worm","Viper","Vole","Wahoo Fish","Walking Stick Insect","Wallaby","Water Buffalo","Water Strider","Weimaraner","White Tiger",
+"Whippet","Wild Boar","Wildebeest","Wirehaired Terrier","Wolf Spider","Wren","Xerus","Yellowjacket","Yorkshire Terrier","Zorse"
+]
+}
+</script>
+
+<!-- SCRIPTS -->
+<script src="/assets/tool-engine.js"></script>
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+<script src="/js/include-header.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+<script>
+ToolEngine.init();
+</script>
+
+</body>
+</html>
