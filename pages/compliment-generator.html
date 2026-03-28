@@ -7,6 +7,8 @@
 
 <title>Compliment Generator | Tool Squares</title>
 <meta name="description" content="Get a random compliment instantly. Choose funny, deep, or romantic compliments, then copy your result in one click.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolsquares.com/pages/compliment-generator.html">
 
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
@@ -16,6 +18,7 @@ crossorigin="anonymous"></script>
 .compliment-result{
   font-size:28px;
   font-weight:700;
+  line-height:1.5;
 }
 
 .category-row{
@@ -24,6 +27,7 @@ crossorigin="anonymous"></script>
   gap:10px;
   justify-content:center;
   margin:0 0 16px;
+  position:relative;
 }
 
 .category-btn{
@@ -54,6 +58,7 @@ crossorigin="anonymous"></script>
   flex-wrap:wrap;
   gap:10px;
   justify-content:center;
+  position:relative;
 }
 
 .copy-btn{
@@ -98,88 +103,90 @@ crossorigin="anonymous"></script>
 <body>
 
 <div id="site-header"></div>
+
 <header class="hero-header">
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
+  <h1>Tool Squares</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
 </header>
 
 <main class="tool-page">
-<div class="tool-wrap">
+  <div class="tool-wrap">
 
-<section class="tool-main">
-<div class="tool-kicker">Feel good</div>
+    <section class="tool-main">
+      <div class="tool-kicker">Feel good</div>
 
-<h1>Compliment Generator</h1>
+      <h1>Compliment Generator</h1>
 
-<p class="tool-lead">
-Get a random compliment instantly. Choose a funny, deep, or romantic style, then copy the result in one click.
-</p>
+      <p class="tool-lead">
+        Get a random compliment instantly. Choose a funny, deep, or romantic style, then copy the result in one click.
+      </p>
 
-<div class="tool-actions">
-<h2>Generate a compliment</h2>
-<p>Pick a category below and click generate.</p>
+      <div class="tool-actions">
+        <h2>Generate a compliment</h2>
+        <p>Pick a category below and click generate.</p>
 
-<div class="category-row">
-  <button type="button" class="category-btn active" data-category="funny" onclick="setCategory('funny', this)">Funny</button>
-  <button type="button" class="category-btn" data-category="deep" onclick="setCategory('deep', this)">Deep</button>
-  <button type="button" class="category-btn" data-category="romantic" onclick="setCategory('romantic', this)">Romantic</button>
-</div>
+        <div class="category-row">
+          <button type="button" class="category-btn active" data-category="funny" onclick="setCategory('funny', this)">Funny</button>
+          <button type="button" class="category-btn" data-category="deep" onclick="setCategory('deep', this)">Deep</button>
+          <button type="button" class="category-btn" data-category="romantic" onclick="setCategory('romantic', this)">Romantic</button>
+        </div>
 
-<div class="action-row">
-  <button type="button" onclick="runCompliment()">Generate</button>
-  <button type="button" class="copy-btn" onclick="copyCompliment()">Copy</button>
-</div>
+        <div class="action-row">
+          <button type="button" onclick="runCompliment()">Generate</button>
+          <button type="button" class="copy-btn" onclick="copyCompliment()">Copy</button>
+        </div>
 
-<div class="result-box">
-  <div id="result" class="result compliment-result"></div>
-  <div id="hint" class="category-note">Current category: Funny</div>
-  <div id="copyStatus" class="copy-status"></div>
-</div>
-</div>
-</section>
+        <div class="result-box">
+          <div id="result" class="result compliment-result"></div>
+          <div id="hint" class="category-note">Current category: Funny</div>
+          <div id="copyStatus" class="copy-status"></div>
+        </div>
+      </div>
+    </section>
 
-<div class="tool-sections">
+    <div class="tool-sections">
 
-<section class="info-card">
-<h2>Choose the kind of compliment you want</h2>
-<p>
-This compliment generator gives you three styles to choose from. Funny compliments are playful and light.
-Deep compliments are more meaningful and personal. Romantic compliments are warmer and better for partners, crushes, or sweet messages.
-</p>
-<p>
-Each category now has a much larger pool, so the tool feels fresher and repeats far less when people click multiple times.
-</p>
-</section>
+      <section class="info-card">
+        <h2>Choose the kind of compliment you want</h2>
+        <p>
+          This compliment generator gives you three styles to choose from. Funny compliments are playful and light.
+          Deep compliments are more meaningful and personal. Romantic compliments are warmer and better for partners, crushes, or sweet messages.
+        </p>
+        <p>
+          Each category has a large pool, so the tool feels fresher and repeats far less when people click multiple times.
+        </p>
+      </section>
 
-<section class="info-card">
-<h2>Ways to use this tool</h2>
-<ul>
-<li>Send a quick kind message to a friend or partner</li>
-<li>Use funny compliments for light conversation</li>
-<li>Pick a deeper compliment when you want something more meaningful</li>
-<li>Copy a romantic line for a text or note</li>
-<li>Click again when you want a fresh result</li>
-</ul>
-</section>
+      <section class="info-card">
+        <h2>Ways to use this tool</h2>
+        <ul>
+          <li>Send a quick kind message to a friend or partner</li>
+          <li>Use funny compliments for light conversation</li>
+          <li>Pick a deeper compliment when you want something more meaningful</li>
+          <li>Copy a romantic line for a text or note</li>
+          <li>Click again when you want a fresh result</li>
+        </ul>
+      </section>
 
-<section class="info-card">
-<h2>Why compliments work</h2>
-<p>
-A good compliment can instantly improve someone’s mood, start a conversation, or make a message feel more personal.
-Sometimes all you need is one sentence that feels warm, genuine, or fun.
-</p>
-<p>
-This tool keeps it simple: choose a style, generate a compliment, and copy it if you want to share it right away.
-</p>
-</section>
+      <section class="info-card">
+        <h2>Why compliments work</h2>
+        <p>
+          A good compliment can instantly improve someone’s mood, start a conversation, or make a message feel more personal.
+          Sometimes all you need is one sentence that feels warm, genuine, or fun.
+        </p>
+        <p>
+          This tool keeps it simple: choose a style, generate a compliment, and copy it if you want to share it right away.
+        </p>
+      </section>
 
-<section class="info-card">
-<h2>Try another tool</h2>
-<div class="related-tool-grid" id="relatedTools"></div>
-</section>
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
 
-</div>
-</div>
+    </div>
+  </div>
 </main>
 
 <script type="application/json" id="tool-config">
@@ -204,6 +211,9 @@ This tool keeps it simple: choose a style, generate a compliment, and copy it if
 </script>
 
 <script src="/assets/tool-engine.js"></script>
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+
 <script>
 const complimentSets = {
   funny: [
@@ -472,128 +482,10 @@ async function copyCompliment(){
 ToolEngine.init();
 </script>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Random Letter Generator | Tool Squares</title>
-<meta name="description" content="Generate a random letter instantly. Perfect for games, classrooms, prompts, and quick ideas.">
-
-<link rel="stylesheet" href="/assets/style.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
-crossorigin="anonymous"></script>
-
-<style>
-.letter-result{
-  font-size:56px;
-  font-weight:900;
-}
-
-.hint{
-  margin-top:12px;
-  font-size:14px;
-  color:#6b7280;
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-<h1>Tool Squares</h1>
-<p>Stop overthinking. Let the internet decide.</p>
-<div class="nav"><a href="/">← Back to all tools</a></div>
-</header>
-
-<main class="tool-page">
-  <div class="tool-wrap">
-
-    <section class="tool-main">
-      <div class="tool-kicker">Random generator</div>
-
-      <h1 id="toolH1">Random Letter Generator</h1>
-
-      <p class="tool-lead" id="toolDesc">
-        Generate a random letter instantly. Great for games, classroom activities, prompts, and quick challenges.
-      </p>
-
-      <div class="tool-actions">
-        <h2>Generate a letter</h2>
-        <p>Click below to get a random letter.</p>
-
-        <button onclick="ToolEngine.run()">Generate</button>
-
-        <div id="result" class="result letter-result"></div>
-        <div id="hint" class="hint">A new random letter appears each time you click.</div>
-      </div>
-    </section>
-
-    <div class="tool-sections">
-
-      <section class="info-card">
-        <h2>How it works</h2>
-        <p>
-          This tool randomly selects one letter from A to Z every time you click the button. It is built to be fast,
-          simple, and useful when you need a quick random alphabet result.
-        </p>
-      </section>
-
-      <section class="info-card">
-        <h2>Common uses for a random letter generator</h2>
-        <ul>
-          <li>Classroom games and warmups</li>
-          <li>Creative writing prompts</li>
-          <li>Alphabet challenges and review</li>
-          <li>Icebreaker games and activities</li>
-          <li>Picking a starting letter for names, words, or categories</li>
-        </ul>
-      </section>
-
-      <section class="info-card">
-        <h2>Why people use random letter tools</h2>
-        <p>
-          A random letter generator is a simple way to add variety to games, lessons, and creative exercises.
-          Instead of choosing a letter yourself, the tool gives you an instant answer that feels unbiased and quick.
-        </p>
-        <p>
-          That makes it useful for teachers, students, families, and anyone who wants an easy alphabet-based prompt without extra setup.
-        </p>
-      </section>
-
-      <section class="info-card">
-        <h2>Try another tool</h2>
-        <div class="related-tool-grid" id="relatedTools"></div>
-      </section>
-
-    </div>
-  </div>
-</main>
-
-<script type="application/json" id="tool-config">
-{
-  "type":"picker",
-  "title":"Random Letter Generator",
-  "description":"Generate a random letter instantly.",
-  "buttonText":"Generate",
-  "hint":"A new random letter appears each time you click.",
-  "options":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-}
-</script>
-
-<script src="/js/tools.js"></script>
-<script src="/js/load-related-tools.js"></script>
-
 <script src="/js/include-header.js"></script>
 
 <div id="site-footer"></div>
 <script src="/js/include-footer.js"></script>
-
-</body>
-</html>
 
 </body>
 </html>
