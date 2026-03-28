@@ -114,25 +114,21 @@ a{
    HERO HEADER
 ========================= */
 
-/* =========================
-   HERO HEADER
-========================= */
-
-header{
+.hero-header{
   background:linear-gradient(135deg,#5b5bd6,#6a4be8);
   color:#fff;
   padding:70px 20px;
   text-align:center;
 }
 
-header h1{
+.hero-header h1{
   margin:0 0 12px;
   font-size:52px;
   font-weight:900;
   letter-spacing:.5px;
 }
 
-header p{
+.hero-header p{
   margin:0;
   font-size:22px;
   opacity:.95;
