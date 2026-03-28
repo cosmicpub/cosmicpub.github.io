@@ -21,6 +21,7 @@
   gap:10px;
   flex-wrap:wrap;
   margin:0 0 18px;
+  position:relative;
 }
 
 .date-pill{
@@ -42,6 +43,7 @@
   justify-content:center;
   flex-wrap:wrap;
   margin-top:14px;
+  position:relative;
 }
 
 .ghost{
@@ -72,6 +74,7 @@
 .history-wrap{
   margin-top:18px;
   text-align:left;
+  position:relative;
 }
 
 .history-title{
@@ -98,6 +101,8 @@
 </head>
 
 <body>
+
+<div id="site-header"></div>
 
 <header>
   <h1>Tool Squares</h1>
@@ -199,10 +204,12 @@
 
         </div>
       </section>
+
       <section class="info-card">
-       <h2>Try another random tool</h2>
-       <div class="related-tool-grid" id="relatedTools"></div>
-     </section>>
+        <h2>Try another random tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
     </div>
   </div>
 </main>
@@ -395,6 +402,7 @@ async function copyIdea(){
   }
 }
 </script>
+
 <script src="/js/tools.js"></script>
 <script src="/js/load-related-tools.js"></script>
 <script src="/js/include-header.js"></script>
