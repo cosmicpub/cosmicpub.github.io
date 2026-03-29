@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random City Generator | Tool Squares</title>
+<meta name="description" content="Generate a random city instantly for games, classrooms, travel inspiration, and writing prompts.">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6749618919601275"
+crossorigin="anonymous"></script>
+
+<style>
+.result-big{
+  font-size:34px;
+  font-weight:800;
+  line-height:1.4;
+}
+.result-empty{
+  color:#6b7280;
+}
+@media (max-width: 640px){
+  .result-big{
+    font-size:28px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<header class="hero-header">
+  <h1>Tool Squares</h1>
+  <p>Stop overthinking. Let the internet decide.</p>
+  <div class="nav"><a href="/">← Back to all tools</a></div>
+</header>
+
+<main class="tool-page">
+  <div class="tool-wrap">
+
+    <section class="tool-main">
+      <div class="tool-kicker">City tool</div>
+
+      <h1>Random City Generator</h1>
+
+      <p class="tool-lead">
+        Generate a random city instantly for geography games, travel ideas, classroom activities, or creative prompts.
+      </p>
+
+      <div class="tool-actions">
+        <h2>Generate a city</h2>
+        <p>Click below to get a random city from around the world.</p>
+
+        <button onclick="ToolEngine.run()">Generate</button>
+
+        <div class="result-box">
+          <div id="result" class="result result-big result-empty">
+            Your random city will appear here.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tool-sections">
+
+      <section class="info-card">
+        <h2>How this works</h2>
+        <p>
+          This tool randomly selects a city from a large worldwide list. It is useful for geography games, classroom activities, travel inspiration, and writing prompts.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Ways to use it</h2>
+        <ul>
+          <li>Travel inspiration and bucket list ideas</li>
+          <li>Geography classroom games</li>
+          <li>Creative writing prompts</li>
+          <li>Random challenges and trivia</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Why people use random city tools</h2>
+        <p>
+          A random city generator gives you a fast answer without overthinking. It is useful when you want a fair random result for a game, a class activity, or a creative idea.
+        </p>
+      </section>
+
+      <section class="info-card">
+        <h2>Try another tool</h2>
+        <div class="related-tool-grid" id="relatedTools"></div>
+      </section>
+
+    </div>
+
+  </div>
+</main>
+
+<script type="application/json" id="tool-config">
+{
+  "type":"picker",
+  "title":"Random City Generator",
+  "options":[
+    "Amsterdam, Netherlands","Athens, Greece","Atlanta, United States","Auckland, New Zealand","Bangkok, Thailand",
+    "Barcelona, Spain","Beijing, China","Belgrade, Serbia","Berlin, Germany","Bogotá, Colombia",
+    "Boston, United States","Brisbane, Australia","Brussels, Belgium","Budapest, Hungary","Buenos Aires, Argentina",
+    "Cairo, Egypt","Calgary, Canada","Cape Town, South Africa","Caracas, Venezuela","Casablanca, Morocco",
+    "Chicago, United States","Copenhagen, Denmark","Dallas, United States","Delhi, India","Denver, United States",
+    "Detroit, United States","Doha, Qatar","Dubai, United Arab Emirates","Dublin, Ireland","Edinburgh, United Kingdom",
+    "Frankfurt, Germany","Geneva, Switzerland","Glasgow, United Kingdom","Guangzhou, China","Hamburg, Germany",
+    "Hanoi, Vietnam","Havana, Cuba","Helsinki, Finland","Ho Chi Minh City, Vietnam","Hong Kong, China",
+    "Honolulu, United States","Houston, United States","Istanbul, Turkey","Jakarta, Indonesia","Johannesburg, South Africa",
+    "Karachi, Pakistan","Kathmandu, Nepal","Kiev, Ukraine","Kingston, Jamaica","Kuala Lumpur, Malaysia",
+    "Kyoto, Japan","Lagos, Nigeria","Las Vegas, United States","Lima, Peru","Lisbon, Portugal",
+    "Liverpool, United Kingdom","London, United Kingdom","Los Angeles, United States","Lyon, France","Madrid, Spain",
+    "Managua, Nicaragua","Manila, Philippines","Melbourne, Australia","Mexico City, Mexico","Miami, United States",
+    "Milan, Italy","Montréal, Canada","Montevideo, Uruguay","Moscow, Russia","Mumbai, India",
+    "Munich, Germany","Nairobi, Kenya","Naples, Italy","New Orleans, United States","New York City, United States",
+    "Nice, France","Osaka, Japan","Oslo, Norway","Ottawa, Canada","Panama City, Panama",
+    "Paris, France","Perth, Australia","Philadelphia, United States","Phnom Penh, Cambodia","Phoenix, United States",
+    "Prague, Czech Republic","Quebec City, Canada","Quito, Ecuador","Reykjavík, Iceland","Rio de Janeiro, Brazil",
+    "Rome, Italy","San Antonio, United States","San Diego, United States","San Francisco, United States","San José, Costa Rica",
+    "Santiago, Chile","São Paulo, Brazil","Seattle, United States","Seoul, South Korea","Shanghai, China",
+    "Singapore, Singapore","Stockholm, Sweden","Sydney, Australia","Taipei, Taiwan","Tallinn, Estonia",
+    "Tokyo, Japan","Toronto, Canada","Valencia, Spain","Vancouver, Canada","Venice, Italy",
+    "Vienna, Austria","Warsaw, Poland","Washington, D.C., United States","Wellington, New Zealand","Zurich, Switzerland",
+    "Abu Dhabi, United Arab Emirates","Accra, Ghana","Alexandria, Egypt","Algiers, Algeria","Ankara, Turkey",
+    "Antwerp, Belgium","Arequipa, Peru","Asunción, Paraguay","Baku, Azerbaijan","Baltimore, United States",
+    "Bamako, Mali","Bangalore, India","Belfast, United Kingdom","Bergen, Norway","Birmingham, United Kingdom",
+    "Bordeaux, France","Bucharest, Romania","Busan, South Korea","Canberra, Australia","Chennai, India",
+    "Cologne, Germany","Columbus, United States","Curitiba, Brazil","Da Nang, Vietnam","Dakar, Senegal",
+    "Durban, South Africa","Fez, Morocco","Fukuoka, Japan","Guatemala City, Guatemala","Halifax, Canada",
+    "Harare, Zimbabwe","Hobart, Australia","Indianapolis, United States","Izmir, Turkey","Jaipur, India",
+    "Kansas City, United States","Kobe, Japan","Kraków, Poland","Leeds, United Kingdom","Leipzig, Germany",
+    "Lusaka, Zambia","Luxembourg City, Luxembourg","Marseille, France","Medellín, Colombia","Memphis, United States",
+    "Minsk, Belarus","Nashville, United States","Nice, France","Oklahoma City, United States","Portland, United States",
+    "Pune, India","Rabat, Morocco","Rotterdam, Netherlands","Salzburg, Austria","Sapporo, Japan",
+    "Sarajevo, Bosnia and Herzegovina","Seville, Spain","Split, Croatia","St. Louis, United States","Stuttgart, Germany",
+    "Tampa, United States","Tbilisi, Georgia","Tunis, Tunisia","Ulaanbaatar, Mongolia","Vilnius, Lithuania",
+    "Winnipeg, Canada","Yokohama, Japan","Zagreb, Croatia"
+  ]
+}
+</script>
+
+<script src="/assets/tool-engine.js"></script>
+<script src="/js/tools.js"></script>
+<script src="/js/load-related-tools.js"></script>
+<script src="/js/include-header.js"></script>
+
+<div id="site-footer"></div>
+<script src="/js/include-footer.js"></script>
+
+<script>
+ToolEngine.init();
+</script>
+
+</body>
+</html>
